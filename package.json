@@ -8,10 +8,10 @@
     "build": "tsc",
     "p": "npm publish --access public"
   },
-  "homepage": "https://github.com/supunlakmal/hooksReadMe",
+  "homepage": "https://github.com/supunlakmal/hooks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/supunlakmal/hooksReadMe.git"
+    "url": "git+https://github.com/supunlakmal/hooks.git"
   },
   "keywords": [
     "react",
@@ -54,7 +54,7 @@
   "author": "supunlakmal",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/supunlakmal/hooksReadMe/issues"
+    "url": "https://github.com/supunlakmal/hooks/issues"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.0",
