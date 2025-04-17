@@ -1,0 +1,79 @@
+{
+  "name": "@supunlakmal/hooks",
+  "version": "0.1.11",
+  "description": "A collection of reusable React hooks",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "p": "npm publish --access public"
+  },
+  "homepage": "https://github.com/supunlakmal/hooksReadMe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supunlakmal/hooksReadMe.git"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "custom hooks",
+    "utility hooks",
+    "react hooks",
+    "typescript",
+    "state management",
+    "performance",
+    "accessibility",
+    "useToggle",
+    "useDebounce",
+    "useFetch",
+    "useAsync",
+    "useLocalStorage",
+    "useSessionStorage",
+    "useClickOutside",
+    "useEventListener",
+    "useWindowSize",
+    "useForm",
+    "useValidation",
+    "useInterval",
+    "useTimeout",
+    "usePrevious",
+    "useIntersectionObserver",
+    "useVirtualList",
+    "usePagination",
+    "useDarkMode",
+    "useClipboard",
+    "useWebSocket",
+    "useScroll",
+    "useAnimation",
+    "useDrag",
+    "useDraggable",
+    "useFocusTrap",
+    "useMediaQuery",
+    "browser api"
+  ],
+  "author": "supunlakmal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supunlakmal/hooksReadMe/issues"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.2",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "directories": {
+    "doc": "docs"
+  }
+}
