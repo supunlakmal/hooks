@@ -168,4 +168,4 @@ Explore the documentation for each hook to see detailed API information and usag
 
 ## Live Demo
 
-**(Coming Soon!)** A live demo environment showcasing all hooks will be available.
+**(Coming Soon!)** A live demo environment showcasing all hooks will be available [**`here`**](https://hooks-showcase-chi.vercel.app/) 
