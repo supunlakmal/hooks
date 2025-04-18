@@ -8,7 +8,7 @@ Define a state machine configuration object and pass it to the hook.
 
 ```tsx
 import React, { useState } from "react";
-import { useFiniteStateMachine, StateMachineConfig } from "your-hooks-library"; // Adjust import path
+import { useFiniteStateMachine, StateMachineConfig } from "@supunlakmal/hooks"; // Adjust import path
 
 type FetchState = "idle" | "loading" | "success" | "error";
 type FetchEvent = "FETCH" | "SUCCESS" | "ERROR" | "RETRY";

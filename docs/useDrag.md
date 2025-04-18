@@ -6,7 +6,7 @@ Provides basic drag event handling (`dragstart`, `drag`, `dragend`) for an eleme
 
 ```tsx
 import React, { useRef, useState } from "react";
-import { useDrag } from "your-hooks-library"; // Adjust the import path
+import { useDrag } from "@supunlakmal/hooks"; // Adjust the import path
 
 const DraggableItem: React.FC<{ id: string; label: string }> = ({
   id,

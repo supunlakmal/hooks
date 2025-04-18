@@ -13,16 +13,16 @@ React hook for managing WebSocket connections.
 ## Installation
 
 ```bash
-npm install your-hooks-library
+npm install @supunlakmal/hooks
 # or
-yarn add your-hooks-library
+yarn add @supunlakmal/hooks
 ```
 
 ## Usage
 
 ```tsx
 import React, { useState, useCallback } from "react";
-import { useWebSocket, ReadyState } from "your-hooks-library"; // Adjust the import path
+import { useWebSocket, ReadyState } from "@supunlakmal/hooks"; // Adjust the import path
 
 function WebSocketComponent() {
   const [socketUrl, setSocketUrl] = useState("wss://echo.websocket.org");

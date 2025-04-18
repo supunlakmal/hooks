@@ -6,7 +6,7 @@ Enables cross-tab/window communication between same-origin contexts using the [B
 
 ```tsx
 import React, { useState } from \'react\';
-import { useBroadcastChannel } from \'your-hooks-library\'; // Adjust the import path
+import { useBroadcastChannel } from \'@supunlakmal/hooks\'; // Adjust the import path
 
 interface MyData {
   message: string;

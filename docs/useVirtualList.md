@@ -10,7 +10,7 @@ Provide the full list data, the fixed height of each item, and a ref to the scro
 
 ```tsx
 import React, { useRef } from "react";
-import { useVirtualList } from "your-hooks-library"; // Adjust import path
+import { useVirtualList } from "@supunlakmal/hooks"; // Adjust import path
 
 // Generate a large list of items
 const allItems = Array.from({ length: 10000 }, (_, index) => ({

@@ -8,7 +8,7 @@ Call this hook inside the component you want to monitor, passing a name for the 
 
 ```tsx
 import React, { useState, useMemo } from 'react';
-import { useWhyDidYouUpdate } from 'your-hooks-library'; // Adjust import path
+import { useWhyDidYouUpdate } from '@supunlakmal/hooks'; // Adjust import path
 
 interface CounterProps {
   count: number;

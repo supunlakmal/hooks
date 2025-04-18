@@ -8,7 +8,7 @@ Provide a factory function that calculates the desired state and an array of dep
 
 ```tsx
 import React, { useState } from "react";
-import { useDerivedState } from "your-hooks-library"; // Adjust import path
+import { useDerivedState } from "@supunlakmal/hooks"; // Adjust import path
 
 interface User {
   id: number;

@@ -13,7 +13,7 @@ import {
   ValidationSchema,
   ValidationRule,
   FormValues,
-} from "your-hooks-library"; // Adjust import path
+} from "@supunlakmal/hooks"; // Adjust import path
 
 // --- Validation Rules ---
 const required: ValidationRule<any> = (value) =>

@@ -8,7 +8,7 @@ Provide an asynchronous function (`mutationFn`) that performs the operation. Cal
 
 ```tsx
 import React, { useState } from "react";
-import { useMutation } from "your-hooks-library"; // Adjust import path
+import { useMutation } from "@supunlakmal/hooks"; // Adjust import path
 
 interface Post {
   id?: number;

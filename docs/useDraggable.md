@@ -10,7 +10,7 @@ Attach a ref to the element you want to make draggable and pass it to the hook.
 
 ```tsx
 import React, { useRef, useState } from "react";
-import { useDraggable } from "your-hooks-library"; // Adjust import path
+import { useDraggable } from "@supunlakmal/hooks"; // Adjust import path
 
 const DraggableBox: React.FC = () => {
   const dragRef = useRef<HTMLDivElement>(null);

@@ -8,7 +8,7 @@ Use it like `useFetch`, providing a URL and optional configuration. The hook aut
 
 ```tsx
 import React, { useState } from "react";
-import { useCachedFetch } from "your-hooks-library"; // Adjust import path
+import { useCachedFetch } from "@supunlakmal/hooks"; // Adjust import path
 
 interface User {
   id: number;

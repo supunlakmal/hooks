@@ -8,7 +8,7 @@ Use it exactly like `useEffect`, but be mindful that the deep comparison can be 
 
 ```tsx
 import React, { useState, useEffect } from "react";
-import { useDeepCompareEffect } from "your-hooks-library"; // Adjust import path
+import { useDeepCompareEffect } from "@supunlakmal/hooks"; // Adjust import path
 
 interface ComplexObject {
   id: number;

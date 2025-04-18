@@ -6,7 +6,7 @@ Implements the [roving tabindex](https://www.w3.org/WAI/ARIA/apg/patterns/landma
 
 ```tsx
 import React, { useRef } from "react";
-import { useRovingTabIndex } from "your-hooks-library"; // Adjust the import path
+import { useRovingTabIndex } from "@supunlakmal/hooks"; // Adjust the import path
 
 const Toolbar: React.FC = () => {
   const toolbarRef = useRef<HTMLDivElement>(null);

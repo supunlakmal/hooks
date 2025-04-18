@@ -6,7 +6,7 @@ Manages a countdown timer with start, pause, and reset controls.
 
 ```tsx
 import React, { useCallback } from \'react\';
-import { useCountdown } from \'your-hooks-library\'; // Adjust the import path
+import { useCountdown } from \'@supunlakmal/hooks\'; // Adjust the import path
 
 const CountdownComponent: React.FC = () => {
   const handleComplete = useCallback(() => {

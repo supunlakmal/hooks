@@ -6,7 +6,7 @@ Detects specific keyboard combinations (shortcuts) being pressed.
 
 ```tsx
 import React, { useState, useCallback } from \'react\';
-import { useKeyCombo } from \'your-hooks-library\'; // Adjust the import path
+import { useKeyCombo } from \'@supunlakmal/hooks\'; // Adjust the import path
 
 const KeyComboComponent: React.FC = () => {
   const [status, setStatus] = useState(\'Waiting for combo...\');

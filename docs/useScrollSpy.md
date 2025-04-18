@@ -8,7 +8,7 @@ Create refs for each section you want to track, pass them as an array to the hoo
 
 ```tsx
 import React, { useRef, useEffect } from "react";
-import { useScrollSpy } from "your-hooks-library"; // Adjust import path
+import { useScrollSpy } from "@supunlakmal/hooks"; // Adjust import path
 
 const sectionsData = [
   { id: "section-1", title: "Section 1", color: "#ffdddd" },
