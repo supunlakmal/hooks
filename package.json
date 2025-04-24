@@ -75,5 +75,8 @@
   ],
   "directories": {
     "doc": "docs"
+  },
+  "dependencies": {
+    "@supunlakmal/hooks": "^0.1.14"
   }
 }
