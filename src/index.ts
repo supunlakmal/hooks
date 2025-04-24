@@ -74,3 +74,4 @@ export { default as useScrollSpy } from "./hooks/useScrollSpy";
 export { default as useVirtualList } from "./hooks/useVirtualList";
 export { default as useDeepCompareEffect } from "./hooks/useDeepCompareEffect";
 export { default as useIsFirstRender } from "./hooks/useIsFirstRender";
+export {default as useDeviceMotion} from "./hooks/useDeviceMotion";
