@@ -2,28 +2,28 @@ import React, { useState } from "react";
 import { useMutation } from "@supunlakmal/hooks";
 
 function MutationExample() {
-  const [result, setResult] = useState<string | null>(null);
+    const [result, setResult] = useState<string | null>(null);
 
-  const mutation = useMutation(async (input: string) => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(`Processed: ${input}`), 1000);
+    const mutation = useMutation(async (input: string) => {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(`Processed: ${input}`), 1000);
+        });
     });
-  });
 
-  const handleMutate = async () => {
-    const response = await mutation.mutate("Sample Input");
-    setResult(response);
-  };
+    const handleMutate = async () => {
+        const response = await mutation.mutate("Sample Input");
+        setResult(response);
+    };
 
-  return (
-    <div>
-      <h1>useMutation Example</h1>
-      <button onClick={handleMutate} disabled={mutation.isLoading}>
-        {mutation.isLoading ? "Processing..." : "Mutate"}
-      </button>
-      {result && <p>Result: {result}</p>}
-    </div>
-  );
+    return (
+        <div>
+            <h1>useMutation Example</h1>
+            <button onClick={handleMutate} disabled={mutation.isLoading}>
+                {mutation.isLoading ? "Processing..." : "Mutate"}
+            </button>
+            {result && <p>Result: {result}</p>}
+        </div>
+    );
 }
 
 export default MutationExample;
