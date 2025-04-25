@@ -1,18 +1,32 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import useQueryParam  from "../../../hooks/useQueryParam";
 
 function QueryParamExample() {
-    const [param, setParam] = useQueryParam("example", "default");
-    const [input, setInput] = useState(param);
+    const [isMounted, setIsMounted] = useState(false);
+    const [input, setInput] = useState("");
+    const [param, setParam] = useState("");
+    
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const updateParam = () => {
-        setParam(input);
+        if(isMounted){
+            setParam(input);
+        }
     };
+    if(isMounted){
+        const [newParam] = useQueryParam("example", "default");
+        setParam(newParam);
+    }
+
+    if(!isMounted){
+      return (<div>Loading...</div>)
+    }
 
     return (
         <div>
-            <h1>useQueryParam Example</h1>
             <p>Query Parameter: {param}</p>
             <input
                 type="text"
@@ -23,6 +37,7 @@ function QueryParamExample() {
             <button onClick={updateParam}>Update Query Param</button>
         </div>
     );
+
 }
 
 export default QueryParamExample;
