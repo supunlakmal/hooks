@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import React from "react";
 import useReducerLogger  from "../../hooks/useReducerLogger";
 
 function ReducerLoggerExample() {
     const initialState = { count: 0 };
 
-    const reducer = (state, action) => {
+    const reducer = (state: { count: number }, action: { type: string }) => {
         switch (action.type) {
             case "increment":
                 return { count: state.count + 1 };

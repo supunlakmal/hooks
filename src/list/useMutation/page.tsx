@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useMutation  from "../../hooks/useMutation";
 
 function MutationExample() {
-    const [result, setResult] = useState<string | null>(null);
+    const [result, setResult] = useState<string | null | undefined>(undefined);
 
     const mutation = useMutation(async (input: string) => {
         return new Promise((resolve) => {

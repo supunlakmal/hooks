@@ -1,18 +1,22 @@
-import React from "react";
-import usePermission  from "../../hooks/usePermission";
+import React, { useEffect } from "react";
+import usePermission from "../../hooks/usePermission";
 
 function PermissionExample() {
-    const { state, requestPermission } = usePermission("notifications");
+  const { state, isSupported, query } = usePermission({ name: "notifications" });
 
-    return (
-        <div>
-            <h1>usePermission Example</h1>
-            <p>Permission State: {state}</p>
-            {state === "prompt" && (
-                <button onClick={requestPermission}>Request Permission</button>
-            )}
-        </div>
-    );
+  useEffect(() => {
+    if (state === "prompt") {
+      query();
+    }
+  }, [state, query]);
+
+  return (
+    <div>
+      <h1>usePermission Example</h1>
+      <p>Is Supported: {isSupported ? "Yes" : "No"}</p>
+      <p>Permission State: {state}</p>
+    </div>
+  );
 }
 
 export default PermissionExample;

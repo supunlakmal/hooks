@@ -1,32 +1,44 @@
 import React, { useState } from "react";
-import usePagination  from "../../hooks/usePagination";
+import usePagination from "../../hooks/usePagination";
 
 function PaginationExample() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const { pages, goToPage } = usePagination({
-        totalItems: 50,
-        itemsPerPage: 5,
-        currentPage,
-        onPageChange: setCurrentPage,
-    });
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    totalPages,
+    goToPage,
+    goToNextPage,
+    goToPreviousPage,
+    canGoNextPage,
+    canGoPreviousPage,
+  } = usePagination({
+    totalItems: 50,
+    initialItemsPerPage: 5,
+    initialPage: currentPage,
+  });
 
-    return (
-        <div>
-            <h1>usePagination Example</h1>
-            <p>Current Page: {currentPage}</p>
-            <div>
-                {pages.map((page) => (
-                    <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        style={{ margin: "0 5px", fontWeight: page === currentPage ? "bold" : "normal" }}
-                    >
-                        {page}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    goToPage(page);
+  };
+
+  return (
+    <div>
+      <h1>usePagination Example</h1>
+      <p>Current Page: {currentPage}</p>
+      <div>
+        <button onClick={goToPreviousPage} disabled={!canGoPreviousPage}>
+          Previous
+        </button>
+        {Array.from({ length: totalPages }).map((_, index) => {
+          const page = index + 1;
+          return (
+            <button key={page} onClick={() => handlePageChange(page)} style={{ margin: "0 5px", fontWeight: page === currentPage ? "bold" : "normal" }}>{page}</button>
+          );
+        })}
+        <button onClick={goToNextPage} disabled={!canGoNextPage}>Next</button>
+      </div>
+    </div>
+  );
 }
 
 export default PaginationExample;
