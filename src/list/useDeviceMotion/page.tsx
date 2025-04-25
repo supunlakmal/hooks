@@ -1,4 +1,5 @@
 import React from "react";
+import useDeviceMotion  from "../../hooks/useDeviceMotion";
 
 type MotionData = {
     x?: number | null;
@@ -11,7 +12,6 @@ const isRotationRate = (data: any): data is DeviceMotionEventRotationRate => {
   };
 
 function DeviceMotionExample() {
-    import useDeviceMotion  from "../../hooks/useDeviceMotion";
 
     const {
         acceleration,

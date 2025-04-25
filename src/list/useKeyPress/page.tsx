@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import useKeyPress  from "../../hooks/useKeyPress";
 
 function KeyPressExample() {
     const [key, setKey] = useState<string | null>(null);
+    const isPressed = useKeyPress('Enter');
 
-    useKeyPress((event) => {
-        setKey(event.key);
-    });
-
+    if(isPressed) setKey('Enter');
     return (
         <div>
             <h1>useKeyPress Example</h1>
-            <p>Last key pressed: {key || "None"}</p>
+            <p>Last key pressed: {key ? key : 'None'}</p>
         </div>
     );
 }

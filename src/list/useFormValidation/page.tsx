@@ -1,11 +1,16 @@
 import React from "react";
 import useFormValidation  from "../../hooks/useFormValidation";
 
+
+interface FormData {
+    name: string;
+    email: string;
+}
 const validationSchema = {
-    name: [(value) => (!value ? "Name is required" : undefined)],
+    name: [(value: string) => (!value ? "Name is required" : undefined)],
     email: [
-        (value) => (!value ? "Email is required" : undefined),
-        (value) =>
+        (value: string) => (!value ? "Email is required" : undefined),
+        (value: string) =>
             value && !/^[^@]+@[^@]+\.[^@]+$/.test(value) ? "Invalid email address" : undefined,
     ],
 };
@@ -18,9 +23,9 @@ function FormValidationExample() {
         handleChange,
         handleSubmit,
         resetForm,
-    } = useFormValidation({ initialValues, validationSchema });
+    } = useFormValidation<FormData>({ initialValues, validationSchema });
 
-    const onSubmit = (formData) => {
+    const onSubmit = (formData: FormData) => {
         console.log("Form submitted:", formData);
         resetForm();
     };

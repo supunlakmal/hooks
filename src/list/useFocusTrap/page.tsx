@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import useFocusTrap  from "../../hooks/useFocusTrap";
 
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-    const modalRef = useRef<HTMLElement>(null);
-    const closeButtonRef = useRef<HTMLElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     if (modalRef.current) {
         useFocusTrap(modalRef, isOpen, closeButtonRef);

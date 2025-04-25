@@ -1,11 +1,12 @@
 import React from "react";
-import useMap  from "../../hooks/useMap";
+import useMap from "../../hooks/useMap";
 
 function MapExample() {
-    const [map, { set, remove, clear }] = useMap<string, number>([
+    const initialMap = new Map<string, number>([
         ["key1", 1],
         ["key2", 2],
     ]);
+    const [map, { set, remove, clear }] = useMap<string, number>(initialMap);
 
     return (
         <div>

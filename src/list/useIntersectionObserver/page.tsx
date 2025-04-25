@@ -1,15 +1,13 @@
 import React, { useRef } from "react";
 import useIntersectionObserver  from "../../hooks/useIntersectionObserver";
 
-function IntersectionObserverExample() {
-    const targetRef = useRef<HTMLDivElement>(null);
+function IntersectionObserverExample() {    
+    const targetRef = useRef<Element | null>(null);
     const entry = useIntersectionObserver(targetRef, { threshold: 0.5 });
 
     return (
         <div>
-            <h1>useIntersectionObserver Example</h1>
             <div
-                ref={targetRef}
                 style={{
                     height: "100px",
                     backgroundColor: entry?.isIntersecting ? "lightgreen" : "lightcoral",
@@ -22,5 +20,4 @@ function IntersectionObserverExample() {
         </div>
     );
 }
-
 export default IntersectionObserverExample;

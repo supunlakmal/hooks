@@ -1,21 +1,21 @@
 import React, { useRef } from "react";
-import useFullscreen  from "../../hooks/useFullscreen";
+import useNewFullscreen from "../../hooks/useNewFullscreen";
 
 function FullscreenExample() {
-    const targetRef = useRef<HTMLDivElement>(null);
-    const { isFullscreen, enterFullscreen, exitFullscreen, toggleFullscreen } =
-        useFullscreen(targetRef);
+    const targetRef = useRef<HTMLElement | null>(null);
+    const { enterFullscreen, exitFullscreen, toggleFullscreen } = useNewFullscreen(targetRef);
 
-    return (
-        <div>
+
+    return ( 
+        <div >
             <h1>useFullscreen Example</h1>
-            <div
-                ref={targetRef}
+            <div 
                 style={{
                     border: "2px solid blue",
                     padding: "20px",
                     marginBottom: "10px",
-                }}
+                    width:'100px'
+                }} 
             >
                 <p>This content can go fullscreen.</p>
             </div>
@@ -25,5 +25,4 @@ function FullscreenExample() {
         </div>
     );
 }
-
 export default FullscreenExample;
