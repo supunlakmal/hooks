@@ -5,7 +5,7 @@ function AnimationExample() {
     const [position, setPosition] = useState(0); // State to animate (e.g., horizontal position)
 
     // Animation callback: Update position based on progress
-    const animationCallback = useCallback((progress: number, elapsed: number) => {
+    const animationCallback = useCallback((progress: number) => {
         // Example: Linear movement from 0 to 200 pixels
         const newPosition = progress * 200;
         setPosition(newPosition);

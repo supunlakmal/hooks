@@ -1,5 +1,11 @@
 import React from "react";
-import { useDeviceMotion } from "@supunlakmal/hooks";
+import  useDeviceMotion  from "../../hooks/useDeviceMotion";
+
+type MotionData = {
+    x?: number | null;
+    y?: number | null;
+    z?: number | null;
+};
 
 function DeviceMotionExample() {
     const {
@@ -10,7 +16,7 @@ function DeviceMotionExample() {
         isSupported,
     } = useDeviceMotion();
 
-    const formatMotionData = (data) => {
+    const formatMotionData = (data: MotionData | null) => {
         if (!data) return "N/A";
         const x = data.x?.toFixed(2) ?? "N/A";
         const y = data.y?.toFixed(2) ?? "N/A";

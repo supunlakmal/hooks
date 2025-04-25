@@ -6,7 +6,10 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "p": "npm publish --access public"
+    "next-build": "next build",
+    "p": "npm publish --access public",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
   },
   "homepage": "https://github.com/supunlakmal/hooks",
   "repository": {
@@ -61,10 +64,14 @@
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.2",
+    "eslint": "^9.25.1",
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "typescript": "^5.0.0"
+  },
+  "eslintConfig": {
+    "extends": "next/core-web-vitals"
   },
   "peerDependencies": {
     "react": "^19.1.0",

@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useClickOutside } from "@supunlakmal/hooks"; // Adjust the import path as needed
+import React, { useState, useRef, RefObject } from "react";
+import useClickOutside from "../../hooks/useClickOutside"; // Adjust the import path as needed
 
 function ModalComponent() {
     const [isOpen, setIsOpen] = useState(false);
-    const modalRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
 
-    useClickOutside(modalRef, () => {
+    useClickOutside(modalRef as RefObject<any>, () => {
         if (isOpen) {
             setIsOpen(false);
             console.log("Clicked outside, closing modal.");

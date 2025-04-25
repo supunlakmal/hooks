@@ -15,11 +15,11 @@ interface UseContextMenuResult extends ContextMenuState {
  * Custom hook to manage the state for a custom context menu.
  * Listens for contextmenu events on the target element and provides menu state (position, visibility).
  *
- * @param {RefObject<HTMLElement>} targetRef - Ref attached to the element that triggers the context menu.
+ * @param {RefObject<HTMLElement | null>} targetRef - Ref attached to the element that triggers the context menu.
  * @returns {UseContextMenuResult} An object containing menu state and control functions.
  */
 function useContextMenu(
-  targetRef: RefObject<HTMLElement>
+  targetRef: RefObject<HTMLElement | null>
 ): UseContextMenuResult {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });

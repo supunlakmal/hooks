@@ -1,5 +1,5 @@
 import React, { useRef, CSSProperties } from "react";
-import { useContextMenu } from "@supunlakmal/hooks"; // Adjust path
+import useContextMenu from "../../hooks/useContextMenu"; // Adjust path
 
 const CustomMenu = ({
     position,
@@ -43,7 +43,7 @@ const CustomMenu = ({
 };
 
 function ContextMenuExample() {
-    const targetAreaRef = useRef<HTMLDivElement>(null);
+    const targetAreaRef = useRef<HTMLDivElement | null>(null);
     const { isOpen, position, close: closeMenu } = useContextMenu(targetAreaRef);
 
     const handleMenuSelect = (option: string) => {
