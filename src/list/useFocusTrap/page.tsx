@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useFocusTrap } from "../../hooks/useFocusTrap";
+import useFocusTrap  from "../../hooks/useFocusTrap";
 
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const modalRef = useRef<HTMLElement>(null);

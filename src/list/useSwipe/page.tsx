@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSwipe } from "../../hooks/useSwipe";
+import useSwipe  from "../../hooks/useSwipe";
 
 function SwipeExample() {
     const [direction, setDirection] = useState<string | null>(null);

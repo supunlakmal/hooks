@@ -1,5 +1,5 @@
 import React from "react";
-import { useStateWithHistory } from "../../hooks/useStateWithHistory";
+import useStateWithHistory  from "../../hooks/useStateWithHistory";
 
 function StateWithHistoryExample() {
     const [value, setValue, { history, pointer, back, forward }] = useStateWithHistory(0);

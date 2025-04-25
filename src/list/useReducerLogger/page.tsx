@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { useReducerLogger } from "../../hooks/useReducerLogger";
+import useReducerLogger  from "../../hooks/useReducerLogger";
 
 function ReducerLoggerExample() {
     const initialState = { count: 0 };

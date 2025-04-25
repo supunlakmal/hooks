@@ -1,5 +1,5 @@
 import React from "react";
-import { useStepper } from "../../hooks/useStepper";
+import useStepper  from "../../hooks/useStepper";
 
 function StepperExample() {
     const { step, next, previous, reset, isFirstStep, isLastStep } = useStepper(3);

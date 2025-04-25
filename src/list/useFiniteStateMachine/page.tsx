@@ -1,5 +1,5 @@
 import React from "react";
-import { useFiniteStateMachine } from "../../hooks/useFiniteStateMachine";
+import useFiniteStateMachine  from "../../hooks/useFiniteStateMachine";
 
 const fetchMachineConfig = {
     initial: "idle",

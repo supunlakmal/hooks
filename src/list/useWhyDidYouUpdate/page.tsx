@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useWhyDidYouUpdate } from "@supunlakmal/hooks";
+import useWhyDidYouUpdate  from "../../hooks/useWhyDidYouUpdate";
 
 function WhyDidYouUpdateExample() {
     const [count, setCount] = useState(0);

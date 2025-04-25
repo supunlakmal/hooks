@@ -11,7 +11,7 @@ const isRotationRate = (data: any): data is DeviceMotionEventRotationRate => {
   };
 
 function DeviceMotionExample() {
-    import { useDeviceMotion } from "../../hooks/useDeviceMotion";
+    import useDeviceMotion  from "../../hooks/useDeviceMotion";
 
     const {
         acceleration,

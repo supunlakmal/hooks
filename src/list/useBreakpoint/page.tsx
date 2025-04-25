@@ -1,5 +1,5 @@
 import React from "react";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 function ResponsiveComponent() {
     const activeBreakpoint = useBreakpoint();

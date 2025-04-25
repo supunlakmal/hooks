@@ -1,5 +1,5 @@
 import React from "react";
-import { useIsFirstRender } from "../../hooks/useIsFirstRender";
+import useIsFirstRender  from "../../hooks/useIsFirstRender";
 
 function IsFirstRenderExample() {
     const isFirstRender = useIsFirstRender();

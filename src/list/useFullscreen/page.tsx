@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useFullscreen } from "../../hooks/useFullscreen";
+import useFullscreen  from "../../hooks/useFullscreen";
 
 function FullscreenExample() {
     const targetRef = useRef<HTMLDivElement>(null);

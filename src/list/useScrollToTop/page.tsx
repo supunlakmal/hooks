@@ -1,5 +1,5 @@
 import React from "react";
-import { useScrollToTop } from "../../hooks/useScrollToTop";
+import useScrollToTop  from "../../hooks/useScrollToTop";
 
 function ScrollToTopExample() {
     const scrollToTop = useScrollToTop();

@@ -1,5 +1,5 @@
 import React from "react";
-import { usePageVisibility } from "../../hooks/usePageVisibility";
+import usePageVisibility  from "../../hooks/usePageVisibility";
 
 function PageVisibilityExample() {
     const isVisible = usePageVisibility();

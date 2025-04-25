@@ -1,5 +1,5 @@
 import React, { useRef, CSSProperties } from "react";
-import { useContextMenu } from "../../hooks/useContextMenu";
+import useContextMenu  from "../../hooks/useContextMenu";
 
 const CustomMenu = ({
     position,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useOnlineStatus } from "../../hooks/useOnlineStatus";
+import useOnlineStatus  from "../../hooks/useOnlineStatus";
 
 function OnlineStatusExample() {
     const isOnline = useOnlineStatus();

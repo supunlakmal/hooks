@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTimeout } from "../../hooks/useTimeout";
+import useTimeout  from "../../hooks/useTimeout";
 
 function TimeoutExample() {
     const [message, setMessage] = useState("Waiting...");

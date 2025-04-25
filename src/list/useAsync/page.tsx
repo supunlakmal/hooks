@@ -1,5 +1,5 @@
 import React from "react";
-import { useAsync } from "../../hooks/useAsync";
+import useAsync from "../../hooks/useAsync";
 
 interface UserData {
     id: number;
