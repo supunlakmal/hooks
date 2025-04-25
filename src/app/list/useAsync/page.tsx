@@ -8,31 +8,23 @@ interface UserData {
     email: string;
 }
 
-const fetchUserData = async (userId: number): Promise<UserData> => {
+const fetchUserData = async (): Promise<UserData> => {
+    const userId = 1
     const response = await fetch(
         `https://jsonplaceholder.typicode.com/users/${userId}`
     );
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`); 
     }
     return response.json();
 };
 
-function UserId() {
-    const userId = 1;
-    return (
-        <div>
-            <UserProfile userId={userId} />
-        </div>
-    )
-}
-
-function UserProfile({ userId }: { userId: number }){
+function UserProfile(){
     const {
         loading,
         error,
         value: userData,
-    } = useAsync<UserData>(() => fetchUserData(userId));
+    } = useAsync<UserData>(fetchUserData);
 
     if (loading) return <div>Loading user data...</div>;
     if (error) return <div>Error fetching user data: {error.message}</div>;
@@ -45,3 +37,4 @@ function UserProfile({ userId }: { userId: number }){
         </div>
     );
 }
+export default UserProfile;
