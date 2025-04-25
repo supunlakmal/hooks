@@ -4,15 +4,14 @@ import useErrorBoundary from '../../../hooks/useErrorBoundary';
 
 function ErrorBoundaryExample() {
   const [shouldThrow, setShouldThrow] = useState(false);
-  const { hasError, error, resetErrorBoundary } = useErrorBoundary();
+  const { error, resetBoundary } = useErrorBoundary();
 
-  if (hasError) {
+  if (error) {
     return (
       <div>
         <h2>An error occurred:</h2>
         <pre>{error.toString()}</pre>
-        <button onClick={() => {
-            resetErrorBoundary();
+        <button onClick={() => {            resetBoundary();
             setShouldThrow(false);
         }}>Try again</button>
       </div>

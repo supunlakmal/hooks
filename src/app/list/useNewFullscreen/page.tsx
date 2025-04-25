@@ -4,13 +4,13 @@ import useNewFullscreen from '../../../hooks/useNewFullscreen';
 
 function NewFullscreenExample() {
   const ref = useRef<any>(null);
-  const { isFullscreen, enterFullscreen, exitFullscreen } = useNewFullscreen();
+  const { isFullscreen, enterFullscreen, exitFullscreen } = useNewFullscreen(ref);
 
   const handleFullscreen = () => {
     if (isFullscreen) {
       exitFullscreen();
     } else {
-      enterFullscreen(ref.current);
+      enterFullscreen();
     }
   };
 

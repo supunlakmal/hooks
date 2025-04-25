@@ -10,11 +10,11 @@ interface Post {
 }
 
 function FetchExample() {
-  const { data, isLoading, error } = useFetch<Post[]>(
+  const { data, loading, error } = useFetch<Post[]>(
     "https://jsonplaceholder.typicode.com/posts"
   );
 
-  if (isLoading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
