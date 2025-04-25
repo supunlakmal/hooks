@@ -24,9 +24,9 @@ const LazyComponent = ({ id }: { id: number }) => {
 };
 
 function VisibilityExample() {
-  const elementRef1 = useRef<HTMLDivElement>(null);
-  const elementRef2 = useRef<HTMLDivElement>(null);
-  const elementRef3 = useRef<HTMLDivElement>(null);
+  const elementRef1 = useRef<any>(null);
+  const elementRef2 = useRef<any>(null);
+  const elementRef3 = useRef<any>(null);
 
   // Example 1: Basic visibility check
   const isVisible1 = useVisibility(elementRef1, {

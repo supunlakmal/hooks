@@ -29,8 +29,8 @@ const defaultOptions: Required<
  * @param options.onEnd - Callback fired when the press ends.
  * @param options.onCancel - Callback fired if the press is cancelled before duration.
  */
-function useLongPress<T extends HTMLElement>(
-  ref: RefObject<T>,
+function useLongPress(
+  ref: RefObject<HTMLElement | null>,
   callback: LongPressCallback,
   {
     threshold = defaultOptions.threshold,

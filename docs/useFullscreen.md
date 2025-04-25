@@ -11,7 +11,7 @@ import React, { useRef } from "react";
 import { useFullscreen } from "@supunlakmal/hooks"; // Adjust path
 
 function FullscreenExample() {
-  const targetRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<any>(null);
   const {
     isFullscreen,
     enterFullscreen,

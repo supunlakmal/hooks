@@ -68,8 +68,8 @@ import React, { useRef } from "react";
 import { useIntersectionObserver } from "@supunlakmal/hooks"; // Adjust path
 
 function ScrollableAreaObserver() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<any>(null);
+  const targetRef = useRef<any>(null);
 
   const entry = useIntersectionObserver(targetRef, {
     root: scrollContainerRef.current, // Observe within the scroll container

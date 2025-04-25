@@ -9,7 +9,7 @@ import React, { useRef } from "react";
 import { useRovingTabIndex } from "@supunlakmal/hooks"; // Adjust the import path
 
 const Toolbar: React.FC = () => {
-  const toolbarRef = useRef<HTMLDivElement>(null);
+  const toolbarRef = useRef<any>(null);
   useRovingTabIndex(toolbarRef, {
     orientation: "horizontal", // Navigate with left/right arrows
     wrapAround: true, // Wrap focus from last to first element

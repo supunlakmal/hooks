@@ -11,7 +11,7 @@ import React, { useRef, useState } from "react";
 import { useSwipe } from "@supunlakmal/hooks"; // Adjust path
 
 function SwipeArea() {
-  const swipeRef = useRef<HTMLDivElement>(null);
+  const swipeRef = useRef<any>(null);
   const [lastSwipe, setLastSwipe] = useState<string>("None");
 
   const handleSwipeLeft = (event: TouchEvent) => {
