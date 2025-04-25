@@ -25,10 +25,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/list/useDeviceMotion/page.js"
     ],
-    "/_not-found/page": [
+    "/list/useLongPress/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/list/useLongPress/page.js"
+    ],
+    "/list/useNetworkSpeed/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/list/useNetworkSpeed/page.js"
+    ],
+    "/list/usePrevious/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/list/usePrevious/page.js"
+    ],
+    "/list/useScrollSpy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/list/useScrollSpy/page.js"
+    ],
+    "/list/useSessionStorage/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/list/useSessionStorage/page.js"
     ]
   }
 }
