@@ -6,7 +6,8 @@
     "types": "dist/types/index.d.ts",
     "scripts": {
       "dev": "next dev",    
-      "build": "next build && tsc",
+      "build": "next build",
+      "build-hook": "tsc",
       "p": "npm publish --access public",
       "start": "next start",
       "lint": "next lint"
