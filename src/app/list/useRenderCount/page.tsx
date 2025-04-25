@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useRenderCount  from "../../hooks/useRenderCount";
+import useRenderCount  from "../../../hooks/useRenderCount";
 
 function RenderCountExample() {
     const renderCount = useRenderCount();

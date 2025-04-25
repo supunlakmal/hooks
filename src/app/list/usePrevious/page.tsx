@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import usePrevious  from "../../hooks/usePrevious";
+import usePrevious  from "../../../hooks/usePrevious";
 
 function PreviousExample() {
     const [count, setCount] = useState(0);

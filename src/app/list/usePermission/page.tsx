@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from "react";
-import usePermission from "../../hooks/usePermission";
+import usePermission from "../../../hooks/usePermission";
 
 function PermissionExample() {
   const { state, isSupported, query } = usePermission({ name: "notifications" });

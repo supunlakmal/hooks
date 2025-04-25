@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useRef, RefObject } from "react";
-import useClickOutside from "../../hooks/useClickOutside";
+import useClickOutside from "../../../hooks/useClickOutside";
     
 function ModalComponent() {
     const [isOpen, setIsOpen] = useState(false);

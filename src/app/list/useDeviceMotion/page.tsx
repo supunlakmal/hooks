@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useDeviceMotion  from "../../hooks/useDeviceMotion";
+import useDeviceMotion  from "../../../hooks/useDeviceMotion";
 
 type MotionData = {
     x?: number | null;

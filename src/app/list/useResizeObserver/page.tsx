@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useState, useEffect } from "react";
-import useResizeObserver from "../../hooks/useResizeObserver";
+import useResizeObserver from "../../../hooks/useResizeObserver";
 
 function ResizeObserverExample() {
   const ref = useRef<any>(null);

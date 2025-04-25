@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useSessionStorage  from "../../hooks/useSessionStorage";
+import useSessionStorage  from "../../../hooks/useSessionStorage";
 
 function SessionStorageExample() {
     const [value, setValue] = useSessionStorage("key", "default");

@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useUnmount  from "../../hooks/useUnmount";
+import useUnmount  from "../../../hooks/useUnmount";
 
 function UnmountExample() {
     const message = "Component is mounted.";

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useWebSocket from "../../hooks/useWebSocket";
+import useWebSocket from "../../../hooks/useWebSocket";
 
 function WebSocketExample() {
   const [messages, setMessages] = useState<string[]>([]);

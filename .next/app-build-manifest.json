@@ -15,10 +15,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/list/useAnimation/page.js"
     ],
-    "/list/useAsync/page": [
+    "/list/useDarkMode/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/list/useAsync/page.js"
+      "static/chunks/app/list/useDarkMode/page.js"
+    ],
+    "/list/useDeviceMotion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/list/useDeviceMotion/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

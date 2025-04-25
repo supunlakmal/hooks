@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useScrollPosition  from "../../hooks/useScrollPosition";
+import useScrollPosition  from "../../../hooks/useScrollPosition";
 
 function ScrollPositionExample() {
     const { y: scrollY } = useScrollPosition();

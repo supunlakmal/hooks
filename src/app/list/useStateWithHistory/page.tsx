@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useStateWithHistory  from "../../hooks/useStateWithHistory";
+import useStateWithHistory  from "../../../hooks/useStateWithHistory";
 
 function StateWithHistoryExample() {
     const { state: value, setState: setValue, history, pointer, back, forward, canUndo, canRedo } = useStateWithHistory(0);

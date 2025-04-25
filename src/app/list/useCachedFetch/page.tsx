@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useCachedFetch from "../../hooks/useCachedFetch";
+import useCachedFetch from "../../../hooks/useCachedFetch";
 
 interface User {
     id: number;

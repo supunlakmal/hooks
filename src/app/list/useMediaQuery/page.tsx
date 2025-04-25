@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useMediaQuery  from "../../hooks/useMediaQuery";
+import useMediaQuery  from "../../../hooks/useMediaQuery";
 
 function MediaQueryExample() {
     const isLargeScreen = useMediaQuery("(min-width: 1024px)");

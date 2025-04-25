@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef } from "react";
-import useNewFullscreen from "../../hooks/useNewFullscreen";
+import useNewFullscreen from "../../../hooks/useNewFullscreen";
 
 function FullscreenExample() {
     const targetRef = useRef<HTMLElement | null>(null);

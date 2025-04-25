@@ -1,6 +1,6 @@
 // "use client"
 import React, { useState, useRef } from "react";
-// import useRovingTabIndex from "../../hooks/useRovingTabIndex";
+// import useRovingTabIndex from "../../../hooks/useRovingTabIndex";
 
 function RovingTabIndexExample() {
   // const [items] = useState(["Item 1", "Item 2", "Item 3"]);

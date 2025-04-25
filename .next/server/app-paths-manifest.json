@@ -1,3 +1,7 @@
 {
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/list/useAnimation/page": "app/list/useAnimation/page.js",
+  "/list/useDarkMode/page": "app/list/useDarkMode/page.js",
+  "/list/useDeviceMotion/page": "app/list/useDeviceMotion/page.js"
 }

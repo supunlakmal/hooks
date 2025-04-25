@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useDerivedState  from "../../hooks/useDerivedState";
+import useDerivedState  from "../../../hooks/useDerivedState";
 
 function DerivedStateExample() {
     const [user, setUser] = useState({ firstName: "John", lastName: "Doe" });

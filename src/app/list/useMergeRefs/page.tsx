@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef } from "react";
-import useMergeRefs  from "../../hooks/useMergeRefs";
+import useMergeRefs  from "../../../hooks/useMergeRefs";
 
 function MergeRefsExample() {
     const ref1 = useRef<any>(null);

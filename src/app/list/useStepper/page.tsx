@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useStepper  from "../../hooks/useStepper";
+import useStepper  from "../../../hooks/useStepper";
 
 function StepperExample() {    
     const { currentStep, goToNextStep, goToPreviousStep, reset, isFirstStep, isLastStep } = useStepper({totalSteps:3});

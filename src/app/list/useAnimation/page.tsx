@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useCallback, CSSProperties } from "react";
-import useAnimation from "../../hooks/useAnimation";
+import useAnimation from "../../../hooks/useAnimation";
 
 function AnimationExample() {
     const [position, setPosition] = useState(0); // State to animate (e.g., horizontal position)

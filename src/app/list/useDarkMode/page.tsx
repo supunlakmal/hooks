@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
-import useDarkMode  from "../../hooks/useDarkMode";
-import "./styles.css"; // Import your global styles
+import useDarkMode  from "../../../hooks/useDarkMode";
 
 function DarkModeExample() {
     const { isDarkMode, toggle, enable, disable } = useDarkMode();

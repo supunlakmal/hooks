@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useWhyDidYouUpdate  from "../../hooks/useWhyDidYouUpdate";
+import useWhyDidYouUpdate  from "../../../hooks/useWhyDidYouUpdate";
 
 function WhyDidYouUpdateExample() {
     const [count, setCount] = useState(0);

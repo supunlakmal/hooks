@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useRouteChange  from "../../hooks/useRouteChange";
+import useRouteChange  from "../../../hooks/useRouteChange";
 
 function RouteChangeExample() {
     const [message, setMessage] = useState("No route change detected.");

@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useMap from "../../hooks/useMap";
+import useMap from "../../../hooks/useMap";
 
 function MapExample() {
     const initialMap = new Map<string, number>([

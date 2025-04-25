@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useThrottle  from "../../hooks/useThrottle";
+import useThrottle  from "../../../hooks/useThrottle";
 
 function ThrottleExample() {
     const [value, setValue] = useState("");

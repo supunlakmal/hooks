@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useInterval  from "../../hooks/useInterval";
+import useInterval  from "../../../hooks/useInterval";
 
 function IntervalExample() {
     const [count, setCount] = useState(0);

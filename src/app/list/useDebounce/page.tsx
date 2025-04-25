@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import useDebounce  from "../../hooks/useDebounce";
+import useDebounce  from "../../../hooks/useDebounce";
 
 function DebounceExample() {
     const [searchTerm, setSearchTerm] = useState("");

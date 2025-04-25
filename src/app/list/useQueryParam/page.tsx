@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useQueryParam  from "../../hooks/useQueryParam";
+import useQueryParam  from "../../../hooks/useQueryParam";
 
 function QueryParamExample() {
     const [param, setParam] = useQueryParam("example", "default");

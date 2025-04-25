@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useRef } from "react";
-import useVirtualList  from "../../hooks/useVirtualList";
+import useVirtualList  from "../../../hooks/useVirtualList";
 
 function VirtualListExample() {
     const [list] = useState(Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`));

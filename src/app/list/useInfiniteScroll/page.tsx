@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useInfiniteScroll  from "../../hooks/useInfiniteScroll";
+import useInfiniteScroll  from "../../../hooks/useInfiniteScroll";
 
 function InfiniteScrollExample() {
     const [items, setItems] = useState(Array.from({ length: 20 }, (_, i) => i + 1));

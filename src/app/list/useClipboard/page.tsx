@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useClipboard  from "../../hooks/useClipboard";
+import useClipboard  from "../../../hooks/useClipboard";
 
 function ClipboardManager() {
     const { value, error, copy, paste } = useClipboard();

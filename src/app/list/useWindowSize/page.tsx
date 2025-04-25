@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useWindowSize  from "../../hooks/useWindowSize";
+import useWindowSize  from "../../../hooks/useWindowSize";
 
 function WindowSizeExample() {
     const { width, height } = useWindowSize();

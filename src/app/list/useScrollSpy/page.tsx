@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useEffect } from "react";
-import useScrollSpy  from "../../hooks/useScrollSpy";
+import useScrollSpy  from "../../../hooks/useScrollSpy";
 
 function ScrollSpyExample() {
     const sections = ["section1", "section2", "section3"];

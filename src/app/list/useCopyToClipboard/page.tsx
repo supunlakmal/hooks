@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useCopyToClipboard  from "../../hooks/useCopyToClipboard";
+import useCopyToClipboard  from "../../../hooks/useCopyToClipboard";
 
 function ClipboardExample() {
     const [textToCopy, setTextToCopy] = useState("Hello from the hook!");

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import useKeyPress  from "../../hooks/useKeyPress";
+import useKeyPress  from "../../../hooks/useKeyPress";
 
 function KeyPressExample() {
     const [key, setKey] = useState<string | null>(null);

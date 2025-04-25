@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import useBroadcastChannel from '../../hooks/useBroadcastChannel';
+import useBroadcastChannel from '../../../hooks/useBroadcastChannel';
 
 interface MyData {
     message: string;

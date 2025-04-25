@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import usePortal  from "../../hooks/usePortal";
+import usePortal  from "../../../hooks/usePortal";
 
 function PortalExample() {
     const Portal = usePortal();

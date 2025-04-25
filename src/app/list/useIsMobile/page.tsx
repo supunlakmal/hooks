@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useIsMobile  from "../../hooks/use-mobile";
+import useIsMobile  from "../../../hooks/use-mobile";
 
 function IsMobileExample() {
     const isMobile = useIsMobile();

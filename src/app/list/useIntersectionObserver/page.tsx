@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef } from "react";
-import useIntersectionObserver  from "../../hooks/useIntersectionObserver";
+import useIntersectionObserver  from "../../../hooks/useIntersectionObserver";
 
 function IntersectionObserverExample() {    
     const targetRef = useRef<Element | null>(null);

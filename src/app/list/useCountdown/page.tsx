@@ -1,6 +1,6 @@
 "use client"
 import React, { useCallback } from "react";
-import useCountdown  from "../../hooks/useCountdown";
+import useCountdown  from "../../../hooks/useCountdown";
 
 const CountdownComponent: React.FC = () => {
     const handleComplete = useCallback(() => {

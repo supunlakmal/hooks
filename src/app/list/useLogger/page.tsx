@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useLogger  from "../../hooks/useLogger";
+import useLogger  from "../../../hooks/useLogger";
 
 function LoggerExample() {
     const [count, setCount] = useState(0);

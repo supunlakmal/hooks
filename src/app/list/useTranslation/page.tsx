@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useTranslation  from "../../hooks/useTranslation";
+import useTranslation  from "../../../hooks/useTranslation";
 
 function TranslationExample() {
     const { t, setLanguage } = useTranslation({

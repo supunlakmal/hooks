@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useKeyCombo  from "../../hooks/useKeyCombo";
+import useKeyCombo  from "../../../hooks/useKeyCombo";
 
 function KeyComboExample() {
     const [message, setMessage] = useState("Press Ctrl+K");

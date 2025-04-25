@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useDeepCompareEffect  from "../../hooks/useDeepCompareEffect";
+import useDeepCompareEffect  from "../../../hooks/useDeepCompareEffect";
 
 function DeepCompareExample() {
     const [settings, setSettings] = useState({

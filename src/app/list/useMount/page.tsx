@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useMount  from "../../hooks/useMount";
+import useMount  from "../../../hooks/useMount";
 
 function MountExample() {
     const [message, setMessage] = useState("Component not mounted yet.");

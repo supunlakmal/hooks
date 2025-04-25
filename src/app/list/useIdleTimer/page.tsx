@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import useIdleTimer  from "../../hooks/useIdleTimer";
+import useIdleTimer  from "../../../hooks/useIdleTimer";
 
 function IdleTimerExample() {
     const [status, setStatus] = useState("Active");

@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import useToggle  from "../../hooks/useToggle";
+import useToggle  from "../../../hooks/useToggle";
 
 function ToggleExample() {
     const [value, toggle, setOn, setOff] = useToggle(false);
