@@ -1,18 +1,27 @@
-"use client"
-// import React, { useState } from "react";
-// import useRouteChange  from "../../../hooks/useRouteChange";
+"use client";
+import React, { useState, useEffect } from "react";
+import useRouteChange from "../../../../src/hooks/useRouteChange";
 
 function RouteChangeExample() {
-    // const [message, setMessage] = useState("No route change detected.");
+    const [message, setMessage] = useState("No route change detected.");
+    const [isMounted, setIsMounted] = useState(false);
 
-    // useRouteChange(() => {
-    //     setMessage("Route has changed!");
-    // });
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+    
+    useEffect(() => {
+      if(isMounted) {
+        useRouteChange(() => {
+            setMessage("Route has changed!");
+        });
+      }
+    },[isMounted])
 
     return (
         <div>
-            {/* <h1>useRouteChange Example</h1>
-            <p>{message}</p> */}
+             <h1>useRouteChange Example</h1>
+             <p>{message}</p>
         </div>
     );
 }
