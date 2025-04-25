@@ -1,5 +1,5 @@
 import React from "react";
-import { useRenderCount } from "@supunlakmal/hooks";
+import { useRenderCount } from "../../hooks/useRenderCount";
 
 function RenderCountExample() {
     const renderCount = useRenderCount();

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDeepCompareEffect } from "@supunlakmal/hooks";
+import { useDeepCompareEffect } from "../../hooks/useDeepCompareEffect";
 
 function DeepCompareExample() {
     const [settings, setSettings] = useState({

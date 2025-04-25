@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUnmount } from "@supunlakmal/hooks";
+import { useUnmount } from "../../hooks/useUnmount";
 
 function UnmountExample() {
     const [message, setMessage] = useState("Component is mounted.");

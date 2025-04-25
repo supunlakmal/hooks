@@ -1,5 +1,5 @@
 import React from "react";
-import { useGeolocation } from "@supunlakmal/hooks";
+import { useGeolocation } from "../../hooks/useGeolocation";
 
 function GeolocationExample() {
     const {

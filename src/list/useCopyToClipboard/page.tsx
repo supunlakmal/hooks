@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCopyToClipboard } from "@supunlakmal/hooks"; // Adjust the import path as needed
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 
 function ClipboardExample() {
     const [textToCopy, setTextToCopy] = useState("Hello from the hook!");

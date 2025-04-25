@@ -1,5 +1,5 @@
 import React from "react";
-import { usePermission } from "@supunlakmal/hooks";
+import { usePermission } from "../../hooks/usePermission";
 
 function PermissionExample() {
     const { state, requestPermission } = usePermission("notifications");

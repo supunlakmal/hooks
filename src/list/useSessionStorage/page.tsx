@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSessionStorage } from "@supunlakmal/hooks";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 function SessionStorageExample() {
     const [value, setValue] = useSessionStorage("key", "default");

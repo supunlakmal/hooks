@@ -1,5 +1,5 @@
 import React from "react";
-import { useDarkMode } from "@supunlakmal/hooks"; // Adjust path
+import { useDarkMode } from "../../hooks/useDarkMode";
 import "./styles.css"; // Import your global styles
 
 function DarkModeExample() {

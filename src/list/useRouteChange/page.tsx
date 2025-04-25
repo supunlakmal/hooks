@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouteChange } from "@supunlakmal/hooks";
+import { useRouteChange } from "../../hooks/useRouteChange";
 
 function RouteChangeExample() {
     const [message, setMessage] = useState("No route change detected.");

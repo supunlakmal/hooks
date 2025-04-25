@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBroadcastChannel } from '@supunlakmal/hooks'; // Adjust the import path
+import { useBroadcastChannel } from '../../hooks/useBroadcastChannel';
 
 interface MyData {
     message: string;

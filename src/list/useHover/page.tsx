@@ -1,5 +1,5 @@
 import React from "react";
-import { useHover } from "@supunlakmal/hooks";
+import { useHover } from "../../hooks/useHover";
 
 function HoverExample() {
     const [hoverRef, isHovered] = useHover<HTMLDivElement>();

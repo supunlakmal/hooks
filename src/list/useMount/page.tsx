@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMount } from "@supunlakmal/hooks";
+import { useMount } from "../../hooks/useMount";
 
 function MountExample() {
     const [message, setMessage] = useState("Component not mounted yet.");

@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
-import { useFocusTrap } from "@supunlakmal/hooks";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-    const modalRef = useRef<HTMLDivElement>(null);
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const modalRef = useRef<HTMLElement>(null);
+    const closeButtonRef = useRef<HTMLElement>(null);
 
-    useFocusTrap(modalRef, isOpen, closeButtonRef);
-
+    if (modalRef.current) {
+        useFocusTrap(modalRef, isOpen, closeButtonRef);
+    }
+   
     if (!isOpen) return null;
 
     return (
@@ -24,7 +26,7 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
             }}
         >
             <h2>Modal</h2>
-            <p>This is a modal with focus trapped inside.</p>
+                <p>This is a modal with focus trapped inside.</p>
             <button ref={closeButtonRef} onClick={onClose}>
                 Close
             </button>

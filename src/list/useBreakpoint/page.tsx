@@ -1,5 +1,5 @@
 import React from "react";
-import { useBreakpoint } from "@supunlakmal/hooks"; // Adjust path
+import { useBreakpoint } from "../../hooks/useBreakpoint";
 
 function ResponsiveComponent() {
     const activeBreakpoint = useBreakpoint();

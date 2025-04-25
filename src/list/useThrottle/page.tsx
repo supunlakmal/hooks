@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useThrottle } from "@supunlakmal/hooks";
+import { useThrottle } from "../../hooks/useThrottle";
 
 function ThrottleExample() {
     const [value, setValue] = useState("");

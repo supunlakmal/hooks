@@ -1,5 +1,5 @@
 import React from "react";
-import { useSet } from "@supunlakmal/hooks";
+import { useSet } from "../../hooks/useSet";
 
 function SetExample() {
     const [set, { add, remove, has, clear }] = useSet<number>([1, 2, 3]);

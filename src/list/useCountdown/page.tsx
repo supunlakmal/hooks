@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useCountdown } from "@supunlakmal/hooks"; // Adjust the import path
+import { useCountdown } from "../../hooks/useCountdown";
 
 const CountdownComponent: React.FC = () => {
     const handleComplete = useCallback(() => {

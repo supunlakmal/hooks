@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLogger } from "@supunlakmal/hooks";
+import { useLogger } from "../../hooks/useLogger";
 
 function LoggerExample() {
     const [count, setCount] = useState(0);

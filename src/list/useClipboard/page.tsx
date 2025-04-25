@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useClipboard } from "@supunlakmal/hooks"; // Adjust path
+import { useClipboard } from "../../hooks/useClipboard";
 
 function ClipboardManager() {
     const { value, error, copy, paste } = useClipboard();

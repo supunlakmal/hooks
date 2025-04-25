@@ -1,5 +1,5 @@
 import React from "react";
-import { usePortal } from "@supunlakmal/hooks";
+import { usePortal } from "../../hooks/usePortal";
 
 function PortalExample() {
     const Portal = usePortal();

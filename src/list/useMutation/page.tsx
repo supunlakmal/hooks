@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@supunlakmal/hooks";
+import { useMutation } from "../../hooks/useMutation";
 
 function MutationExample() {
     const [result, setResult] = useState<string | null>(null);

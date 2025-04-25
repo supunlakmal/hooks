@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormValidation } from "@supunlakmal/hooks";
+import { useFormValidation } from "../../hooks/useFormValidation";
 
 const validationSchema = {
     name: [(value) => (!value ? "Name is required" : undefined)],

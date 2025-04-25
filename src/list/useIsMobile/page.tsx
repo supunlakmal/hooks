@@ -1,5 +1,5 @@
 import React from "react";
-import { useIsMobile } from "@supunlakmal/hooks";
+import { useIsMobile } from "../../hooks/use-mobile";
 
 function IsMobileExample() {
     const isMobile = useIsMobile();

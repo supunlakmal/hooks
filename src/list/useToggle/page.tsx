@@ -1,5 +1,5 @@
 import React from "react";
-import { useToggle } from "@supunlakmal/hooks";
+import { useToggle } from "../../hooks/useToggle";
 
 function ToggleExample() {
     const [isToggled, toggle] = useToggle(false);

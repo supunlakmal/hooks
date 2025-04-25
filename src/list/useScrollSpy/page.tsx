@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useScrollSpy } from "@supunlakmal/hooks";
+import { useScrollSpy } from "../../hooks/useScrollSpy";
 
 function ScrollSpyExample() {
     const sections = ["section1", "section2", "section3"];

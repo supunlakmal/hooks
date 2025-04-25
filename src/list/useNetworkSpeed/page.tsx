@@ -1,5 +1,5 @@
 import React from "react";
-import { useNetworkSpeed } from "@supunlakmal/hooks";
+import { useNetworkSpeed } from "../../hooks/useNetworkSpeed";
 
 function NetworkSpeedExample() {
     const { speed, isTesting, startTest } = useNetworkSpeed();

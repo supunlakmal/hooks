@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocalStorage } from "@supunlakmal/hooks";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 function LocalStorageExample() {
     const [name, setName] = useLocalStorage("name", "");

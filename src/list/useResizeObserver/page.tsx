@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useResizeObserver } from "@supunlakmal/hooks";
+import { useResizeObserver } from "../../hooks/useResizeObserver";
 
 function ResizeObserverExample() {
     const ref = useRef<HTMLDivElement>(null);

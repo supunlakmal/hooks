@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLongPress } from "@supunlakmal/hooks";
+import { useLongPress } from "../../hooks/useLongPress";
 
 function LongPressExample() {
     const [message, setMessage] = useState("Press and hold the button");

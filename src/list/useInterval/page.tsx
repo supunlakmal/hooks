@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useInterval } from "@supunlakmal/hooks";
+import { useInterval } from "../../hooks/useInterval";
 
 function IntervalExample() {
     const [count, setCount] = useState(0);

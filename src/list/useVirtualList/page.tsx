@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useVirtualList } from "@supunlakmal/hooks";
+import { useVirtualList } from "../../hooks/useVirtualList";
 
 function VirtualListExample() {
     const [items] = useState(Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`));

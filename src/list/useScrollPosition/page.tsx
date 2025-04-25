@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useScrollPosition } from "@supunlakmal/hooks";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 
 function ScrollPositionExample() {
     const [scrollY, setScrollY] = useState(0);

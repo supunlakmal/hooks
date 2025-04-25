@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useVisibility } from "@supunlakmal/hooks";
+import { useVisibility } from "../../hooks/useVisibility";
 
 function VisibilityExample() {
     const ref = useRef<HTMLDivElement>(null);
