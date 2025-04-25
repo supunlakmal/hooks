@@ -62,7 +62,7 @@ const CustomMenu = ({
 
 // Component using the hook
 function ContextMenuExample() {
-  const targetAreaRef = useRef<HTMLDivElement>(null);
+  const targetAreaRef = useRef<any>(null);
   const {
     isOpen,
     position,

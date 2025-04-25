@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import useResizeObserver from "../../hooks/useResizeObserver";
 
 function ResizeObserverExample() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<any>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const entry = useResizeObserver(ref);
 

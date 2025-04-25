@@ -1,15 +1,15 @@
 import React from "react";
 import useStepper  from "../../hooks/useStepper";
 
-function StepperExample() {
-    const { step, next, previous, reset, isFirstStep, isLastStep } = useStepper(3);
+function StepperExample() {    
+    const { currentStep, goToNextStep, goToPreviousStep, reset, isFirstStep, isLastStep } = useStepper({totalSteps:3});
 
     return (
         <div>
             <h1>useStepper Example</h1>
-            <p>Current Step: {step}</p>
-            <button onClick={previous} disabled={isFirstStep}>Previous</button>
-            <button onClick={next} disabled={isLastStep}>Next</button>
+            <p>Current Step: {currentStep}</p>
+            <button onClick={goToPreviousStep} disabled={isFirstStep}>Previous</button>
+            <button onClick={goToNextStep} disabled={isLastStep}>Next</button>
             <button onClick={reset}>Reset</button>
         </div>
     );

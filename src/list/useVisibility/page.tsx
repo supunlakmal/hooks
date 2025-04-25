@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import useVisibility  from "../../hooks/useVisibility";
 
 function VisibilityExample() {
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<any>(null);
     const isVisible = useVisibility(ref);
 
     return (

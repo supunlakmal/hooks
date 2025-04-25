@@ -2,15 +2,15 @@ import React from "react";
 import useToggle  from "../../hooks/useToggle";
 
 function ToggleExample() {
-    const [isToggled, toggle] = useToggle(false);
+    const [value, toggle, setOn, setOff] = useToggle(false);
 
     return (
         <div>
             <h1>useToggle Example</h1>
-            <p>State: {isToggled ? "On" : "Off"}</p>
+            <p>State: {value ? "On" : "Off"}</p>
             <button onClick={toggle}>Toggle</button>
-            <button onClick={() => toggle(true)}>Set On</button>
-            <button onClick={() => toggle(false)}>Set Off</button>
+            <button onClick={setOn}>Set On</button>
+            <button onClick={setOff}>Set Off</button>
         </div>
     );
 }

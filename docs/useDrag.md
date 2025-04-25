@@ -12,7 +12,7 @@ const DraggableItem: React.FC<{ id: string; label: string }> = ({
   id,
   label,
 }) => {
-  const dragRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<any>(null);
   const { isDragging } = useDrag(dragRef, {
     transferData: { id, type: "item" }, // Data to send on drop
     dataFormat: "application/json", // Format of the data

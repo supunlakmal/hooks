@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import useMergeRefs  from "../../hooks/useMergeRefs";
 
 function MergeRefsExample() {
-    const ref1 = useRef<HTMLDivElement>(null);
-    const ref2 = useRef<HTMLDivElement>(null);
+    const ref1 = useRef<any>(null);
+    const ref2 = useRef<any>(null);
 
     const mergedRef = useMergeRefs(ref1, ref2);
 
