@@ -55,7 +55,7 @@ function useVirtualList<T>(
   } = options;
 
   const [scrollTop, setScrollTop] = useState(initialScrollTop);
-  const innerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<any>(null);
 
   // Update scroll position on scroll events
   const handleScroll = useCallback(

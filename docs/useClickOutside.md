@@ -11,7 +11,7 @@ import { useClickOutside } from "@supunlakmal/hooks"; // Adjust the import path 
 
 function ModalComponent() {
   const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null); // Create a ref for the modal element
+  const modalRef = useRef<any>(null); // Create a ref for the modal element
 
   // Use the hook: call setIsOpen(false) when clicking outside modalRef
   useClickOutside(modalRef, () => {
@@ -59,7 +59,7 @@ import { useClickOutside } from "@supunlakmal/hooks";
 
 function DropdownComponent() {
   const [isVisible, setIsVisible] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<any>(null);
 
   // Close dropdown on mouseup outside the element
   useClickOutside(

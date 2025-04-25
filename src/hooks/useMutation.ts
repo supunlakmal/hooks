@@ -4,13 +4,13 @@ import { useState, useCallback, useRef, useEffect } from "react";
 type MutationStatus = "idle" | "loading" | "success" | "error";
 
 // Result type for the hook
-interface UseMutationResult<TData = any, TError = Error, TVariables = void> {
+interface UseMutationResult {
   /** The current status of the mutation. */
   status: MutationStatus;
   /** The data returned from a successful mutation. */
-  data: TData | undefined;
+  data: any;
   /** The error object if the mutation failed. */
-  error: TError | undefined;
+  error: any;
   /** Boolean indicating if the mutation is currently executing. */
   isLoading: boolean;
   /** Boolean indicating if the mutation has successfully completed. */
@@ -20,26 +20,26 @@ interface UseMutationResult<TData = any, TError = Error, TVariables = void> {
   /** Boolean indicating if the mutation has not started yet. */
   isIdle: boolean;
   /** The function to trigger the mutation. Accepts variables if the mutation function requires them. */
-  mutate: (variables: TVariables) => Promise<TData | undefined>;
+  mutate: (variables: any) => Promise<any>;
   /** Async version of mutate */
-  mutateAsync: (variables: TVariables) => Promise<TData>;
+  mutateAsync: (variables: any) => Promise<any>;
   /** Resets the mutation state back to idle. */
   reset: () => void;
 }
 
 // Options for the hook
-interface UseMutationOptions<TData = any, TError = Error, TVariables = void> {
+interface UseMutationOptions {
   /** Callback function executed on successful mutation. Receives the data and variables. */
-  onSuccess?: (data: TData, variables: TVariables) => void;
+  onSuccess?: (data: any, variables: any) => void;
   /** Callback function executed on mutation error. Receives the error and variables. */
-  onError?: (error: TError, variables: TVariables) => void;
+  onError?: (error: any, variables: any) => void;
   /** Callback function executed when the mutation starts. Receives the variables. */
-  onMutate?: (variables: TVariables) => void;
+  onMutate?: (variables: any) => void;
   /** Callback function executed when mutation finishes (either success or error). Receives data/error and variables. */
   onSettled?: (
-    data: TData | undefined,
-    error: TError | undefined,
-    variables: TVariables
+    data: any,
+    error: any,
+    variables: any
   ) => void;
 }
 
@@ -47,20 +47,17 @@ interface UseMutationOptions<TData = any, TError = Error, TVariables = void> {
  * Hook to manage asynchronous operations that modify data (mutations).
  * Handles loading, success, and error states, and provides callbacks.
  *
- * @template TData The type of data returned by the mutation function on success.
- * @template TError The type of error thrown or returned on failure.
- * @template TVariables The type of variables the mutation function accepts.
  * @param mutationFn The asynchronous function that performs the mutation.
  * @param options Optional configuration with callbacks (onSuccess, onError, etc.).
  * @returns State and functions to manage the mutation lifecycle.
  */
-function useMutation<TData = any, TError = Error, TVariables = void>(
-  mutationFn: (variables: TVariables) => Promise<TData>,
-  options?: UseMutationOptions<TData, TError, TVariables>
-): UseMutationResult<TData, TError, TVariables> {
+function useMutation(
+  mutationFn: (variables: any) => Promise<any>,
+  options?: UseMutationOptions
+): UseMutationResult {
   const [status, setStatus] = useState<MutationStatus>("idle");
-  const [data, setData] = useState<TData | undefined>(undefined);
-  const [error, setError] = useState<TError | undefined>(undefined);
+  const [data, setData] = useState<any>(undefined);
+  const [error, setError] = useState<any>(undefined);
 
   // Use refs for callbacks to avoid including them in the mutate callback dependencies
   const optionsRef = useRef(options);
@@ -82,7 +79,7 @@ function useMutation<TData = any, TError = Error, TVariables = void>(
   }, []);
 
   const mutateAsync = useCallback(
-    async (variables: TVariables): Promise<TData> => {
+    async (variables: any): Promise<any> => {
       setStatus("loading");
       setData(undefined);
       setError(undefined);
@@ -97,11 +94,10 @@ function useMutation<TData = any, TError = Error, TVariables = void>(
         optionsRef.current?.onSettled?.(result, undefined, variables);
         return result;
       } catch (err: any) {
-        const typedError = err as TError;
-        setError(typedError);
+        setError(err);
         setStatus("error");
-        optionsRef.current?.onError?.(typedError, variables);
-        optionsRef.current?.onSettled?.(undefined, typedError, variables);
+        optionsRef.current?.onError?.(err, variables);
+        optionsRef.current?.onSettled?.(undefined, err, variables);
         // Rethrow the error so callers of mutateAsync can catch it if needed
         throw err;
       }
@@ -110,13 +106,8 @@ function useMutation<TData = any, TError = Error, TVariables = void>(
   ); // No dependencies needed due to refs
 
   const mutate = useCallback(
-    (variables: TVariables): Promise<TData | undefined> => {
-      return mutateAsync(variables).catch(() => {
-        // Catch the rethrown error from mutateAsync to prevent unhandled promise rejections
-        // when using the non-async mutate function. The error state is already set.
-        // console.debug("Caught error in non-async mutate wrapper:", err);
-        return undefined; // Return undefined on error for the non-async version
-      });
+    (variables: any): Promise<any> => {
+      return mutateAsync(variables);
     },
     [mutateAsync]
   );

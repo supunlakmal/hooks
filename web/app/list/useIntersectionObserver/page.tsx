@@ -1,0 +1,24 @@
+"use client"
+import React, { useRef } from "react";
+import useIntersectionObserver  from "../../../../src/hooks/useIntersectionObserver";
+
+function IntersectionObserverExample() {    
+    const targetRef = useRef<Element | null>(null);
+    const entry = useIntersectionObserver(targetRef, { threshold: 0.5 });
+
+    return (
+        <div>
+            <div
+                style={{
+                    height: "100px",
+                    backgroundColor: entry?.isIntersecting ? "lightgreen" : "lightcoral",
+                    margin: "50px 0",
+                }}
+            >
+                {entry?.isIntersecting ? "Visible" : "Not Visible"}
+            </div>
+            <p>Scroll to see the box change color when it becomes visible.</p>
+        </div>
+    );
+}
+export default IntersectionObserverExample;

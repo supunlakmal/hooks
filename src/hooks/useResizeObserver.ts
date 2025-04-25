@@ -7,17 +7,16 @@ interface ResizeObserverEntryExtended extends ResizeObserverEntry {
 /**
  * Custom hook that uses the ResizeObserver API to monitor changes to an element's size.
  *
- * @template T The type of the element being observed (defaults to Element).
- * @param {RefObject<T>} ref The ref attached to the element to observe.
+ * @param {RefObject<HTMLElement | null>} ref The ref attached to the element to observe.
  * @returns {ResizeObserverEntryExtended | null} The latest ResizeObserverEntry for the observed element, or null initially.
  */
-function useResizeObserver<T extends Element>(
-  ref: RefObject<T>
+function useResizeObserver(
+  ref: RefObject<HTMLElement | null>
 ): ResizeObserverEntryExtended | null {
   const [entry, setEntry] = useState<ResizeObserverEntryExtended | null>(null);
 
   useEffect(() => {
-    const element = ref?.current;
+    const element = ref.current;
     const hasResizeObserverSupport =
       typeof window.ResizeObserver !== "undefined";
 
@@ -36,8 +35,7 @@ function useResizeObserver<T extends Element>(
     return () => {
       observer.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref?.current]); // Depend on the ref's current value
+  }, [ref]); // Depend on the ref
 
   return entry;
 }

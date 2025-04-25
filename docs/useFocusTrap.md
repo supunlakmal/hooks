@@ -11,7 +11,7 @@ import React, { useState, useRef } from "react";
 import { useFocusTrap } from "@supunlakmal/hooks"; // Adjust path
 
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<any>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // Activate focus trap when the modal is open

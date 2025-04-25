@@ -55,7 +55,7 @@ import React, { useRef } from "react";
 import { useScrollPosition } from "@supunlakmal/hooks"; // Adjust path
 
 function ElementScrollReporter() {
-  const scrollableRef = useRef<HTMLDivElement>(null);
+  const scrollableRef = useRef<any>(null);
   // Track scroll position of the element referenced by scrollableRef, no throttle
   const { x, y } = useScrollPosition(scrollableRef, 0);
 

@@ -19,9 +19,9 @@ const FOCUSABLE_SELECTORS = [
  * @param initialFocusRef - Optional ref object pointing to the element that should receive focus initially.
  */
 function useFocusTrap<T extends HTMLElement>(
-  containerRef: RefObject<T>,
+  containerRef: RefObject<T | null>,
   isActive: boolean,
-  initialFocusRef?: RefObject<HTMLElement>
+  initialFocusRef?: RefObject<HTMLElement | null>
 ): void {
   const previousActiveElement = useRef<Element | null>(null);
 

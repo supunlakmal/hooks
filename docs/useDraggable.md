@@ -13,8 +13,8 @@ import React, { useRef, useState } from "react";
 import { useDraggable } from "@supunlakmal/hooks"; // Adjust import path
 
 const DraggableBox: React.FC = () => {
-  const dragRef = useRef<HTMLDivElement>(null);
-  const boundsRef = useRef<HTMLDivElement>(null); // Ref for the constraining container
+  const dragRef = useRef<any>(null);
+  const boundsRef = useRef<any>(null); // Ref for the constraining container
 
   // --- Uncontrolled Mode ---
   const { position, isDragging } = useDraggable(dragRef, {
