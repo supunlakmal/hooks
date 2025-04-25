@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useDrag from '../../../hooks/useDrag';
 
 const DragExample = () => {
-  const dragRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<any>(null);
   const { position } = useDrag(dragRef);
 
   const style = {

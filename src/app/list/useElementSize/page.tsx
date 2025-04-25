@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useElementSize from '../../../hooks/useElementSize';
 
 function ElementSizeExample() {
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<any>(null);
   const { width, height } = useElementSize(divRef);
 
   return (

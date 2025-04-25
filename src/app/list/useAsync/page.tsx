@@ -18,7 +18,16 @@ const fetchUserData = async (userId: number): Promise<UserData> => {
     return response.json();
 };
 
-function UserProfile({ userId }: { userId: number }) {
+function UserId() {
+    const userId = 1;
+    return (
+        <div>
+            <UserProfile userId={userId} />
+        </div>
+    )
+}
+
+function UserProfile({ userId }: { userId: number }){
     const {
         loading,
         error,
@@ -36,5 +45,3 @@ function UserProfile({ userId }: { userId: number }) {
         </div>
     );
 }
-
-export default UserProfile;

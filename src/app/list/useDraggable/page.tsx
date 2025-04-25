@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useDraggable from '../../../hooks/useDraggable';
 
 function DraggableExample() {
-  const boxRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<any>(null);
   const { position, isDragging } = useDraggable(boxRef);
 
   return (

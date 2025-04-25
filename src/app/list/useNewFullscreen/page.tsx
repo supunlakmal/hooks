@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useNewFullscreen from '../../../hooks/useNewFullscreen';
 
 function NewFullscreenExample() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<any>(null);
   const { isFullscreen, enterFullscreen, exitFullscreen } = useNewFullscreen();
 
   const handleFullscreen = () => {
