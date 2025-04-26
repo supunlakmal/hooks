@@ -8,6 +8,7 @@ export { default as useContextMenu } from "./hooks/useContextMenu";
 export { default as useCopyToClipboard } from "./hooks/useCopyToClipboard";
 export { default as useDarkMode } from "./hooks/useDarkMode";
 export { default as useDebouncedState} from "./hooks/useDebouncedState";
+export { default as usePreviousDifferent} from "./hooks/usePreviousDifferent";
 export { default as useThrottledState} from "./hooks/useThrottledState";
 export { default as useDebounce } from "./hooks/useDebounce";
 export { default as useElementSize } from "./hooks/useElementSize";

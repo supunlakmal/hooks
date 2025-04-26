@@ -54,6 +54,7 @@ const hookLinks: HookLink[] = [
   { name: 'usePermission', path: '/list/usePermission' },
   { name: 'usePortal', path: '/list/usePortal' },
   { name: 'usePrevious', path: '/list/usePrevious' },
+  { name: 'usePreviousDifferent', path: '/list/usePreviousDifferent' },
   { name: 'useQueryParam', path: '/list/useQueryParam' },
   { name: 'useReducerLogger', path: '/list/useReducerLogger' },
   { name: 'useRenderCount', path: '/list/useRenderCount' },
