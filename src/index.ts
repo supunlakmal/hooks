@@ -7,6 +7,7 @@ export { default as useClipboard } from "./hooks/useClipboard";
 export { default as useContextMenu } from "./hooks/useContextMenu";
 export { default as useCopyToClipboard } from "./hooks/useCopyToClipboard";
 export { default as useDarkMode } from "./hooks/useDarkMode";
+export { default as useDebouncedState} from "./hooks/useDebouncedState";
 export { default as useDebounce } from "./hooks/useDebounce";
 export { default as useElementSize } from "./hooks/useElementSize";
 export { default as useErrorBoundary } from "./hooks/useErrorBoundary";

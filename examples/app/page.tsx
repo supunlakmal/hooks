@@ -19,6 +19,7 @@ const hookLinks: HookLink[] = [
   { name: 'useCountdown', path: '/list/useCountdown' },
   { name: 'useDarkMode', path: '/list/useDarkMode' },
   { name: 'useDebounce', path: '/list/useDebounce' },
+  { name: 'useDebouncedState', path: '/list/useDebouncedState' },
   { name: 'useDeepCompareEffect', path: '/list/useDeepCompareEffect' },
   { name: 'useDerivedState', path: '/list/useDerivedState' },
   { name: 'useDeviceMotion', path: '/list/useDeviceMotion' },
