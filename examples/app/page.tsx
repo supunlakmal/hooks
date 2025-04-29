@@ -7,6 +7,7 @@ interface HookLink {
 }
 
 const hookLinks: HookLink[] = [
+  { name: 'useLayout', path: '/list/useLayout' },
   { name: 'useAnimation', path: '/list/useAnimation' },
   { name: 'useAsync', path: '/list/useAsync' },
   { name: 'usePromise', path: '/list/usePromise' },

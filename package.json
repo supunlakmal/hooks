@@ -75,5 +75,8 @@
   ],
   "directories": {
     "doc": "docs"
+  },
+  "dependencies": {
+    "react-hook-layout": "^1.0.2"
   }
 }
