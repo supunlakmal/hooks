@@ -70,7 +70,6 @@ const hookLinks: HookLink[] = [
   { name: 'useSessionStorage', path: '/list/useSessionStorage' },
   { name: 'useSet', path: '/list/useSet' },
   { name: 'useStateWithHistory', path: '/list/useStateWithHistory' },
-  { name: 'useStepper', path: '/list/useStepper' },
   { name: 'useSwipe', path: '/list/useSwipe' },
   { name: 'useSwipeable', path: '/list/useSwipeable' },
   { name: 'useThrottle', path: '/list/useThrottle' },
@@ -85,6 +84,7 @@ const hookLinks: HookLink[] = [
   { name: 'useWhyDidYouUpdate', path: '/list/useWhyDidYouUpdate' },
   { name: 'useWindowSize', path: '/list/useWindowSize' },
 ];
+
 
 const HookListPage: React.FC = () => {
   return (
