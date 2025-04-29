@@ -1,4 +1,11 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
+
+function useLatest<T>(value: T) {
+  const ref = useRef(value);
+  ref.current = value;
+
+  return ref;
+}
 
 type Target = HTMLElement | null | HTMLElement[] | null;
 
@@ -7,18 +14,19 @@ function useClickOutside<T extends Event = Event>(
   target: Target,
   eventName: keyof DocumentEventMap = 'click'
 ) {
-  const callbackRef = useRef(callback);
-  callbackRef.current = callback;
+  const callbackRef = useLatest(callback);
 
-  const targets = Array.isArray(target) ? target : [target];
+  const targets = Array.isArray(target) ? target : target ? [target]:[];
 
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
         const clickedOutside = targets.every((targetElement) => {
             return !targetElement?.contains(event.target as Node);
           });
-        if(clickedOutside) callbackRef.current(event as T);
+        if(clickedOutside) callbackRef.current(event as T)
     };
+
+    if(targets.length === 0) return;
 
     document.addEventListener(eventName, handleClickOutside);
     return () => {

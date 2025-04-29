@@ -4,22 +4,24 @@ import type { DebounceOptions } from '../useDebounce/debounceOptions';
 import useDebounceFn from '../useDebounceFn';
 import useUpdateEffect from '../useUpdateEffect';
 
-function useDebounceEffect(
-  effect: EffectCallback,
-  deps?: DependencyList,
-  options?: DebounceOptions,
-) {
-  const [flag, setFlag] = useState({});
+interface DebounceConfig extends DebounceOptions {}
 
-  const { run } = useDebounceFn(() => {
-    setFlag({});
+function useDebounceEffect(
+  asyncEffect: EffectCallback,
+  deps?: DependencyList,
+  options?: DebounceConfig,
+) {
+  const [debouncedFlag, setDebouncedFlag] = useState({});
+
+  const { run: debouncedRun } = useDebounceFn(() => {
+    setDebouncedFlag({});
   }, options);
 
   useEffect(() => {
-    return run();
+    return debouncedRun();
   }, deps);
 
-  useUpdateEffect(effect, [flag]);
+  useUpdateEffect(asyncEffect, [debouncedFlag]);
 }
 
 export default useDebounceEffect;
