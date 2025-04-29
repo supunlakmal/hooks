@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "react-cool-dimensions": "^3.0.1",
     "react-hook-layout": "^1.0.2"
   }
 }

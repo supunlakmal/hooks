@@ -1,21 +1,6 @@
----
-title: useLayout
-nav: Hooks
-group:
-  title: Layout
-  order: 6
----
+# useLayout Hook Documentation
 
-# useLayout
-
-A custom React hook for managing layout slots and rendering components based on slot definitions. This hook provides a flexible way to define and manage component layouts within your application.
-
-## Features
-
--   **Dynamic Slot Definition:** Define named slots and render content into them.
--   **Component Rendering:** Render components or functions into the defined slots.
--   **Layout Management:** Manage the overall layout structure and inject content into specific slots.
-- **Support multiple Slots**: Support multiple Slots in the same layout
+`useLayout` is a custom React hook designed to provide a flexible way to manage and render content within defined layout slots. It allows you to define named slots in your layout and inject content into them dynamically.
 
 ## Installation
 ```
