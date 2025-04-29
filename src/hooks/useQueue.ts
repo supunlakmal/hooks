@@ -1,52 +1,42 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
-interface Queue<T> {
-  enqueue: (item: T) => void;
-  dequeue: () => T | undefined;
-  peek: () => T | undefined;
-  getSize: () => number;
-  clear: () => void;
-  isEmpty: () => boolean;
-}
+type Queue<T> = {
+  add: (item: T) => void;
+  remove: () => T | null;
+  first: () => T | null;
+  count: () => number;
+  reset: () => void;
+  empty: () => boolean;
+};
 
-/**
- * Custom hook to manage a queue data structure.
- *
- * @returns {Queue<T>} An object containing queue operations.
- */
 function useQueue<T>(): Queue<T> {
-  const [queue, setQueue] = useState<T[]>([]);
+  const [internalQueue, updateQueue] = useState<T[]>([]);
 
-  const enqueue = useCallback((item: T) => {
-    setQueue((prevQueue) => [...prevQueue, item]);
+  const add = useCallback((item: T) => {
+    updateQueue((prev) => [...prev, item]);
   }, []);
 
-  const dequeue = useCallback(() => {
-    if (queue.length === 0) {
-      return undefined;
+  const remove = useCallback(() => {
+    if (internalQueue.length === 0) {
+      return null;
     }
-    const item = queue[0];
-    setQueue((prevQueue) => prevQueue.slice(1));
-    return item;
-  }, [queue]);
+    const itemToReturn = internalQueue[0];
+    updateQueue((prev) => prev.slice(1));
+    return itemToReturn;
+  }, [internalQueue]);
 
-  const peek = useCallback(() => {
-    return queue.length > 0 ? queue[0] : undefined;
-  }, [queue]);
+  const first = useCallback(() => {
+    return internalQueue.length > 0 ? internalQueue[0] : null;
+  }, [internalQueue]);
 
-  const getSize = useCallback(() => {
-    return queue.length;
-  }, [queue]);
+  const count = useCallback(() => internalQueue.length, [internalQueue]);
 
-  const clear = useCallback(() => {
-    setQueue([]);
+  const reset = useCallback(() => {
+    updateQueue([]);
   }, []);
 
-  const isEmpty = useCallback(() => {
-    return queue.length === 0;
-  }, [queue]);
+  const empty = useCallback(() => internalQueue.length === 0, [internalQueue]);
 
-  return { enqueue, dequeue, peek, getSize, clear, isEmpty };
+  return useMemo(() => ({ add, remove, first, count, reset, empty }), [add, remove, first, count, reset, empty]);
 }
-
 export default useQueue;
