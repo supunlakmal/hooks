@@ -2,6 +2,7 @@ export { default as useIsMobile } from "./hooks/use-mobile";
 export { default as useAnimation } from "./hooks/useAnimation";
 export { default as useAsync } from "./hooks/useAsync";
 export { default as useBreakpoint } from "./hooks/useBreakpoint";
+export { default as useMediatedState } from "./hooks/useMediatedState";
 export { default as useFirstMountState } from "./hooks/useFirstMountState"; //add
 export { default as useLocalStorageValue } from "./hooks/useLocalStorageValue";
 export { default as useClickOutside } from "./hooks/useClickOutside";
