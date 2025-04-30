@@ -80,3 +80,4 @@ export { default as useVirtualList } from "./hooks/useVirtualList";
 export { default as useDeepCompareEffect } from "./hooks/useDeepCompareEffect";
 export { default as useIsFirstRender } from "./hooks/useIsFirstRender";
 export {default as useDeviceMotion} from "./hooks/useDeviceMotion";
+export { default as useAsyncAbortable} from './hooks/useAsyncAbortable'
