@@ -23,3 +23,5 @@ export function useIsMounted(initialValue = false): () => boolean {
 	return get;
 }
 
+export default useIsMounted;
+
