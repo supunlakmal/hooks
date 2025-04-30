@@ -99,4 +99,6 @@ export { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect';
 export { useLifecycleLogger } from './hooks/useLifecycleLogger';
 export { useThrottledCallback } from './hooks/useThrottledCallback';
 export { useList } from './hooks/useList';
+export { default as useNetworkState } from './hooks/useNetworkState';
+
 export { default as useFirstMountState } from "./hooks/useFirstMountState";

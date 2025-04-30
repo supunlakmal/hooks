@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import {isBrowser} from '../util/const.js';
-import {off, on} from '../util/misc.js';
-import {type InitialState} from '../util/resolve-hook-state.js';
+import {isBrowser} from '../util/const';
+import {off, on} from '../util/misc';
+import {type InitialState} from '../util/resolve-hook-state';
 
-export type NetworkInformation = {
+export type NetworkInformation = { 
 	readonly downlink: number;
 	readonly downlinkMax: number;
 	readonly effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
