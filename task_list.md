@@ -5,9 +5,7 @@ This task list outlines the process for migrating React hooks from the `./new` f
 - [ ] **Preparation (One-Time Setup)**
   - [ ] Review all files in the `./new` folder for potential copyright issues and note them.
   - [ ] Identify and list any external libraries required by the hooks in `./new`.
-  - [ ] Install all required external libraries listed.
   - [ ] Ensure `npm run build` runs without error before starting the hook migration.
-  - [ ] Create a backup branch before starting the migration.
 - [ ] **Hook Migration (Repeat for Each Hook)**
   - [ ] **Select Hook:** Choose one hook from the `./new` folder.
   - [ ] **Duplicate Check**: Check if the hook already exist in the `src/hooks` folder. If it exists, delete the hook from the `./new` folder and skip to the next hook. Otherwise, proceed with the migration.
