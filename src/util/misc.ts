@@ -1,6 +1,4 @@
 import {type DependencyList} from 'react';
-import {type DependenciesComparator} from '../types.js';
-
 export function on<T extends EventTarget>(
 	object: T | null,
 	...args:
@@ -30,7 +28,11 @@ export const hasOwnProperty = <
 export const yieldTrue = () => true as const;
 export const yieldFalse = () => false as const;
 
-export const basicDepsComparator: DependenciesComparator = (d1, d2) => {
+export type DependenciesComparator<Deps extends DependencyList = DependencyList> = (
+	a: Deps,
+	b: Deps
+) => boolean;
+export const basicDepsComparator: DependenciesComparator = (d1: DependencyList, d2: DependencyList) => {
 	if (d1 === d2) {
 		return true;
 	}

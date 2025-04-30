@@ -13,3 +13,4 @@ export function useRerender(): () => void {
 		setState(stateChanger);
 	}, []);
 }
+export default useRerender;

@@ -1,7 +1,7 @@
 import {type SetStateAction, useMemo, useRef} from 'react';
-import {useRerender} from '../useRerender/index.js';
-import {useSyncedRef} from '../useSyncedRef/index.js';
-import {type InitialState, resolveHookState} from '../util/resolve-hook-state.js';
+import useRerender from './useRerender';
+import {useSyncedRef} from './useSyncedRef';
+import {type InitialState, resolveHookState} from '../util/resolve-hook-state';
 
 export type ListActions<T> = {
 	/**
@@ -170,3 +170,4 @@ export function useList<T>(initialList: InitialState<T[]>): [T[], ListActions<T>
 
 	return [list.current, actions];
 }
+
