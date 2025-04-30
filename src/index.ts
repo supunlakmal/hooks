@@ -3,7 +3,6 @@ export { default as useAnimation } from "./hooks/useAnimation";
 export { default as useAsync } from "./hooks/useAsync";
 export { default as useBreakpoint } from "./hooks/useBreakpoint";
 export { default as useMediatedState } from "./hooks/useMediatedState";
-export { default as useFirstMountState } from "./hooks/useFirstMountState"; //add
 export { default as useLocalStorageValue } from "./hooks/useLocalStorageValue";
 export { default as useClickOutside } from "./hooks/useClickOutside";
 export { default as useClipboard } from "./hooks/useClipboard";
@@ -57,6 +56,7 @@ export { default as useTranslation } from "./hooks/useTranslation";
 export { default as useUnmount } from "./hooks/useUnmount";
 
 export { default as useUnmountEffect } from "./hooks/useUnmountEffect";
+export { default as useMeasure } from "./hooks/useMeasure";
 export { default as useStorageValue } from "./hooks/useStorageValue";
 export { default as useUpdateEffect } from "./hooks/useUpdateEffect";
 export { default as useVisibility } from "./hooks/useVisibility";
@@ -99,3 +99,4 @@ export { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect';
 export { useLifecycleLogger } from './hooks/useLifecycleLogger';
 export { useThrottledCallback } from './hooks/useThrottledCallback';
 export { useList } from './hooks/useList';
+export { default as useFirstMountState } from "./hooks/useFirstMountState";
