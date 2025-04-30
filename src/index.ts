@@ -83,6 +83,7 @@ export {default as useDeviceMotion} from "./hooks/useDeviceMotion";
 export { default as useAsyncAbortable} from './hooks/useAsyncAbortable';
 export { default as useControlledRerenderState} from './hooks/useControlledRerenderState';
 export { default as useCounter } from './hooks/useCounter';
+export { default as useFunctionalState } from './hooks/useFunctionalState';
 export { useDebouncedEffect } from "./hooks/useDebouncedEffect";
 
 export {default as useCustomCompareEffect } from "./hooks/useCustomCompareEffect";
