@@ -108,8 +108,7 @@ Explore the documentation for each hook to see detailed API information and usag
 | [**`useDeviceOrientation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDeviceOrientation.md)       | Tracks the physical orientation of the device via the `deviceorientation` event.                                      |
 | [**`useDrag`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDrag.md)                                 | Provides basic HTML Drag and Drop API event handling (`dragstart`, `drag`, `dragend`) for an element.                 |
 | [**`useConditionalEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useConditionalEffect.md)    | A `useEffect` variant that allows you to conditionally run the effect.                                             |
-| [**`useCookieValue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCookieValue.md)    |  Sets and retrieves values from a cookie                                             |
-| [**`useCounter`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCounter.md)    | A basic counter hook                                           |
+| [**`useCounter`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCounter.md)                           | A basic counter hook                                           |
 | [**`useControlledRerenderState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useControlledRerenderState.md)    | A hook to force a component to re-render                                             |
 | [**`useGeolocationContinuous`**](https://github.com/supunlakmal/hooks/blob/main/docs/useGeolocationContinuous.md) | Tracks the user's geographic location continuously using the Geolocation API.                                                      |
 | [**`useErrorBoundary`**](https://github.com/supunlakmal/hooks/blob/main/docs/useErrorBoundary.md)    | A hook to add error boundary to a component                                            |
