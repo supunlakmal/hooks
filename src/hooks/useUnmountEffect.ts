@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useSyncedRef} from '../useSyncedRef/index.js';
+import {useSyncedRef} from './useSyncedRef';
 
 /**
  * Run effect only when component is unmounted.
@@ -18,3 +18,4 @@ export function useUnmountEffect(effect: CallableFunction): void {
 		[],
 	);
 }
+export default useUnmountEffect

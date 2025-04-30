@@ -2,6 +2,8 @@ export { default as useIsMobile } from "./hooks/use-mobile";
 export { default as useAnimation } from "./hooks/useAnimation";
 export { default as useAsync } from "./hooks/useAsync";
 export { default as useBreakpoint } from "./hooks/useBreakpoint";
+export { default as useFirstMountState } from "./hooks/useFirstMountState"; //add
+export { default as useLocalStorageValue } from "./hooks/useLocalStorageValue";
 export { default as useClickOutside } from "./hooks/useClickOutside";
 export { default as useClipboard } from "./hooks/useClipboard";
 export { default as useContextMenu } from "./hooks/useContextMenu";
@@ -52,6 +54,9 @@ export { default as useTimeout } from "./hooks/useTimeout";
 export { default as useToggle } from "./hooks/useToggle";
 export { default as useTranslation } from "./hooks/useTranslation";
 export { default as useUnmount } from "./hooks/useUnmount";
+
+export { default as useUnmountEffect } from "./hooks/useUnmountEffect";
+export { default as useStorageValue } from "./hooks/useStorageValue";
 export { default as useUpdateEffect } from "./hooks/useUpdateEffect";
 export { default as useVisibility } from "./hooks/useVisibility";
 export { default as useWindowSize } from "./hooks/useWindowSize";
@@ -91,4 +96,5 @@ export { default as useIsMounted } from './hooks/useIsMounted';
 export {default as useCustomCompareEffect } from "./hooks/useCustomCompareEffect";
 export { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect';
 export { useLifecycleLogger } from './hooks/useLifecycleLogger';
+export { useThrottledCallback } from './hooks/useThrottledCallback';
 export { useList } from './hooks/useList';
