@@ -15,7 +15,7 @@ function useFirstMountState(): boolean {
 
 const stateChanger = (state: number) => (state + 1) % Number.MAX_SAFE_INTEGER;
 
-/**
+/** 
  * Return callback function that re-renders component.
  */
 function useRerender(): () => void {
@@ -74,7 +74,7 @@ export function useControlledRerenderState<S = undefined>(): [
   ControlledRerenderDispatch<SetStateAction<S | undefined>>,
 ];
 
-/**
+/** 
  * Like `React.useState`, but its state setter accepts extra argument, that allows to cancel
  * rerender.
  */
@@ -86,7 +86,7 @@ export function useControlledRerenderState<S>(
   );
   const rr = useRerender();
 
-  return [
+  return [ 
     state.current,
     useCallback((value, rerender) => {
       const newState = resolveHookState(value, state.current);
@@ -102,3 +102,5 @@ export function useControlledRerenderState<S>(
     }, []),
   ];
 }
+
+export default useControlledRerenderState;

@@ -184,3 +184,5 @@ export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown
 
 	return [ state, actions, meta ];
 }
+
+export default useAsyncAbortable;

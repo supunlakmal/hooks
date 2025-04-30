@@ -17,5 +17,5 @@ This task list outlines the process for migrating React hooks from the `./new` f
    - [ ] **File Creation:** Create a new file for the hook in the `./src/hooks` folder. Name the file `use[HookName].ts` (e.g., `useMyHook.ts`).
    - [ ] **Code Transfer:** Copy the consolidated code into the new file.
   - [ ] **Build Check:** Run `npm run build` to check for type errors and code issues. If build fails fix the hook, and run again.
-  - [ ] **Index Update:** Add an export statement for the new hook in `src/index.ts`.
+  - [ ] **Index Update:** Add an export statement for the new hook in `src/index.ts`. (exsample  export {default as useDeviceMotion} from "./hooks/useDeviceMotion";)
   

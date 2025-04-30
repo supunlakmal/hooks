@@ -1,7 +1,7 @@
 import { type Dispatch, useCallback, useEffect, useState, useRef, useMemo } from 'react';
 import Cookies from 'js-cookie';
 
-function useFirstMountState(): boolean {
+export function useFirstMountState(): boolean {
   const isFirstMount = useRef(true);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function useFirstMountState(): boolean {
  *
  * @param onMount - The function to call on mount.
  */
-function useMount(onMount: () => void): void {
+export function useMount(onMount: () => void): void {
   // Use a ref to store the callback to ensure the correct function is called,
   // even though useEffect with [] should only run once.
   // This pattern aligns with useUnmount and handles potential edge cases or future extensions.
@@ -38,7 +38,7 @@ function useMount(onMount: () => void): void {
  *
  * @param value
  */
-function useSyncedRef<T>(value: T): { readonly current: T } {
+export function useSyncedRef<T>(value: T): { readonly current: T } {
   const ref = useRef(value);
 
   ref.current = value;
@@ -125,10 +125,6 @@ export type UseCookieValueOptions<
 export type UseCookieValueReturn<V extends undefined | null | string = undefined | null | string> =
   [value: V, set: (value: string) => void, remove: () => void, fetch: () => void];
 
-export function useCookieValue(
-  key: string,
-  options: UseCookieValueOptions<false>,
-): UseCookieValueReturn;
 export function useCookieValue(key: string, options?: UseCookieValueOptions): UseCookieValueReturn;
 /**
  * Manages a single cookie.
@@ -210,3 +206,5 @@ export function useCookieValue(
     }, []),
   ];
 }
+
+export default useCookieValue;

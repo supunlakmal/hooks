@@ -80,6 +80,8 @@ export { default as useVirtualList } from "./hooks/useVirtualList";
 export { default as useDeepCompareEffect } from "./hooks/useDeepCompareEffect";
 export { default as useIsFirstRender } from "./hooks/useIsFirstRender";
 export {default as useDeviceMotion} from "./hooks/useDeviceMotion";
-export * from './hooks/useAsyncAbortable'
-export * from './hooks/useControlledRerenderState'
-export * from './hooks/useCookieValue'
+export { default as useAsyncAbortable} from './hooks/useAsyncAbortable';
+export { default as useControlledRerenderState} from './hooks/useControlledRerenderState';
+export { default as useCookieValue} from './hooks/useCookieValue';
+export { default as useCounter} from './hooks/useCounter';
+
