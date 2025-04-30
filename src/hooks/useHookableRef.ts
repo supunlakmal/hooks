@@ -1,14 +1,14 @@
 import {type MutableRefObject, useMemo} from 'react';
-import {useSyncedRef} from '../useSyncedRef/index.js';
+import {useSyncedRef} from './useSyncedRef';
 
 export type HookableRefHandler<T> = (v: T) => T;
 
-export function useHookableRef<T>(
+export function useHookableRef<T>( // Add export
 	initialValue: T,
 	onSet?: HookableRefHandler<T>,
 	onGet?: HookableRefHandler<T>
 ): MutableRefObject<T>;
-export function useHookableRef<T = undefined>(): MutableRefObject<T | null | undefined>;
+export function useHookableRef<T = undefined>(): MutableRefObject<T | null | undefined>; // Add export
 
 /**
  * Like `React.useRef` but it is possible to define get and set handlers.
@@ -19,7 +19,7 @@ export function useHookableRef<T = undefined>(): MutableRefObject<T | null | und
  * @param onGet Function to be called while ref.current value accessed. Return
  * value will be used as a return value.
  */
-export function useHookableRef<T>(
+export default function useHookableRef<T>(
 	initialValue?: T,
 	onSet?: HookableRefHandler<T>,
 	onGet?: HookableRefHandler<T>,
