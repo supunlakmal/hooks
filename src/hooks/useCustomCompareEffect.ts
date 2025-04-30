@@ -79,3 +79,5 @@ export function useCustomCompareEffect<
 
 	effectHook(callback, dependencies.current, ...effectHookRestArgs);
 }
+
+export default useCustomCompareEffect;

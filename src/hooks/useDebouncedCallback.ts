@@ -1,5 +1,43 @@
 import {type DependencyList, useEffect, useMemo, useRef} from 'react';
-import {useUnmountEffect} from '../useUnmountEffect/index.js';
+
+/**
+ * Like `useRef`, but it returns immutable ref that contains actual value.
+ *
+ * @param value
+ */
+function useSyncedRef<T>(value: T): {readonly current: T} {
+	const ref = useRef(value);
+
+	ref.current = value;
+
+	return useMemo(
+		() =>
+			Object.freeze({
+				get current() {
+					return ref.current;
+				},
+			}),
+		[],
+	);
+}
+
+/**
+ * Run effect only when component is unmounted.
+ *
+ * @param effect Effector to run on unmount
+ */
+function useUnmountEffect(effect: CallableFunction): void {
+	const effectRef = useSyncedRef(effect);
+
+	useEffect(
+		() => () => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+			effectRef.current();
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[],
+	);
+}
 
 export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
 	this: ThisParameterType<Fn>,
@@ -16,7 +54,7 @@ export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
  * @param maxWait The maximum time `callback` is allowed to be delayed before
  * it's invoked. 0 means no max wait.
  */
-export function useDebouncedCallback<Fn extends (...args: any[]) => any>(
+function useDebouncedCallback<Fn extends (...args: any[]) => any>(
 	callback: Fn,
 	deps: DependencyList,
 	delay: number,
@@ -86,3 +124,6 @@ export function useDebouncedCallback<Fn extends (...args: any[]) => any>(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [delay, maxWait, ...deps]);
 }
+
+export default useDebouncedCallback;
+
