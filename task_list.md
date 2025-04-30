@@ -9,7 +9,6 @@ This task list outlines the process for migrating React hooks from the `./new` f
 - [ ] **Hook Migration (Repeat for Each Hook)**
   - [ ] **Select Hook:** Choose one hook from the `./new` folder.
   - [ ] **Duplicate Check**: Check if the hook already exist in the `src/hooks` folder. If it exists, delete the hook from the `./new` folder and skip to the next hook. Otherwise, proceed with the migration.
-  - [ ] **Import Review:** Examine the hook's code to identify all imported code from other files.
   - [ ] **Code Consolidation:** Merge all imported code into the hook's primary file within the `./new` directory.
    - [ ] **File Creation:** Create a new file for the hook in the `./src/hooks` folder. Name the file `use[HookName].ts` (e.g., `useMyHook.ts`).
    - [ ] **Code Transfer:** Copy the consolidated code into the new file.
