@@ -84,3 +84,4 @@ export { default as useAsyncAbortable} from './hooks/useAsyncAbortable';
 export { default as useControlledRerenderState} from './hooks/useControlledRerenderState';
 export { default as useCounter} from './hooks/useCounter';
 
+export {default as useCustomCompareEffect} from "./hooks/useCustomCompareEffect";
