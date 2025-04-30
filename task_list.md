@@ -19,7 +19,7 @@ This task list outlines the process for migrating React hooks from the `./new` f
   - [ ] **Import Adjustments:** Update the imports within the hook's file to reflect its new location.
   - [ ] **Build Check:** Run `npm run build` to check for type errors and code issues. If build fails fix the hook, and run again.
   - [ ] **Index Update:** Add an export statement for the new hook in `src/index.ts`.
-  - [ ] **Documentation:** Create a README file for the hook in the `./docs` folder. Name it `use[HookName].md`.
+  - [ ] **Documentation:** Create a README file for the hook in the `./docs` folder. Name it `use[HookName].md`. (fallow the   documentation_instructions.md instructions)
     - [ ] Include a concise description of the hook's functionality.
     - [ ] Provide usage examples with code snippets.
     - [ ] Explain parameters and return values.
