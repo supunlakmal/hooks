@@ -2,6 +2,7 @@
 
 This guide outlines the steps to create a new React hook and properly document it within our project.
 
+my pakage  is @supunlakmal/hooks
 
 ## Documenting the New Hook
 
