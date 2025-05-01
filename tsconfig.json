@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "declaration": true,
@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "jsx": "react",
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "outDir": "dist",
     "declarationDir": "dist/types"
   },
