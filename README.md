@@ -197,7 +197,12 @@ Explore the documentation for each hook to see detailed API information and usag
 | [**`useVisibility`**](https://github.com/supunlakmal/hooks/blob/main/docs/useVisibility.md)                     | Tracks whether a target element is currently visible within the viewport or an ancestor using `IntersectionObserver`. |
 | [**`useWebSocket`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWebSocket.md)                       | Manages WebSocket connections, state, messaging, and automatic reconnection.                                          |
 | [**`useWindowSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWindowSize.md)                     | Returns the current dimensions (width and height) of the browser window.                                              |
-| [**`useWhyDidYouUpdate`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWhyDidYouUpdate.md)           | Development utility to debug component re-renders by logging changed props.                                           |
+| [**`useWhyDidYouUpdate`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWhyDidYouUpdate.md)           | Development utility to debug component re-renders by logging changed props.
+
+| [**`useIdleTimer`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleTimer.md)               | Monitors user activity and triggers callbacks based on idle/active status.                                            |
+| [**`useWakeLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWakeLock.md)                 | Manages the Screen Wake Lock API to prevent the screen from sleeping.                                                |
+| [**`useWebWorker`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWebWorker.md)               | Runs a function in a Web Worker thread to offload heavy computations from the main thread.                          |
+| [**`useWorker`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWorker.md)                     | Offloads expensive computations or functions to a separate Web Worker thread (alternative to useWebWorker).        |                                           |
 
 ## Live Demo
 
