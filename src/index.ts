@@ -68,7 +68,6 @@ export { useMount } from "./hooks/useMount";
 export { useMutation } from "./hooks/useMutation";
 export { useNetworkState } from './hooks/useNetworkState';
 export { useNetworkSpeed } from "./hooks/useNetworkSpeed";
-export { useNewFullscreen } from "./hooks/useNewFullscreen"; // Assuming this remains if kept separate
 // export { useOldUpdateEffect } from "./hooks/useOldUpdateEffect"; // Assuming this remains if kept separate
 export { useOnlineStatus } from './hooks/useOnlineStatus';
 export { usePageVisibility } from './hooks/usePageVisibility';
