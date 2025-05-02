@@ -36,7 +36,7 @@ interface DraggableState {
  * @param options Configuration options for draggable behavior.
  * @returns State including the element's position and dragging status.
  */
-const useDraggable = <T extends HTMLElement>(
+export const useDraggable = <T extends HTMLElement>(
   ref: React.RefObject<T>,
   options: DraggableOptions = {}
 ): DraggableState => {
@@ -229,4 +229,4 @@ const useDraggable = <T extends HTMLElement>(
   };
 };
 
-export default useDraggable;
+

@@ -125,5 +125,5 @@ function useDebouncedCallback<Fn extends (...args: any[]) => any>(
 	}, [delay, maxWait, ...deps]);
 }
 
-export default useDebouncedCallback;
+export { useDebouncedCallback };
 

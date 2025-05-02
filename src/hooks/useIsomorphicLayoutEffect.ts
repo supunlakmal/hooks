@@ -7,6 +7,3 @@ import {isBrowser} from '../util/const';
  */
 export const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 
-export default useIsomorphicLayoutEffect;
-
-

@@ -11,7 +11,7 @@ interface ScrollToTopOptions {
  * @param {'auto' | 'smooth'} [options.behavior='auto'] - Defines the transition animation.
  * @returns {() => void} A function that scrolls the window to the top when called.
  */
-function useScrollToTop({
+export function useScrollToTop({
   behavior = "auto",
 }: ScrollToTopOptions = {}): () => void {
   const scrollToTop = useCallback(() => {
@@ -36,4 +36,4 @@ function useScrollToTop({
   return scrollToTop;
 }
 
-export default useScrollToTop;
+

@@ -1,6 +1,6 @@
-import {useCallback, useMemo, useRef} from 'react';
-import {useSyncedRef} from './useSyncedRef';
-import {useUnmountEffect} from './useUnmountEffect';
+import { useCallback, useRef } from 'react';
+import { useSyncedRef } from './useSyncedRef';
+import { useUnmountEffect } from './useUnmountEffect';
 import {isBrowser} from '../util/const';
 
 /**
@@ -11,10 +11,10 @@ import {isBrowser} from '../util/const';
  * @param cb Callback to fire within animation frame.
  */
 
-export function useRafCallback<T extends (...args: any[]) => any>(
-	cb: T,
-): [(...args: Parameters<T>) => void, () => void] {
-	const cbRef = useSyncedRef(cb);
+export const useRafCallback = (
+	callback: (...args: any[]) => void,
+): ((...args: any[]) => void) => {
+	const cbRef = useSyncedRef(callback);
 	const frame = useRef<number>(0);
 
 	const cancel = useCallback(() => {
@@ -30,30 +30,21 @@ export function useRafCallback<T extends (...args: any[]) => any>(
 
 	useUnmountEffect(cancel);
 
-	return [
-		useMemo(() => {
-			const wrapped = (...args: Parameters<T>) => {
-				if (!isBrowser) {
-					return;
-				}
+	const rafCallback = useCallback(
+		(...args: any[]) => {
+			if (!isBrowser) {
+				return;
+			}
 
-				cancel();
+			cancel();
 
-				frame.current = requestAnimationFrame(() => {
-					cbRef.current(...args);
-					frame.current = 0;
-				});
-			};
-
-			Object.defineProperties(wrapped, {
-				length: {value: cb.length},
-				name: {value: `${cb.name || 'anonymous'}__raf`},
+			frame.current = requestAnimationFrame(() => {
+				cbRef.current(...args);
+				frame.current = 0;
 			});
+		},
+		[],
+	);
 
-			return wrapped;
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-		}, []),
-
-		cancel,
-	];
-}
+	return rafCallback;
+};

@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
  * @param channelName The name of the broadcast channel.
  * @returns An object containing the received data and a function to post messages.
  */
-const useBroadcastChannel = <T = any>(channelName: string) => {
+export const useBroadcastChannel = <T = any>(channelName: string) => {
   const [data, setData] = useState<T | null>(null);
   const channelRef = useRef<BroadcastChannel | null>(null);
 
@@ -50,4 +50,4 @@ const useBroadcastChannel = <T = any>(channelName: string) => {
   return { data, postMessage };
 };
 
-export default useBroadcastChannel;
+

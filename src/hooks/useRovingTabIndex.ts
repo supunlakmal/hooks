@@ -23,7 +23,7 @@ const defaultFocusableSelector =
  * @param containerRef Ref object pointing to the container element.
  * @param options Configuration options for the roving tabindex behavior.
  */
-const useRovingTabIndex = <T extends HTMLElement>(
+export const useRovingTabIndex = <T extends HTMLElement>(
   containerRef: React.RefObject<T>,
   options: RovingTabIndexOptions = {}
 ) => {
@@ -186,4 +186,3 @@ const useRovingTabIndex = <T extends HTMLElement>(
   };
 };
 
-export default useRovingTabIndex;

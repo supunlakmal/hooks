@@ -6,7 +6,7 @@ import { useRef } from "react";
  *
  * @returns {number} The current render count (starts at 1).
  */
-function useRenderCount(): number {
+export function useRenderCount(): number {
  
   // Increment on subsequent renders (this runs *after* the return)
   // But since we return the ref's value *before* incrementing, it reflects the render number.
@@ -23,4 +23,4 @@ function useRenderCount(): number {
   return renderCount.current;
 }
 
-export default useRenderCount;
+

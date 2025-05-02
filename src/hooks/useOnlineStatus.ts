@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import useEventListener from "./useEventListener";
+import {useEventListener} from "./useEventListener";
 
 /**
  * Custom hook to track the browser's online status.
  *
  * @returns {boolean} Returns `true` if the browser is online, `false` otherwise.
  */
-function useOnlineStatus(): boolean {
+export function useOnlineStatus(): boolean {
   // Get the initial status from navigator.onLine
   // Ensure navigator is defined (for SSR or specific environments)
   const getInitialStatus = () => {
@@ -39,4 +39,4 @@ function useOnlineStatus(): boolean {
   return isOnline;
 }
 
-export default useOnlineStatus;
+

@@ -1,8 +1,8 @@
-import { useState, type RefObject, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 // Removed unused: type MutableRefObject
 // Removed unused: import useHookableRef from './useHookableRef';
 import { useRafCallback } from './useRafCallback'; // Assuming this hook exists and works correctly
-import useResizeObserver, { type ResizeObserverEntryExtended } from './useResizeObserver'; // Assuming this hook exists and works correctly
+import { useResizeObserver } from './useResizeObserver'; // Assuming this hook exists and works correctly
 
 export type Measures = {
 	width: number;
@@ -28,10 +28,12 @@ export function useMeasure<T extends Element>(
 	const [measures, setMeasures] = useState<Measures>();
 
 	// Wrap the state update in requestAnimationFrame to batch updates
-	const [observerHandler] = useRafCallback((entry: ResizeObserverEntryExtended) => {
-		// Extract width and height from the contentRect
-		const { width, height } = entry.contentRect;
+	const [observerHandler] = useRafCallback(() => {
 		// Update state only if dimensions have actually changed to prevent unnecessary re-renders
+        if (!entry) return
+		const { width, height } = entry.contentRect;
+
+
 		setMeasures((prevMeasures) => {
 			if (prevMeasures?.width === width && prevMeasures?.height === height) {
 				return prevMeasures;
@@ -44,7 +46,7 @@ export function useMeasure<T extends Element>(
 	// Assumption: useResizeObserver handles attaching/detaching the observer to elementRef.current
 	const entry = useResizeObserver(elementRef); // Pass the ref here
 
-	useEffect(() => {
+	useEffect(() => {        
 		// Only process the resize entry if the hook is enabled and an entry exists
 		if (enabled && entry) {
 			observerHandler(entry);
@@ -56,5 +58,3 @@ export function useMeasure<T extends Element>(
 	// Return the latest measures and the ref
 	return [measures, elementRef];
 }
-
-export default useMeasure;

@@ -1,4 +1,4 @@
-import {type DependencyList, useMemo, useRef} from 'react';
+import {type DependencyList, useMemo, useRef, } from 'react';
 import {useUnmountEffect} from './useUnmountEffect';
 
 export type ThrottledFunction<Fn extends (...args: any[]) => any> = (
@@ -15,32 +15,48 @@ export type ThrottledFunction<Fn extends (...args: any[]) => any> = (
  * @param noTrailing If `noTrailing` is true, callback will only execute every
  * `delay` milliseconds, otherwise, callback will be executed one final time
  * after the last throttled-function call.
+ * @returns Returns a throttled version of the function.
  */
-export function useThrottledCallback<Fn extends (...args: any[]) => any>(
-	callback: Fn,
-	deps: DependencyList,
-	delay: number,
+export const useThrottledCallback = <Fn extends (...args: any[]) => any>(
+	callback: Fn, 
+	deps: DependencyList, 
+	wait: number,
 	noTrailing = false,
-): ThrottledFunction<Fn> {
-	const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+):((...args: Parameters<Fn>) => void) => {
+	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	let timer: ReturnType<typeof setTimeout> | null = null;
+
+	
 	const lastCall = useRef<{args: Parameters<Fn>; this: ThisParameterType<Fn>}>(undefined);
+	
+	if (typeof wait !== 'number') {
+		console.error('Wait must be a number.');
+		return () => {};
+	}
+
+	if (typeof callback !== 'function') {
+		console.error('Callback must be a function.');
+		return () => {};
+	  }
 
 	useUnmountEffect(() => {
-		if (timeout.current) {
-			clearTimeout(timeout.current);
-			timeout.current = undefined;
+		if (timerRef.current) {
+			clearTimeout(timerRef.current);
+			timerRef.current = null;
 		}
 	});
 
-	return useMemo(() => {
+	return useMemo((): ((...args: Parameters<Fn>) => void) => {
+		let delay = wait;
+
 		const execute = (context: ThisParameterType<Fn>, args: Parameters<Fn>) => {
 			lastCall.current = undefined;
-			callback.apply(context, args);
-
-			timeout.current = setTimeout(() => {
-				timeout.current = undefined;
-
-				// If trailing execution is not disabled - call callback with last
+			callback.apply(context, args);				
+			timer = setTimeout(() => {
+				timer = null;
+				
+				// If trailing execution is not disabled, call callback with last
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				// received arguments and context
 				if (!noTrailing && lastCall.current) {
 					execute(lastCall.current.this, lastCall.current.args);
@@ -48,10 +64,16 @@ export function useThrottledCallback<Fn extends (...args: any[]) => any>(
 					lastCall.current = undefined;
 				}
 			}, delay);
+						
 		};
 
-		const wrapped = function (this, ...args) {
-			if (timeout.current) {
+		const wrapped = function (this: ThisParameterType<Fn>, ...args: Parameters<Fn>): void {
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+			
+			if (timerRef.current) {
+				
+				
+
 				// If we cant execute callback immediately - save its arguments and
 				// context to execute it when delay is passed
 				lastCall.current = {args, this: this};
@@ -59,8 +81,12 @@ export function useThrottledCallback<Fn extends (...args: any[]) => any>(
 				return;
 			}
 
+
 			execute(this, args);
-		} as ThrottledFunction<Fn>;
+			timerRef.current = setTimeout(() => {
+				timerRef.current = null
+			}, delay);
+		};
 
 		Object.defineProperties(wrapped, {
 			length: {value: callback.length},
@@ -68,6 +94,6 @@ export function useThrottledCallback<Fn extends (...args: any[]) => any>(
 		});
 
 		return wrapped;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [delay, noTrailing, ...deps]);
-}
+		// eslint-disable-next-line react-hooks/exhaustive-deps	
+	}, [wait, noTrailing, callback, ...deps]);
+};

@@ -49,7 +49,7 @@ function getSessionStorageValue<T>(
  * @param {T | (() => T)} initialValue The initial value or a function to compute it. This is used if the key is not found in sessionStorage.
  * @returns {[T, SetValue<T>]} A tuple containing the current value and a function to update it.
  */
-function useSessionStorage<T>(
+export function useSessionStorage<T>(
   key: string,
   initialValue: T | (() => T)
 ): [T, SetValue<T>] {
@@ -95,4 +95,4 @@ function useSessionStorage<T>(
   return [storedValue, setValue];
 }
 
-export default useSessionStorage;
+

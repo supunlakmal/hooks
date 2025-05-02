@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import useLocalStorage from "./useLocalStorage"; // Use our existing hook
-import useMediaQuery from "./useMediaQuery"; // Use our existing hook
+import {useLocalStorage} from "./useLocalStorage"; // Use our existing hook
+import {useMediaQuery} from "./useMediaQuery"; // Use our existing hook
 
 const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
 const LOCAL_STORAGE_KEY = "usehooks-ts-dark-mode";
@@ -20,7 +20,7 @@ interface UseDarkModeOutput {
  * @param {boolean} [defaultValue] - Optional initial value (overrides OS preference and local storage).
  * @returns {UseDarkModeOutput} An object containing the dark mode state and control functions.
  */
-function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
+export function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
   // Get system preference
   const isSystemDark = useMediaQuery(COLOR_SCHEME_QUERY);
 
@@ -60,4 +60,4 @@ function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
   };
 }
 
-export default useDarkMode;
+

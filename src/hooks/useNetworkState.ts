@@ -140,5 +140,3 @@ export function useNetworkState(
 
   return state;
 }
-
-export default useNetworkState;

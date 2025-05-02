@@ -15,7 +15,7 @@ type ReactRef<T> =
  * @param refs - An array of refs (React.RefCallback<T> or React.MutableRefObject<T>) to merge.
  * @returns {React.RefCallback<T>} A single memoized callback ref that assigns the instance to all provided refs.
  */
-function useMergeRefs<T>(...refs: ReactRef<T>[]): React.RefCallback<T> {
+export function useMergeRefs<T>(...refs: ReactRef<T>[]): React.RefCallback<T> {
   return useCallback(
     (instance: T | null) => {
       // Iterate through the refs and assign the instance to each one
@@ -35,4 +35,4 @@ function useMergeRefs<T>(...refs: ReactRef<T>[]): React.RefCallback<T> {
   );
 }
 
-export default useMergeRefs;
+

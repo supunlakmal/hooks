@@ -16,7 +16,7 @@ interface ScrollSpyOptions {
  * @param options Configuration options for offset and container.
  * @returns The id of the currently active section element, or null if none are active.
  */
-const useScrollSpy = (
+export const useScrollSpy = (
   sectionRefs: React.RefObject<HTMLElement | null>[],
   options: ScrollSpyOptions = {}
 ): string | null => {
@@ -108,4 +108,4 @@ const useScrollSpy = (
   return activeSectionId;
 };
 
-export default useScrollSpy;
+

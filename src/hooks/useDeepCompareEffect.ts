@@ -1,7 +1,7 @@
 import { useEffect, useRef, EffectCallback, DependencyList } from "react";
 
 // Basic deep comparison function (consider using lodash.isequal for robustness)
-function isDeepEqual(objA: any, objB: any): boolean {
+export function isDeepEqual(objA: any, objB: any): boolean {
   if (objA === objB) return true;
 
   if (
@@ -55,7 +55,7 @@ function useDeepCompareMemoize(value: DependencyList): DependencyList {
  * @param effect Imperative function that can return a cleanup function.
  * @param dependencies Array of dependencies. The effect runs only if these dependencies are deeply unequal compared to the previous render.
  */
-function useDeepCompareEffect(
+export function useDeepCompareEffect(
   effect: EffectCallback,
   dependencies: DependencyList
 ): void {
@@ -66,4 +66,4 @@ function useDeepCompareEffect(
   useEffect(effect, memoizedDependencies);
 }
 
-export default useDeepCompareEffect;
+

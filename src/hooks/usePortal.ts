@@ -51,7 +51,7 @@ const getOrCreatePortalRoot = (
  * @param {Record<string, string>} [options.attributes] - Additional HTML attributes to set on the portal container div.
  * @returns {FunctionComponent<{ children: ReactNode }>} A Portal component.
  */
-function usePortal({
+export function usePortal({
   id = "react-portal-root", // Default ID
   attributes = defaultAttributes,
 }: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> {
@@ -96,4 +96,4 @@ function usePortal({
   return Portal;
 }
 
-export default usePortal;
+

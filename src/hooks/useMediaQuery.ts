@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
  * @returns {boolean} Returns `true` if the media query matches, `false` otherwise.
  *                  Returns `false` during server-side rendering or before the first client-side check.
  */
-function useMediaQuery(query: string): boolean {
+export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ function useMediaQuery(query: string): boolean {
   return matches;
 }
 
-export default useMediaQuery;
+

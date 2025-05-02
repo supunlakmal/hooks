@@ -124,4 +124,4 @@ function useNewFullscreen(
   };
 }
 
-export default useNewFullscreen;
+export { useNewFullscreen };

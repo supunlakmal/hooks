@@ -21,7 +21,7 @@ type UseMapResult<K, V> = [Map<K, V>, MapActions<K, V>];
  * @param initialMap - Optional initial Map or an iterable of key-value pairs.
  * @returns A tuple containing the current Map state and an actions object.
  */
-function useMap<K, V>(
+export function useMap<K, V>(
   initialMap?: Map<K, V> | Iterable<readonly [K, V]>
 ): UseMapResult<K, V> {
   const [map, setMap] = useState<Map<K, V>>(() => new Map(initialMap));
@@ -80,4 +80,4 @@ function useMap<K, V>(
   return [map, actions];
 }
 
-export default useMap;
+

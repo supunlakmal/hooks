@@ -13,7 +13,7 @@ type SetValue<T> = (value: T | ((prevValue: T) => T)) => void;
  * @param initialValue - The initial value to use if no value is found in localStorage
  * @returns A tuple containing the current value and a function to update it
  */
-function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   // Create state to store our value
   // Pass initialState function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -83,4 +83,4 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   return [storedValue, setValue];
 }
 
-export default useLocalStorage;
+

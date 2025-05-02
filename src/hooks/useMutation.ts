@@ -43,7 +43,7 @@ interface UseMutationOptions {
   ) => void;
 }
 
-/**
+/** 
  * Hook to manage asynchronous operations that modify data (mutations).
  * Handles loading, success, and error states, and provides callbacks.
  *
@@ -51,7 +51,7 @@ interface UseMutationOptions {
  * @param options Optional configuration with callbacks (onSuccess, onError, etc.).
  * @returns State and functions to manage the mutation lifecycle.
  */
-function useMutation(
+export function useMutation(
   mutationFn: (variables: any) => Promise<any>,
   options?: UseMutationOptions
 ): UseMutationResult {
@@ -126,4 +126,3 @@ function useMutation(
   };
 }
 
-export default useMutation;

@@ -27,7 +27,7 @@ const parseCombo = (combo: string): Set<string> => {
  * @param callback The function to call when the combo is detected.
  * @param options Optional configuration for the event listener.
  */
-const useKeyCombo = (
+export const useKeyCombo = (
   combo: string,
   callback: (event: KeyboardEvent) => void,
   options: KeyComboOptions = {}
@@ -128,4 +128,4 @@ const useKeyCombo = (
   }, [targetElement, event, handleKeyEvent, handleKeyUp, combo]); // Re-attach if target, event type, handlers, or combo changes
 };
 
-export default useKeyCombo;
+

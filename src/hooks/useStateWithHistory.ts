@@ -22,7 +22,7 @@ interface StateWithHistory<T> {
  * @param capacity - The maximum number of history entries to keep (default: 10).
  * @returns An object containing the current state, state setter, history, navigation functions, and flags.
  */
-function useStateWithHistory<T>(
+export function useStateWithHistory<T>(
   initialState: T,
   capacity: number = 10
 ): StateWithHistory<T> {
@@ -97,4 +97,4 @@ function useStateWithHistory<T>(
   };
 }
 
-export default useStateWithHistory;
+

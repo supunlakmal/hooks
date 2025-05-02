@@ -31,7 +31,7 @@ interface UseAsyncReturn<T, E = Error> extends AsyncState<T, E> {
  * @param {boolean} [immediate=true] Whether to execute the function immediately on mount. Defaults to true.
  * @returns {UseAsyncReturn<T, E>} An object containing the loading state, error, value, and an execute function.
  */
-function useAsync<T, E = Error>(
+export function useAsync<T, E = Error>(
   asyncFunction: () => Promise<T>,
   immediate = true
 ): UseAsyncReturn<T, E> {
@@ -76,4 +76,4 @@ function useAsync<T, E = Error>(
   return { ...state, execute };
 }
 
-export default useAsync;
+

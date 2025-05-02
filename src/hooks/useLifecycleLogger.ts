@@ -6,7 +6,7 @@ import {type DependencyList, useEffect, useRef} from 'react';
  * @param componentName Provides the name of the component in which the life cycle is being logged
  * @param deps Dependencies list, as for `useEffect` hook
  */
-export function useLifecycleLogger(componentName: string, deps?: DependencyList): void {
+export const useLifecycleLogger = (componentName: string, deps?: DependencyList): void => {
 	const mountedRef = useRef(false);
 
 	useEffect(() => {
@@ -26,5 +26,4 @@ export function useLifecycleLogger(componentName: string, deps?: DependencyList)
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-}
-
+};

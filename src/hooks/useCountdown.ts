@@ -30,7 +30,7 @@ interface CountdownControls {
  * @param options Configuration options for the countdown timer.
  * @returns Controls and state for the countdown timer.
  */
-const useCountdown = ({
+export const useCountdown = ({
   seconds,
   interval = 1000,
   onComplete,
@@ -104,4 +104,4 @@ const useCountdown = ({
   return { remainingSeconds, isRunning, start, pause, reset };
 };
 
-export default useCountdown;
+

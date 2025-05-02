@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
  * @param {() => void} callback The function to execute after the timeout.
  * @param {number | null} delay The delay in milliseconds. If null, the timeout is not set.
  */
-function useTimeout(callback: () => void, delay: number | null): void {
+export function useTimeout(callback: () => void, delay: number | null): void {
   const savedCallback = useRef<() => void>(callback);
 
   // Remember the latest callback.
@@ -32,4 +32,4 @@ function useTimeout(callback: () => void, delay: number | null): void {
   }, [delay]); // Re-run effect only if delay changes
 }
 
-export default useTimeout;
+

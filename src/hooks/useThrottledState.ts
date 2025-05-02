@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function useThrottledState<T>(
+export function useThrottledState<T>(
   initialValue: T,
   delay: number = 500
 ): [T, (newValue: T | ((prevValue: T) => T)) => void] {

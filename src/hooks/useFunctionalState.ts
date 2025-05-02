@@ -21,7 +21,5 @@ export function useFunctionalState<S>(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return [useCallback(() => stateRef.current, []), setState];
 }
-
-export default useFunctionalState;
-
+;
 

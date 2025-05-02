@@ -18,4 +18,3 @@ export function useUnmountEffect(effect: CallableFunction): void {
 		[],
 	);
 }
-export default useUnmountEffect

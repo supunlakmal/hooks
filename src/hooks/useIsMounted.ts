@@ -13,15 +13,13 @@ export function useIsMounted(initialValue = false): () => boolean {
 	const get = useCallback(() => isMounted.current, []);
 
 	useEffect(() => {
-		isMounted.current = true;
+			isMounted.current = true;
 
-		return () => {
-			isMounted.current = false;
-		};
+			return () => {
+					isMounted.current = false;
+			};
 	}, []);
 
 	return get;
 }
-
-export default useIsMounted;
 

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
  *                             Uses `event.key`. See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
  * @returns {boolean} Returns `true` if the target key is currently pressed, `false` otherwise.
  */
-function useKeyPress(targetKey: string): boolean {
+export function useKeyPress(targetKey: string): boolean {
   // State for keeping track of whether key is pressed
   const [keyPressed, setKeyPressed] = useState<boolean>(false);
 
@@ -41,4 +41,4 @@ function useKeyPress(targetKey: string): boolean {
   return keyPressed;
 }
 
-export default useKeyPress;
+

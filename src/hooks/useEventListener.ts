@@ -18,7 +18,7 @@ type EventTargetLike =
  * @param {EventTargetLike} [element=window] The target element. Defaults to `window`.
  * @param {boolean | AddEventListenerOptions} [options] Optional event listener options.
  */
-function useEventListener(
+export function useEventListener(
   eventName: string,
   handler: (event: any) => void, // Use 'any' for handler event type for broader compatibility
   element: EventTargetLike = window,
@@ -67,4 +67,4 @@ function useEventListener(
   }, [eventName, element, options]);
 }
 
-export default useEventListener;
+
