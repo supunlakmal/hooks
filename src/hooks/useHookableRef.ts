@@ -19,7 +19,7 @@ export function useHookableRef<T = undefined>(): MutableRefObject<T | null | und
  * @param onGet Function to be called while ref.current value accessed. Return
  * value will be used as a return value.
  */
-export default function useHookableRef<T>(
+export function useHookableRef<T>(
 	initialValue?: T,
 	onSet?: HookableRefHandler<T>,
 	onGet?: HookableRefHandler<T>,

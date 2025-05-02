@@ -1,5 +1,5 @@
 import { useState, useEffect, RefObject } from "react";
-import useResizeObserver from "./useResizeObserver";
+import { useResizeObserver } from "./useResizeObserver";
 
 interface UseElementSize {
   width: number;
@@ -12,7 +12,7 @@ interface UseElementSize {
  * @param elementRef - The ref attached to the element being observed.
  * @returns - The width and height of the element.
  */
-function useElementSize(elementRef: RefObject<HTMLElement | null>): UseElementSize {
+export function useElementSize(elementRef: RefObject<HTMLElement | null>): UseElementSize {
   const [size, setSize] = useState<UseElementSize>({
     width: 0,
     height: 0,
@@ -33,5 +33,3 @@ function useElementSize(elementRef: RefObject<HTMLElement | null>): UseElementSi
 
   return size;
 }
-
-export default useElementSize;

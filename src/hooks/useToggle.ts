@@ -21,7 +21,7 @@ type UseToggleReturn = [
  *          - A function to explicitly set the value to true.
  *          - A function to explicitly set the value to false.
  */
-const useToggle = (initialValue: boolean = false): UseToggleReturn => {
+export const useToggle = (initialValue: boolean = false): UseToggleReturn => {
   const [value, setValue] = useState<boolean>(initialValue);
 
   // useCallback ensures the toggle function identity is stable across re-renders
@@ -43,4 +43,4 @@ const useToggle = (initialValue: boolean = false): UseToggleReturn => {
   return [value, toggle, setOn, setOff];
 };
 
-export default useToggle;
+

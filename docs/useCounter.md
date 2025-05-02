@@ -1,8 +1,10 @@
 # `useCounter` Hook
 
-This hook provides a simple way to manage a numerical counter state. It allows you to increment, decrement, and reset the counter value.
+**Description:**
+The `useCounter` hook is a custom React hook designed to manage a numerical counter. It allows for incrementing, decrementing, and resetting the counter. It is useful for keeping track of counts, scores, or any numerical data within your React application.
 
-## Usage
+**Usage:**
+
 ```
 typescript
 import { useCounter } from './src/hooks/useCounter';

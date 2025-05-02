@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import useFirstMountState from './useFirstMountState';
+import { useFirstMountState } from './useFirstMountState';
 import {useIsomorphicLayoutEffect} from './useIsomorphicLayoutEffect';
 import {useSyncedRef} from './useSyncedRef';
 import {useUpdateEffect} from './useUpdateEffect';
@@ -313,4 +313,3 @@ const defaultParse = <T>(str: string | null, fallback: T | null): T | null => {
 		return fallback;
 	}
 };
-export default useStorageValue;

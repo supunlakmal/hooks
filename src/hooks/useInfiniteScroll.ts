@@ -24,7 +24,7 @@ interface UseInfiniteScrollOptions {
  * @returns {RefObject<any>} A ref object to attach to the target element that triggers loading more data when it becomes visible.
  * @returns {(node: T | null) => void} A callback ref setter function to attach to the target element.
  */
-function useInfiniteScroll<T extends Element>({
+export function useInfiniteScroll<T extends Element>({
   loading,
   hasNextPage,
   onLoadMore,
@@ -70,4 +70,4 @@ function useInfiniteScroll<T extends Element>({
   return ref; // Return the callback ref function directly
 }
 
-export default useInfiniteScroll;
+

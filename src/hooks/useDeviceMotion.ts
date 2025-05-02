@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useEventListener from "./useEventListener"; // Assuming useEventListener is in the same directory
+import {useEventListener} from "./useEventListener"; // Assuming useEventListener is in the same directory
 
 interface DeviceMotionState {
   acceleration: DeviceMotionEventAcceleration | null;
@@ -27,7 +27,7 @@ const initialState: DeviceMotionState = {
  *
  * @returns {DeviceMotionState} The current state of device motion.
  */
-function useDeviceMotion(): DeviceMotionState {
+export function useDeviceMotion(): DeviceMotionState {
   const [state, setState] = useState<DeviceMotionState>(initialState);
   const [isSupported, setIsSupported] = useState<boolean>(false);
 
@@ -56,4 +56,3 @@ function useDeviceMotion(): DeviceMotionState {
   return { ...state, isSupported };
 }
 
-export default useDeviceMotion;

@@ -55,8 +55,7 @@ export const basicDepsComparator: DependenciesComparator = (prevDeps, nextDeps):
  * after the `callback` and the dependency list.
  */
 // eslint-disable-next-line max-params
-export function useCustomCompareEffect<
-	Callback extends EffectCallback = EffectCallback,
+export function useCustomCompareEffect<Callback extends EffectCallback = EffectCallback,
 	Deps extends DependencyList = DependencyList,
 	HookRestArgs extends any[] = any[],
 	R extends HookRestArgs = HookRestArgs,
@@ -79,5 +78,3 @@ export function useCustomCompareEffect<
 
 	effectHook(callback, dependencies.current, ...effectHookRestArgs);
 }
-
-export default useCustomCompareEffect;

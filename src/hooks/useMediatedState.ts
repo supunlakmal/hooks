@@ -39,4 +39,3 @@ export function useMediatedState<State, RawState = State>(
 		}, []),
 	];
 }
-export default useMediatedState

@@ -34,7 +34,7 @@ type EffectHook<
  * `callback` and the dependency list.
  */
 
-export function useConditionalEffect<
+export const  useConditionalEffect = <
 	Cond extends ConditionsList,
 	Callback extends EffectCallback = EffectCallback,
 	Deps extends DependencyList | undefined = DependencyList | undefined,
@@ -47,7 +47,7 @@ export function useConditionalEffect<
 	predicate: ConditionsPredicate<Cond> = truthyAndArrayPredicate,
 	effectHook: EffectHook<Callback, Deps, HookRestArgs> = useEffect,
 	...effectHookRestArgs: R
-): void {
+): void =>{
 	effectHook(
 		(() => {
 			if (predicate(conditions)) {
@@ -58,6 +58,6 @@ export function useConditionalEffect<
 		deps,
 		...effectHookRestArgs,
 	);
-}
+};
 
 

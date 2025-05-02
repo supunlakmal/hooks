@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, RefObject } from "react";
-import useEventListener from "./useEventListener";
+import {useEventListener} from "./useEventListener";
 
 interface ScrollPosition {
   x: number;
@@ -42,7 +42,7 @@ function getScrollPosition(
  * @param {number} [throttleMs=100] - Throttle time in milliseconds to limit scroll event handling. Set to 0 to disable throttling.
  * @returns {ScrollPosition} An object containing the current x and y scroll position.
  */
-function useScrollPosition(
+export function useScrollPosition(
   element?: RefObject<Element> | Window | null,
   throttleMs: number = 100
 ): ScrollPosition {
@@ -80,4 +80,3 @@ function useScrollPosition(
   return position;
 }
 
-export default useScrollPosition;

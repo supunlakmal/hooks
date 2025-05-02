@@ -10,7 +10,7 @@ export interface ResizeObserverEntryExtended extends ResizeObserverEntry {
  * @param {RefObject<HTMLElement | null>} ref The ref attached to the element to observe.
  * @returns {ResizeObserverEntryExtended | null} The latest ResizeObserverEntry for the observed element, or null initially.
 */
-function useResizeObserver<T extends Element = HTMLElement>(
+export function useResizeObserver<T extends Element = HTMLElement>(
   ref: RefObject<T | null>,
   enabled = true,
 ): ResizeObserverEntryExtended | null {
@@ -40,4 +40,3 @@ function useResizeObserver<T extends Element = HTMLElement>(
   return entry;
 }
 
-export default useResizeObserver;

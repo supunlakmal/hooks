@@ -1,5 +1,5 @@
 import { RefObject, useCallback, useState } from "react";
-import useEventListener from "./useEventListener"; // Reuse useEventListener
+import {useEventListener} from "./useEventListener"; // Reuse useEventListener
 
 interface ContextMenuState {
   isOpen: boolean;
@@ -18,7 +18,7 @@ interface UseContextMenuResult extends ContextMenuState {
  * @param {RefObject<HTMLElement | null>} targetRef - Ref attached to the element that triggers the context menu.
  * @returns {UseContextMenuResult} An object containing menu state and control functions.
  */
-function useContextMenu(
+export function useContextMenu(
   targetRef: RefObject<HTMLElement | null>
 ): UseContextMenuResult {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,4 +99,4 @@ function useContextMenu(
   };
 }
 
-export default useContextMenu;
+

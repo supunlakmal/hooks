@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useEventListener from "./useEventListener"; // Assuming useEventListener handles window
+import {useEventListener} from "./useEventListener"; // Assuming useEventListener handles window
 
 export interface DeviceOrientationState {
   alpha: number | null; // Rotation around Z-axis (0-360)
@@ -22,7 +22,7 @@ const initialOrientationState: Omit<DeviceOrientationState, "isSupported"> = {
  *
  * @returns {DeviceOrientationState} An object containing orientation angles (alpha, beta, gamma) and support status.
  */
-function useDeviceOrientation(): DeviceOrientationState {
+export function useDeviceOrientation(): DeviceOrientationState {
   const [state, setState] = useState<
     Omit<DeviceOrientationState, "isSupported">
   >(initialOrientationState);
@@ -60,4 +60,4 @@ function useDeviceOrientation(): DeviceOrientationState {
   return { ...state, isSupported };
 }
 
-export default useDeviceOrientation;
+

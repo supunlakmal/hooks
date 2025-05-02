@@ -76,7 +76,7 @@ export interface UseFormValidationResult<T extends FormValues> {
  * @param options Configuration options including initial values and validation schema.
  * @returns Form state and handler functions.
  */
-function useFormValidation<T extends FormValues>(
+export function useFormValidation<T extends FormValues>(
   options: UseFormValidationOptions<T>
 ): UseFormValidationResult<T> {
   const {
@@ -327,4 +327,4 @@ function useFormValidation<T extends FormValues>(
   };
 }
 
-export default useFormValidation;
+

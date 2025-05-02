@@ -14,7 +14,7 @@ interface Props {
  * @param componentName The name of the component being debugged (for logging purposes).
  * @param props The current props object of the component.
  */
-function useWhyDidYouUpdate(componentName: string, props: Props): void {
+export function useWhyDidYouUpdate(componentName: string, props: Props): void {
   // Use a ref to store the previous props
   const previousProps = useRef<Props | undefined>(undefined);
 
@@ -76,4 +76,4 @@ function useWhyDidYouUpdate(componentName: string, props: Props): void {
   }); // Runs after every render
 }
 
-export default useWhyDidYouUpdate;
+

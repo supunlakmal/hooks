@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import useMount from "./useMount"; // For mount log
-import useUnmount from "./useUnmount"; // For unmount log
-import useUpdateEffect from "./useUpdateEffect"; // For update log
+import {useMount} from "./useMount"; // For mount log
+import {useUnmount} from "./useUnmount"; // For unmount log
+import {useUpdateEffect} from "./useUpdateEffect"; // For update log
 
 // Helper to compare props (simple shallow comparison)
 const propsChanged = (prevProps: any, nextProps: any): boolean => {
@@ -25,7 +25,7 @@ const propsChanged = (prevProps: any, nextProps: any): boolean => {
  * @param componentName - The name of the component to include in the logs.
  * @param props - The current props of the component (optional, for logging changes).
  */
-function useLogger(componentName: string, props?: any): void {
+export function useLogger(componentName: string, props?: any): void {
   const prevPropsRef = useRef(props);
 
   // Check if in development environment
@@ -70,4 +70,4 @@ function useLogger(componentName: string, props?: any): void {
   // No need to return anything, the hook just performs side effects (logging)
 }
 
-export default useLogger;
+

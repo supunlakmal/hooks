@@ -36,7 +36,7 @@ const getNestedValue = (obj: Translations, key: string): string | undefined => {
  * @param {string} initialLanguage - The default language code to use.
  * @returns {UseTranslationResult} An object with language state, setter, translation function, loaded translations, and loading status.
  */
-function useTranslation(
+export function useTranslation(
   // In a real app, resources would likely be passed in or configured globally.
   // For simplicity, we'll define some static resources here.
   staticResources: Record<string, Translations> = {
@@ -109,4 +109,4 @@ function useTranslation(
   };
 }
 
-export default useTranslation;
+

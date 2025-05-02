@@ -20,7 +20,7 @@ interface UseVisibilityOptions extends IntersectionObserverInit {
  * @param {boolean} [options.disconnectOnVisible=false] - If true, the observer disconnects after the element first becomes visible.
  * @returns {boolean} True if the element is currently intersecting/visible based on the options, false otherwise.
  */
-function useVisibility<T extends Element>(
+export function useVisibility<T extends Element>(
   elementRef: RefObject<T>,
   {
     initialIsVisible = false,
@@ -62,4 +62,4 @@ function useVisibility<T extends Element>(
   return isVisible;
 }
 
-export default useVisibility;
+

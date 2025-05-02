@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import useEventListener from "./useEventListener";
+import {useEventListener} from "./useEventListener";
 
 // Define the custom event name
 const HISTORY_CHANGE_EVENT = "historystatechange";
@@ -11,7 +11,7 @@ const HISTORY_CHANGE_EVENT = "historystatechange";
  *
  * @param {() => void} onChange - The callback function to execute on route change.
  */
-function useRouteChange(onChange: () => void): void {
+export function useRouteChange(onChange: () => void): void {
   const savedOnChange = useRef(onChange);
 
   // Update ref to latest callback instance on each render
@@ -63,4 +63,4 @@ function useRouteChange(onChange: () => void): void {
   }, []); // Run only once on mount
 }
 
-export default useRouteChange;
+

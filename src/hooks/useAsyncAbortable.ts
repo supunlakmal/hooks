@@ -54,7 +54,7 @@ export type ArgsWithAbortSignal<Args extends unknown[] = unknown[]> = [AbortSign
  * @param asyncFn Function that accepts AbortSignal and other args, and returns a Promise resolving to T.
  * @param initialValue Value that will be set on initialisation and on reset.
  */
-export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown[]>(
+export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown[]>( // Add export
 	asyncFn: (...params: ArgsWithAbortSignal<Args>) => Promise<T>,
 	initialValue?: T,
 ): 	[
@@ -185,4 +185,5 @@ export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown
 	return [ state, actions, meta ];
 }
 
-export default useAsyncAbortable;
+
+

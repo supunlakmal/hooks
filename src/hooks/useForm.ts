@@ -26,7 +26,7 @@ interface UseFormReturn<T> {
  * @param {T} initialValues The initial values for the form fields.
  * @returns {UseFormReturn<T>} An object containing form values, handlers, and reset function.
  */
-function useForm<T extends object>(initialValues: T): UseFormReturn<T> {
+export  function useForm<T extends object>(initialValues: T): UseFormReturn<T> {
   const [values, setValues] = useState<T>(initialValues);
 
   /**
@@ -89,4 +89,4 @@ function useForm<T extends object>(initialValues: T): UseFormReturn<T> {
   };
 }
 
-export default useForm;
+

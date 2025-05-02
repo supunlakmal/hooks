@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import useEventListener from "./useEventListener";
+import {useEventListener} from "./useEventListener";
 
 // Helper to safely get query param value (handles SSR)
 const getQueryParamValue = (paramName: string): string | null => {
@@ -45,7 +45,7 @@ const updateUrlQueryParam = (paramName: string, value: string | null) => {
  *          - The current value of the query parameter state.
  *          - A function to update the state and the URL query parameter (pass null to remove).
  */
-function useQueryParam(
+export function useQueryParam(
   paramName: string,
   initialValue: string = ""
 ): [string, (newValue: string | null) => void] {
@@ -87,4 +87,4 @@ function useQueryParam(
   return [value, updateParam];
 }
 
-export default useQueryParam;
+

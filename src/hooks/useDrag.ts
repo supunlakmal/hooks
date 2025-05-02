@@ -43,7 +43,7 @@ interface DragState {
  * @param options Configuration options for the drag behavior.
  * @returns State indicating if the element is currently being dragged.
  */
-const useDrag = <T extends HTMLElement>(
+export const useDrag = <T extends HTMLElement>(
   ref: React.RefObject<T>,
   options: DragOptions = {}
 ): DragState => {
@@ -146,4 +146,4 @@ const useDrag = <T extends HTMLElement>(
   return { isDragging };
 };
 
-export default useDrag;
+

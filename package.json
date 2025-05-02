@@ -1,11 +1,13 @@
 {
   "name": "@supunlakmal/hooks",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A collection of reusable React hooks",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
     "p": "npm publish --access public"
   },
   "homepage": "https://github.com/supunlakmal/hooks",

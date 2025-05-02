@@ -161,12 +161,12 @@ export type CounterActions = {
  * @param max Optional maximum value. Initial value is clamped if needed.
  * @param min Optional minimum value. Initial value is clamped if needed.
  */
-function useCounter(
+export function useCounter(
     initialValue: InitialState<number> = 0,
   max?: number,
   min?: number,
 ): [number, CounterActions] {
-
+    
   // 1. Create the clamping mediator function, memoized based on min/max
   const mediator = useCallback((value: number): number => {
     let clampedValue = value;
@@ -215,4 +215,3 @@ function useCounter(
   return [state, actions];
 }
 
-export default useCounter;

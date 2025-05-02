@@ -34,4 +34,3 @@ export function useCustomCompareMemo<T, Deps extends DependencyList = Dependency
 	},deps)
 }
 
-export default useCustomCompareMemo;

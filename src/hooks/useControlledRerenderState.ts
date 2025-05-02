@@ -102,5 +102,3 @@ export function useControlledRerenderState<S>(
     }, []),
   ];
 }
-
-export default useControlledRerenderState;

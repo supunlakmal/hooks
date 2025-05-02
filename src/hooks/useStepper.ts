@@ -26,7 +26,7 @@ interface UseStepperReturn {
  * @param {number} props.totalSteps - The total number of steps in the process.
  * @returns {UseStepperReturn} An object containing stepper state and control functions.
  */
-function useStepper({
+export function useStepper({
   initialStep = 1,
   totalSteps,
 }: UseStepperProps): UseStepperReturn {
@@ -97,4 +97,4 @@ function useStepper({
   };
 }
 
-export default useStepper;
+

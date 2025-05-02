@@ -9,7 +9,7 @@ type EventType = "mousedown" | "mouseup" | "touchstart" | "touchend";
  * @param {() => void} handler The function to call when a click outside occurs.
  * @param {EventType} [eventType='mousedown'] The type of event to listen for ('mousedown', 'mouseup', 'touchstart', 'touchend').
  */
-function useClickOutside(
+export function useClickOutside(
   ref: RefObject<HTMLElement>,
   handler: () => void,
   eventType: EventType = "mousedown" // Default to mousedown
@@ -38,4 +38,4 @@ function useClickOutside(
   }, [ref, handler, eventType]); // Re-run if ref, handler, or eventType changes
 }
 
-export default useClickOutside;
+

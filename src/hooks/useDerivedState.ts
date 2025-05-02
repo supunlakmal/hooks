@@ -10,7 +10,7 @@ import { useMemo, DependencyList } from "react";
  * @param dependencies An array of dependencies. The factory function will re-run if any dependency changes.
  * @returns The computed derived state.
  */
-function useDerivedState<T>(
+export function useDerivedState<T>(
   factoryFn: () => T,
   dependencies: DependencyList
 ): T {
@@ -19,4 +19,4 @@ function useDerivedState<T>(
   return derivedState;
 }
 
-export default useDerivedState;
+

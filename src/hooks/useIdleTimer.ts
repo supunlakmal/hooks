@@ -25,7 +25,7 @@ const defaultEvents: (keyof WindowEventMap)[] = [
  * @param {number} [options.debounce=0] - Debounce time in milliseconds for handling frequent activity events.
  * @returns {boolean} Returns the current idle state (`true` if idle, `false` otherwise).
  */
-function useIdleTimer({
+export function useIdleTimer({
   onIdle,
   onActive,
   timeout,
@@ -99,4 +99,4 @@ function useIdleTimer({
   return isIdle;
 }
 
-export default useIdleTimer;
+

@@ -11,7 +11,7 @@ interface WindowSize {
  * @returns {WindowSize} An object containing the current window width and height.
  *                     Returns { width: undefined, height: undefined } on the server-side.
  */
-function useWindowSize(): WindowSize {
+export function useWindowSize(): WindowSize {
   // Initialize state with undefined width/height so server and client renders match
   // Prevent hydration warning
   const [windowSize, setWindowSize] = useState<WindowSize>({
@@ -42,4 +42,5 @@ function useWindowSize(): WindowSize {
   return windowSize;
 }
 
-export default useWindowSize;
+
+

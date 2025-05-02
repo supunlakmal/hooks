@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
  *
  * @param onMount - The function to call on mount.
  */
-function useMount(onMount: () => void): void {
+export function useMount(onMount: () => void): void {
   // Use a ref to store the callback to ensure the correct function is called,
   // even though useEffect with [] should only run once.
   // This pattern aligns with useUnmount and handles potential edge cases or future extensions.
@@ -22,4 +22,4 @@ function useMount(onMount: () => void): void {
   }, []); // Empty dependency array ensures this effect runs only once after initial mount
 }
 
-export default useMount;
+

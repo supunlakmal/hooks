@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from "react";
  * @param {number} limit The minimum time interval in milliseconds between updates.
  * @returns {T} The throttled value.
  */
-function useThrottle<T>(value: T, limit: number): T {
+export  function useThrottle<T>(value: T, limit: number): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRan = useRef<number>(Date.now());
 
@@ -36,4 +36,4 @@ function useThrottle<T>(value: T, limit: number): T {
   return throttledValue;
 }
 
-export default useThrottle;
+
