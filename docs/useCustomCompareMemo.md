@@ -1,12 +1,10 @@
 # `useCustomCompareMemo` Hook
 
-## Description
+**Description:**
+The `useCustomCompareMemo` hook is a custom React hook that works like `useMemo` but allows you to define a custom comparison function for its dependencies. This is particularly useful when dealing with complex objects or arrays as dependencies, where a shallow comparison might not be sufficient to determine if the dependencies have changed.
 
-The `useCustomCompareMemo` hook is a custom hook that provides memoization capabilities similar to React's `useMemo`, but with the added ability to customize the comparison logic. This allows you to define how the hook determines whether the dependencies have changed, providing finer control over when the memoized value is recalculated.
+**Usage:**
 
-## Usage
-
-Here's how you can use the `useCustomCompareMemo` hook in your React components:
 ```
 typescript
 import { useCustomCompareMemo } from '@supunlakmal/hooks';

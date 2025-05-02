@@ -1,12 +1,4 @@
-# `useCustomCompareEffect` Hook
 
-## Description
-
-The `useCustomCompareEffect` hook is a custom React hook that provides a way to perform side effects (like data fetching or DOM manipulation) in a way that only triggers when the dependencies have actually changed, using a custom comparison function. This is similar to `useEffect` but allows for a more flexible and precise comparison method beyond just strict equality.
-
-## Usage
-
-Here's a basic example of how to use the `useCustomCompareEffect` hook:
 ```
 typescript
 import { useCustomCompareEffect } from '@supunlakmal/hooks';

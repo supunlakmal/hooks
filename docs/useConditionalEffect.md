@@ -1,8 +1,8 @@
-# `useConditionalEffect` Hook
+**Description:**
+The `useConditionalEffect` hook is a custom React hook designed to run a side effect (like data fetching or DOM manipulation) only when a specific condition is met. It's a variation on `useEffect` that includes a conditional check to determine if the effect should execute. This hook is useful in scenarios where you want to perform an action based on changes in certain dependencies, but only if a specific condition related to those dependencies is true.
 
-This hook provides a way to run a side effect conditionally, based on a boolean value. It is similar to the built-in `useEffect` hook, but with the added ability to control whether the effect runs based on a condition. This is useful for scenarios where you only want to execute a side effect under specific circumstances.
+**Usage:**
 
-## Usage
 ```
 typescript
 import useConditionalEffect from '@supunlakmal/hooks/useConditionalEffect';
