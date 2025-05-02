@@ -110,6 +110,7 @@ export { useWebSocket } from './hooks/useWebSocket';
 export { useWindowSize } from "./hooks/useWindowSize";
 export { useWhyDidYouUpdate } from "./hooks/useWhyDidYouUpdate";
 export {  useWorker } from "./hooks/useWorker";
-export {  useWebWorker } from "./hooks/useWebWorker";
+export { useWebWorker } from "./hooks/useWebWorker";
+export {  useWakeLock } from "./hooks/useWakeLock";
 // Example of exporting types alongside hooks if needed:
 // export { useMyHook, type UseMyHookOptions } from './hooks/useMyHook';
