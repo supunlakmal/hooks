@@ -1,5 +1,5 @@
-import {type DependencyList, useMemo, useRef, } from 'react';
-import {useUnmountEffect} from './useUnmountEffect';
+import { type DependencyList, useMemo, useRef, } from 'react';
+import { useUnmountEffect } from './useUnmountEffect';
 
 export type ThrottledFunction<Fn extends (...args: any[]) => any> = (
 	this: ThisParameterType<Fn>,
@@ -24,7 +24,6 @@ export const useThrottledCallback = <Fn extends (...args: any[]) => any>(
 	noTrailing = false,
 ):((...args: Parameters<Fn>) => void) => {
 	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-	let timer: ReturnType<typeof setTimeout> | null = null;
 
 	
 	const lastCall = useRef<{args: Parameters<Fn>; this: ThisParameterType<Fn>}>(undefined);
@@ -51,9 +50,9 @@ export const useThrottledCallback = <Fn extends (...args: any[]) => any>(
 
 		const execute = (context: ThisParameterType<Fn>, args: Parameters<Fn>) => {
 			lastCall.current = undefined;
-			callback.apply(context, args);				
-			timer = setTimeout(() => {
-				timer = null;
+			callback.apply(context, args);
+			setTimeout(() => {
+				
 				
 				// If trailing execution is not disabled, call callback with last
 				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -63,7 +62,7 @@ export const useThrottledCallback = <Fn extends (...args: any[]) => any>(
 
 					lastCall.current = undefined;
 				}
-			}, delay);
+			}, delay); 
 						
 		};
 

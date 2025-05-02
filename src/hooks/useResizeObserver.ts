@@ -39,3 +39,4 @@ export function useResizeObserver<T extends Element = HTMLElement>(
 
   return entry;
 }
+
