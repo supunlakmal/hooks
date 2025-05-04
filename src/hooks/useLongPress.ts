@@ -77,7 +77,7 @@ export const useLongPress = (
         onStart?.(event); // Fire onStart callback
 
         // Clear any existing timer
-        clearTimer();
+       clearTimer();
 
         // Set a new timer
         timeoutRef.current = setTimeout(() => onLongPress(event), threshold);

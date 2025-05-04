@@ -63,7 +63,7 @@ export const useMutation = (
   const optionsRef = useRef(options);
   const mutationFnRef = useRef(mutationFn);
 
-  // Update refs if functions change
+  // Update refs if options change
   useEffect(() => {
     optionsRef.current = options;
   }, [options]);

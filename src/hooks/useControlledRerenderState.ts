@@ -23,7 +23,7 @@ const useRerender = (): (() => void) => {
   const [, setState] = useState(0);
 
   return useCallback(() =>
-    setState(stateChanger);
+    setState(stateChanger),
   }, []);
 };
 
@@ -51,10 +51,10 @@ const updateState = <State, PreviousState = State>(
 
   return nextState;
 }
- 
+
 const resolveHookState = <State, PreviousState = State>(
   ...args:
-    | Parameters<typeof initState<State>>
+  | Parameters<typeof initState<State>>
     | Parameters<typeof updateState<State, PreviousState>>
 ): State => {
   if (args.length === 1) {
@@ -69,11 +69,12 @@ export type ControlledRerenderDispatch<A> = (value: A, rerender?: boolean) => vo
 /**
  * Like `React.useState`, but its state setter accepts extra argument, that allows to cancel
  * rerender.
- */ 
+ */
 export const useControlledRerenderState = <S = undefined>(
   initialState?: S | (() => S),
 ): [S | undefined, ControlledRerenderDispatch<SetStateAction<S | undefined>>] => {
 
+  const isFirstMount = useFirstMountState();
 
   const state = useRef<S | undefined>(
     useFirstMountState() ? (initialState instanceof Function ? initialState() : initialState) as S | undefined : undefined,
@@ -83,18 +84,22 @@ export const useControlledRerenderState = <S = undefined>(
   return [
     state.current,
     useCallback(
-      (value: SetStateAction<S | undefined>, rerender?: boolean) => {
-        const newState = resolveHookState(value, state.current);
+      (value: SetStateAction<S | undefined>, rerender?: boolean) => { 
+        const newState = resolveHookState(value, state.current); 
+          
+        if(isFirstMount){
+          state.current = (initialState instanceof Function ? initialState() : initialState) as S | undefined
+        }
 
-        if (newState !== state.current) {
-          state.current = newState;
+        if(newState !== state.current) {
+            state.current = newState
 
-          if (rerender === undefined || rerender) {
-            rr();
-          }
+            if (rerender === undefined || rerender) {
+              rr();
+            }
         }
       },
-      [rr]
-    ),
+      [rr, initialState, isFirstMount]
+    )
   ];
-}
+};
