@@ -30,7 +30,7 @@ interface UseFullscreenResult {
  * @param {RefObject<HTMLElement>} ref - Ref attached to the target element.
  * @returns {UseFullscreenResult} An object with fullscreen status and control functions.
  */
-export function useFullscreen(ref: RefObject<HTMLElement>): UseFullscreenResult {
+export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult => {
   // Get the initial state based on the standard API if possible
   const [isFullscreen, setIsFullscreen] = useState<boolean>(
     () =>

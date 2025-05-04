@@ -8,7 +8,15 @@ interface WorkerState<T> {
 
 type WorkerFunction<T, A extends any[]> = (...args: A) => T;
 
-export function useWebWorker<T, A extends any[]>(workerFunction: WorkerFunction<T, A>) {
+/**
+ * `useWebWorker` is a custom React hook that allows you to run a function in a web worker,
+ * to avoid blocking the main thread.
+ *
+ * @param workerFunction - The function to run in the web worker.
+ * @returns An object containing the result, error, loading state, and functions to execute or terminate the worker.
+ */
+export const useWebWorker = <T, A extends any[]>(
+  workerFunction: WorkerFunction<T, A>) => {
   const [workerState, setWorkerState] = useState<WorkerState<T>>({
     result: null,
     error: null,

@@ -37,12 +37,13 @@ interface UseMutationOptions {
   onMutate?: (variables: any) => void;
   /** Callback function executed when mutation finishes (either success or error). Receives data/error and variables. */
   onSettled?: (
-    data: any,
-    error: any,
-    variables: any
-  ) => void;
+    data: any, 
+    error: any, 
+    variables: any) => void;
 }
 
+
+  
 /** 
  * Hook to manage asynchronous operations that modify data (mutations).
  * Handles loading, success, and error states, and provides callbacks.
@@ -51,10 +52,10 @@ interface UseMutationOptions {
  * @param options Optional configuration with callbacks (onSuccess, onError, etc.).
  * @returns State and functions to manage the mutation lifecycle.
  */
-export function useMutation(
+export const useMutation = (
   mutationFn: (variables: any) => Promise<any>,
-  options?: UseMutationOptions
-): UseMutationResult {
+  options?: UseMutationOptions,
+): UseMutationResult =>{
   const [status, setStatus] = useState<MutationStatus>("idle");
   const [data, setData] = useState<any>(undefined);
   const [error, setError] = useState<any>(undefined);
@@ -63,7 +64,7 @@ export function useMutation(
   const optionsRef = useRef(options);
   const mutationFnRef = useRef(mutationFn);
 
-  // Update refs if functions change
+  // Update refs if options change
   useEffect(() => {
     optionsRef.current = options;
   }, [options]);

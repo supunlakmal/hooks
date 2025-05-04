@@ -18,12 +18,12 @@ type EventTargetLike =
  * @param {EventTargetLike} [element=window] The target element. Defaults to `window`.
  * @param {boolean | AddEventListenerOptions} [options] Optional event listener options.
  */
-export function useEventListener(
+export const useEventListener = (
   eventName: string,
   handler: (event: any) => void, // Use 'any' for handler event type for broader compatibility
   element: EventTargetLike = window,
   options?: boolean | AddEventListenerOptions
-): void {
+): void => {
   const savedHandler = useRef(handler);
 
   useEffect(() => {

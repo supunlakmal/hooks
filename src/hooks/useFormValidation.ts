@@ -48,7 +48,7 @@ export interface UseFormValidationResult<T extends FormValues> {
   /** Function to handle input blur events */
   handleBlur: (
     event: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => void;
   /** Function to handle form submission */
@@ -76,9 +76,9 @@ export interface UseFormValidationResult<T extends FormValues> {
  * @param options Configuration options including initial values and validation schema.
  * @returns Form state and handler functions.
  */
-export function useFormValidation<T extends FormValues>(
+export const useFormValidation = <T extends FormValues>(
   options: UseFormValidationOptions<T>
-): UseFormValidationResult<T> {
+): UseFormValidationResult<T> => {
   const {
     initialValues,
     validationSchema,
@@ -227,7 +227,10 @@ export function useFormValidation<T extends FormValues>(
 
   const setFieldTouched = useCallback(
     (fieldName: keyof T, isTouched: boolean) => {
-      setTouched((prevTouched) => ({ ...prevTouched, [fieldName]: isTouched }));
+      setTouched((prevTouched) => ({
+        ...prevTouched,
+        [fieldName]: isTouched,
+      }));
       if (isTouched && validateOnBlur) {
         setValuesState((currentVals) => {
           // Ensure validation runs with the latest state
@@ -326,5 +329,3 @@ export function useFormValidation<T extends FormValues>(
     resetForm,
   };
 }
-
-

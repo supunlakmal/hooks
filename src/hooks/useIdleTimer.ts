@@ -25,12 +25,12 @@ const defaultEvents: (keyof WindowEventMap)[] = [
  * @param {number} [options.debounce=0] - Debounce time in milliseconds for handling frequent activity events.
  * @returns {boolean} Returns the current idle state (`true` if idle, `false` otherwise).
  */
-export function useIdleTimer({
+export const useIdleTimer = ({
   onIdle,
   onActive,
   timeout,
   debounce = 0,
-}: UseIdleTimerProps): boolean {
+}: UseIdleTimerProps) => {
   const [isIdle, setIsIdle] = useState<boolean>(false);
   const timer = useRef<NodeJS.Timeout | null>(null);
   const eventDebounceTimer = useRef<NodeJS.Timeout | null>(null);

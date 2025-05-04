@@ -42,9 +42,9 @@ interface UseVirtualListResult<T> {
  * @param options Configuration options including the list data, item height, and container ref.
  * @returns An object containing the items to render and the total list height.
  */
-export function useVirtualList<T>(
+export const useVirtualList = <T>(
   options: UseVirtualListOptions<T>
-): UseVirtualListResult<T> {
+): UseVirtualListResult<T> =>{
   const {
     list,
     itemHeight,

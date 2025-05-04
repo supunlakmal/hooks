@@ -54,14 +54,14 @@ export type ArgsWithAbortSignal<Args extends unknown[] = unknown[]> = [AbortSign
  * @param asyncFn Function that accepts AbortSignal and other args, and returns a Promise resolving to T.
  * @param initialValue Value that will be set on initialisation and on reset.
  */
-export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown[]>( // Add export
+export const useAsyncAbortable = <T, E = Error, Args extends unknown[] = unknown[]>( // Add export
 	asyncFn: (...params: ArgsWithAbortSignal<Args>) => Promise<T>,
 	initialValue?: T,
 ): 	[
 		AsyncState<T, E>,
 		UseAsyncAbortableActions<Args>,
 		UseAsyncAbortableMeta<Args>,
-	] {
+	] => {
 	// Ref to hold the AbortController for the current or last execution
 	const abortControllerRef = useRef<AbortController | undefined>(undefined);
 
@@ -87,7 +87,7 @@ export function useAsyncAbortable<T, E = Error, Args extends unknown[] = unknown
             // If the signal was aborted during the asyncFn execution, throw an error
             // Or let asyncFn handle it internally by checking signal.aborted
             if (ac.signal.aborted) {
-                // Optionally throw a specific AbortError or let it proceed if asyncFn handles it
+                // Optionally throw a specific AbortError or let it proceed if asyncFn handles it.
                 // For now, let's assume asyncFn might throw or handle it.
                 // If it resolves despite abort, we proceed, but the controller state is 'aborted'.
             }

@@ -5,7 +5,7 @@ import {type DependencyList, useEffect, useMemo, useRef} from 'react';
  *
  * @param value
  */
-function useSyncedRef<T>(value: T): {readonly current: T} {
+const useSyncedRef = <T>(value: T): {readonly current: T} => {
 	const ref = useRef(value);
 
 	ref.current = value;
@@ -19,14 +19,14 @@ function useSyncedRef<T>(value: T): {readonly current: T} {
 			}),
 		[],
 	);
-}
+};
 
 /**
  * Run effect only when component is unmounted.
  *
  * @param effect Effector to run on unmount
  */
-function useUnmountEffect(effect: CallableFunction): void {
+const useUnmountEffect = (effect: CallableFunction): void => {
 	const effectRef = useSyncedRef(effect);
 
 	useEffect(
@@ -37,7 +37,7 @@ function useUnmountEffect(effect: CallableFunction): void {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[],
 	);
-}
+};
 
 export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
 	this: ThisParameterType<Fn>,
@@ -54,12 +54,12 @@ export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
  * @param maxWait The maximum time `callback` is allowed to be delayed before
  * it's invoked. 0 means no max wait.
  */
-function useDebouncedCallback<Fn extends (...args: any[]) => any>(
+export const useDebouncedCallback = <Fn extends (...args: any[]) => any>(
 	callback: Fn,
 	deps: DependencyList,
 	delay: number,
 	maxWait = 0,
-): DebouncedFunction<Fn> {
+): DebouncedFunction<Fn> => {
 	const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const waitTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const cb = useRef(callback);
@@ -124,6 +124,4 @@ function useDebouncedCallback<Fn extends (...args: any[]) => any>(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [delay, maxWait, ...deps]);
 }
-
-export { useDebouncedCallback };
 

@@ -70,7 +70,7 @@ const getConnectionState = (
  *
  * @returns {NetworkSpeedState} An object containing network state information.
  */
-export function useNetworkSpeed(): NetworkSpeedState {
+export const useNetworkSpeed = (): NetworkSpeedState => {
   const isSupported =
     typeof navigator !== "undefined" && "connection" in navigator;
 

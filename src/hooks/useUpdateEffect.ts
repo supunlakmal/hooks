@@ -8,7 +8,7 @@ import { useFirstMountState } from './useFirstMountState';
  * @param effect Effector to run on updates
  * @param deps Dependencies list, as for `useEffect` hook
  */
-export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList): void {
+export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList): void => {
 	const isFirstMount = useFirstMountState();
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps

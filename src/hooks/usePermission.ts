@@ -18,9 +18,9 @@ export interface UsePermissionState {
  * @param {PermissionDescriptor} permissionDesc - An object describing the permission to query (e.g., { name: 'geolocation' }).
  * @returns {UsePermissionState} An object containing the permission state, support status, and a function to re-query.
  */
-export function usePermission(
-  permissionDesc: PermissionDescriptor
-): UsePermissionState {
+export const usePermission = (
+  permissionDesc: PermissionDescriptor,
+): UsePermissionState => {
   const [state, setState] = useState<PermissionState>("querying");
   const [isSupported, setIsSupported] = useState<boolean>(false);
   const [permissionStatus, setPermissionStatus] =

@@ -6,7 +6,7 @@ import {useEventListener} from "./useEventListener";
  *
  * @returns {boolean} Returns `true` if the browser is online, `false` otherwise.
  */
-export function useOnlineStatus(): boolean {
+export const useOnlineStatus = (): boolean => {
   // Get the initial status from navigator.onLine
   // Ensure navigator is defined (for SSR or specific environments)
   const getInitialStatus = () => {

@@ -24,10 +24,10 @@ interface UseAnimationControls {
  * @param options.onComplete - Optional callback triggered when the animation completes its duration.
  * @returns Controls object with start, stop, reset functions and running status.
  */
-export function useAnimation(
+export const useAnimation = (
   callback: AnimationCallback,
   { duration, onComplete }: UseAnimationOptions
-): UseAnimationControls {
+): UseAnimationControls => {
   const [isRunning, setIsRunning] = useState(false);
   const frameIdRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);

@@ -34,7 +34,7 @@ type EffectHook<
  * `callback` and the dependency list.
  */
 
-export const  useConditionalEffect = <
+export const useConditionalEffect = <
 	Cond extends ConditionsList,
 	Callback extends EffectCallback = EffectCallback,
 	Deps extends DependencyList | undefined = DependencyList | undefined,

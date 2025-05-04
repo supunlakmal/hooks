@@ -7,7 +7,7 @@ import { useRef, useEffect } from "react";
  * @param {T} value The current value.
  * @returns {T | undefined} The value from the previous render, or undefined on the initial render.
  */
-export  function usePrevious<T>(value: T): T | undefined {
+export const usePrevious = <T>(value: T): T | undefined => {
   // Initialize ref with undefined
   const ref = useRef<T | undefined>(undefined);
 

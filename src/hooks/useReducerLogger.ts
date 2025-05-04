@@ -16,13 +16,13 @@ const getTime = () => new Date().toLocaleTimeString();
  * @param loggerName - Optional name to identify this reducer instance in logs.
  * @returns A tuple containing the current state and the dispatch function, same as `useReducer`.
  */
-export function useReducerLogger<S, A>(
+export const useReducerLogger = <S, A>(
   reducer: Reducer<S, A>,
   initialState: S,
   initializer?: (initialArg: S) => S,
   loggerName: string = "Reducer"
-): [S, Dispatch<A>] {
-  // Determine initial state
+): [S, Dispatch<A>] => {
+	// Determine initial state
   const computedInitialState = initializer
     ? initializer(initialState)
     : initialState;

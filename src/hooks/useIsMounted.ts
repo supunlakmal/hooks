@@ -8,7 +8,7 @@ import {useCallback, useEffect, useRef} from 'react';
  *
  * @return Function that returns `true` only if the component is mounted.
  */
-export function useIsMounted(initialValue = false): () => boolean {
+export const useIsMounted = (initialValue = false): () => boolean => {
 	const isMounted = useRef(initialValue);
 	const get = useCallback(() => isMounted.current, []);
 

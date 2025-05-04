@@ -45,11 +45,11 @@ const updateUrlQueryParam = (paramName: string, value: string | null) => {
  *          - The current value of the query parameter state.
  *          - A function to update the state and the URL query parameter (pass null to remove).
  */
-export function useQueryParam(
+export const useQueryParam = (
   paramName: string,
   initialValue: string = ""
-): [string, (newValue: string | null) => void] {
-  // State reflects the param value, falling back to initialValue if absent
+): [string, (newValue: string | null) => void] => {
+   // State reflects the param value, falling back to initialValue if absent
   const [value, setValue] = useState<string>(() => {
     return getQueryParamValue(paramName) ?? initialValue;
   });

@@ -15,7 +15,10 @@ interface DraggableOptions {
   /** Callback fired continuously during dragging. */
   onDrag?: (position: { x: number; y: number }, event: PointerEvent) => void;
   /** Callback fired when dragging stops. */
-  onDragEnd?: (position: { x: number; y: number }, event: PointerEvent) => void;
+  onDragEnd?: (
+    position: { x: number; y: number },
+    event: PointerEvent
+  ) => void;
   /** Control the position externally. If provided, the hook operates in controlled mode. */
   position?: { x: number; y: number };
   /** Callback to update the position in controlled mode. */

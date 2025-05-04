@@ -14,7 +14,7 @@ This hook provides continuous geolocation updates, allowing you to track the use
 ## Examples
 ```
 tsx
-import { useGeolocationContinuous } from 'src';
+import { useGeolocationContinuous } from '@supunlakmal/hooks';
 
 function GeolocationContinuousExample() {
   const { location, error, loading, stop } = useGeolocationContinuous();

@@ -29,7 +29,7 @@ const defaultOptions: Required<
  * @param options.onEnd - Callback fired when the press ends.
  * @param options.onCancel - Callback fired if the press is cancelled before duration.
  */
-export function useLongPress(
+export const useLongPress = (
   ref: RefObject<HTMLElement | null>,
   callback: LongPressCallback,
   {
@@ -37,8 +37,8 @@ export function useLongPress(
     onStart,
     onEnd,
     onCancel,
-  }: UseLongPressOptions = {}
-): void {
+  } = {} as UseLongPressOptions
+): void =>{
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const targetRef = useRef<EventTarget | null>(null); // Store the target element
 
@@ -77,7 +77,7 @@ export function useLongPress(
         onStart?.(event); // Fire onStart callback
 
         // Clear any existing timer
-        clearTimer();
+       clearTimer();
 
         // Set a new timer
         timeoutRef.current = setTimeout(() => onLongPress(event), threshold);

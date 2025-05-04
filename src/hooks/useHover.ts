@@ -7,10 +7,10 @@ import { useState, useRef, useEffect, RefObject } from "react";
  *           - ref: A React ref object (possibly null initially) to attach to the target DOM element.
  *           - isHovered: A boolean state indicating if the element is currently hovered.
  */
-export function useHover<T extends HTMLElement = HTMLElement>(): [
+export const useHover = <T extends HTMLElement = HTMLElement>(): [
   RefObject<T | null>,
   boolean
-] {
+] => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const ref = useRef<T>(null);
 

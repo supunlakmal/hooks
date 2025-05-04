@@ -20,14 +20,14 @@ interface UseVisibilityOptions extends IntersectionObserverInit {
  * @param {boolean} [options.disconnectOnVisible=false] - If true, the observer disconnects after the element first becomes visible.
  * @returns {boolean} True if the element is currently intersecting/visible based on the options, false otherwise.
  */
-export function useVisibility<T extends Element>(
+export const useVisibility = <T extends Element>(
   elementRef: RefObject<T>,
   {
     initialIsVisible = false,
     disconnectOnVisible = false,
     ...observerOptions
   }: UseVisibilityOptions = {}
-): boolean {
+): boolean =>{
   const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
 
   useEffect(() => {

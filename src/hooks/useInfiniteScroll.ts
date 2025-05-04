@@ -24,14 +24,14 @@ interface UseInfiniteScrollOptions {
  * @returns {RefObject<any>} A ref object to attach to the target element that triggers loading more data when it becomes visible.
  * @returns {(node: T | null) => void} A callback ref setter function to attach to the target element.
  */
-export function useInfiniteScroll<T extends Element>({
+export const useInfiniteScroll = <T extends Element>({
   loading,
   hasNextPage,
   onLoadMore,
   root = null,
   rootMargin = "0px",
   threshold = 0.1,
-}: UseInfiniteScrollOptions): (node: T | null) => void {
+}: UseInfiniteScrollOptions): (node: T | null) => void => {
   const observer = useRef<IntersectionObserver | null>(null);
 
   // Use `useCallback` for the ref setter to get a stable function reference
