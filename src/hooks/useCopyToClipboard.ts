@@ -24,7 +24,7 @@ type UseCopyToClipboardReturn = [
  *
  * @returns {UseCopyToClipboardReturn} A tuple containing the copy status and the copy function.
  */
-export  function useCopyToClipboard(): UseCopyToClipboardReturn {
+export const useCopyToClipboard = (): UseCopyToClipboardReturn => {
   const [status, setStatus] = useState<CopyStatus>(null);
 
   const copy = useCallback(async (text: string) => {

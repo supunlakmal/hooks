@@ -18,9 +18,9 @@ interface UseContextMenuResult extends ContextMenuState {
  * @param {RefObject<HTMLElement | null>} targetRef - Ref attached to the element that triggers the context menu.
  * @returns {UseContextMenuResult} An object containing menu state and control functions.
  */
-export function useContextMenu(
+export const useContextMenu = (
   targetRef: RefObject<HTMLElement | null>
-): UseContextMenuResult {
+): UseContextMenuResult => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 

@@ -27,7 +27,7 @@ const initialState: DeviceMotionState = {
  *
  * @returns {DeviceMotionState} The current state of device motion.
  */
-export function useDeviceMotion(): DeviceMotionState {
+export const useDeviceMotion = (): DeviceMotionState => {
   const [state, setState] = useState<DeviceMotionState>(initialState);
   const [isSupported, setIsSupported] = useState<boolean>(false);
 

@@ -22,7 +22,7 @@ const initialOrientationState: Omit<DeviceOrientationState, "isSupported"> = {
  *
  * @returns {DeviceOrientationState} An object containing orientation angles (alpha, beta, gamma) and support status.
  */
-export function useDeviceOrientation(): DeviceOrientationState {
+export const useDeviceOrientation = (): DeviceOrientationState => {
   const [state, setState] = useState<
     Omit<DeviceOrientationState, "isSupported">
   >(initialOrientationState);

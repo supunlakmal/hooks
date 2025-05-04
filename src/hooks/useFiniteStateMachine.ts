@@ -54,44 +54,29 @@ export interface StateMachineInstance<
  * @param config The state machine configuration object.
  * @returns An object containing the current state, context, and a send function.
  */
-export function useFiniteStateMachine<
+export const useFiniteStateMachine = <
   TState extends string,
   TEvent extends string,
   TContext = any
->(
-  config: StateMachineConfig<TState, TEvent, TContext>
-): StateMachineInstance<TState, TEvent, TContext> {
+>( config: StateMachineConfig<TState, TEvent, TContext> ): StateMachineInstance<TState, TEvent, TContext> => {
   const [currentState, setCurrentState] = useState<TState>(config.initial);
-  const [context, setContext] = useState<TContext>(
-    config.context ?? ({} as TContext)
-  );
+  const [context, setContext] = useState<TContext>( config.context ?? ({} as TContext) );
 
-  const send = useCallback(
-    (eventInput: TEvent | { type: TEvent; payload?: any }) => {
-      const eventType =
-        typeof eventInput === "string" ? eventInput : eventInput.type;
-      const eventPayload =
-        typeof eventInput === "object" ? eventInput.payload : undefined;
+  const send = useCallback( (eventInput: TEvent | { type: TEvent; payload?: any }) => {
+      const eventType = typeof eventInput === "string" ? eventInput : eventInput.type;
+      const eventPayload = typeof eventInput === "object" ? eventInput.payload : undefined;
 
       const currentStateConfig = config.states[currentState];
       if (!currentStateConfig?.on || !currentStateConfig.on[eventType]) {
-        console.warn(
-          `No transition defined for event '${eventType}' in state '${currentState}'`
-        );
+        console.warn( `No transition defined for event '${eventType}' in state '${currentState}'` );
         return; // No transition defined for this event in the current state
       }
 
       const transitionConfig = currentStateConfig.on[eventType];
 
       let targetState: TState;
-      let actions:
-        | Array<
-            (context: TContext, eventPayload?: any) => Partial<TContext> | void
-          >
-        | undefined;
-      let condition:
-        | ((context: TContext, eventPayload?: any) => boolean)
-        | undefined;
+      let actions: | Array< (context: TContext, eventPayload?: any) => Partial<TContext> | void > | undefined;
+      let condition: | ((context: TContext, eventPayload?: any) => boolean) | undefined;
 
       if (typeof transitionConfig === "string") {
         // Shorthand transition
@@ -150,8 +135,7 @@ export function useFiniteStateMachine<
     [currentState, context, config]
   );
 
-  const matches = useCallback(
-    (state: TState): boolean => {
+  const matches = useCallback( (state: TState): boolean => {
       return currentState === state;
     },
     [currentState]
@@ -159,8 +143,7 @@ export function useFiniteStateMachine<
 
   // Use useMemo to ensure the returned object reference is stable if state/context hasn't changed
   // This is a minor optimization for consumers memoizing based on the hook's return value
-  const machineInstance = useMemo(
-    () => ({
+  const machineInstance = useMemo( () => ({
       currentState,
       context,
       send,
@@ -171,5 +154,4 @@ export function useFiniteStateMachine<
 
   return machineInstance;
 }
-
 

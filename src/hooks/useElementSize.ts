@@ -12,7 +12,7 @@ interface UseElementSize {
  * @param elementRef - The ref attached to the element being observed.
  * @returns - The width and height of the element.
  */
-export function useElementSize(elementRef: RefObject<HTMLElement | null>): UseElementSize {
+export const useElementSize = (elementRef: RefObject<HTMLElement | null>): UseElementSize => {
   const [size, setSize] = useState<UseElementSize>({
     width: 0,
     height: 0,

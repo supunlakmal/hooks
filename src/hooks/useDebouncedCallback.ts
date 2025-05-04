@@ -54,12 +54,12 @@ export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
  * @param maxWait The maximum time `callback` is allowed to be delayed before
  * it's invoked. 0 means no max wait.
  */
-function useDebouncedCallback<Fn extends (...args: any[]) => any>(
+export const useDebouncedCallback = <Fn extends (...args: any[]) => any>(
 	callback: Fn,
 	deps: DependencyList,
 	delay: number,
 	maxWait = 0,
-): DebouncedFunction<Fn> {
+): DebouncedFunction<Fn> => {
 	const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const waitTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const cb = useRef(callback);
@@ -124,6 +124,4 @@ function useDebouncedCallback<Fn extends (...args: any[]) => any>(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [delay, maxWait, ...deps]);
 }
-
-export { useDebouncedCallback };
 

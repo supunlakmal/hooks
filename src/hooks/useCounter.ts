@@ -85,10 +85,10 @@ function resolveHookState<State, PreviousState = State>(...args: any[]): State {
  * @param initialState Initial state value or initializer function.
  * @param mediator Function that takes the resolved raw value and returns the final state value.
  */
-export function useMediatedState<State, RawState = State>(
+export const useMediatedState = <State, RawState = State>(
   initialState: InitialState<State>, // Made initialState non-optional for clarity, use `undefined` explicitly if needed
   mediator?: (resolvedRawValue: RawState) => State,
-): [State, Dispatch<NextState<RawState, State>>] { // Return type uses State, not State | undefined assuming initialState provides a non-undefined State
+): [State, Dispatch<NextState<RawState, State>>] => { // Return type uses State, not State | undefined assuming initialState provides a non-undefined State
 
   // Use useSyncedRef to track the latest mediator function without causing setter recreation
   const mediatorRef = useSyncedRef(mediator);
@@ -161,11 +161,11 @@ export type CounterActions = {
  * @param max Optional maximum value. Initial value is clamped if needed.
  * @param min Optional minimum value. Initial value is clamped if needed.
  */
-export function useCounter(
+export const useCounter = (
     initialValue: InitialState<number> = 0,
   max?: number,
   min?: number,
-): [number, CounterActions] {
+): [number, CounterActions] => {
     
   // 1. Create the clamping mediator function, memoized based on min/max
   const mediator = useCallback((value: number): number => {

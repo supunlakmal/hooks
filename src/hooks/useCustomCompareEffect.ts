@@ -55,7 +55,7 @@ export const basicDepsComparator: DependenciesComparator = (prevDeps, nextDeps):
  * after the `callback` and the dependency list.
  */
 // eslint-disable-next-line max-params
-export function useCustomCompareEffect<Callback extends EffectCallback = EffectCallback,
+export const useCustomCompareEffect = <Callback extends EffectCallback = EffectCallback,
 	Deps extends DependencyList = DependencyList,
 	HookRestArgs extends any[] = any[],
 	R extends HookRestArgs = HookRestArgs,
@@ -65,7 +65,7 @@ export function useCustomCompareEffect<Callback extends EffectCallback = EffectC
 	comparator: DependenciesComparator<Deps> = basicDepsComparator,
 	effectHook: EffectHook<Callback, Deps, HookRestArgs> = myUseEffect,
 	...effectHookRestArgs: R
-): void {
+): void => {
 	const dependencies = useRef<Deps>(undefined);
 
 	// Effects are not run during SSR, therefore, it makes no sense to invoke the comparator

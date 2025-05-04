@@ -12,7 +12,7 @@ interface UseErrorBoundaryReturn {
  *
  * @returns {UseErrorBoundaryReturn} An object containing the current error, a function to reset the error, and a function to set an error.
  */
-export function useErrorBoundary(): UseErrorBoundaryReturn {
+export const useErrorBoundary = (): UseErrorBoundaryReturn => {
   const [error, setError] = useState<Error | null>(null);
 
   const resetBoundary = useCallback(() => {

@@ -16,11 +16,11 @@ export const basicDepsComparator: DependenciesComparator = (prevDeps, nextDeps):
  * @param comparator Function that compares two dependency arrays,
  * and returns `true` if they're equal.
  */
-export function useCustomCompareMemo<T, Deps extends DependencyList = DependencyList>(
+export const useCustomCompareMemo = <T, Deps extends DependencyList = DependencyList>(
 	factory: () => T,
 	deps: Deps,
 	comparator: DependenciesComparator<Deps> = basicDepsComparator,
-): T {
+): T => {
 	const dependencies = useRef<Deps>(undefined);
 	const result = useRef<T>(undefined as T)
 

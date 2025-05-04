@@ -20,7 +20,7 @@ interface UseDarkModeOutput {
  * @param {boolean} [defaultValue] - Optional initial value (overrides OS preference and local storage).
  * @returns {UseDarkModeOutput} An object containing the dark mode state and control functions.
  */
-export function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
+export const useDarkMode = (defaultValue?: boolean): UseDarkModeOutput => {
   // Get system preference
   const isSystemDark = useMediaQuery(COLOR_SCHEME_QUERY);
 

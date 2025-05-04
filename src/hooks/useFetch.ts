@@ -18,10 +18,10 @@ interface FetchState<T> {
  * @param {FetchOptions} [options] Optional fetch options (e.g., method, headers, body).
  * @returns {FetchState<T>} An object containing the fetched data, loading state, and error state.
  */
-export  function useFetch<T>(
+export const useFetch = <T>(
   url: string | null | undefined,
   options?: FetchOptions
-): FetchState<T> {
+): FetchState<T> => {
   const [state, setState] = useState<FetchState<T>>({
      data: null,
     loading: false,

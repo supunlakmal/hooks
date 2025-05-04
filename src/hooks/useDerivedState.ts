@@ -10,10 +10,10 @@ import { useMemo, DependencyList } from "react";
  * @param dependencies An array of dependencies. The factory function will re-run if any dependency changes.
  * @returns The computed derived state.
  */
-export function useDerivedState<T>(
+export const useDerivedState = <T>(
   factoryFn: () => T,
   dependencies: DependencyList
-): T {
+): T => {
   // Directly use useMemo as the core implementation
   const derivedState = useMemo(factoryFn, dependencies);
   return derivedState;
