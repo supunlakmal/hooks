@@ -10,9 +10,9 @@ const DEFAULT_MOBILE_BREAKPOINT = 768;
  * @param breakpoint - Optional custom breakpoint in pixels (defaults to 768px)
  * @returns boolean indicating if viewport is mobile-sized
  */
-export function useMobile(
+export const useMobile = (
   breakpoint: number = DEFAULT_MOBILE_BREAKPOINT
-): boolean {
+): boolean => {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
     undefined
   );

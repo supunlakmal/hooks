@@ -48,10 +48,10 @@ const DEFAULT_TTL = 5 * 60 * 1000; // 5 minutes
  * @param options Configuration options including TTL, fetch options, and cache key generation.
  * @returns State object with data, error, status, and refetch function.
  */
-export function useCachedFetch<T = any>(
+export const useCachedFetch = <T = any>(
   url: string | undefined | null,
   options: UseCachedFetchOptions = {}
-): UseCachedFetchResult<T> {
+): UseCachedFetchResult<T> => {
   const {
     ttl = DEFAULT_TTL,
     fetchOptions,

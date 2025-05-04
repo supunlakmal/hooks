@@ -9,11 +9,11 @@ type EventType = "mousedown" | "mouseup" | "touchstart" | "touchend";
  * @param {() => void} handler The function to call when a click outside occurs.
  * @param {EventType} [eventType='mousedown'] The type of event to listen for ('mousedown', 'mouseup', 'touchstart', 'touchend').
  */
-export function useClickOutside(
+export const useClickOutside = (
   ref: RefObject<HTMLElement>,
   handler: () => void,
   eventType: EventType = "mousedown" // Default to mousedown
-): void {
+): void => {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
       // Do nothing if clicking ref's element or descendent elements

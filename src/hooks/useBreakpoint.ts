@@ -18,9 +18,9 @@ type DefaultBreakpointKey = keyof typeof defaultBreakpoints;
  * @param {Record<K, string>} [customBreakpoints] - Optional custom breakpoints object. Keys are breakpoint names, values are media query strings.
  * @returns {K | null} The key of the largest currently active breakpoint, or null if none match.
  */
-export function useBreakpoint<K extends string = DefaultBreakpointKey>(
+export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
   customBreakpoints?: Record<K, string>
-): K | null {
+): K | null => {
   const breakpoints = customBreakpoints ?? defaultBreakpoints;
   const [activeBreakpoint, setActiveBreakpoint] = useState<K | null>(null);
 

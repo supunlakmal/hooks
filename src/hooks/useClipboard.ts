@@ -14,7 +14,7 @@ interface UseClipboardReturn {
  * @param {UseClipboardOptions} [options] - Optional configuration options.
  * @returns {UseClipboardReturn} An object containing the clipboard value, error state, and copy/paste functions.
  */
-export function useClipboard(): UseClipboardReturn {
+export const useClipboard = (): UseClipboardReturn => {
   const [value, setValue] = useState<string | null>(null);
   const [error, setError] = useState<Error | DOMException | null>(null);
 
