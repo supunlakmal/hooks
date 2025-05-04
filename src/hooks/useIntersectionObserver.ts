@@ -15,7 +15,7 @@ interface UseIntersectionObserverOptions extends IntersectionObserverInit {}
 export const useIntersectionObserver = (
   elementRef: RefObject<Element | null>,
   options?: UseIntersectionObserverOptions
-): IntersectionObserverEntry | null {
+): IntersectionObserverEntry | null => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
 
   useEffect(() => {

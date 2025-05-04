@@ -42,7 +42,7 @@ export const useSwipe = <T extends HTMLElement>(
     onSwipeUp,
     onSwipeDown,
   }: UseSwipeOptions = {}
-): void {
+): void => {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);

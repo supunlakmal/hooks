@@ -27,7 +27,7 @@ export const useVisibility = <T extends Element>(
     disconnectOnVisible = false,
     ...observerOptions
   }: UseVisibilityOptions = {}
-): boolean {
+): boolean =>{
   const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
 
   useEffect(() => {

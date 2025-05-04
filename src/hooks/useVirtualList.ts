@@ -44,7 +44,7 @@ interface UseVirtualListResult<T> {
  */
 export const useVirtualList = <T>(
   options: UseVirtualListOptions<T>
-): UseVirtualListResult<T> {
+): UseVirtualListResult<T> =>{
   const {
     list,
     itemHeight,

@@ -19,8 +19,8 @@ export interface UsePermissionState {
  * @returns {UsePermissionState} An object containing the permission state, support status, and a function to re-query.
  */
 export const usePermission = (
-  permissionDesc: PermissionDescriptor
-): UsePermissionState {
+  permissionDesc: PermissionDescriptor,
+): UsePermissionState => {
   const [state, setState] = useState<PermissionState>("querying");
   const [isSupported, setIsSupported] = useState<boolean>(false);
   const [permissionStatus, setPermissionStatus] =

@@ -30,7 +30,7 @@ export const useIdleTimer = ({
   onActive,
   timeout,
   debounce = 0,
-}: UseIdleTimerProps): boolean {
+}: UseIdleTimerProps) => {
   const [isIdle, setIsIdle] = useState<boolean>(false);
   const timer = useRef<NodeJS.Timeout | null>(null);
   const eventDebounceTimer = useRef<NodeJS.Timeout | null>(null);

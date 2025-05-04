@@ -40,7 +40,7 @@ const DEFAULT_RECONNECT_INTERVAL_MS = 5000;
 export const useWebSocket = (
   url: string | URL | null,
   options: UseWebSocketOptions = {}
-): UseWebSocketReturn {
+): UseWebSocketReturn => {
   const {
     onOpen,
     onClose,

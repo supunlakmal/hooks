@@ -26,14 +26,17 @@ const useSyncedRef = <T>(value: T): { readonly current: T } => {
 };
 
 
-// --- State Helpers (Seem OK, no changes needed but adding types for clarity) ---
+// --- State Helpers (Simplified and Corrected) ---
 type StateInitializerFN<State> = () => State;
 type StateUpdaterFN<State, PreviousState = State> = (previousState: PreviousState) => State;
 
 export type InitialState<State> = State | StateInitializerFN<State>;
 export type NextState<State, PreviousState = State> = State | StateUpdaterFN<State, PreviousState>;
 
-const initState = <State>(initialState: InitialState<State>): State => {
+/** Internal helper to resolve initial state */
+const resolveInitialState = <State>(
+    initialState: InitialState<State>
+): State => {
   // Check if initialState is a function (initializer) and call it
   if (typeof initialState === 'function') {
     // We cast here because TS struggles with the typeof check narrowing perfectly in this context
@@ -42,10 +45,11 @@ const initState = <State>(initialState: InitialState<State>): State => {
   return initialState;
 }
 
-const updateState = <State, PreviousState = State>(
+/** Internal helper to resolve next state based on previous state */
+const resolveNextState = <State, PreviousState = State>(
   nextState: NextState<State, PreviousState>,
   previousState: PreviousState,
-): State {
+): State =>{
   // Check if nextState is a function (updater) and call it with previousState
   if (typeof nextState === 'function') {
     // We cast here for the same reason as above
@@ -54,63 +58,50 @@ const updateState = <State, PreviousState = State>(
   return nextState;
 }
 
-/** Internal helper to resolve initial or next state */
-const resolveHookState = <State, PreviousState = State>(
-  stateOrFn: InitialState<State>
-): State => {
-	return initState(stateOrFn as InitialState<State>);
-};
-const resolveHookState = <State, PreviousState = State>(
-  stateOrFn: NextState<State, PreviousState>,
-  previousState: PreviousState,
-): State => {
-	return updateState(stateOrFn as NextState<State, PreviousState>, previousState);
-};
-
-
-// --- useMediatedState (Fixed) ---
+// --- useMediatedState (Corrected) ---
 /**
  * Like `useState`, but every value set is passed through a mediator function
- * before the state is updated.
+ * before the state is updated. The initial state is NOT mediated by default.
  * @template State The type of the state managed by the hook (after mediation).
  * @template RawState The type of the value passed to the setter (before mediation). Defaults to State.
- * @param initialState Initial state value or initializer function.
- * @param mediator Function that takes the resolved raw value and returns the final state value.
+ * @param initialState Initial state value or initializer function. Resolved value is used directly.
+ * @param mediator Optional function that takes the resolved raw value and returns the final state value. Applied only on updates.
  */
 export const useMediatedState = <State, RawState = State>(
-  initialState: InitialState<State>, // Made initialState non-optional for clarity, use `undefined` explicitly if needed
+  initialState: InitialState<State>,
   mediator?: (resolvedRawValue: RawState) => State,
-): [State, Dispatch<NextState<RawState, State>>] => { // Return type uses State, not State | undefined assuming initialState provides a non-undefined State
+): [State, Dispatch<NextState<RawState, State>>] => {
 
   // Use useSyncedRef to track the latest mediator function without causing setter recreation
   const mediatorRef = useSyncedRef(mediator);
 
   // Initialize state using the provided initialState helper
-  const [state, setState] = useState<State>(() => initState(initialState));
+  // The initial state itself is NOT mediated here. Mediation happens on updates.
+  const [state, setState] = useState<State>(() => resolveInitialState(initialState));
 
   // Memoize the setter function
   const setMediatedState = useCallback<Dispatch<NextState<RawState, State>>>(
     (valueOrFn) => {
       // Use the functional update form of setState to ensure we have the latest previous state
       setState(prevState => {
-        // Resolve the raw value (handles both direct value and updater function)
-        const resolvedRawValue = resolveHookState<RawState, State>(valueOrFn, prevState);
+        // 1. Resolve the raw value (handles both direct value and updater function)
+        const resolvedRawValue = resolveNextState<RawState, State>(valueOrFn, prevState);
 
-        // Get the current mediator function from the ref
+        // 2. Get the current mediator function from the ref
         const currentMediator = mediatorRef.current;
 
-        // Apply mediator if it exists, otherwise return the resolved raw value
-        // (Assuming State and RawState are compatible if no mediator is provided)
+        // 3. Apply mediator if it exists, otherwise return the resolved raw value
         if (currentMediator) {
           return currentMediator(resolvedRawValue);
         } else {
           // If no mediator, assume RawState is assignable to State
-          // Add type assertion if necessary, but ideally State == RawState in this case
+          // Add type assertion for safety, though ideally State == RawState here
+          // Or the user should ensure compatibility or provide an identity mediator.
           return resolvedRawValue as unknown as State;
         }
       });
     },
-    [setState], // setState is stable, mediatorRef handles mediator changes
+    [], // setState is stable, mediatorRef handles mediator changes. No deps needed.
   );
 
   // Return the current state and the memoized setter
@@ -118,13 +109,13 @@ export const useMediatedState = <State, RawState = State>(
 }
 
 
-// --- useCounter (Refactored to use useMediatedState and fixed) ---
+// --- useCounter (Refactored to use useMediatedState and Corrected) ---
 
 export type CounterActions = {
   /**
-   * Returns the current value of the counter.
+   * Returns the current value of the counter. (Getter removed, use state value directly)
    */
-  get: () => number;
+  // get: () => number; // Removed: Just use the `value` returned by the hook directly
   /**
    * Increment the counter by the given `delta`. Clamped by min/max.
    * @param delta Amount to increment by. Can be a number or function `(prevValue) => number`. Defaults to 1.
@@ -141,7 +132,7 @@ export type CounterActions = {
    */
   set: (value: NextState<number, number>) => void;
   /**
-   * Resets the counter to its originally resolved initial value. Clamped by min/max.
+   * Resets the counter to its originally resolved and clamped initial value.
    */
   reset: () => void;
 };
@@ -154,13 +145,13 @@ export type CounterActions = {
  * @param min Optional minimum value. Initial value is clamped if needed.
  */
 export const useCounter = (
-    initialValue: InitialState<number> = 0,
+  initialValue: InitialState<number> = 0,
   max?: number,
   min?: number,
 ): [number, CounterActions] => {
-    
-  // 1. Create the clamping mediator function, memoized based on min/max
-  const mediator = useCallback((value: number): number => {
+
+  // 1. Define the clamping function (mediator logic) based on min/max
+  const clamp = useCallback((value: number): number => {
     let clampedValue = value;
     if (max !== undefined) {
       clampedValue = Math.min(max, clampedValue);
@@ -169,41 +160,50 @@ export const useCounter = (
       clampedValue = Math.max(min, clampedValue);
     }
     return clampedValue;
-  }, [max, min]); // Recreate mediator only if min/max change
+  }, [max, min]); // Recreate clamp only if min/max change
 
-  // 2. Resolve and store the *initial* value *after* mediation, for reset()
-  // We need to resolve it once and keep it stable.
-  const initialResolvedAndMediatedValue = useMemo(() => {
-        const resolved = initState(initialValue);
-        return mediator(resolved);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Calculate only once on initial render
+  // 2. Resolve and clamp the *initial* value *once* for the reset functionality
+  // and to ensure the starting state is valid.
+  const initialClampedValue = useMemo(() => {
+    const resolvedInitial = resolveInitialState(initialValue);
+    return clamp(resolvedInitial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clamp]); // Depends on the clamp function (which depends on min/max)
+               // initialValue is only needed on mount, but including clamp ensures
+               // if min/max change the initial value *conceptually* aligns, though reset stays fixed.
+               // Alternatively, use [] if you strictly want the *first ever* clamped value.
+               // Using [clamp] makes slightly more sense if min/max could change, though unusual for an initial value.
 
-
-  // 3. Use useMediatedState with the clamped initial value and the mediator
+  // 3. Use useMediatedState with the initially clamped value and the clamp function as mediator
   const [state, setState] = useMediatedState<number, number>(
-    initialResolvedAndMediatedValue, // Start with the correctly clamped initial value
-    mediator
+    initialClampedValue, // Start with the correctly clamped initial value
+    clamp                // Use clamp as the mediator for subsequent updates
   );
 
   // 4. Define stable actions using the setter from useMediatedState
   const actions = useMemo<CounterActions>(() => ({
-    get: () => state, // Directly return the current state
+    // `get` is removed - the state value is returned directly by the hook
     set: (value) => {
-        // Pass value/fn directly; useMediatedState handles resolution and mediation
-        setState(value);
+      // Pass value/fn directly; useMediatedState handles resolution and mediation (clamping)
+      setState(value);
     },
     inc: (delta = 1) => {
-        setState(prev => prev + resolveHookState(delta, prev)); // Resolve delta, add, then mediate
+      // setState uses functional update. We resolve delta *inside* it.
+      // The outer value passed to setState is the updater function.
+      setState(prev => prev + resolveNextState(delta, prev));
     },
     dec: (delta = 1) => {
-        setState(prev => prev - resolveHookState(delta, prev)); // Resolve delta, subtract, then mediate
+      setState(prev => prev - resolveNextState(delta, prev));
     },
     reset: () => {
-        setState(initialResolvedAndMediatedValue); // Reset to the stored initial mediated value
+      // Reset directly to the stored initial clamped value.
+      // This ensures reset goes back to the *first* clamped value,
+      // even if min/max props change later.
+      setState(initialClampedValue);
     },
-  }), [state, setState, initialResolvedAndMediatedValue]); // Dependencies needed for get() and reset()
+    // Note: state is not needed in deps here because actions only depend on setState and initialClampedValue
+    // which are stable or memoized correctly.
+  }), [setState, initialClampedValue]);
 
   return [state, actions];
-}
-
+};

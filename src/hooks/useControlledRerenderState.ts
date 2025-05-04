@@ -23,8 +23,8 @@ const useRerender = (): (() => void) => {
   const [, setState] = useState(0);
 
   return useCallback(() =>
-    setState(stateChanger),
-  }, []);
+    setState(stateChanger)
+  , []);
 };
 
 type StateInitializerFN<State> = () => State;
@@ -44,7 +44,7 @@ const initState = <State>(initialState: InitialState<State>): State => {
 const updateState = <State, PreviousState = State>(
   nextState: NextState<State, PreviousState>,
   previousState: PreviousState,
-): State {
+): State =>{
   if (typeof nextState === 'function') {
     return (nextState as StateUpdaterFN<State, PreviousState>)(previousState);
   }

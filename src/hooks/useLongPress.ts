@@ -37,8 +37,8 @@ export const useLongPress = (
     onStart,
     onEnd,
     onCancel,
-  }: UseLongPressOptions = {}
-): void {
+  } = {} as UseLongPressOptions
+): void =>{
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const targetRef = useRef<EventTarget | null>(null); // Store the target element
 
