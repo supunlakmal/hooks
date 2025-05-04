@@ -29,7 +29,7 @@ const defaultOptions: Required<
  * @param options.onEnd - Callback fired when the press ends.
  * @param options.onCancel - Callback fired if the press is cancelled before duration.
  */
-export function useLongPress(
+export const useLongPress = (
   ref: RefObject<HTMLElement | null>,
   callback: LongPressCallback,
   {

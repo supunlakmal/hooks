@@ -91,7 +91,7 @@ const conn: NetworkInformation | undefined =
     navigator.mozConnection ??
     navigator.webkitConnection);
 
-function getConnectionState(previousState?: UseNetworkState): UseNetworkState {
+const getConnectionState = (previousState?: UseNetworkState): UseNetworkState => {
   const online = navigator?.onLine;
   const previousOnline = previousState?.online;
 
@@ -106,15 +106,15 @@ function getConnectionState(previousState?: UseNetworkState): UseNetworkState {
     saveData: conn?.saveData,
     type: conn?.type,
   };
-}
+};
 
 /**
  * Tracks the state of browser's network connection.
  */
-export function useNetworkState(
+export const useNetworkState = (
   initialState?: InitialState<UseNetworkState>
-): UseNetworkState {
-  const [state, setState] = useState(initialState ?? getConnectionState);
+): UseNetworkState => {
+    const [state, setState] = useState(initialState ?? getConnectionState);
 
   useEffect(() => {
     const handleStateChange = () => {
@@ -139,4 +139,4 @@ export function useNetworkState(
   }, []);
 
   return state;
-}
+};

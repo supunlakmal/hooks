@@ -29,11 +29,12 @@ interface UsePaginationReturn {
  * @param {number} [props.initialItemsPerPage=10] - The initial number of items per page.
  * @returns {UsePaginationReturn} An object containing pagination state and control functions.
  */
-export function usePagination({
+export const usePagination = ({
   totalItems,
   initialPage = 1,
   initialItemsPerPage = 10,
-}: UsePaginationProps): UsePaginationReturn {
+}: UsePaginationProps): UsePaginationReturn => {
+
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
   const [itemsPerPage, setItemsPerPageState] =
     useState<number>(initialItemsPerPage);
@@ -105,5 +106,5 @@ export function usePagination({
     goToPreviousPage,
     setItemsPerPage,
   };
-}
+};
 

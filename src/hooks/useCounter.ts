@@ -6,7 +6,7 @@ import { useCallback, useState, useMemo, useRef, type Dispatch } from 'react';
  * Ensures the .current getter always provides the latest value passed to the hook.
  * @param value The value to track.
  */
-function useSyncedRef<T>(value: T): { readonly current: T } {
+const useSyncedRef = <T>(value: T): { readonly current: T } => {
   const ref = useRef(value);
 
   // Update the ref's current value on every render
@@ -23,7 +23,7 @@ function useSyncedRef<T>(value: T): { readonly current: T } {
       }),
     [], // Empty dependency array is correct here
   );
-}
+};
 
 
 // --- State Helpers (Seem OK, no changes needed but adding types for clarity) ---
@@ -33,7 +33,7 @@ type StateUpdaterFN<State, PreviousState = State> = (previousState: PreviousStat
 export type InitialState<State> = State | StateInitializerFN<State>;
 export type NextState<State, PreviousState = State> = State | StateUpdaterFN<State, PreviousState>;
 
-function initState<State>(initialState: InitialState<State>): State {
+const initState = <State>(initialState: InitialState<State>): State => {
   // Check if initialState is a function (initializer) and call it
   if (typeof initialState === 'function') {
     // We cast here because TS struggles with the typeof check narrowing perfectly in this context
@@ -42,7 +42,7 @@ function initState<State>(initialState: InitialState<State>): State {
   return initialState;
 }
 
-function updateState<State, PreviousState = State>(
+const updateState = <State, PreviousState = State>(
   nextState: NextState<State, PreviousState>,
   previousState: PreviousState,
 ): State {
@@ -55,25 +55,17 @@ function updateState<State, PreviousState = State>(
 }
 
 /** Internal helper to resolve initial or next state */
-function resolveHookState<State, PreviousState = State>(
+const resolveHookState = <State, PreviousState = State>(
   stateOrFn: InitialState<State>
-): State;
-function resolveHookState<State, PreviousState = State>(
+): State => {
+	return initState(stateOrFn as InitialState<State>);
+};
+const resolveHookState = <State, PreviousState = State>(
   stateOrFn: NextState<State, PreviousState>,
   previousState: PreviousState,
-): State;
-function resolveHookState<State, PreviousState = State>(...args: any[]): State {
-	if (args.length === 1) {
-		// Called with InitialState<State>
-		return initState(args[0] as InitialState<State>);
-	}
-	if (args.length === 2) {
-		// Called with NextState<State, PreviousState>, PreviousState
-		return updateState(args[0] as NextState<State, PreviousState>, args[1] as PreviousState);
-	}
-	// Should not happen with current usage, but throw error for safety
-	throw new Error('Invalid arguments for resolveHookState');
-}
+): State => {
+	return updateState(stateOrFn as NextState<State, PreviousState>, previousState);
+};
 
 
 // --- useMediatedState (Fixed) ---

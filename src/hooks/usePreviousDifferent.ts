@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function usePreviousDifferent<T>(value: T): T | undefined {
+export const usePreviousDifferent = <T>(value: T): T | undefined => {
   const previousRef = useRef<T | undefined>(undefined);
   const previousDifferentRef = useRef<T | undefined>(undefined);
 
@@ -12,4 +12,4 @@ export function usePreviousDifferent<T>(value: T): T | undefined {
   });
 
   return previousDifferentRef.current
-}
+};

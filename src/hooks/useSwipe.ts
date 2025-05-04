@@ -33,7 +33,7 @@ const defaultOptions: Required<
  * @param options.onSwipeUp - Callback for up swipe.
  * @param options.onSwipeDown - Callback for down swipe.
  */
-export function useSwipe<T extends HTMLElement>(
+export const useSwipe = <T extends HTMLElement>(
   ref: RefObject<T>,
   {
     threshold = defaultOptions.threshold,

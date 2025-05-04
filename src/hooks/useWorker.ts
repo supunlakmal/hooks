@@ -10,10 +10,11 @@ interface UseWorkerResult<T, R> {
   kill: () => void;
 }
 
-export  function useWorker<T, R>(
+/** */
+export const useWorker = <T, R>(
   workerFn: (...args: T[]) => R
-): UseWorkerResult<T, R> {
-  const [result, setResult] = useState<R | null>(null);
+): UseWorkerResult<T, R> => {
+    const [result, setResult] = useState<R | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<WorkerStatus>('idle');
   const workerRef = useRef<Worker | null>(null);

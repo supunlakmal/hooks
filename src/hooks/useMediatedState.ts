@@ -2,26 +2,31 @@ import {type Dispatch, useCallback, useState} from 'react';
 import {useSyncedRef} from './useSyncedRef';
 import {type InitialState, type NextState, resolveHookState} from '../util/resolve-hook-state';
 
-export function useMediatedState<State = undefined>(): [
-		State | undefined,
-		Dispatch<NextState<State | undefined>>,
-];
-export function useMediatedState<State>(
+export const useMediatedState = <State = undefined>(): [
+	State | undefined,
+	Dispatch<NextState<State | undefined>>,
+] => {
+	return [] as unknown as [State | undefined, Dispatch<NextState<State | undefined>>]
+};
+export const useMediatedState = <State>(
 	initialState: InitialState<State>
-): [State, Dispatch<NextState<State>>];
-export function useMediatedState<State, RawState = State>(
+): [State, Dispatch<NextState<State>>] => {
+	return [] as unknown as [State, Dispatch<NextState<State>>]
+};
+export const useMediatedState = <State, RawState = State>(
 	initialState: InitialState<State>,
 	mediator?: (state: RawState) => State
-): [State, Dispatch<NextState<RawState, State>>];
-
+): [State, Dispatch<NextState<RawState, State>>] => {
+	return [] as unknown as [State, Dispatch<NextState<RawState, State>>]
+};
 /**
  * Like `useState`, but every value set is passed through a mediator function.
  */
-export function useMediatedState<State, RawState = State>(
+export const useMediatedState = <State, RawState = State>(
 	initialState?: InitialState<State>,
 	mediator?: (state: RawState | State | undefined) => State,
-): [State | undefined, Dispatch<NextState<RawState, State | undefined>>] {
-	const [state, setState] = useState(() => mediator ? mediator(resolveHookState(initialState)) : initialState);
+): [State | undefined, Dispatch<NextState<RawState, State | undefined>>] => {
+	const [state, setState] = useState(() => (mediator ? mediator(resolveHookState(initialState)) : initialState));
 	const mediatorRef = useSyncedRef(mediator);
 
 	return [
@@ -38,4 +43,4 @@ export function useMediatedState<State, RawState = State>(
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, []),
 	];
-}
+};

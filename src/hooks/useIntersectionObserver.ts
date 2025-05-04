@@ -12,7 +12,7 @@ interface UseIntersectionObserverOptions extends IntersectionObserverInit {}
  * @param {number | number[]} [options.threshold=0] - A single number or an array of numbers indicating at what percentage of the target's visibility the observer's callback should be executed.
  * @returns {IntersectionObserverEntry | null} The latest IntersectionObserverEntry for the observed element, or null if not intersecting or not yet observed.
  */
-export function useIntersectionObserver(
+export const useIntersectionObserver = (
   elementRef: RefObject<Element | null>,
   options?: UseIntersectionObserverOptions
 ): IntersectionObserverEntry | null {

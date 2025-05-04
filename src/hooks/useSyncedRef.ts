@@ -5,7 +5,7 @@ import { useMemo, useRef } from 'react';
  *
  * @param value
  */
-export function useSyncedRef<T>(value: T): { readonly current: T } {
+export const useSyncedRef = <T>(value: T): { readonly current: T } => {
   const ref = useRef(value);
 
   ref.current = value;

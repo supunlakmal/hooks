@@ -74,7 +74,9 @@ export type ListActions<T> = {
 	reset: () => void;
 };
 
-export function useList<T>(initialList: InitialState<T[]>): [T[], ListActions<T>] {
+export const useList = <T>(
+	initialList: InitialState<T[]>,
+): [T[], ListActions<T>] => {
 	const initial = useSyncedRef(initialList);
 	const list = useRef(resolveHookState(initial.current));
 	const rerender = useRerender();
@@ -169,6 +171,6 @@ export function useList<T>(initialList: InitialState<T[]>): [T[], ListActions<T>
 	);
 
 	return [list.current, actions];
-}
+};
 
 

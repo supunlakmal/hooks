@@ -26,10 +26,11 @@ interface UseStepperReturn {
  * @param {number} props.totalSteps - The total number of steps in the process.
  * @returns {UseStepperReturn} An object containing stepper state and control functions.
  */
-export function useStepper({
+export const useStepper = ({
   initialStep = 1,
   totalSteps,
-}: UseStepperProps): UseStepperReturn {
+}: UseStepperProps): UseStepperReturn => {
+
   // Ensure totalSteps is at least 1
   const safeTotalSteps = useMemo(() => Math.max(1, totalSteps), [totalSteps]);
 

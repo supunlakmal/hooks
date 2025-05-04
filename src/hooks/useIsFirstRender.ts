@@ -6,7 +6,7 @@ import { useRef, useEffect } from "react";
  *
  * @returns {boolean} True if it's the first render, false otherwise.
  */
-export function useIsFirstRender(): boolean {
+export const useIsFirstRender = (): boolean => {
   // Create a ref to track if the component has rendered before
   const isFirst = useRef(true);
 

@@ -3,15 +3,15 @@ import {useSyncedRef} from './useSyncedRef';
 
 export type HookableRefHandler<T> = (v: T) => T;
 
-export function useHookableRef<T>( // Add export
+export const useHookableRef = <T>(
 	initialValue: T,
 	onSet?: HookableRefHandler<T>,
 	onGet?: HookableRefHandler<T>
 ): MutableRefObject<T>;
-export function useHookableRef<T = undefined>(): MutableRefObject<T | null | undefined>; // Add export
+export const useHookableRef = <T = undefined>(): MutableRefObject<T | null | undefined> => undefined as any;
 
 /**
- * Like `React.useRef` but it is possible to define get and set handlers.
+ * Like `React.useRef` but it is possible to define get and set handlers
  *
  * @param initialValue Initial value of a hook.
  * @param onSet Function to be called while ref.current value set. Return value
@@ -19,7 +19,7 @@ export function useHookableRef<T = undefined>(): MutableRefObject<T | null | und
  * @param onGet Function to be called while ref.current value accessed. Return
  * value will be used as a return value.
  */
-export function useHookableRef<T>(
+export const useHookableRef = <T>( 
 	initialValue?: T,
 	onSet?: HookableRefHandler<T>,
 	onGet?: HookableRefHandler<T>,

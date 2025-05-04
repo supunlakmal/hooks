@@ -42,11 +42,11 @@ function getScrollPosition(
  * @param {number} [throttleMs=100] - Throttle time in milliseconds to limit scroll event handling. Set to 0 to disable throttling.
  * @returns {ScrollPosition} An object containing the current x and y scroll position.
  */
-export function useScrollPosition(
+export const useScrollPosition = (
   element?: RefObject<Element> | Window | null,
   throttleMs: number = 100
-): ScrollPosition {
-  const [position, setPosition] = useState<ScrollPosition>(() =>
+): ScrollPosition => {
+    const [position, setPosition] = useState<ScrollPosition>(() =>
     getScrollPosition(element)
   );
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null);

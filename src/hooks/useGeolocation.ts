@@ -34,7 +34,7 @@ const initialGeolocationState: GeolocationState = {
  * @param {UseGeolocationOptions} [options] - Optional configuration for the geolocation request (e.g., enableHighAccuracy).
  * @returns {GeolocationState} An object containing the geolocation data, loading state, and error state.
  */
-export function useGeolocation(options?: UseGeolocationOptions): GeolocationState {
+export const useGeolocation = (options?: UseGeolocationOptions): GeolocationState => {
   const [state, setState] = useState<GeolocationState>(initialGeolocationState);
   let watchId: number | null = null;
 

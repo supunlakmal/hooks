@@ -51,7 +51,7 @@ interface UseMutationOptions {
  * @param options Optional configuration with callbacks (onSuccess, onError, etc.).
  * @returns State and functions to manage the mutation lifecycle.
  */
-export function useMutation(
+export const useMutation = (
   mutationFn: (variables: any) => Promise<any>,
   options?: UseMutationOptions
 ): UseMutationResult {

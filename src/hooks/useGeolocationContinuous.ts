@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export function useGeolocationContinuous() {
-    const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+export const useGeolocationContinuous = () => {
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   let watchId: number | null = null;
@@ -35,4 +35,4 @@ export function useGeolocationContinuous() {
   }, [stop]);
 
   return { location, error, loading, stop };
-}
+};

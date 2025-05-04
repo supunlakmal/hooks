@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 
-export function useThrottledState<T>(
+export const useThrottledState = <T>(
   initialValue: T,
   delay: number = 500
-): [T, (newValue: T | ((prevValue: T) => T)) => void] {
+): [T, (newValue: T | ((prevValue: T) => T)) => void] => {
   const [value, setValue] = useState<T>(initialValue);
   const [throttledValue, setThrottledValue] = useState<T>(initialValue);
   const lastExecuted = useRef<number>(Date.now());
@@ -28,4 +28,4 @@ export function useThrottledState<T>(
   }, [value, delay]);
 
   return [throttledValue, setValue] as const ;
-}
+};

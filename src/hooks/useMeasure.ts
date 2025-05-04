@@ -33,11 +33,12 @@ export type Measures = {
  *          - `measures`: An object with `width` and `height`, or `undefined` if there is no measures.
  *          - `ref`: A RefObject to attach to the DOM element being measured.
  */
-export function useMeasure<T extends Element>(enabled = true): {
+export const useMeasure = <T extends Element>(enabled = true): {
   measures: Measures | undefined;
   ref: RefObject<T | null>;
-} {
+} => {
   const elementRef = useRef<T | null>(null);
+
   const [measures, setMeasures] = useState<Measures>();
 
   const observerHandler = useRafCallback((entry: ResizeObserverEntry) => {

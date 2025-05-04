@@ -5,7 +5,7 @@ import {type DependencyList, useEffect, useMemo, useRef} from 'react';
  *
  * @param value
  */
-function useSyncedRef<T>(value: T): {readonly current: T} {
+const useSyncedRef = <T>(value: T): {readonly current: T} => {
 	const ref = useRef(value);
 
 	ref.current = value;
@@ -19,14 +19,14 @@ function useSyncedRef<T>(value: T): {readonly current: T} {
 			}),
 		[],
 	);
-}
+};
 
 /**
  * Run effect only when component is unmounted.
  *
  * @param effect Effector to run on unmount
  */
-function useUnmountEffect(effect: CallableFunction): void {
+const useUnmountEffect = (effect: CallableFunction): void => {
 	const effectRef = useSyncedRef(effect);
 
 	useEffect(
@@ -37,7 +37,7 @@ function useUnmountEffect(effect: CallableFunction): void {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[],
 	);
-}
+};
 
 export type DebouncedFunction<Fn extends (...args: any[]) => any> = (
 	this: ThisParameterType<Fn>,

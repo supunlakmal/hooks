@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export function usePromise<T>(promiseFn: () => Promise<T>) {
+export const usePromise = <T>(promiseFn: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);

@@ -6,7 +6,7 @@ import {useSyncedRef} from './useSyncedRef';
  *
  * @param effect Effector to run on unmount
  */
-export function useUnmountEffect(effect: CallableFunction): void {
+export const useUnmountEffect = (effect: CallableFunction): void => {
 	const effectRef = useSyncedRef(effect);
 
 	useEffect(
@@ -17,4 +17,4 @@ export function useUnmountEffect(effect: CallableFunction): void {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[],
 	);
-}
+};

@@ -10,11 +10,11 @@ export interface ResizeObserverEntryExtended extends ResizeObserverEntry {
  * @param {RefObject<HTMLElement | null>} ref The ref attached to the element to observe.
  * @returns {ResizeObserverEntryExtended | null} The latest ResizeObserverEntry for the observed element, or null initially.
 */
-export function useResizeObserver<T extends Element = HTMLElement>(
+export const useResizeObserver = <T extends Element = HTMLElement>(
   ref: RefObject<T | null>,
   enabled = true,
-): ResizeObserverEntryExtended | null {
-  const [entry, setEntry] = useState<ResizeObserverEntryExtended | null>(null);
+): ResizeObserverEntryExtended | null => {
+    const [entry, setEntry] = useState<ResizeObserverEntryExtended | null>(null);
   useEffect(() => {
     const element = ref.current;
     const hasResizeObserverSupport =
@@ -38,5 +38,5 @@ export function useResizeObserver<T extends Element = HTMLElement>(
   }, [ref, enabled]); // Depend on the ref
 
   return entry;
-}
+};
 

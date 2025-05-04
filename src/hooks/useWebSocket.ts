@@ -37,7 +37,7 @@ const DEFAULT_RECONNECT_INTERVAL_MS = 5000;
  * @param {UseWebSocketOptions} [options={}] Hook options.
  * @returns {UseWebSocketReturn} Object containing the WebSocket state and control functions.
  */
-export function useWebSocket(
+export const useWebSocket = (
   url: string | URL | null,
   options: UseWebSocketOptions = {}
 ): UseWebSocketReturn {

@@ -49,10 +49,10 @@ function getSessionStorageValue<T>(
  * @param {T | (() => T)} initialValue The initial value or a function to compute it. This is used if the key is not found in sessionStorage.
  * @returns {[T, SetValue<T>]} A tuple containing the current value and a function to update it.
  */
-export function useSessionStorage<T>(
+export const useSessionStorage = <T>(
   key: string,
   initialValue: T | (() => T)
-): [T, SetValue<T>] {
+): [T, SetValue<T>] => {
   // State to store our value
   // Pass lazy initial state function to useState
   const [storedValue, setStoredValue] = useState<T>(() => {

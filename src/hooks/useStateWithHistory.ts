@@ -22,10 +22,12 @@ interface StateWithHistory<T> {
  * @param capacity - The maximum number of history entries to keep (default: 10).
  * @returns An object containing the current state, state setter, history, navigation functions, and flags.
  */
-export function useStateWithHistory<T>(
+export const useStateWithHistory = <T>(
   initialState: T,
   capacity: number = 10
-): StateWithHistory<T> {
+): StateWithHistory<T> => {
+
+
   const [state, setInternalState] = useState<T>(initialState);
   const historyRef = useRef<T[]>([initialState]);
   const pointerRef = useRef<number>(0); // Points to the current state index in history
@@ -95,6 +97,6 @@ export function useStateWithHistory<T>(
     canUndo,
     canRedo,
   };
-}
+};
 
 

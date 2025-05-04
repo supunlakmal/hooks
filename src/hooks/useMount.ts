@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
  *
  * @param onMount - The function to call on mount.
  */
-export function useMount(onMount: () => void): void {
+export const useMount = (onMount: () => void): void => {
   // Use a ref to store the callback to ensure the correct function is called,
   // even though useEffect with [] should only run once.
   // This pattern aligns with useUnmount and handles potential edge cases or future extensions.
@@ -20,6 +20,6 @@ export function useMount(onMount: () => void): void {
     onMountRef.current();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once after initial mount
-}
+};
 
 
