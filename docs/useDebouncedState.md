@@ -17,7 +17,7 @@ This hook provides a way to debounce state updates. It's useful when you want to
 ## Examples
 ```
 tsx
-import { useDebouncedState } from 'src/hooks/useDebouncedState';
+import { useDebouncedState } from  '@supunlakmal/hooks';
 import React, { ChangeEvent } from 'react';
 
 function SearchInput() {

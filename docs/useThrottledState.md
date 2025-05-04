@@ -17,7 +17,7 @@ This hook provides a way to throttle state updates. It's useful when you want to
 ## Examples
 ```
 tsx
-import { useThrottledState } from 'src';
+import { useThrottledState } from '@supunlakmal/hooks';
 import { ChangeEvent, useState } from 'react';
 
 function ThrottledInput() {
