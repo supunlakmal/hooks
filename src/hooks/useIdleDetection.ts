@@ -181,10 +181,9 @@ export function useIdleDetection(
   useEffect(() => {
     if (isSupported && optionsRef.current.autoStart) {
       // Check initial permission state without prompting
-      // @ts-expect-error: 'idle-detection' is an experimental permission name not yet in standard TypeScript lib definitions.
-      navigator.permissions
+      (navigator.permissions as any)
         ?.query({ name: 'idle-detection' })
-        .then((status) => {
+        .then((status:any) => {
           setPermissionState(status.state as IdlePermissionState);
           if (status.state === 'granted') {
             startDetector();
@@ -199,7 +198,7 @@ export function useIdleDetection(
             }
           };
         })
-        .catch((err) => {
+        .catch((err:any) => {
           console.warn('Could not query idle-detection permission state:', err);
           // Fallback to trying to start, which will request permission if needed
           startDetector();
