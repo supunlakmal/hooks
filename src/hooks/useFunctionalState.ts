@@ -13,13 +13,18 @@ export function useFunctionalState<S>(
   initialState: S | (() => S)
 ): [() => S, Dispatch<SetStateAction<S>>];
 // Overload 1: No initial state provided (defaults S to undefined)
-export function useFunctionalState<S = undefined>(): [() => S | undefined, Dispatch<SetStateAction<S | undefined>>];
+export function useFunctionalState<S = undefined>(): [
+  () => S | undefined,
+  Dispatch<SetStateAction<S | undefined>>,
+];
 export function useFunctionalState<S>(
   initialState?: S | (() => S)
-): [(() => S | undefined), Dispatch<SetStateAction<S | undefined>>] {
+): [() => S | undefined, Dispatch<SetStateAction<S | undefined>>] {
   return useFunctionalStateFn<S>(initialState);
 }
-const useFunctionalStateFn = <S>(initialState?: S | (() => S)) : [() => S | undefined, Dispatch<SetStateAction<S | undefined>>]=> {
+const useFunctionalStateFn = <S>(
+  initialState?: S | (() => S)
+): [() => S | undefined, Dispatch<SetStateAction<S | undefined>>] => {
   // useState handles the initial state (value or function) correctly.
   // If initialState is undefined (from overload 1), state starts as undefined.
   const [state, setState] = useState<S | undefined>(initialState);

@@ -158,9 +158,8 @@ export const useStorageValue = <
 >(
   storage: Storage,
   key: string,
-  options?: UseStorageValueOptions<Type, Initialize>,
+  options?: UseStorageValueOptions<Type, Initialize>
 ): UseStorageValueResult<Type, Default, Initialize> => {
-
   const optionsRef = useSyncedRef({ ...DEFAULT_OPTIONS, ...options });
   const parse = (str: string | null, fallback: Type | null): Type | null => {
     const parseFunction = optionsRef.current.parse ?? defaultParse;
