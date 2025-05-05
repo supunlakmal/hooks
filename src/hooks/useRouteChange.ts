@@ -11,7 +11,7 @@ const HISTORY_CHANGE_EVENT = 'historystatechange';
  *
  * @param {() => void} onChange - The callback function to execute on route change.
  */
-export function useRouteChange(onChange: () => void): void {
+export const useRouteChange = (onChange: () => void): void => {
   const savedOnChange = useRef(onChange);
 
   // Update ref to latest callback instance on each render
@@ -61,4 +61,4 @@ export function useRouteChange(onChange: () => void): void {
       history.replaceState = originalReplaceState;
     };
   }, []); // Run only once on mount
-}
+};

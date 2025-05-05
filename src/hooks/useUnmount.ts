@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
  *
  * @param onUnmount - The function to call on unmount.
  */
-export function useUnmount(onUnmount: () => void): void {
+export const useUnmount = (onUnmount: () => void): void => {
   // Use a ref to store the latest callback without causing re-renders
   const onUnmountRef = useRef(onUnmount);
 
@@ -22,4 +22,4 @@ export function useUnmount(onUnmount: () => void): void {
       onUnmountRef.current();
     };
   }, []); // Empty array ensures this effect runs only once on mount and cleans up on unmount
-}
+};

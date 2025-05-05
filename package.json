@@ -6,7 +6,6 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write .",
     "p": "npm publish --access public"
   },

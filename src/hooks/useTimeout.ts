@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
  * @param {() => void} callback The function to execute after the timeout.
  * @param {number | null} delay The delay in milliseconds. If null, the timeout is not set.
  */
-export function useTimeout(callback: () => void, delay: number | null): void {
+export const useTimeout = (callback: () => void, delay: number | null): void => {
   const savedCallback = useRef<() => void>(callback);
 
   // Remember the latest callback.
@@ -30,4 +30,4 @@ export function useTimeout(callback: () => void, delay: number | null): void {
     // Clear timeout if the component unmounts or delay/callback changes
     return () => clearTimeout(id);
   }, [delay]); // Re-run effect only if delay changes
-}
+};

@@ -25,7 +25,7 @@ const propsChanged = (prevProps: any, nextProps: any): boolean => {
  * @param componentName - The name of the component to include in the logs.
  * @param props - The current props of the component (optional, for logging changes).
  */
-export function useLogger(componentName: string, props?: any): void {
+export const useLogger = (componentName: string, props?: any): void => {
   const prevPropsRef = useRef(props);
 
   // Check if in development environment
@@ -68,4 +68,4 @@ export function useLogger(componentName: string, props?: any): void {
   });
 
   // No need to return anything, the hook just performs side effects (logging)
-}
+};
