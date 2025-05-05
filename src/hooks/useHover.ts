@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, RefObject } from "react";
+import { useState, useRef, useEffect, RefObject } from 'react';
 
 /**
  * Custom hook to detect whether a DOM element is being hovered over.
@@ -9,7 +9,7 @@ import { useState, useRef, useEffect, RefObject } from "react";
  */
 export const useHover = <T extends HTMLElement = HTMLElement>(): [
   RefObject<T | null>,
-  boolean
+  boolean,
 ] => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const ref = useRef<T>(null);
@@ -21,13 +21,13 @@ export const useHover = <T extends HTMLElement = HTMLElement>(): [
     () => {
       const node = ref.current;
       if (node) {
-        node.addEventListener("mouseover", handleMouseOver);
-        node.addEventListener("mouseout", handleMouseOut);
+        node.addEventListener('mouseover', handleMouseOver);
+        node.addEventListener('mouseout', handleMouseOut);
 
         // Return cleanup function
         return () => {
-          node.removeEventListener("mouseover", handleMouseOver);
-          node.removeEventListener("mouseout", handleMouseOut);
+          node.removeEventListener('mouseover', handleMouseOver);
+          node.removeEventListener('mouseout', handleMouseOut);
         };
       } else {
         // If node doesn't exist, return an empty cleanup function
@@ -40,6 +40,4 @@ export const useHover = <T extends HTMLElement = HTMLElement>(): [
 
   // Use 'as const' for better tuple type inference
   return [ref, isHovered] as const;
-}
-
-
+};

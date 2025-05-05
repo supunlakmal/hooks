@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 interface UseErrorBoundaryReturn {
   error: Error | null;
@@ -28,4 +28,4 @@ export const useErrorBoundary = (): UseErrorBoundaryReturn => {
   // It needs to be used with an Error Boundary component.
 
   return { error, resetBoundary, showBoundary };
-}
+};

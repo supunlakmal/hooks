@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useRef } from 'react';
 
 interface KeyComboOptions {
   /** Target element for the listener (default: document) */
@@ -8,14 +8,14 @@ interface KeyComboOptions {
   /** Stop propagation (default: false) */
   stopPropagation?: boolean;
   /** Trigger on keyup instead of keydown (default: false) */
-  event?: "keydown" | "keyup";
+  event?: 'keydown' | 'keyup';
 }
 
 const parseCombo = (combo: string): Set<string> => {
   return new Set(
     combo
       .toLowerCase()
-      .split("+")
+      .split('+')
       .map((key) => key.trim())
   );
 };
@@ -33,13 +33,13 @@ export const useKeyCombo = (
   options: KeyComboOptions = {}
 ) => {
   const {
-    target = typeof window !== "undefined" ? window.document : null,
+    target = typeof window !== 'undefined' ? window.document : null,
     preventDefault = false,
     stopPropagation = false,
-    event = "keydown",
+    event = 'keydown',
   } = options;
 
-  const targetElement = typeof target === "function" ? target() : target;
+  const targetElement = typeof target === 'function' ? target() : target;
 
   const requiredKeys = useRef<Set<string>>(parseCombo(combo));
   const pressedKeys = useRef<Set<string>>(new Set());
@@ -53,13 +53,13 @@ export const useKeyCombo = (
     (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
 
-      if (event === "keydown") {
+      if (event === 'keydown') {
         pressedKeys.current.add(key);
         // Add modifiers if they are pressed
-        if (e.ctrlKey) pressedKeys.current.add("ctrl");
-        if (e.altKey) pressedKeys.current.add("alt");
-        if (e.shiftKey) pressedKeys.current.add("shift");
-        if (e.metaKey) pressedKeys.current.add("meta"); // Handle Cmd key on Mac
+        if (e.ctrlKey) pressedKeys.current.add('ctrl');
+        if (e.altKey) pressedKeys.current.add('alt');
+        if (e.shiftKey) pressedKeys.current.add('shift');
+        if (e.metaKey) pressedKeys.current.add('meta'); // Handle Cmd key on Mac
 
         let comboMatched = true;
         // Check if all required keys are currently pressed
@@ -94,10 +94,10 @@ export const useKeyCombo = (
     const key = e.key.toLowerCase();
     pressedKeys.current.delete(key);
     // Also remove modifiers if they are released
-    if (key === "control") pressedKeys.current.delete("ctrl");
-    if (key === "alt") pressedKeys.current.delete("alt");
-    if (key === "shift") pressedKeys.current.delete("shift");
-    if (key === "meta") pressedKeys.current.delete("meta");
+    if (key === 'control') pressedKeys.current.delete('ctrl');
+    if (key === 'alt') pressedKeys.current.delete('alt');
+    if (key === 'shift') pressedKeys.current.delete('shift');
+    if (key === 'meta') pressedKeys.current.delete('meta');
   }, []);
 
   useEffect(() => {
@@ -106,13 +106,13 @@ export const useKeyCombo = (
     // Function to handle attaching listeners
     const addListeners = () => {
       targetElement.addEventListener(event, handleKeyEvent as EventListener);
-      targetElement.addEventListener("keyup", handleKeyUp as EventListener);
+      targetElement.addEventListener('keyup', handleKeyUp as EventListener);
     };
 
     // Function to handle removing listeners
     const removeListeners = () => {
       targetElement.removeEventListener(event, handleKeyEvent as EventListener);
-      targetElement.removeEventListener("keyup", handleKeyUp as EventListener);
+      targetElement.removeEventListener('keyup', handleKeyUp as EventListener);
     };
 
     // Add listeners
@@ -127,5 +127,3 @@ export const useKeyCombo = (
     };
   }, [targetElement, event, handleKeyEvent, handleKeyUp, combo]); // Re-attach if target, event type, handlers, or combo changes
 };
-
-

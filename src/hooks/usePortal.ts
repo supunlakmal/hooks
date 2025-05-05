@@ -5,8 +5,8 @@ import {
   useCallback,
   ReactNode,
   FunctionComponent,
-} from "react";
-import { createPortal } from "react-dom";
+} from 'react';
+import { createPortal } from 'react-dom';
 
 interface UsePortalOptions {
   id?: string;
@@ -20,7 +20,7 @@ const getOrCreatePortalRoot = (
   id: string,
   attributes: Record<string, string> = defaultAttributes
 ): { element: HTMLElement; created: boolean } => {
-  if (typeof document === "undefined") {
+  if (typeof document === 'undefined') {
     // Cannot create on server
     return { element: null as any, created: false }; // Return null-like structure
   }
@@ -29,8 +29,8 @@ const getOrCreatePortalRoot = (
   let elementCreated = false;
 
   if (!element) {
-    element = document.createElement("div");
-    element.setAttribute("id", id);
+    element = document.createElement('div');
+    element.setAttribute('id', id);
     Object.entries(attributes).forEach(([key, value]) => {
       element!.setAttribute(key, value);
     });
@@ -52,7 +52,7 @@ const getOrCreatePortalRoot = (
  * @returns {FunctionComponent<{ children: ReactNode }>} A Portal component.
  */
 export function usePortal({
-  id = "react-portal-root", // Default ID
+  id = 'react-portal-root', // Default ID
   attributes = defaultAttributes,
 }: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> {
   const portalElementRef = useRef<HTMLElement | null>(null);
@@ -60,7 +60,7 @@ export function usePortal({
   const portalCreatedByHook = useRef<boolean>(false);
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (typeof document === 'undefined') return;
 
     const { element, created } = getOrCreatePortalRoot(id, attributes);
     portalElementRef.current = element;
@@ -95,5 +95,3 @@ export function usePortal({
 
   return Portal;
 }
-
-

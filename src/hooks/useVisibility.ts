@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from "react";
+import { useState, useEffect, RefObject } from 'react';
 
 interface UseVisibilityOptions extends IntersectionObserverInit {
   // IntersectionObserverInit includes root, rootMargin, threshold
@@ -27,12 +27,12 @@ export const useVisibility = <T extends Element>(
     disconnectOnVisible = false,
     ...observerOptions
   }: UseVisibilityOptions = {}
-): boolean =>{
+): boolean => {
   const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element || typeof IntersectionObserver === "undefined") {
+    if (!element || typeof IntersectionObserver === 'undefined') {
       // Ensure element exists and IntersectionObserver is supported
       return;
     }
@@ -60,6 +60,4 @@ export const useVisibility = <T extends Element>(
   }, [elementRef, JSON.stringify(observerOptions), disconnectOnVisible]);
 
   return isVisible;
-}
-
-
+};

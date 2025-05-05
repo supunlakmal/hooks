@@ -7,8 +7,8 @@ A drop-in replacement for `React.useEffect` that performs a **deep comparison** 
 Use it exactly like `useEffect`, but be mindful that the deep comparison can be more computationally expensive.
 
 ```tsx
-import React, { useState, useEffect } from "react";
-import { useDeepCompareEffect } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useState, useEffect } from 'react';
+import { useDeepCompareEffect } from '@supunlakmal/hooks'; // Adjust import path
 
 interface ComplexObject {
   id: number;
@@ -29,7 +29,7 @@ const SettingsDisplay: React.FC<{ settings: ComplexObject }> = ({
   // Standard useEffect: Will run on every render if parent passes a new object reference
   useEffect(() => {
     console.log(
-      "[useEffect] Running due to settings change (or initial render)."
+      '[useEffect] Running due to settings change (or initial render).'
     );
     setEffectRunCount((c) => c + 1);
     // Simulate some action based on settings
@@ -38,7 +38,7 @@ const SettingsDisplay: React.FC<{ settings: ComplexObject }> = ({
   // useDeepCompareEffect: Will only run if the *content* of settings changes
   useDeepCompareEffect(() => {
     console.log(
-      "[useDeepCompareEffect] Running due to deep settings change (or initial render)."
+      '[useDeepCompareEffect] Running due to deep settings change (or initial render).'
     );
     setDeepEffectRunCount((c) => c + 1);
     // Simulate some action based on settings
@@ -51,7 +51,7 @@ const SettingsDisplay: React.FC<{ settings: ComplexObject }> = ({
 
   return (
     <div
-      style={{ border: "1px solid green", padding: "10px", marginTop: "10px" }}
+      style={{ border: '1px solid green', padding: '10px', marginTop: '10px' }}
     >
       <h4>Settings Display</h4>
       <pre>{JSON.stringify(settings, null, 2)}</pre>
@@ -76,7 +76,7 @@ const App: React.FC = () => {
       values: [10, 20, 30], // Keeping this array reference stable for simplicity here
     },
     // Add a name property that doesn't change to show it doesn't trigger deep compare
-    name: "Stable Setting",
+    name: 'Stable Setting',
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 /**
  * Represents the result of the copy operation.
@@ -15,7 +15,7 @@ type CopyStatus = null | boolean;
  */
 type UseCopyToClipboardReturn = [
   status: CopyStatus,
-  copy: (text: string) => Promise<void>
+  copy: (text: string) => Promise<void>,
 ];
 
 /**
@@ -34,25 +34,25 @@ export const useCopyToClipboard = (): UseCopyToClipboardReturn => {
         await navigator.clipboard.writeText(text);
         setStatus(true);
       } catch (error) {
-        console.error("Failed to copy text using Clipboard API:", error);
+        console.error('Failed to copy text using Clipboard API:', error);
         setStatus(false);
       }
     } else {
       // Fallback for older browsers
       try {
-        const textArea = document.createElement("textarea");
+        const textArea = document.createElement('textarea');
         textArea.value = text;
 
         // Prevent scrolling to bottom
-        textArea.style.position = "fixed";
-        textArea.style.top = "-9999px";
-        textArea.style.left = "-9999px";
+        textArea.style.position = 'fixed';
+        textArea.style.top = '-9999px';
+        textArea.style.left = '-9999px';
 
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
 
-        const successful = document.execCommand("copy");
+        const successful = document.execCommand('copy');
         document.body.removeChild(textArea);
 
         if (successful) {
@@ -61,7 +61,7 @@ export const useCopyToClipboard = (): UseCopyToClipboardReturn => {
           throw new Error('document.execCommand("copy") failed');
         }
       } catch (error) {
-        console.error("Failed to copy text using fallback method:", error);
+        console.error('Failed to copy text using fallback method:', error);
         setStatus(false);
       }
     }
@@ -71,6 +71,4 @@ export const useCopyToClipboard = (): UseCopyToClipboardReturn => {
   }, []);
 
   return [status, copy];
-}
-
-
+};

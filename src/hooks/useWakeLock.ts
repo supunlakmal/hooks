@@ -8,7 +8,11 @@ interface WakeLockState {
 type WakeLockAcquire = () => Promise<void>;
 type WakeLockRelease = () => Promise<void>;
 
-export const useWakeLock = (): [WakeLockAcquire, WakeLockRelease, WakeLockState] => {
+export const useWakeLock = (): [
+  WakeLockAcquire,
+  WakeLockRelease,
+  WakeLockState,
+] => {
   const [wakeLockState, setWakeLockState] = useState<WakeLockState>({
     isSupported: 'wakeLock' in navigator,
     isActive: false,
@@ -60,4 +64,3 @@ export const useWakeLock = (): [WakeLockAcquire, WakeLockRelease, WakeLockState]
 
   return [acquire, release, wakeLockState];
 };
-

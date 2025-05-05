@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from 'react';
 
 // Type Definitions
 export type FieldValue = any;
@@ -48,7 +48,10 @@ export interface UseFormValidationResult<T extends FormValues> {
   /** Function to handle input blur events */
   handleBlur: (
     event: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLTextAreaElement | HTMLSelectElement
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
     >
   ) => void;
   /** Function to handle form submission */
@@ -90,10 +93,13 @@ export const useFormValidation = <T extends FormValues>(
   const [values, setValuesState] = useState<T>(initialValues);
   const [errors, setErrors] = useState<ValidationErrors<T>>({});
   const [touched, setTouched] = useState<Record<keyof T, boolean>>(() =>
-    Object.keys(initialValues).reduce((acc, key) => {
-      acc[key as keyof T] = false;
-      return acc;
-    }, {} as Record<keyof T, boolean>)
+    Object.keys(initialValues).reduce(
+      (acc, key) => {
+        acc[key as keyof T] = false;
+        return acc;
+      },
+      {} as Record<keyof T, boolean>
+    )
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -148,12 +154,12 @@ export const useFormValidation = <T extends FormValues>(
       let parsedValue: FieldValue = value;
 
       // Handle checkboxes
-      if (type === "checkbox" && event.target instanceof HTMLInputElement) {
+      if (type === 'checkbox' && event.target instanceof HTMLInputElement) {
         parsedValue = event.target.checked;
       }
       // Handle multi-select potentially
       if (
-        type === "select-multiple" &&
+        type === 'select-multiple' &&
         event.target instanceof HTMLSelectElement
       ) {
         parsedValue = Array.from(event.target.selectedOptions).map(
@@ -218,10 +224,13 @@ export const useFormValidation = <T extends FormValues>(
     // Maybe re-validate all or clear errors?
     setErrors({});
     setTouched(
-      Object.keys(newValues).reduce((acc, key) => {
-        acc[key as keyof T] = false;
-        return acc;
-      }, {} as Record<keyof T, boolean>)
+      Object.keys(newValues).reduce(
+        (acc, key) => {
+          acc[key as keyof T] = false;
+          return acc;
+        },
+        {} as Record<keyof T, boolean>
+      )
     );
   }, []);
 
@@ -279,7 +288,7 @@ export const useFormValidation = <T extends FormValues>(
           try {
             await onSubmit(values);
           } catch (submitError) {
-            console.error("Form submission error:", submitError);
+            console.error('Form submission error:', submitError);
             // Optionally set a form-level error
             // setErrors(prev => ({ ...prev, _form: 'Submission failed' }));
           } finally {
@@ -297,10 +306,13 @@ export const useFormValidation = <T extends FormValues>(
     setValuesState(initialValues);
     setErrors({});
     setTouched(
-      Object.keys(initialValues).reduce((acc, key) => {
-        acc[key as keyof T] = false;
-        return acc;
-      }, {} as Record<keyof T, boolean>)
+      Object.keys(initialValues).reduce(
+        (acc, key) => {
+          acc[key as keyof T] = false;
+          return acc;
+        },
+        {} as Record<keyof T, boolean>
+      )
     );
     setIsSubmitting(false);
   }, [initialValues]);
@@ -328,4 +340,4 @@ export const useFormValidation = <T extends FormValues>(
     validateForm: () => validateFormInternal(values),
     resetForm,
   };
-}
+};

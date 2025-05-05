@@ -8,8 +8,8 @@ import { useResizeObserver } from './useResizeObserver';
 // npm install --save-dev @types/resize-observer-browser
 
 export type Measures = {
-    width: number;
-    height: number;
+  width: number;
+  height: number;
 };
 
 // If 'ResizeObserverEntryExtended' is an exported type from your hook's module,
@@ -19,8 +19,6 @@ export type Measures = {
 
 // If ResizeObserverEntryExtended is not exported or you only need base properties,
 // using the standard ResizeObserverEntry is usually sufficient:
-
-
 
 /**
  * Uses ResizeObserver to track element dimensions and re-render component when they change.
@@ -33,7 +31,9 @@ export type Measures = {
  *          - `measures`: An object with `width` and `height`, or `undefined` if there is no measures.
  *          - `ref`: A RefObject to attach to the DOM element being measured.
  */
-export const useMeasure = <T extends Element>(enabled = true): {
+export const useMeasure = <T extends Element>(
+  enabled = true
+): {
   measures: Measures | undefined;
   ref: RefObject<T | null>;
 } => {
@@ -51,8 +51,9 @@ export const useMeasure = <T extends Element>(enabled = true): {
     });
   });
 
-  const entry: ResizeObserverEntry | null = useResizeObserver(elementRef) as ResizeObserverEntry | null;
-
+  const entry: ResizeObserverEntry | null = useResizeObserver(
+    elementRef
+  ) as ResizeObserverEntry | null;
 
   useEffect(() => {
     if (enabled && entry) {
@@ -61,6 +62,6 @@ export const useMeasure = <T extends Element>(enabled = true): {
   }, [entry, enabled, observerHandler]);
 
   return { measures, ref: elementRef };
-}
+};
 
 export default useMeasure;

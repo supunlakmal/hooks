@@ -9,8 +9,8 @@ A performance optimization hook for rendering long lists. It calculates which it
 Provide the full list data, the fixed height of each item, and a ref to the scrollable container.
 
 ```tsx
-import React, { useRef } from "react";
-import { useVirtualList } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useRef } from 'react';
+import { useVirtualList } from '@supunlakmal/hooks'; // Adjust import path
 
 // Generate a large list of items
 const allItems = Array.from({ length: 10000 }, (_, index) => ({
@@ -35,11 +35,11 @@ const VirtualListComponent: React.FC = () => {
   });
 
   const containerStyle: React.CSSProperties = {
-    height: "500px", // Height of the scrollable viewport
-    width: "300px",
-    overflowY: "auto",
-    border: "1px solid #ccc",
-    position: "relative", // Needed for positioning context of innerRef
+    height: '500px', // Height of the scrollable viewport
+    width: '300px',
+    overflowY: 'auto',
+    border: '1px solid #ccc',
+    position: 'relative', // Needed for positioning context of innerRef
   };
 
   // Style for the inner container that has the total height
@@ -48,14 +48,14 @@ const VirtualListComponent: React.FC = () => {
 
   // Style for each absolutely positioned virtual item
   const itemStyleBase: React.CSSProperties = {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     height: `${ITEM_HEIGHT}px`,
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: "10px",
-    borderBottom: "1px solid #eee",
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '10px',
+    borderBottom: '1px solid #eee',
   };
 
   return (
@@ -73,7 +73,7 @@ const VirtualListComponent: React.FC = () => {
                 top: `${virtualItem.offsetTop}px`, // Position item correctly
                 // Alternate background for visibility
                 backgroundColor:
-                  virtualItem.index % 2 === 0 ? "#f9f9f9" : "white",
+                  virtualItem.index % 2 === 0 ? '#f9f9f9' : 'white',
               }}
             >
               {virtualItem.data.text}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 // Extend the Navigator interface to include the experimental NetworkInformation API
 declare global {
@@ -11,18 +11,18 @@ declare global {
 interface NetworkInformation extends EventTarget {
   readonly downlink?: number; // Effective bandwidth estimate in megabits per second
   readonly downlinkMax?: number; // Maximum downlink speed in megabits per second
-  readonly effectiveType?: "slow-2g" | "2g" | "3g" | "4g"; // Effective connection type
+  readonly effectiveType?: 'slow-2g' | '2g' | '3g' | '4g'; // Effective connection type
   readonly rtt?: number; // Round-trip time estimate in milliseconds
   readonly saveData?: boolean; // User preference for reduced data usage
   readonly type?:
-    | "bluetooth"
-    | "cellular"
-    | "ethernet"
-    | "none"
-    | "wifi"
-    | "wimax"
-    | "other"
-    | "unknown";
+    | 'bluetooth'
+    | 'cellular'
+    | 'ethernet'
+    | 'none'
+    | 'wifi'
+    | 'wimax'
+    | 'other'
+    | 'unknown';
 
   // Event handler for connection changes
   onchange?: ((this: NetworkInformation, ev: Event) => any) | null;
@@ -32,23 +32,23 @@ export interface NetworkSpeedState {
   isSupported: boolean;
   downlink?: number;
   downlinkMax?: number;
-  effectiveType?: "slow-2g" | "2g" | "3g" | "4g";
+  effectiveType?: 'slow-2g' | '2g' | '3g' | '4g';
   rtt?: number;
   saveData?: boolean;
   type?:
-    | "bluetooth"
-    | "cellular"
-    | "ethernet"
-    | "none"
-    | "wifi"
-    | "wimax"
-    | "other"
-    | "unknown";
+    | 'bluetooth'
+    | 'cellular'
+    | 'ethernet'
+    | 'none'
+    | 'wifi'
+    | 'wimax'
+    | 'other'
+    | 'unknown';
 }
 
 const getConnectionState = (
   connection?: NetworkInformation
-): Omit<NetworkSpeedState, "isSupported"> => {
+): Omit<NetworkSpeedState, 'isSupported'> => {
   if (!connection) {
     return {};
   }
@@ -72,7 +72,7 @@ const getConnectionState = (
  */
 export const useNetworkSpeed = (): NetworkSpeedState => {
   const isSupported =
-    typeof navigator !== "undefined" && "connection" in navigator;
+    typeof navigator !== 'undefined' && 'connection' in navigator;
 
   const [state, setState] = useState<NetworkSpeedState>(() => ({
     isSupported,
@@ -95,15 +95,13 @@ export const useNetworkSpeed = (): NetworkSpeedState => {
     };
 
     // Add event listener
-    connection.addEventListener("change", handleChange);
+    connection.addEventListener('change', handleChange);
 
     // Cleanup
     return () => {
-      connection.removeEventListener("change", handleChange);
+      connection.removeEventListener('change', handleChange);
     };
   }, [isSupported]); // Only re-run effect if support changes (unlikely)
 
   return state;
-}
-
-
+};

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 /**
  * Default mobile breakpoint in pixels
@@ -24,11 +24,11 @@ export const useMobile = (
       setIsMobile(window.innerWidth < breakpoint);
     };
 
-    mql.addEventListener("change", onChange);
+    mql.addEventListener('change', onChange);
     setIsMobile(window.innerWidth < breakpoint);
 
-    return () => mql.removeEventListener("change", onChange);
+    return () => mql.removeEventListener('change', onChange);
   }, [breakpoint]);
 
   return !!isMobile;
-}
+};

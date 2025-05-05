@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 interface GeolocationState {
   loading: boolean;
@@ -34,7 +34,9 @@ const initialGeolocationState: GeolocationState = {
  * @param {UseGeolocationOptions} [options] - Optional configuration for the geolocation request (e.g., enableHighAccuracy).
  * @returns {GeolocationState} An object containing the geolocation data, loading state, and error state.
  */
-export const useGeolocation = (options?: UseGeolocationOptions): GeolocationState => {
+export const useGeolocation = (
+  options?: UseGeolocationOptions
+): GeolocationState => {
   const [state, setState] = useState<GeolocationState>(initialGeolocationState);
   let watchId: number | null = null;
 
@@ -43,7 +45,7 @@ export const useGeolocation = (options?: UseGeolocationOptions): GeolocationStat
       setState((prevState) => ({
         ...prevState,
         loading: false,
-        error: new Error("Geolocation is not supported by this browser."),
+        error: new Error('Geolocation is not supported by this browser.'),
       }));
       return;
     }
@@ -87,5 +89,4 @@ export const useGeolocation = (options?: UseGeolocationOptions): GeolocationStat
   }, [options]); // Re-run if options change
 
   return state;
-}
-
+};

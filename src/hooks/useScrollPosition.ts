@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef, RefObject } from "react";
-import {useEventListener} from "./useEventListener";
+import { useState, useEffect, useRef, RefObject } from 'react';
+import { useEventListener } from './useEventListener';
 
 interface ScrollPosition {
   x: number;
   y: number;
 }
 
-const isBrowser = typeof window !== "undefined";
+const isBrowser = typeof window !== 'undefined';
 
 function getScrollPosition(
   element?: RefObject<Element> | Window | null
@@ -16,7 +16,7 @@ function getScrollPosition(
   }
 
   const target = element
-    ? "current" in element
+    ? 'current' in element
       ? element.current
       : element
     : window;
@@ -46,7 +46,7 @@ export const useScrollPosition = (
   element?: RefObject<Element> | Window | null,
   throttleMs: number = 100
 ): ScrollPosition => {
-    const [position, setPosition] = useState<ScrollPosition>(() =>
+  const [position, setPosition] = useState<ScrollPosition>(() =>
     getScrollPosition(element)
   );
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -70,7 +70,7 @@ export const useScrollPosition = (
   // Determine the event target
   const target = element ?? window;
 
-  useEventListener("scroll", throttledHandleScroll, target as any);
+  useEventListener('scroll', throttledHandleScroll, target as any);
 
   // Re-calculate on element change
   useEffect(() => {
@@ -78,5 +78,4 @@ export const useScrollPosition = (
   }, [element]); // Depend on the element/ref object itself
 
   return position;
-}
-
+};

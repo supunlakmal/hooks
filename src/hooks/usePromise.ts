@@ -20,4 +20,4 @@ export const usePromise = <T>(promiseFn: () => Promise<T>) => {
   }, [reload]);
 
   return { data, error, loading, reload };
-}
+};

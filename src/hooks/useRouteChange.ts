@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import {useEventListener} from "./useEventListener";
+import { useEffect, useRef } from 'react';
+import { useEventListener } from './useEventListener';
 
 // Define the custom event name
-const HISTORY_CHANGE_EVENT = "historystatechange";
+const HISTORY_CHANGE_EVENT = 'historystatechange';
 
 /**
  * Custom hook to execute a callback function when the browser's route changes.
@@ -25,14 +25,14 @@ export function useRouteChange(onChange: () => void): void {
   };
 
   // Listen for popstate and our custom event
-  useEventListener("popstate", handleHistoryChange); // Handles back/forward
+  useEventListener('popstate', handleHistoryChange); // Handles back/forward
   useEventListener(HISTORY_CHANGE_EVENT as any, handleHistoryChange); // Handles pushState/replaceState
   // Note: Cast needed as HISTORY_CHANGE_EVENT is not a standard WindowEventMap key
 
   // Effect to patch history methods
   useEffect(() => {
     // Check if running in a browser environment
-    if (typeof window === "undefined" || !window.history) {
+    if (typeof window === 'undefined' || !window.history) {
       return;
     }
 
@@ -62,5 +62,3 @@ export function useRouteChange(onChange: () => void): void {
     };
   }, []); // Run only once on mount
 }
-
-

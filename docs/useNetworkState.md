@@ -7,6 +7,7 @@ The `useNetworkState` hook provides information about the user's network connect
 ## Usage
 
 Here's how you can use the `useNetworkState` hook in your React component:
+
 ```
 typescript
 import { useNetworkState } from '@supunlakmal/hooks';
@@ -32,7 +33,9 @@ function NetworkStatusComponent() {
   );
 }
 ```
+
 ## API
+
 ```
 typescript
 interface NetworkState {
@@ -50,6 +53,7 @@ interface NetworkInformation {
   type: 'bluetooth' | 'cellular' | 'ethernet' | 'mixed' | 'none' | 'other' | 'unknown' | 'wifi' | 'wimax' | undefined;
 }
 ```
+
 ## Parameters
 
 This hook does not accept any parameters.
@@ -58,18 +62,18 @@ This hook does not accept any parameters.
 
 The `useNetworkState` hook returns an object with the following properties:
 
-*   **`online`**: `boolean | null` - Indicates whether the user is currently online (true) or offline (false). It can be `null` initially before the state is determined.
-*   **`since`**: `Date | null` - A `Date` object representing when the user went online. It's `null` if the user is offline or if the online state hasn't been determined.
-* **`offlineAt`** : `Date | null` - A `Date` object representing when the user went offline. It's `null` if the user is online or if the offline state hasn't been determined.
-*   **`connection`**: `NetworkInformation | null` - An object containing information about the user's network connection. It includes properties like `downlink`, `effectiveType`, `rtt`, `saveData`, and `type`. This is `null` if the browser doesn't support the Network Information API.
+- **`online`**: `boolean | null` - Indicates whether the user is currently online (true) or offline (false). It can be `null` initially before the state is determined.
+- **`since`**: `Date | null` - A `Date` object representing when the user went online. It's `null` if the user is offline or if the online state hasn't been determined.
+- **`offlineAt`** : `Date | null` - A `Date` object representing when the user went offline. It's `null` if the user is online or if the offline state hasn't been determined.
+- **`connection`**: `NetworkInformation | null` - An object containing information about the user's network connection. It includes properties like `downlink`, `effectiveType`, `rtt`, `saveData`, and `type`. This is `null` if the browser doesn't support the Network Information API.
 
 ## How it Works
 
 The `useNetworkState` hook utilizes the `navigator.onLine` property and the `online` and `offline` events to track the user's network status. It also uses the `navigator.connection` API (if available) to get detailed network information.
 
-*   **Event Listeners:** The hook adds event listeners for the `online` and `offline` events on the window object. These listeners update the internal state when the network status changes.
-*   **Initial State:** The initial `online` state is determined using `navigator.onLine`.
-* **offlineAt state** : keep last offline data.
-*   **Network Information API:** If the `navigator.connection` API is available, the hook retrieves the connection details and updates the `connection` state.
-*   **Cleanup:** The hook cleans up the event listeners when the component unmounts to prevent memory leaks.
-*  **Reasoning:** Use network state to build network state-dependent features.
+- **Event Listeners:** The hook adds event listeners for the `online` and `offline` events on the window object. These listeners update the internal state when the network status changes.
+- **Initial State:** The initial `online` state is determined using `navigator.onLine`.
+- **offlineAt state** : keep last offline data.
+- **Network Information API:** If the `navigator.connection` API is available, the hook retrieves the connection details and updates the `connection` state.
+- **Cleanup:** The hook cleans up the event listeners when the component unmounts to prevent memory leaks.
+- **Reasoning:** Use network state to build network state-dependent features.

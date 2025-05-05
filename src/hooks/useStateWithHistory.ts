@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from 'react';
 
 // Define the shape of the state and history controls
 interface StateWithHistory<T> {
@@ -26,8 +26,6 @@ export const useStateWithHistory = <T>(
   initialState: T,
   capacity: number = 10
 ): StateWithHistory<T> => {
-
-
   const [state, setInternalState] = useState<T>(initialState);
   const historyRef = useRef<T[]>([initialState]);
   const pointerRef = useRef<number>(0); // Points to the current state index in history
@@ -39,7 +37,7 @@ export const useStateWithHistory = <T>(
   const setState = useCallback((newStateOrFn: T | ((currentState: T) => T)) => {
     setInternalState((currentState) => {
       const newState =
-        typeof newStateOrFn === "function"
+        typeof newStateOrFn === 'function'
           ? (newStateOrFn as (currentState: T) => T)(currentState)
           : newStateOrFn;
 
@@ -98,5 +96,3 @@ export const useStateWithHistory = <T>(
     canRedo,
   };
 };
-
-

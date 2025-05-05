@@ -1,15 +1,15 @@
-import { useRef, useEffect, useCallback, RefObject } from "react";
+import { useRef, useEffect, useCallback, RefObject } from 'react';
 
 // Selectors for focusable elements
 const FOCUSABLE_SELECTORS = [
-  "a[href]",
-  "button:not([disabled])",
+  'a[href]',
+  'button:not([disabled])',
   'input:not([disabled]):not([type="hidden"])',
-  "select:not([disabled])",
-  "textarea:not([disabled])",
+  'select:not([disabled])',
+  'textarea:not([disabled])',
   '[tabindex]:not([tabindex="-1"])',
   '[contenteditable="true"]',
-].join(", ");
+].join(', ');
 
 /**
  * Traps focus within a specified container element.
@@ -35,7 +35,7 @@ export const useFocusTrap = <T extends HTMLElement>(
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key !== "Tab" || !isActive || !containerRef.current) return;
+      if (event.key !== 'Tab' || !isActive || !containerRef.current) return;
 
       const focusableElements = getFocusableElements();
       if (focusableElements.length === 0) return;
@@ -81,10 +81,10 @@ export const useFocusTrap = <T extends HTMLElement>(
         initialFocusRef?.current ?? getFocusableElements()[0];
       targetFocusElement?.focus();
 
-      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
     } else {
       // If deactivated, remove the listener
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
       // Restore focus to the previously active element
       if (previousActiveElement.current instanceof HTMLElement) {
         previousActiveElement.current.focus();
@@ -94,7 +94,7 @@ export const useFocusTrap = <T extends HTMLElement>(
 
     // Cleanup function
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
       // Ensure focus is restored if component unmounts while trap is active
       if (isActive && previousActiveElement.current instanceof HTMLElement) {
         previousActiveElement.current.focus();
@@ -107,4 +107,4 @@ export const useFocusTrap = <T extends HTMLElement>(
     handleKeyDown,
     getFocusableElements,
   ]);
-}
+};

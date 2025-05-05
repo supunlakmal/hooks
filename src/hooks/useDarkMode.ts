@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import {useLocalStorage} from "./useLocalStorage"; // Use our existing hook
-import {useMediaQuery} from "./useMediaQuery"; // Use our existing hook
+import { useEffect } from 'react';
+import { useLocalStorage } from './useLocalStorage'; // Use our existing hook
+import { useMediaQuery } from './useMediaQuery'; // Use our existing hook
 
-const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
-const LOCAL_STORAGE_KEY = "usehooks-ts-dark-mode";
+const COLOR_SCHEME_QUERY = '(prefers-color-scheme: dark)';
+const LOCAL_STORAGE_KEY = 'usehooks-ts-dark-mode';
 
 interface UseDarkModeOutput {
   isDarkMode: boolean;
@@ -37,11 +37,11 @@ export const useDarkMode = (defaultValue?: boolean): UseDarkModeOutput => {
   useEffect(() => {
     const element = window.document.documentElement; // Use <html> element
     if (isDarkMode) {
-      element.classList.add("dark");
-      element.classList.remove("light");
+      element.classList.add('dark');
+      element.classList.remove('light');
     } else {
-      element.classList.add("light");
-      element.classList.remove("dark");
+      element.classList.add('light');
+      element.classList.remove('dark');
     }
   }, [isDarkMode]);
 
@@ -58,6 +58,4 @@ export const useDarkMode = (defaultValue?: boolean): UseDarkModeOutput => {
     disable,
     set,
   };
-}
-
-
+};

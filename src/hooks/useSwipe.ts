@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, RefObject } from "react";
+import { useRef, useCallback, useEffect, RefObject } from 'react';
 
 // Define types for callbacks
 type SwipeCallback = (event: TouchEvent) => void;
@@ -16,7 +16,7 @@ interface UseSwipeOptions {
 const defaultOptions: Required<
   Omit<
     UseSwipeOptions,
-    "onSwipeLeft" | "onSwipeRight" | "onSwipeUp" | "onSwipeDown"
+    'onSwipeLeft' | 'onSwipeRight' | 'onSwipeUp' | 'onSwipeDown'
   >
 > = {
   threshold: 50, // Minimum swipe distance of 50px
@@ -118,14 +118,14 @@ export const useSwipe = <T extends HTMLElement>(
     if (element) {
       // Use passive listeners for touch events to improve scroll performance
       element.addEventListener(
-        "touchstart",
+        'touchstart',
         handleTouchStart as EventListener,
         { passive: true }
       );
-      element.addEventListener("touchmove", handleTouchMove as EventListener, {
+      element.addEventListener('touchmove', handleTouchMove as EventListener, {
         passive: true,
       });
-      element.addEventListener("touchend", handleTouchEnd as EventListener);
+      element.addEventListener('touchend', handleTouchEnd as EventListener);
       // Optional: Add touchcancel listener to reset state if touch is interrupted
       const handleTouchCancel = () => {
         touchStartX.current = null;
@@ -134,7 +134,7 @@ export const useSwipe = <T extends HTMLElement>(
         touchEndY.current = null;
       };
       element.addEventListener(
-        "touchcancel",
+        'touchcancel',
         handleTouchCancel as EventListener,
         { passive: true }
       );
@@ -142,19 +142,19 @@ export const useSwipe = <T extends HTMLElement>(
       // Cleanup listeners on component unmount or ref change
       return () => {
         element.removeEventListener(
-          "touchstart",
+          'touchstart',
           handleTouchStart as EventListener
         );
         element.removeEventListener(
-          "touchmove",
+          'touchmove',
           handleTouchMove as EventListener
         );
         element.removeEventListener(
-          "touchend",
+          'touchend',
           handleTouchEnd as EventListener
         );
         element.removeEventListener(
-          "touchcancel",
+          'touchcancel',
           handleTouchCancel as EventListener
         );
       };
@@ -167,6 +167,4 @@ export const useSwipe = <T extends HTMLElement>(
   }, [ref, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
   // This hook doesn't return anything directly, it attaches listeners
-}
-
-
+};

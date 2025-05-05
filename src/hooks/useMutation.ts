@@ -1,7 +1,7 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect } from 'react';
 
 // Status types for the mutation
-type MutationStatus = "idle" | "loading" | "success" | "error";
+type MutationStatus = 'idle' | 'loading' | 'success' | 'error';
 
 // Result type for the hook
 interface UseMutationResult {
@@ -36,15 +36,10 @@ interface UseMutationOptions {
   /** Callback function executed when the mutation starts. Receives the variables. */
   onMutate?: (variables: any) => void;
   /** Callback function executed when mutation finishes (either success or error). Receives data/error and variables. */
-  onSettled?: (
-    data: any, 
-    error: any, 
-    variables: any) => void;
+  onSettled?: (data: any, error: any, variables: any) => void;
 }
 
-
-  
-/** 
+/**
  * Hook to manage asynchronous operations that modify data (mutations).
  * Handles loading, success, and error states, and provides callbacks.
  *
@@ -54,9 +49,9 @@ interface UseMutationOptions {
  */
 export const useMutation = (
   mutationFn: (variables: any) => Promise<any>,
-  options?: UseMutationOptions,
-): UseMutationResult =>{
-  const [status, setStatus] = useState<MutationStatus>("idle");
+  options?: UseMutationOptions
+): UseMutationResult => {
+  const [status, setStatus] = useState<MutationStatus>('idle');
   const [data, setData] = useState<any>(undefined);
   const [error, setError] = useState<any>(undefined);
 
@@ -74,37 +69,34 @@ export const useMutation = (
   }, [mutationFn]);
 
   const reset = useCallback(() => {
-    setStatus("idle");
+    setStatus('idle');
     setData(undefined);
     setError(undefined);
   }, []);
 
-  const mutateAsync = useCallback(
-    async (variables: any): Promise<any> => {
-      setStatus("loading");
-      setData(undefined);
-      setError(undefined);
+  const mutateAsync = useCallback(async (variables: any): Promise<any> => {
+    setStatus('loading');
+    setData(undefined);
+    setError(undefined);
 
-      optionsRef.current?.onMutate?.(variables);
+    optionsRef.current?.onMutate?.(variables);
 
-      try {
-        const result = await mutationFnRef.current(variables);
-        setData(result);
-        setStatus("success");
-        optionsRef.current?.onSuccess?.(result, variables);
-        optionsRef.current?.onSettled?.(result, undefined, variables);
-        return result;
-      } catch (err: any) {
-        setError(err);
-        setStatus("error");
-        optionsRef.current?.onError?.(err, variables);
-        optionsRef.current?.onSettled?.(undefined, err, variables);
-        // Rethrow the error so callers of mutateAsync can catch it if needed
-        throw err;
-      }
-    },
-    []
-  ); // No dependencies needed due to refs
+    try {
+      const result = await mutationFnRef.current(variables);
+      setData(result);
+      setStatus('success');
+      optionsRef.current?.onSuccess?.(result, variables);
+      optionsRef.current?.onSettled?.(result, undefined, variables);
+      return result;
+    } catch (err: any) {
+      setError(err);
+      setStatus('error');
+      optionsRef.current?.onError?.(err, variables);
+      optionsRef.current?.onSettled?.(undefined, err, variables);
+      // Rethrow the error so callers of mutateAsync can catch it if needed
+      throw err;
+    }
+  }, []); // No dependencies needed due to refs
 
   const mutate = useCallback(
     (variables: any): Promise<any> => {
@@ -117,13 +109,12 @@ export const useMutation = (
     status,
     data,
     error,
-    isLoading: status === "loading",
-    isSuccess: status === "success",
-    isError: status === "error",
-    isIdle: status === "idle",
+    isLoading: status === 'loading',
+    isSuccess: status === 'success',
+    isError: status === 'error',
+    isIdle: status === 'idle',
     mutate,
     mutateAsync,
     reset,
   };
-}
-
+};

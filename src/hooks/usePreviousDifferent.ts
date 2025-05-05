@@ -11,5 +11,5 @@ export const usePreviousDifferent = <T>(value: T): T | undefined => {
     previousRef.current = value;
   });
 
-  return previousDifferentRef.current
+  return previousDifferentRef.current;
 };

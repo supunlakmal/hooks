@@ -99,7 +99,7 @@ export default FocusTrapExample;
 ## API
 
 ```typescript
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
 function useFocusTrap<T extends HTMLElement>(
   containerRef: RefObject<T>,

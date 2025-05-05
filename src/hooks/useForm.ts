@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 
 /**
  * Interface for the return value of useForm.
@@ -26,7 +26,9 @@ interface UseFormReturn<T> {
  * @param {T} initialValues The initial values for the form fields.
  * @returns {UseFormReturn<T>} An object containing form values, handlers, and reset function.
  */
-export const useForm = <T extends object>(initialValues: T): UseFormReturn<T> => {
+export const useForm = <T extends object>(
+  initialValues: T
+): UseFormReturn<T> => {
   const [values, setValues] = useState<T>(initialValues);
 
   /**
@@ -43,7 +45,7 @@ export const useForm = <T extends object>(initialValues: T): UseFormReturn<T> =>
       const target = event.target;
 
       // Handle checkbox input type
-      if (type === "checkbox" && target instanceof HTMLInputElement) {
+      if (type === 'checkbox' && target instanceof HTMLInputElement) {
         setValues((prevValues) => ({
           ...prevValues,
           [name]: target.checked,
@@ -87,6 +89,4 @@ export const useForm = <T extends object>(initialValues: T): UseFormReturn<T> =>
     resetForm,
     setValues, // Expose setValues for more complex state updates if needed
   };
-}
-
-
+};

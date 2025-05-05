@@ -22,7 +22,9 @@ function MyComponent({ isActive, data }) {
   return <div>My Component</div>;
 }
 ```
+
 ## API
+
 ```
 typescript
 function useConditionalEffect(
@@ -31,21 +33,22 @@ function useConditionalEffect(
   deps?: DependencyList
 ): void;
 ```
+
 ## Parameters
 
-*   **effect**: `EffectCallback`
-    *   Type: `() => void | (() => void)`
-    *   Description: The function containing the side effect logic. This function can optionally return a cleanup function, which will be executed when the component unmounts or the effect is re-run.
-*   **condition**: `boolean`
-    *   Type: `boolean`
-    *   Description: A boolean value that determines whether the `effect` should be executed. If `true`, the effect is run; otherwise, it is skipped.
-*   **deps**: `DependencyList` (optional)
-    *   Type: `Array<any>`
-    *   Description: An array of dependencies. If `condition` is `true` and any of the values in this array change between renders, the `effect` will be re-run. This array functions similarly to the dependency array in `useEffect`.
+- **effect**: `EffectCallback`
+  - Type: `() => void | (() => void)`
+  - Description: The function containing the side effect logic. This function can optionally return a cleanup function, which will be executed when the component unmounts or the effect is re-run.
+- **condition**: `boolean`
+  - Type: `boolean`
+  - Description: A boolean value that determines whether the `effect` should be executed. If `true`, the effect is run; otherwise, it is skipped.
+- **deps**: `DependencyList` (optional)
+  - Type: `Array<any>`
+  - Description: An array of dependencies. If `condition` is `true` and any of the values in this array change between renders, the `effect` will be re-run. This array functions similarly to the dependency array in `useEffect`.
 
 ## Returns
 
-*   `void`: This hook does not return any value.
+- `void`: This hook does not return any value.
 
 ## How it Works
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  * Custom hook for tracking the state of a CSS media query.
@@ -12,9 +12,9 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     // Ensure window.matchMedia is available (client-side)
-    if (typeof window.matchMedia !== "function") {
+    if (typeof window.matchMedia !== 'function') {
       console.warn(
-        "`useMediaQuery` requires `window.matchMedia` to function, which is not available in this environment."
+        '`useMediaQuery` requires `window.matchMedia` to function, which is not available in this environment.'
       );
       return;
     }
@@ -32,7 +32,7 @@ export function useMediaQuery(query: string): boolean {
     // Add listener for changes
     // Using addEventListener for modern browsers, fallback for older ones
     if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener("change", handleChange);
+      mediaQueryList.addEventListener('change', handleChange);
     } else {
       // Deprecated method for older browsers (e.g., Safari < 14)
       mediaQueryList.addListener(handleChange);
@@ -41,7 +41,7 @@ export function useMediaQuery(query: string): boolean {
     // Cleanup function to remove the listener
     return () => {
       if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener("change", handleChange);
+        mediaQueryList.removeEventListener('change', handleChange);
       } else {
         mediaQueryList.removeListener(handleChange);
       }
@@ -50,5 +50,3 @@ export function useMediaQuery(query: string): boolean {
 
   return matches;
 }
-
-

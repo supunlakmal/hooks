@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  * Custom hook for setting an interval that executes a callback function repeatedly.
@@ -18,7 +18,7 @@ export function useInterval(callback: () => void, delay: number | null): void {
   // Set up the interval.
   useEffect(() => {
     // Don't schedule if delay is null or undefined
-    if (delay === null || typeof delay === "undefined") {
+    if (delay === null || typeof delay === 'undefined') {
       return;
     }
 
@@ -32,5 +32,3 @@ export function useInterval(callback: () => void, delay: number | null): void {
     return () => clearInterval(id);
   }, [delay]); // Re-run effect only if delay changes
 }
-
-

@@ -1,4 +1,4 @@
-import { useReducer, useRef, Reducer, Dispatch } from "react";
+import { useReducer, useRef, Reducer, Dispatch } from 'react';
 
 // Helper function to get the current time string for logs
 const getTime = () => new Date().toLocaleTimeString();
@@ -20,9 +20,9 @@ export const useReducerLogger = <S, A>(
   reducer: Reducer<S, A>,
   initialState: S,
   initializer?: (initialArg: S) => S,
-  loggerName: string = "Reducer"
+  loggerName: string = 'Reducer'
 ): [S, Dispatch<A>] => {
-	// Determine initial state
+  // Determine initial state
   const computedInitialState = initializer
     ? initializer(initialState)
     : initialState;
@@ -32,20 +32,20 @@ export const useReducerLogger = <S, A>(
     const nextState = reducer(state, action);
 
     // Log only in development
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       console.groupCollapsed(
         `%c${loggerName} Action @ ${getTime()}`,
-        "color: #4CAF50; font-weight: bold;"
+        'color: #4CAF50; font-weight: bold;'
       );
       console.log(
-        "%cPrevious State:",
-        "color: #9E9E9E; font-weight: bold;",
+        '%cPrevious State:',
+        'color: #9E9E9E; font-weight: bold;',
         state
       );
-      console.log("%cAction:", "color: #03A9F4; font-weight: bold;", action);
+      console.log('%cAction:', 'color: #03A9F4; font-weight: bold;', action);
       console.log(
-        "%cNext State:",
-        "color: #4CAF50; font-weight: bold;",
+        '%cNext State:',
+        'color: #4CAF50; font-weight: bold;',
         nextState
       );
       console.groupEnd();
@@ -59,14 +59,14 @@ export const useReducerLogger = <S, A>(
 
   // Log initial state on mount (only in development)
   const isMounted = useRef(false);
-  if (!isMounted.current && process.env.NODE_ENV === "development") {
+  if (!isMounted.current && process.env.NODE_ENV === 'development') {
     console.groupCollapsed(
       `%c${loggerName} Initial State @ ${getTime()}`,
-      "color: #795548; font-weight: bold;"
+      'color: #795548; font-weight: bold;'
     );
     console.log(
-      "%cInitial State:",
-      "color: #9E9E9E; font-weight: bold;",
+      '%cInitial State:',
+      'color: #9E9E9E; font-weight: bold;',
       computedInitialState
     );
     console.groupEnd();
@@ -74,6 +74,4 @@ export const useReducerLogger = <S, A>(
   }
 
   return [state, dispatch];
-}
-
-
+};

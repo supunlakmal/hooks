@@ -44,7 +44,9 @@ Create a CSS file (e.g., `styles.css`) to define styles based on the `dark` and 
 /* Default styles (can be light mode or common styles) */
 body {
   font-family: sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .content-box {

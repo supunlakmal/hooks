@@ -7,6 +7,7 @@ The `use-mobile` hook is a custom React hook that determines whether the current
 ## Usage
 
 This example demonstrates how to use the `use-mobile` hook within a functional component to conditionally render content based on whether the device is mobile.
+
 ```
 typescript
 import React from 'react';
@@ -26,18 +27,21 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
+
 ```
 typescript
 type useMobile = () => boolean;
 ```
+
 ## Parameters
 
 This hook does not accept any parameters.
 
 ## Returns
 
-*   **`boolean`**: A boolean value indicating whether the device is considered mobile (`true`) or not (`false`).
+- **`boolean`**: A boolean value indicating whether the device is considered mobile (`true`) or not (`false`).
 
 ## How it Works
 

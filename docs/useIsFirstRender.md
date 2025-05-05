@@ -5,22 +5,22 @@ A React hook that returns `true` if the component is rendering for the first tim
 ## Usage
 
 ```jsx
-import React from "react";
-import { useIsFirstRender } from "@supunlakmal/hooks"; // Adjust the import path if necessary
+import React from 'react';
+import { useIsFirstRender } from '@supunlakmal/hooks'; // Adjust the import path if necessary
 
 function MyComponent() {
   const isFirstRender = useIsFirstRender();
 
   React.useEffect(() => {
     if (isFirstRender) {
-      console.log("Component rendered for the first time!");
+      console.log('Component rendered for the first time!');
       // Perform initial setup or data fetching here
     } else {
-      console.log("Component re-rendered.");
+      console.log('Component re-rendered.');
     }
   }, [isFirstRender]); // Dependency array includes isFirstRender
 
-  return <div>{isFirstRender ? "First Render!" : "Subsequent Render."}</div>;
+  return <div>{isFirstRender ? 'First Render!' : 'Subsequent Render.'}</div>;
 }
 
 export default MyComponent;

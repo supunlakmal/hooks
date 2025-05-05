@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  * Custom hook for detecting when a specific key is pressed down.
@@ -27,18 +27,16 @@ export function useKeyPress(targetKey: string): boolean {
 
   // Add event listeners
   useEffect(() => {
-    window.addEventListener("keydown", downHandler);
-    window.addEventListener("keyup", upHandler);
+    window.addEventListener('keydown', downHandler);
+    window.addEventListener('keyup', upHandler);
 
     // Remove event listeners on cleanup
     return () => {
-      window.removeEventListener("keydown", downHandler);
-      window.removeEventListener("keyup", upHandler);
+      window.removeEventListener('keydown', downHandler);
+      window.removeEventListener('keyup', upHandler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetKey]); // Empty array ensures effect is only run on mount and unmount, targetKey added for correctness if it changes
 
   return keyPressed;
 }
-
-

@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect } from 'react';
 
 interface UseInfiniteScrollOptions {
   loading: boolean;
@@ -29,9 +29,9 @@ export const useInfiniteScroll = <T extends Element>({
   hasNextPage,
   onLoadMore,
   root = null,
-  rootMargin = "0px",
+  rootMargin = '0px',
   threshold = 0.1,
-}: UseInfiniteScrollOptions): (node: T | null) => void => {
+}: UseInfiniteScrollOptions): ((node: T | null) => void) => {
   const observer = useRef<IntersectionObserver | null>(null);
 
   // Use `useCallback` for the ref setter to get a stable function reference
@@ -68,6 +68,4 @@ export const useInfiniteScroll = <T extends Element>({
   }, []);
 
   return ref; // Return the callback ref function directly
-}
-
-
+};

@@ -1,4 +1,4 @@
-import { useRef, useEffect, RefObject } from "react";
+import { useRef, useEffect, RefObject } from 'react';
 
 // Define a type for possible event targets
 type EventTargetLike =
@@ -33,17 +33,17 @@ export const useEventListener = (
   useEffect(() => {
     const target = element ?? window;
     const targetElement =
-      target && typeof target === "object" && "current" in target
+      target && typeof target === 'object' && 'current' in target
         ? target.current
         : target;
 
     // Ensure targetElement is valid and supports addEventListener
     if (
       !targetElement ||
-      typeof (targetElement as any).addEventListener !== "function"
+      typeof (targetElement as any).addEventListener !== 'function'
     ) {
       console.warn(
-        "useEventListener: Target element does not support addEventListener.",
+        'useEventListener: Target element does not support addEventListener.',
         targetElement
       );
       return;
@@ -65,6 +65,4 @@ export const useEventListener = (
       );
     };
   }, [eventName, element, options]);
-}
-
-
+};

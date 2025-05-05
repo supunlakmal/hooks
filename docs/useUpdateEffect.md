@@ -51,7 +51,7 @@ export default UpdateEffectExample;
 ## API
 
 ```typescript
-import { EffectCallback, DependencyList } from "react";
+import { EffectCallback, DependencyList } from 'react';
 
 function useUpdateEffect(effect: EffectCallback, deps?: DependencyList): void;
 ```

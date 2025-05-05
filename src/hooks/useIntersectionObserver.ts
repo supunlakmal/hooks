@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from "react";
+import { useState, useEffect, RefObject } from 'react';
 
 interface UseIntersectionObserverOptions extends IntersectionObserverInit {}
 
@@ -50,6 +50,4 @@ export const useIntersectionObserver = (
   // Stringifying/deep comparing options might be needed for complex objects
 
   return entry;
-}
-
-
+};

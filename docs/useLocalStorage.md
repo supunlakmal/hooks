@@ -15,12 +15,12 @@ yarn add @supunlakmal/hooks
 ## Usage
 
 ```jsx
-import { useLocalStorage } from "@supunlakmal/hooks";
+import { useLocalStorage } from '@supunlakmal/hooks';
 
 function ProfileSettings() {
   // Similar to useState but persists in localStorage
-  const [username, setUsername] = useLocalStorage("username", "");
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [username, setUsername] = useLocalStorage('username', '');
+  const [theme, setTheme] = useLocalStorage('theme', 'light');
 
   return (
     <div>
@@ -88,20 +88,20 @@ Where `SetValue<T>` is a function with signature:
 ## Example: Dark Mode with Persistence
 
 ```jsx
-import React from "react";
-import { useLocalStorage } from "@supunlakmal/hooks";
+import React from 'react';
+import { useLocalStorage } from '@supunlakmal/hooks';
 
 function DarkModeToggle() {
-  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
+  const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
 
   React.useEffect(() => {
     // Apply the dark mode to the document
-    document.body.classList.toggle("dark-mode", darkMode);
+    document.body.classList.toggle('dark-mode', darkMode);
   }, [darkMode]);
 
   return (
     <button onClick={() => setDarkMode((prevMode) => !prevMode)}>
-      {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     </button>
   );
 }

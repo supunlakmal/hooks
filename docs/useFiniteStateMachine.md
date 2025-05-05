@@ -7,11 +7,11 @@ A hook for managing complex component state using an explicit state machine defi
 Define a state machine configuration object and pass it to the hook.
 
 ```tsx
-import React, { useState } from "react";
-import { useFiniteStateMachine, StateMachineConfig } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useState } from 'react';
+import { useFiniteStateMachine, StateMachineConfig } from '@supunlakmal/hooks'; // Adjust import path
 
-type FetchState = "idle" | "loading" | "success" | "error";
-type FetchEvent = "FETCH" | "SUCCESS" | "ERROR" | "RETRY";
+type FetchState = 'idle' | 'loading' | 'success' | 'error';
+type FetchEvent = 'FETCH' | 'SUCCESS' | 'ERROR' | 'RETRY';
 interface FetchContext {
   data?: any;
   error?: string;
@@ -23,49 +23,49 @@ const fetchMachineConfig: StateMachineConfig<
   FetchEvent,
   FetchContext
 > = {
-  initial: "idle",
+  initial: 'idle',
   context: {
     retries: 0,
   },
   states: {
     idle: {
       on: {
-        FETCH: "loading",
+        FETCH: 'loading',
       },
     },
     loading: {
-      entry: [(ctx) => console.log("Entering loading state...")],
+      entry: [(ctx) => console.log('Entering loading state...')],
       on: {
         SUCCESS: {
-          target: "success",
+          target: 'success',
           actions: [
             (ctx, payload) => ({ data: payload, error: undefined }), // Update context with data
           ],
         },
         ERROR: {
-          target: "error",
+          target: 'error',
           actions: [
             (ctx, payload) => ({ error: payload, data: undefined }), // Update context with error
           ],
         },
       },
-      exit: [(ctx) => console.log("Exiting loading state.")],
+      exit: [(ctx) => console.log('Exiting loading state.')],
     },
     success: {
       on: {
-        FETCH: "loading", // Allow fetching again
+        FETCH: 'loading', // Allow fetching again
       },
     },
     error: {
       on: {
         RETRY: {
-          target: "loading",
+          target: 'loading',
           actions: [
             (ctx) => ({ retries: ctx.retries + 1 }), // Increment retry count
           ],
           cond: (ctx) => ctx.retries < 3, // Condition: only retry if retries < 3
         },
-        FETCH: "loading", // Allow fetching again, resetting retries implicitly by context reset on fetch
+        FETCH: 'loading', // Allow fetching again, resetting retries implicitly by context reset on fetch
       },
     },
   },
@@ -74,10 +74,10 @@ const fetchMachineConfig: StateMachineConfig<
 const DataFetcher: React.FC = () => {
   const { currentState, context, send, matches } =
     useFiniteStateMachine(fetchMachineConfig);
-  const [userId, setUserId] = useState("1");
+  const [userId, setUserId] = useState('1');
 
   const handleFetch = () => {
-    send("FETCH");
+    send('FETCH');
 
     // Simulate API call
     setTimeout(async () => {
@@ -95,15 +95,15 @@ const DataFetcher: React.FC = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        send({ type: "SUCCESS", payload: data });
+        send({ type: 'SUCCESS', payload: data });
       } catch (error: any) {
-        send({ type: "ERROR", payload: error.message || "Unknown error" });
+        send({ type: 'ERROR', payload: error.message || 'Unknown error' });
       }
     }, 1500); // Simulate network delay
   };
 
   const handleRetry = () => {
-    send("RETRY");
+    send('RETRY');
     // If the retry transition occurs (condition met), re-trigger the fetch logic
     // We need a way to re-run the fetch logic on entering 'loading' after RETRY.
     // This example simplifies by requiring manual re-fetch click after retry state change.
@@ -125,23 +125,23 @@ const DataFetcher: React.FC = () => {
           type="number"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
-          disabled={matches("loading")}
+          disabled={matches('loading')}
         />
       </div>
 
-      {matches("idle") && <button onClick={handleFetch}>Fetch User</button>}
-      {matches("loading") && <p>Loading...</p>}
-      {matches("success") && (
+      {matches('idle') && <button onClick={handleFetch}>Fetch User</button>}
+      {matches('loading') && <p>Loading...</p>}
+      {matches('success') && (
         <div>
           <h3>Success!</h3>
           <pre>{JSON.stringify(context.data, null, 2)}</pre>
           <button onClick={handleFetch}>Fetch Again</button>
         </div>
       )}
-      {matches("error") && (
+      {matches('error') && (
         <div>
           <h3>Error</h3>
-          <p style={{ color: "red" }}>{context.error}</p>
+          <p style={{ color: 'red' }}>{context.error}</p>
           {context.retries < 3 ? (
             <button onClick={handleRetry}>Retry</button>
           ) : (

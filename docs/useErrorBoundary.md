@@ -87,8 +87,8 @@ function AppWithErrorBoundary() {
   return (
     <div>
       <h1>useErrorBoundary Demo</h1>
-      {/* 
-         Wrap potentially problematic components in ErrorBoundary. 
+      {/*
+         Wrap potentially problematic components in ErrorBoundary.
          Pass the hook's resetBoundary and error state if needed,
          or rely on react-error-boundary's props like in ErrorFallback.
        */}
@@ -114,7 +114,7 @@ function AppWithErrorBoundary() {
         <BuggyComponent shouldThrow={throwRenderError} />
 
         {/* Component triggering error programmatically via the hook */}
-        {/* ErrorBoundary won't catch this async error directly, 
+        {/* ErrorBoundary won't catch this async error directly,
            but showBoundary will activate the nearest boundary's fallback */}
         {/* We need another boundary or context for showBoundary to work */}
         {/* Let's wrap the AsyncErrorComponent separately for clarity */}

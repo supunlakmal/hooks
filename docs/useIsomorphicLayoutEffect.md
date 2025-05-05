@@ -5,6 +5,7 @@
 This hook is a utility that uses `useLayoutEffect` on the client side and `useEffect` on the server side. This is useful for avoiding server-side rendering mismatches when using `useLayoutEffect`, which can cause warnings or errors.
 
 ## Usage
+
 ```
 typescript
 import { useIsomorphicLayoutEffect } from './src/hooks/useIsomorphicLayoutEffect';
@@ -19,7 +20,9 @@ function MyComponent() {
   return <div>My Component</div>;
 }
 ```
+
 ## API
+
 ```
 typescript
 type EffectCallback = () => void | (() => void);
@@ -31,18 +34,19 @@ declare function useIsomorphicLayoutEffect(
 
 type DependencyList = ReadonlyArray<unknown>;
 ```
+
 ## Parameters
 
-*   **effect**: `EffectCallback`
-    *   A function that contains the effect logic. It may optionally return a cleanup function.
-    *   This function will be called after the component has rendered.
-*   **deps**: `DependencyList` (optional)
-    *   An optional array of dependencies. If any value in this array changes between renders, the effect will be re-run.
-    *   If not provided, the effect will run after every render.
+- **effect**: `EffectCallback`
+  - A function that contains the effect logic. It may optionally return a cleanup function.
+  - This function will be called after the component has rendered.
+- **deps**: `DependencyList` (optional)
+  - An optional array of dependencies. If any value in this array changes between renders, the effect will be re-run.
+  - If not provided, the effect will run after every render.
 
 ## Returns
 
-*   **void**: This hook does not return any value. It is used for performing side effects.
+- **void**: This hook does not return any value. It is used for performing side effects.
 
 ## How it Works
 

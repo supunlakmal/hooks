@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 interface DragOptions {
   /** Data to be transferred during the drag operation. Can be any serializable data. */
@@ -7,15 +7,15 @@ interface DragOptions {
   dataFormat?: string;
   /** Effect allowed for the drag operation (e.g., 'copy', 'move', 'link', 'none'). Defaults to 'move'. */
   dragEffect?:
-    | "none"
-    | "copy"
-    | "copyLink"
-    | "copyMove"
-    | "link"
-    | "linkMove"
-    | "move"
-    | "all"
-    | "uninitialized";
+    | 'none'
+    | 'copy'
+    | 'copyLink'
+    | 'copyMove'
+    | 'link'
+    | 'linkMove'
+    | 'move'
+    | 'all'
+    | 'uninitialized';
   /** Element to use as the drag ghost image. If null, browser default is used. */
   dragImage?: HTMLElement | null;
   /** Offset for the drag ghost image relative to the cursor. */
@@ -47,10 +47,7 @@ export const useDrag = <T extends HTMLElement>(
   ref: React.RefObject<T>,
   options: DragOptions = {}
 ): DragState => {
-  const {
-
-    setDraggableAttribute = true,
-  } = options;
+  const { setDraggableAttribute = true } = options;
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -65,18 +62,18 @@ export const useDrag = <T extends HTMLElement>(
     setIsDragging(true);
 
     if (event.dataTransfer) {
-      event.dataTransfer.effectAllowed = currentOptions.dragEffect || "move";
+      event.dataTransfer.effectAllowed = currentOptions.dragEffect || 'move';
 
       if (currentOptions.transferData !== undefined) {
         let dataString: string | null = null;
         try {
-          if (typeof currentOptions.transferData === "string") {
+          if (typeof currentOptions.transferData === 'string') {
             dataString = currentOptions.transferData;
           } else {
             dataString = JSON.stringify(currentOptions.transferData);
           }
           event.dataTransfer.setData(
-            currentOptions.dataFormat || "text/plain",
+            currentOptions.dataFormat || 'text/plain',
             dataString
           );
         } catch (e) {
@@ -85,8 +82,8 @@ export const useDrag = <T extends HTMLElement>(
             e
           );
           event.dataTransfer.setData(
-            currentOptions.dataFormat || "text/plain",
-            "[Serialization Error]"
+            currentOptions.dataFormat || 'text/plain',
+            '[Serialization Error]'
           );
         }
       }
@@ -101,7 +98,7 @@ export const useDrag = <T extends HTMLElement>(
         // If explicitly null, try to use a minimal transparent image (browser support varies)
         const emptyImage = new Image();
         emptyImage.src =
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
         event.dataTransfer.setDragImage(emptyImage, 0, 0);
       }
       // Otherwise, use browser default drag image
@@ -125,25 +122,23 @@ export const useDrag = <T extends HTMLElement>(
     if (!element) return;
 
     if (setDraggableAttribute) {
-      element.setAttribute("draggable", "true");
+      element.setAttribute('draggable', 'true');
     }
 
-    element.addEventListener("dragstart", handleDragStart);
-    element.addEventListener("drag", handleDrag);
-    element.addEventListener("dragend", handleDragEnd);
+    element.addEventListener('dragstart', handleDragStart);
+    element.addEventListener('drag', handleDrag);
+    element.addEventListener('dragend', handleDragEnd);
 
     return () => {
-      element.removeEventListener("dragstart", handleDragStart);
-      element.removeEventListener("drag", handleDrag);
-      element.removeEventListener("dragend", handleDragEnd);
+      element.removeEventListener('dragstart', handleDragStart);
+      element.removeEventListener('drag', handleDrag);
+      element.removeEventListener('dragend', handleDragEnd);
       if (setDraggableAttribute) {
         // Reset draggable attribute on cleanup if we set it
-        element.removeAttribute("draggable");
+        element.removeAttribute('draggable');
       }
     };
   }, [ref, setDraggableAttribute, handleDragStart, handleDrag, handleDragEnd]);
 
   return { isDragging };
 };
-
-

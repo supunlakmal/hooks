@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface UseVirtualListOptions<T> {
   /** Height of each item in pixels. Assumes fixed height for simplicity. */
@@ -44,7 +44,7 @@ interface UseVirtualListResult<T> {
  */
 export const useVirtualList = <T>(
   options: UseVirtualListOptions<T>
-): UseVirtualListResult<T> =>{
+): UseVirtualListResult<T> => {
   const {
     list,
     itemHeight,
@@ -76,8 +76,8 @@ export const useVirtualList = <T>(
       container.scrollTop = initialScrollTop;
     }
 
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
   }, [containerRef, handleScroll, initialScrollTop]);
 
   const totalHeight = list.length * itemHeight;
@@ -107,7 +107,7 @@ export const useVirtualList = <T>(
     if (innerRef.current) {
       // Although items are positioned absolutely, setting the height ensures scrollbar size is correct.
       innerRef.current.style.height = `${totalHeight}px`;
-      innerRef.current.style.position = "relative"; // Needed for absolute positioning of children
+      innerRef.current.style.position = 'relative'; // Needed for absolute positioning of children
     }
   }, [totalHeight]);
 
@@ -116,6 +116,4 @@ export const useVirtualList = <T>(
     totalHeight,
     innerRef,
   };
-}
-
-
+};

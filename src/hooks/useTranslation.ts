@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 // Define a basic type for translation resources (can be more complex)
 type Translations = Record<string, string | { [key: string]: string }>;
@@ -14,16 +14,16 @@ interface UseTranslationResult {
 
 // Helper function to get nested values from the translation object
 const getNestedValue = (obj: Translations, key: string): string | undefined => {
-  const keys = key.split(".");
+  const keys = key.split('.');
   let current: any = obj;
   for (const k of keys) {
-    if (current && typeof current === "object" && k in current) {
+    if (current && typeof current === 'object' && k in current) {
       current = current[k];
     } else {
       return undefined; // Key path not found
     }
   }
-  return typeof current === "string" ? current : undefined;
+  return typeof current === 'string' ? current : undefined;
 };
 
 /**
@@ -41,25 +41,25 @@ export const useTranslation = (
   // For simplicity, we'll define some static resources here.
   staticResources: Record<string, Translations> = {
     en: {
-      greeting: "Hello",
-      farewell: "Goodbye",
+      greeting: 'Hello',
+      farewell: 'Goodbye',
       button: {
-        submit: "Submit",
-        cancel: "Cancel",
+        submit: 'Submit',
+        cancel: 'Cancel',
       },
-      message: "This is a sample message.",
+      message: 'This is a sample message.',
     },
     es: {
-      greeting: "Hola",
-      farewell: "Adiós",
+      greeting: 'Hola',
+      farewell: 'Adiós',
       button: {
-        submit: "Enviar",
-        cancel: "Cancelar",
+        submit: 'Enviar',
+        cancel: 'Cancelar',
       },
-      message: "Este es un mensaje de ejemplo.",
+      message: 'Este es un mensaje de ejemplo.',
     },
   },
-  initialLanguage: string = "en" // Default to English
+  initialLanguage: string = 'en' // Default to English
 ): UseTranslationResult => {
   const [language, setLanguage] = useState<string>(initialLanguage);
   const [translations, setTranslations] = useState<Translations>({});
@@ -77,7 +77,7 @@ export const useTranslation = (
           `Translations for language "${language}" not found. Falling back to initial language or empty.`
         );
         // Optionally fall back to the initial language or default
-        const fallbackLang = Object.keys(staticResources)[0] || "";
+        const fallbackLang = Object.keys(staticResources)[0] || '';
         setTranslations(staticResources[fallbackLang] || {});
         // Optionally set language back to fallback if desired
         // setLanguage(fallbackLang);
@@ -108,5 +108,3 @@ export const useTranslation = (
     isLoaded,
   };
 };
-
-

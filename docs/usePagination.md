@@ -72,12 +72,12 @@ function PaginatedList() {
         </button>
 
         {/* Optional: Go to specific page */}
-        {/* <input 
-             type="number" 
-             min="1" 
-             max={totalPages} 
-             value={currentPage} 
-             onChange={(e) => goToPage(parseInt(e.target.value, 10) || 1)} 
+        {/* <input
+             type="number"
+             min="1"
+             max={totalPages}
+             value={currentPage}
+             onChange={(e) => goToPage(parseInt(e.target.value, 10) || 1)}
              style={{ width: '50px' }}/> */}
 
         {/* Optional: Items per page selector */}

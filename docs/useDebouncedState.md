@@ -6,15 +6,16 @@ This hook provides a way to debounce state updates. It's useful when you want to
 
 ### Parameters
 
-*   `initialValue`: `T` - The initial value of the state.
-*   `delay`: `number` (optional) - The delay in milliseconds before the state is updated. Defaults to 500ms.
+- `initialValue`: `T` - The initial value of the state.
+- `delay`: `number` (optional) - The delay in milliseconds before the state is updated. Defaults to 500ms.
 
 ### Return Value
 
-*   `debouncedValue`: `T` - The debounced value of the state. This is the value that will be updated after the delay.
-*   `setValue`: `(value: T) => void` - The function to update the state. This will update the internal state and trigger the debounce.
+- `debouncedValue`: `T` - The debounced value of the state. This is the value that will be updated after the delay.
+- `setValue`: `(value: T) => void` - The function to update the state. This will update the internal state and trigger the debounce.
 
 ## Examples
+
 ```
 tsx
 import { useDebouncedState } from  '@supunlakmal/hooks';
@@ -35,6 +36,7 @@ function SearchInput() {
   );
 }
 ```
+
 In this example, `searchTerm` will only be updated 300ms after the user stops typing.
 
 ## How it Works

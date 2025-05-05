@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 /**
  * Custom hook to track the number of times a component has rendered.
@@ -7,7 +7,6 @@ import { useRef } from "react";
  * @returns {number} The current render count (starts at 1).
  */
 export function useRenderCount(): number {
- 
   // Increment on subsequent renders (this runs *after* the return)
   // But since we return the ref's value *before* incrementing, it reflects the render number.
   // On first render, ref is 1, we return 1.
@@ -22,5 +21,3 @@ export function useRenderCount(): number {
 
   return renderCount.current;
 }
-
-

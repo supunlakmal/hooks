@@ -36,7 +36,7 @@ const MyComponent = (props: MyComponentProps) => {
       <h3>MyComponent (ID: {id})</h3>
       <p>Label: {label}</p>
       <p>Internal State: {internalState}</p>
-      {/* Note: Changing internal state doesn't trigger the update log for props, 
+      {/* Note: Changing internal state doesn't trigger the update log for props,
           only changes to props passed from the parent will. */}
     </div>
   );

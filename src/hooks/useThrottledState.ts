@@ -18,14 +18,16 @@ export const useThrottledState = <T>(
       lastExecuted.current = now;
       return;
     } else {
-       timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setThrottledValue(value);
         lastExecuted.current = Date.now();
       }, delay - timeSinceLastExecution);
     }
 
-    return () => { if(timer) clearTimeout(timer)};
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [value, delay]);
 
-  return [throttledValue, setValue] as const ;
+  return [throttledValue, setValue] as const;
 };

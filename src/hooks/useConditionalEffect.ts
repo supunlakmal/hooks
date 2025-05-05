@@ -1,21 +1,22 @@
-import {type DependencyList, useEffect} from 'react';
-
+import { type DependencyList, useEffect } from 'react';
 
 type ConditionsList = readonly unknown[];
 type ConditionsPredicate<Cond extends ConditionsList = ConditionsList> = (
-	conditions: Cond,
+  conditions: Cond
 ) => boolean;
 
 const truthyAndArrayPredicate: ConditionsPredicate = (conditions) =>
-	conditions.every(Boolean);
+  conditions.every(Boolean);
 
 type EffectCallback = (...args: any[]) => any;
 
 type EffectHook<
-	Callback extends EffectCallback = EffectCallback,
-	Deps extends DependencyList | undefined = DependencyList | undefined,
-	RestArgs extends any[] = any[],
-> = ((...args: [Callback, Deps, ...RestArgs]) => void) | ((...args: [Callback, Deps]) => void);
+  Callback extends EffectCallback = EffectCallback,
+  Deps extends DependencyList | undefined = DependencyList | undefined,
+  RestArgs extends any[] = any[],
+> =
+  | ((...args: [Callback, Deps, ...RestArgs]) => void)
+  | ((...args: [Callback, Deps]) => void);
 
 /**
  * Like `useEffect` but its callback is invoked only if all given conditions match a given predicate.
@@ -35,29 +36,27 @@ type EffectHook<
  */
 
 export const useConditionalEffect = <
-	Cond extends ConditionsList,
-	Callback extends EffectCallback = EffectCallback,
-	Deps extends DependencyList | undefined = DependencyList | undefined,
-	HookRestArgs extends any[] = any[],
-	R extends HookRestArgs = HookRestArgs,
+  Cond extends ConditionsList,
+  Callback extends EffectCallback = EffectCallback,
+  Deps extends DependencyList | undefined = DependencyList | undefined,
+  HookRestArgs extends any[] = any[],
+  R extends HookRestArgs = HookRestArgs,
 >(
-	callback: Callback,
-	deps: Deps,
-	conditions: Cond,
-	predicate: ConditionsPredicate<Cond> = truthyAndArrayPredicate,
-	effectHook: EffectHook<Callback, Deps, HookRestArgs> = useEffect,
-	...effectHookRestArgs: R
-): void =>{
-	effectHook(
-		(() => {
-			if (predicate(conditions)) {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-				return callback();
-			}
-		}) as Callback,
-		deps,
-		...effectHookRestArgs,
-	);
+  callback: Callback,
+  deps: Deps,
+  conditions: Cond,
+  predicate: ConditionsPredicate<Cond> = truthyAndArrayPredicate,
+  effectHook: EffectHook<Callback, Deps, HookRestArgs> = useEffect,
+  ...effectHookRestArgs: R
+): void => {
+  effectHook(
+    (() => {
+      if (predicate(conditions)) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        return callback();
+      }
+    }) as Callback,
+    deps,
+    ...effectHookRestArgs
+  );
 };
-
-

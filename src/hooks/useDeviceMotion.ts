@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import {useEventListener} from "./useEventListener"; // Assuming useEventListener is in the same directory
+import { useState, useEffect } from 'react';
+import { useEventListener } from './useEventListener'; // Assuming useEventListener is in the same directory
 
 interface DeviceMotionState {
   acceleration: DeviceMotionEventAcceleration | null;
@@ -33,7 +33,7 @@ export const useDeviceMotion = (): DeviceMotionState => {
 
   useEffect(() => {
     // Feature detection
-    if (typeof window !== "undefined" && "DeviceMotionEvent" in window) {
+    if (typeof window !== 'undefined' && 'DeviceMotionEvent' in window) {
       setIsSupported(true);
     } else {
       setIsSupported(false);
@@ -50,9 +50,8 @@ export const useDeviceMotion = (): DeviceMotionState => {
     });
   };
 
-  useEventListener("devicemotion", handleMotionChange, undefined, isSupported);
+  useEventListener('devicemotion', handleMotionChange, undefined, isSupported);
 
   // Combine internal isSupported with the rest of the state for the return value
   return { ...state, isSupported };
-}
-
+};

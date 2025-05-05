@@ -7,8 +7,8 @@ A hook similar to `useFetch` but with an added layer of simple in-memory caching
 Use it like `useFetch`, providing a URL and optional configuration. The hook automatically checks the cache before making a network request.
 
 ```tsx
-import React, { useState } from "react";
-import { useCachedFetch } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useState } from 'react';
+import { useCachedFetch } from '@supunlakmal/hooks'; // Adjust import path
 
 interface User {
   id: number;
@@ -32,7 +32,7 @@ const UserDisplay: React.FC<{ userId: number }> = ({ userId }) => {
   if (isLoading) return <p>Loading user {userId}...</p>;
   if (error)
     return (
-      <p style={{ color: "red" }}>
+      <p style={{ color: 'red' }}>
         Error fetching user {userId}: {error.message}
       </p>
     );
@@ -40,7 +40,7 @@ const UserDisplay: React.FC<{ userId: number }> = ({ userId }) => {
 
   return (
     <div
-      style={{ border: "1px solid lightgray", margin: "10px", padding: "10px" }}
+      style={{ border: '1px solid lightgray', margin: '10px', padding: '10px' }}
     >
       <h4>
         {data.name} (@{data.username})
@@ -72,16 +72,16 @@ const App: React.FC = () => {
           <button
             key={id}
             onClick={() => setSelectedUserId(id)}
-            style={{ fontWeight: selectedUserId === id ? "bold" : "normal" }}
+            style={{ fontWeight: selectedUserId === id ? 'bold' : 'normal' }}
           >
             User {id}
           </button>
         ))}
         <button
           onClick={() => setShowUser((s) => !s)}
-          style={{ marginLeft: "20px" }}
+          style={{ marginLeft: '20px' }}
         >
-          {showUser ? "Hide User" : "Show User"}
+          {showUser ? 'Hide User' : 'Show User'}
         </button>
       </div>
 

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 /**
  * Type definition for the return value of useToggle.
@@ -8,7 +8,7 @@ type UseToggleReturn = [
   boolean, // currentValue
   () => void, // toggle function
   () => void, // setOn function
-  () => void // setOff function
+  () => void, // setOff function
 ];
 
 /**
@@ -42,5 +42,3 @@ export const useToggle = (initialValue: boolean = false): UseToggleReturn => {
 
   return [value, toggle, setOn, setOff];
 };
-
-

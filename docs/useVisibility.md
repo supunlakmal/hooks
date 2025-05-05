@@ -101,7 +101,7 @@ export default VisibilityExample;
 ## API
 
 ```typescript
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
 interface UseVisibilityOptions extends IntersectionObserverInit {
   initialIsVisible?: boolean;

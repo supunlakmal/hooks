@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface ScrollSpyOptions {
   /** The container element whose scroll position is monitored. Defaults to window. */
@@ -93,12 +93,12 @@ export const useScrollSpy = (
     // Initial check
     handleScroll();
 
-    container.addEventListener("scroll", throttledHandleScroll);
-    window.addEventListener("resize", throttledHandleScroll); // Also check on resize
+    container.addEventListener('scroll', throttledHandleScroll);
+    window.addEventListener('resize', throttledHandleScroll); // Also check on resize
 
     return () => {
-      container.removeEventListener("scroll", throttledHandleScroll);
-      window.removeEventListener("resize", throttledHandleScroll);
+      container.removeEventListener('scroll', throttledHandleScroll);
+      window.removeEventListener('resize', throttledHandleScroll);
       if (throttleTimeoutRef.current) {
         clearTimeout(throttleTimeoutRef.current);
       }
@@ -107,5 +107,3 @@ export const useScrollSpy = (
 
   return activeSectionId;
 };
-
-

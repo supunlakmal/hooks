@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import {useEventListener} from "./useEventListener"; // Assuming useEventListener handles window
+import { useState, useEffect } from 'react';
+import { useEventListener } from './useEventListener'; // Assuming useEventListener handles window
 
 export interface DeviceOrientationState {
   alpha: number | null; // Rotation around Z-axis (0-360)
@@ -9,7 +9,7 @@ export interface DeviceOrientationState {
   isSupported: boolean;
 }
 
-const initialOrientationState: Omit<DeviceOrientationState, "isSupported"> = {
+const initialOrientationState: Omit<DeviceOrientationState, 'isSupported'> = {
   alpha: null,
   beta: null,
   gamma: null,
@@ -24,7 +24,7 @@ const initialOrientationState: Omit<DeviceOrientationState, "isSupported"> = {
  */
 export const useDeviceOrientation = (): DeviceOrientationState => {
   const [state, setState] = useState<
-    Omit<DeviceOrientationState, "isSupported">
+    Omit<DeviceOrientationState, 'isSupported'>
   >(initialOrientationState);
   const [isSupported, setIsSupported] = useState<boolean>(false);
 
@@ -39,25 +39,23 @@ export const useDeviceOrientation = (): DeviceOrientationState => {
 
   useEffect(() => {
     // Check for API support on mount
-    if (typeof window !== "undefined" && "DeviceOrientationEvent" in window) {
+    if (typeof window !== 'undefined' && 'DeviceOrientationEvent' in window) {
       setIsSupported(true);
     } else {
       setIsSupported(false);
-      console.warn("DeviceOrientationEvent API not supported by this browser.");
+      console.warn('DeviceOrientationEvent API not supported by this browser.');
     }
   }, []);
 
   // Use useEventListener hook to manage the listener
   useEventListener(
-    "deviceorientation",
+    'deviceorientation',
     handleOrientationChange as EventListener, // Cast handler to basic EventListener
-    isSupported && typeof window !== "undefined" ? window : undefined
+    isSupported && typeof window !== 'undefined' ? window : undefined
   );
 
   // Note: Some browsers might require HTTPS or user permission for orientation data.
   // This basic hook doesn't handle requesting permissions.
 
   return { ...state, isSupported };
-}
-
-
+};

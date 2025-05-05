@@ -7,15 +7,15 @@ Monitors the scroll position of a container (or the window) and determines which
 Create refs for each section you want to track, pass them as an array to the hook, and optionally provide a container ref and offset.
 
 ```tsx
-import React, { useRef, useEffect } from "react";
-import { useScrollSpy } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useRef, useEffect } from 'react';
+import { useScrollSpy } from '@supunlakmal/hooks'; // Adjust import path
 
 const sectionsData = [
-  { id: "section-1", title: "Section 1", color: "#ffdddd" },
-  { id: "section-2", title: "Section 2", color: "#ddffdd" },
-  { id: "section-3", title: "Section 3", color: "#ddddff" },
-  { id: "section-4", title: "Section 4", color: "#ffffdd" },
-  { id: "section-5", title: "Section 5", color: "#ffddff" },
+  { id: 'section-1', title: 'Section 1', color: '#ffdddd' },
+  { id: 'section-2', title: 'Section 2', color: '#ddffdd' },
+  { id: 'section-3', title: 'Section 3', color: '#ddddff' },
+  { id: 'section-4', title: 'Section 4', color: '#ffffdd' },
+  { id: 'section-5', title: 'Section 5', color: '#ffddff' },
 ];
 
 const ScrollSpyComponent: React.FC = () => {
@@ -32,45 +32,45 @@ const ScrollSpyComponent: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log("Active Section:", activeSectionId);
+    console.log('Active Section:', activeSectionId);
   }, [activeSectionId]);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const navStyle: React.CSSProperties = {
-    position: "sticky",
-    top: "0",
-    backgroundColor: "white",
-    padding: "10px",
-    borderBottom: "1px solid #ccc",
+    position: 'sticky',
+    top: '0',
+    backgroundColor: 'white',
+    padding: '10px',
+    borderBottom: '1px solid #ccc',
     zIndex: 10,
-    display: "flex",
-    gap: "15px",
+    display: 'flex',
+    gap: '15px',
   };
 
   const sectionStyle: React.CSSProperties = {
-    height: "80vh", // Make sections taller than viewport
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "2em",
-    borderBottom: "1px dashed #aaa",
+    height: '80vh', // Make sections taller than viewport
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '2em',
+    borderBottom: '1px dashed #aaa',
   };
 
   return (
     <div>
       {/* Sticky Navigation */}
       <nav style={navStyle}>
-        <strong>Active: {activeSectionId || "None"} | Jump To:</strong>
+        <strong>Active: {activeSectionId || 'None'} | Jump To:</strong>
         {sectionsData.map((section, index) => (
           <button
             key={section.id}
             onClick={() => scrollToSection(sectionRefs[index])}
             style={{
-              fontWeight: activeSectionId === section.id ? "bold" : "normal",
-              color: activeSectionId === section.id ? "blue" : "black",
+              fontWeight: activeSectionId === section.id ? 'bold' : 'normal',
+              color: activeSectionId === section.id ? 'blue' : 'black',
             }}
           >
             {section.title}

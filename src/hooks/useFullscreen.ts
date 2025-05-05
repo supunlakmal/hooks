@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, RefObject } from "react";
+import { useState, useEffect, useCallback, RefObject } from 'react';
 
 // Simpler type checks, relying on standard properties first
 interface FullscreenDocument extends Document {
@@ -30,12 +30,14 @@ interface UseFullscreenResult {
  * @param {RefObject<HTMLElement>} ref - Ref attached to the target element.
  * @returns {UseFullscreenResult} An object with fullscreen status and control functions.
  */
-export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult => {
+export const useFullscreen = (
+  ref: RefObject<HTMLElement>
+): UseFullscreenResult => {
   // Get the initial state based on the standard API if possible
   const [isFullscreen, setIsFullscreen] = useState<boolean>(
     () =>
       !!(
-        typeof document !== "undefined" &&
+        typeof document !== 'undefined' &&
         document.fullscreenElement &&
         document.fullscreenElement === ref.current
       )
@@ -43,11 +45,11 @@ export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult 
 
   // Check for API support using the standard property
   const isSupported = !!(
-    typeof document !== "undefined" && document.fullscreenEnabled
+    typeof document !== 'undefined' && document.fullscreenEnabled
   );
 
   const getFullscreenElement = (): Element | null => {
-    if (typeof document === "undefined") return null;
+    if (typeof document === 'undefined') return null;
     const doc = document as FullscreenDocument;
     // Prioritize standard, then fall back to prefixed versions
     return (
@@ -66,29 +68,29 @@ export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult 
   }, [ref]);
 
   useEffect(() => {
-    if (!isSupported || typeof document === "undefined") return;
+    if (!isSupported || typeof document === 'undefined') return;
 
     // Still need prefixed event names for listeners
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
-    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
-    document.addEventListener("msfullscreenchange", handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
 
     // Update state on mount
     handleFullscreenChange();
 
     return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
       document.removeEventListener(
-        "webkitfullscreenchange",
+        'webkitfullscreenchange',
         handleFullscreenChange
       );
       document.removeEventListener(
-        "mozfullscreenchange",
+        'mozfullscreenchange',
         handleFullscreenChange
       );
       document.removeEventListener(
-        "msfullscreenchange",
+        'msfullscreenchange',
         handleFullscreenChange
       );
     };
@@ -106,9 +108,9 @@ export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult 
       else if (element.mozRequestFullScreen)
         await element.mozRequestFullScreen();
       else if (element.msRequestFullscreen) await element.msRequestFullscreen();
-      else console.warn("Fullscreen API not fully supported on this element.");
+      else console.warn('Fullscreen API not fully supported on this element.');
     } catch (error) {
-      console.error("Failed to enter fullscreen:", error);
+      console.error('Failed to enter fullscreen:', error);
       setIsFullscreen(false); // Reset state on failure
     }
   }, [isSupported, ref]);
@@ -125,10 +127,10 @@ export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult 
       else if (doc.msExitFullscreen) await doc.msExitFullscreen();
       else
         console.warn(
-          "Exit Fullscreen API not fully supported on this document."
+          'Exit Fullscreen API not fully supported on this document.'
         );
     } catch (error) {
-      console.error("Failed to exit fullscreen:", error);
+      console.error('Failed to exit fullscreen:', error);
     }
   }, [isSupported]);
 
@@ -148,6 +150,4 @@ export const useFullscreen = (ref: RefObject<HTMLElement>): UseFullscreenResult 
     toggleFullscreen,
     isSupported,
   };
-}
-
-
+};

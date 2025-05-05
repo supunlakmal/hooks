@@ -22,7 +22,9 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
+
 ```
 typescript
 type UseCounterReturn = {
@@ -32,38 +34,39 @@ type UseCounterReturn = {
   reset: () => void;
 };
 ```
+
 ## Parameters
 
-*   **initialValue**
-    *   Type: `number`
-    *   Description: The starting value of the counter.
-    *   Optional: No
+- **initialValue**
+  - Type: `number`
+  - Description: The starting value of the counter.
+  - Optional: No
 
 ## Returns
 
-*   **count**
-    *   Type: `number`
-    *   Description: The current value of the counter.
-*   **increment**
-    *   Type: `() => void`
-    *   Description: A function to increment the counter by 1.
-*   **decrement**
-    *   Type: `() => void`
-    *   Description: A function to decrement the counter by 1.
-*   **reset**
-    *   Type: `() => void`
-    *   Description: A function to reset the counter to its initial value.
+- **count**
+  - Type: `number`
+  - Description: The current value of the counter.
+- **increment**
+  - Type: `() => void`
+  - Description: A function to increment the counter by 1.
+- **decrement**
+  - Type: `() => void`
+  - Description: A function to decrement the counter by 1.
+- **reset**
+  - Type: `() => void`
+  - Description: A function to reset the counter to its initial value.
 
 ## How it Works
 
 The `useCounter` hook uses the `useState` hook from React to manage the numerical counter. It initializes the counter with the provided `initialValue`.
 
-*   **State Management:**
-    *   `useState` is used to create a state variable `count`.
-*   **Increment Function:**
-    *   The `increment` function updates the `count` state by adding 1 to the current value.
-*   **Decrement Function:**
-    *   The `decrement` function updates the `count` state by subtracting 1 from the current value.
-*   **Reset Function:**
-    *   The `reset` function sets the `count` state back to the `initialValue`.
-* No Cleanup procedures.
+- **State Management:**
+  - `useState` is used to create a state variable `count`.
+- **Increment Function:**
+  - The `increment` function updates the `count` state by adding 1 to the current value.
+- **Decrement Function:**
+  - The `decrement` function updates the `count` state by subtracting 1 from the current value.
+- **Reset Function:**
+  - The `reset` function sets the `count` state back to the `initialValue`.
+- No Cleanup procedures.

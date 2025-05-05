@@ -7,6 +7,7 @@ The `useIsMounted` hook provides a way to check if a component is currently moun
 ## Usage
 
 A clear code example demonstrating how to use the hook.
+
 ```
 typescript
 import { useEffect } from 'react';
@@ -33,18 +34,21 @@ function MyComponent() {
   return <div>My Component</div>;
 }
 ```
+
 ## API
+
 ```
 typescript
 function useIsMounted(): () => boolean;
 ```
+
 ## Parameters
 
 This hook does not take any parameters.
 
 ## Returns
 
-*   **`() => boolean`**: A function that, when called, returns a boolean indicating whether the component is currently mounted (`true`) or not (`false`).
+- **`() => boolean`**: A function that, when called, returns a boolean indicating whether the component is currently mounted (`true`) or not (`false`).
 
 ## How it Works
 

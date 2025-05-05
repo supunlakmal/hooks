@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 // Define valid permission names based on the Permissions API spec
 // Note: This list might evolve; check MDN for the latest.
 // Using PermissionName directly relies on TypeScript's lib.dom.d.ts
 
-type PermissionState = PermissionStatus["state"] | "unsupported" | "querying";
+type PermissionState = PermissionStatus['state'] | 'unsupported' | 'querying';
 
 export interface UsePermissionState {
   state: PermissionState;
@@ -19,23 +19,23 @@ export interface UsePermissionState {
  * @returns {UsePermissionState} An object containing the permission state, support status, and a function to re-query.
  */
 export const usePermission = (
-  permissionDesc: PermissionDescriptor,
+  permissionDesc: PermissionDescriptor
 ): UsePermissionState => {
-  const [state, setState] = useState<PermissionState>("querying");
+  const [state, setState] = useState<PermissionState>('querying');
   const [isSupported, setIsSupported] = useState<boolean>(false);
   const [permissionStatus, setPermissionStatus] =
     useState<PermissionStatus | null>(null);
 
   const queryPermission = useCallback(async () => {
-    if (typeof navigator === "undefined" || !navigator.permissions) {
+    if (typeof navigator === 'undefined' || !navigator.permissions) {
       setIsSupported(false);
-      setState("unsupported");
+      setState('unsupported');
       setPermissionStatus(null);
       return;
     }
 
     setIsSupported(true);
-    setState("querying"); // Set state to querying before async call
+    setState('querying'); // Set state to querying before async call
     setPermissionStatus(null);
 
     try {
@@ -55,7 +55,7 @@ export const usePermission = (
       // If query fails (e.g., unrecognized permission), treat as unsupported or denied?
       // Let's default to 'denied' or maybe a specific 'error' state?
       // For simplicity, sticking to 'denied' if query fails after support check.
-      setState("denied");
+      setState('denied');
       setPermissionStatus(null);
     }
   }, [permissionDesc]); // Re-query if permissionDesc changes
@@ -86,6 +86,4 @@ export const usePermission = (
   }, [permissionStatus]); // Run cleanup when permissionStatus object itself changes
 
   return { state, isSupported, query: queryPermission };
-}
-
-
+};

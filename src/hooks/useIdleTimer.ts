@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface UseIdleTimerProps {
   onIdle: () => void;
@@ -8,11 +8,11 @@ interface UseIdleTimerProps {
 }
 
 const defaultEvents: (keyof WindowEventMap)[] = [
-  "mousemove",
-  "keydown",
-  "mousedown",
-  "touchstart",
-  "scroll",
+  'mousemove',
+  'keydown',
+  'mousedown',
+  'touchstart',
+  'scroll',
 ];
 
 /**
@@ -97,6 +97,4 @@ export const useIdleTimer = ({
   }, [resetTimer, debouncedActivityHandler]); // Add dependencies correctly
 
   return isIdle;
-}
-
-
+};

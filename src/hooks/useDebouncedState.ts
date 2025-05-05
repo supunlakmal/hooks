@@ -13,4 +13,4 @@ export const useDebouncedState = <T>(initialValue: T, delay: number = 500) => {
   }, [value, delay]);
 
   return [debouncedValue, setValue] as const;
-}
+};

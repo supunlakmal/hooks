@@ -15,7 +15,7 @@ yarn add @supunlakmal/hooks
 ## Usage
 
 ```jsx
-import { useToggle } from "@supunlakmal/hooks";
+import { useToggle } from '@supunlakmal/hooks';
 
 function ToggleExample() {
   // Use the hook with default initial value (false)
@@ -26,7 +26,7 @@ function ToggleExample() {
 
   return (
     <div>
-      <div>Status: {isOpen ? "Open" : "Closed"}</div>
+      <div>Status: {isOpen ? 'Open' : 'Closed'}</div>
       <button onClick={toggle}>Toggle</button>
       <button onClick={setOn}>Open</button>
       <button onClick={setOff}>Close</button>
@@ -67,8 +67,8 @@ The hook returns an array with the following elements:
 ## Example: Collapsible Panel
 
 ```jsx
-import React from "react";
-import { useToggle } from "@supunlakmal/hooks";
+import React from 'react';
+import { useToggle } from '@supunlakmal/hooks';
 
 function CollapsiblePanel({ title, children }) {
   const [isExpanded, toggle, expand, collapse] = useToggle(false);
@@ -77,7 +77,7 @@ function CollapsiblePanel({ title, children }) {
     <div className="panel">
       <div className="panel-header">
         <h3>{title}</h3>
-        <button onClick={toggle}>{isExpanded ? "Collapse" : "Expand"}</button>
+        <button onClick={toggle}>{isExpanded ? 'Collapse' : 'Expand'}</button>
       </div>
 
       {isExpanded && <div className="panel-content">{children}</div>}
@@ -89,8 +89,8 @@ function CollapsiblePanel({ title, children }) {
 ## Example: Form Input with Show/Hide Password
 
 ```jsx
-import React from "react";
-import { useToggle } from "@supunlakmal/hooks";
+import React from 'react';
+import { useToggle } from '@supunlakmal/hooks';
 
 function PasswordInput() {
   const [passwordVisible, toggleVisibility, showPassword, hidePassword] =
@@ -99,15 +99,15 @@ function PasswordInput() {
   return (
     <div className="password-input-wrapper">
       <input
-        type={passwordVisible ? "text" : "password"}
+        type={passwordVisible ? 'text' : 'password'}
         placeholder="Enter password"
       />
       <button
         type="button"
         onClick={toggleVisibility}
-        aria-label={passwordVisible ? "Hide password" : "Show password"}
+        aria-label={passwordVisible ? 'Hide password' : 'Show password'}
       >
-        {passwordVisible ? "Hide" : "Show"}
+        {passwordVisible ? 'Hide' : 'Show'}
       </button>
     </div>
   );

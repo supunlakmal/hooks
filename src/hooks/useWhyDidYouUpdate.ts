@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 interface Props {
   [key: string]: any;
@@ -75,5 +75,3 @@ export function useWhyDidYouUpdate(componentName: string, props: Props): void {
     previousProps.current = props;
   }); // Runs after every render
 }
-
-

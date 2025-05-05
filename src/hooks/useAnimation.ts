@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect } from 'react';
 
 // Define the callback type
 type AnimationCallback = (progress: number, elapsed: number) => void;
@@ -65,7 +65,7 @@ export const useAnimation = (
   );
 
   const start = useCallback(() => {
-    if (isRunning || typeof window === "undefined") return; // Prevent starting if already running or SSR
+    if (isRunning || typeof window === 'undefined') return; // Prevent starting if already running or SSR
 
     setIsRunning(true);
     startTimeRef.current = null; // Reset start time
@@ -103,6 +103,4 @@ export const useAnimation = (
   }, []);
 
   return { start, stop, reset, isRunning };
-}
-
-
+};
