@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
  * @param {() => void} callback The function to execute at each interval.
  * @param {number | null} delay The interval duration in milliseconds. If null, the interval is not set/cleared.
  */
-export function useInterval(callback: () => void, delay: number | null): void {
+export const useInterval = (callback: () => void, delay: number | null): void => {
   const savedCallback = useRef<() => void>(callback);
 
   // Remember the latest callback.
@@ -31,4 +31,4 @@ export function useInterval(callback: () => void, delay: number | null): void {
     // Clear interval if the component unmounts or delay changes
     return () => clearInterval(id);
   }, [delay]); // Re-run effect only if delay changes
-}
+};

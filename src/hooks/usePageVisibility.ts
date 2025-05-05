@@ -28,7 +28,7 @@ const getVisibilityProperties = (): {
  *
  * @returns {boolean} True if the page is currently visible, false otherwise.
  */
-export function usePageVisibility(): boolean {
+export const usePageVisibility = (): boolean => {
   const visibilityProps = getVisibilityProperties();
   const isSupported = !!visibilityProps.hidden;
 
@@ -67,4 +67,4 @@ export function usePageVisibility(): boolean {
   }, [isSupported, visibilityProps.hidden, visibilityProps.visibilityChange]);
 
   return isVisible;
-}
+};

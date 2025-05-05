@@ -151,15 +151,16 @@ const DEFAULT_OPTIONS = {
   initializeWithValue: true,
 };
 
-export function useStorageValue<
+export const useStorageValue = <
   Type,
   Default extends Type = Type,
   Initialize extends boolean | undefined = boolean | undefined,
 >(
   storage: Storage,
   key: string,
-  options?: UseStorageValueOptions<Type, Initialize>
-): UseStorageValueResult<Type, Default, Initialize> {
+  options?: UseStorageValueOptions<Type, Initialize>,
+): UseStorageValueResult<Type, Default, Initialize> => {
+
   const optionsRef = useSyncedRef({ ...DEFAULT_OPTIONS, ...options });
   const parse = (str: string | null, fallback: Type | null): Type | null => {
     const parseFunction = optionsRef.current.parse ?? defaultParse;
@@ -294,7 +295,7 @@ export function useStorageValue<
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
   );
-}
+};
 
 const defaultStringify = (data: unknown): string | null => {
   if (data === null) {

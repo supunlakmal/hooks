@@ -20,7 +20,7 @@ type UseSetResult<T> = [Set<T>, SetActions<T>];
  * @param initialSet - Optional initial Set or an iterable of values.
  * @returns A tuple containing the current Set state and an actions object.
  */
-export function useSet<T>(initialSet?: Set<T> | Iterable<T>): UseSetResult<T> {
+export const useSet = <T>(initialSet?: Set<T> | Iterable<T>): UseSetResult<T> => {
   const [set, setSet] = useState<Set<T>>(() => new Set(initialSet));
 
   const actions = useMemo(
@@ -73,4 +73,4 @@ export function useSet<T>(initialSet?: Set<T> | Iterable<T>): UseSetResult<T> {
   ); // Recalculate actions only if initialSet reference changes
 
   return [set, actions];
-}
+};

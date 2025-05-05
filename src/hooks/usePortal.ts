@@ -51,12 +51,11 @@ const getOrCreatePortalRoot = (
  * @param {Record<string, string>} [options.attributes] - Additional HTML attributes to set on the portal container div.
  * @returns {FunctionComponent<{ children: ReactNode }>} A Portal component.
  */
-export function usePortal({
+export const usePortal = ({
   id = 'react-portal-root', // Default ID
   attributes = defaultAttributes,
-}: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> {
+}: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> =>{
   const portalElementRef = useRef<HTMLElement | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
   const portalCreatedByHook = useRef<boolean>(false);
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export function usePortal({
     const { element, created } = getOrCreatePortalRoot(id, attributes);
     portalElementRef.current = element;
     portalCreatedByHook.current = created;
-    setIsMounted(true); // Signal that portal root is ready
+    
 
     // Cleanup function
     return () => {
@@ -76,10 +75,11 @@ export function usePortal({
       // Reset refs/state on unmount
       portalElementRef.current = null;
       portalCreatedByHook.current = false;
-      setIsMounted(false);
+     
     };
   }, [id, attributes]); // Re-run if id or attributes change
-
+  const [isMounted, setIsMounted] = useState(!!portalElementRef.current);
+  setIsMounted(!!portalElementRef.current)
   // The Portal component definition using useCallback for stability
   const Portal = useCallback(
     ({ children }: { children: ReactNode }): React.ReactPortal | null => {
@@ -90,7 +90,7 @@ export function usePortal({
       }
       return null; // Render nothing if not ready
     },
-    [isMounted]
+    [isMounted, portalElementRef.current]
   );
 
   return Portal;
