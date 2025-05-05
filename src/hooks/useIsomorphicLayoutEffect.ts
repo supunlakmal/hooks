@@ -1,9 +1,10 @@
-import {useEffect, useLayoutEffect} from 'react';
-import {isBrowser} from '../util/const';
+import { useEffect, useLayoutEffect } from 'react';
+import { isBrowser } from '../util/const';
 
 /**
  * Alias for `useLayoutEffect` in browser, but for `useEffect` at server side. Helps to avoid
  * warning shown during SSR.
  */
-export const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
-
+export const useIsomorphicLayoutEffect = isBrowser
+  ? useLayoutEffect
+  : useEffect;

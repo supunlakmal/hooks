@@ -9,8 +9,8 @@ _(Note: This hook focuses on direct element dragging via translation. For HTML D
 Attach a ref to the element you want to make draggable and pass it to the hook.
 
 ```tsx
-import React, { useRef, useState } from "react";
-import { useDraggable } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useRef, useState } from 'react';
+import { useDraggable } from '@supunlakmal/hooks'; // Adjust import path
 
 const DraggableBox: React.FC = () => {
   const dragRef = useRef<any>(null);
@@ -20,9 +20,9 @@ const DraggableBox: React.FC = () => {
   const { position, isDragging } = useDraggable(dragRef, {
     initialPosition: { x: 50, y: 50 },
     boundsRef: boundsRef, // Constrain within the parent
-    onDragStart: (pos) => console.log("Drag Start:", pos),
-    onDrag: (pos) => console.log("Dragging:", pos),
-    onDragEnd: (pos) => console.log("Drag End:", pos),
+    onDragStart: (pos) => console.log('Drag Start:', pos),
+    onDrag: (pos) => console.log('Dragging:', pos),
+    onDragEnd: (pos) => console.log('Drag End:', pos),
   });
 
   // --- Controlled Mode Example (Comment out the uncontrolled hook above to use) ---
@@ -38,26 +38,26 @@ const DraggableBox: React.FC = () => {
   // const position = controlledPos; // Use the controlled state for styling
 
   const boxStyle: React.CSSProperties = {
-    width: "100px",
-    height: "100px",
-    backgroundColor: isDragging ? "lightblue" : "coral",
-    border: "2px solid black",
-    position: "absolute", // IMPORTANT: Required for transform to position correctly
+    width: '100px',
+    height: '100px',
+    backgroundColor: isDragging ? 'lightblue' : 'coral',
+    border: '2px solid black',
+    position: 'absolute', // IMPORTANT: Required for transform to position correctly
     left: 0, // Initial CSS position (transform handles movement)
     top: 0, // Initial CSS position
-    cursor: isDragging ? "grabbing" : "grab",
-    touchAction: "none", // Prevent scrolling on touch devices while dragging
-    userSelect: "none", // Prevent text selection
+    cursor: isDragging ? 'grabbing' : 'grab',
+    touchAction: 'none', // Prevent scrolling on touch devices while dragging
+    userSelect: 'none', // Prevent text selection
     // Transform is applied by the hook's useEffect
   };
 
   const boundsStyle: React.CSSProperties = {
-    width: "500px",
-    height: "400px",
-    border: "2px dashed grey",
-    position: "relative", // Needed for absolute positioning of the child
-    marginTop: "20px",
-    overflow: "hidden", // Hide parts of the box that go outside
+    width: '500px',
+    height: '400px',
+    border: '2px dashed grey',
+    position: 'relative', // Needed for absolute positioning of the child
+    marginTop: '20px',
+    overflow: 'hidden', // Hide parts of the box that go outside
   };
 
   return (
@@ -67,7 +67,7 @@ const DraggableBox: React.FC = () => {
       <div ref={boundsRef} style={boundsStyle}>
         <div ref={dragRef} style={boxStyle}>
           Drag Me!
-          <p style={{ fontSize: "0.8em", margin: "2px" }}>
+          <p style={{ fontSize: '0.8em', margin: '2px' }}>
             ({position.x.toFixed(0)}, {position.y.toFixed(0)})
           </p>
         </div>

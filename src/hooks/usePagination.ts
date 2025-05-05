@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 interface UsePaginationProps {
   totalItems: number;
@@ -34,7 +34,6 @@ export const usePagination = ({
   initialPage = 1,
   initialItemsPerPage = 10,
 }: UsePaginationProps): UsePaginationReturn => {
-
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
   const [itemsPerPage, setItemsPerPageState] =
     useState<number>(initialItemsPerPage);
@@ -71,7 +70,6 @@ export const usePagination = ({
   // Set items per page (and reset to page 1)
   const setItemsPerPage = useCallback(
     (newItemsPerPage: number) => {
- 
       setItemsPerPageState(Math.max(1, newItemsPerPage));
       // Reset to page 1 if current page is out of bounds with new itemsPerPage
       setCurrentPage(1);
@@ -107,4 +105,3 @@ export const usePagination = ({
     setItemsPerPage,
   };
 };
-

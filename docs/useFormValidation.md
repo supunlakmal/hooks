@@ -7,23 +7,23 @@ A comprehensive hook for managing form state, validation (on change, blur, submi
 Define initial values and a validation schema, then use the returned state and handlers to build your form.
 
 ```tsx
-import React from "react";
+import React from 'react';
 import {
   useFormValidation,
   ValidationSchema,
   ValidationRule,
   FormValues,
-} from "@supunlakmal/hooks"; // Adjust import path
+} from '@supunlakmal/hooks'; // Adjust import path
 
 // --- Validation Rules ---
 const required: ValidationRule<any> = (value) =>
-  value === "" || value === null || value === undefined
-    ? "This field is required"
+  value === '' || value === null || value === undefined
+    ? 'This field is required'
     : undefined;
 
 const isEmail: ValidationRule<any> = (value) =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
+    ? 'Invalid email address'
     : undefined;
 
 const minLength =
@@ -43,11 +43,11 @@ interface MyFormValues extends FormValues {
 }
 
 const initialFormData: MyFormValues = {
-  name: "",
-  email: "",
+  name: '',
+  email: '',
   subscribe: false,
-  feedback: "",
-  role: "developer",
+  feedback: '',
+  role: 'developer',
 };
 
 const formSchema: ValidationSchema<MyFormValues> = {
@@ -56,7 +56,7 @@ const formSchema: ValidationSchema<MyFormValues> = {
   feedback: (value, fieldName, values) => {
     // Conditional validation: feedback required only if subscribed
     if (values.subscribe && !value) {
-      return "Feedback is required when subscribed";
+      return 'Feedback is required when subscribed';
     }
     return undefined;
   },
@@ -82,13 +82,13 @@ const RegistrationForm: React.FC = () => {
   });
 
   const handleFormSubmit = async (formValues: MyFormValues) => {
-    console.log("Form Submitted:", formValues);
+    console.log('Form Submitted:', formValues);
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Submission successful!");
+    console.log('Submission successful!');
     // Optionally reset form after successful submission
     // resetForm();
-    alert("Form submitted successfully! (Check console)");
+    alert('Form submitted successfully! (Check console)');
   };
 
   return (
@@ -106,11 +106,11 @@ const RegistrationForm: React.FC = () => {
           onBlur={handleBlur}
           aria-invalid={!!errors.name && touched.name}
           aria-describedby={
-            errors.name && touched.name ? "name-error" : undefined
+            errors.name && touched.name ? 'name-error' : undefined
           }
         />
         {errors.name && touched.name && (
-          <p id="name-error" style={{ color: "red" }}>
+          <p id="name-error" style={{ color: 'red' }}>
             {errors.name}
           </p>
         )}
@@ -127,11 +127,11 @@ const RegistrationForm: React.FC = () => {
           onBlur={handleBlur}
           aria-invalid={!!errors.email && touched.email}
           aria-describedby={
-            errors.email && touched.email ? "email-error" : undefined
+            errors.email && touched.email ? 'email-error' : undefined
           }
         />
         {errors.email && touched.email && (
-          <p id="email-error" style={{ color: "red" }}>
+          <p id="email-error" style={{ color: 'red' }}>
             {errors.email}
           </p>
         )}
@@ -177,18 +177,18 @@ const RegistrationForm: React.FC = () => {
           onBlur={handleBlur}
           aria-invalid={!!errors.feedback && touched.feedback}
           aria-describedby={
-            errors.feedback && touched.feedback ? "feedback-error" : undefined
+            errors.feedback && touched.feedback ? 'feedback-error' : undefined
           }
         />
         {errors.feedback && touched.feedback && (
-          <p id="feedback-error" style={{ color: "red" }}>
+          <p id="feedback-error" style={{ color: 'red' }}>
             {errors.feedback}
           </p>
         )}
       </div>
 
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Register"}
+        {isSubmitting ? 'Submitting...' : 'Register'}
       </button>
       <button type="button" onClick={resetForm} disabled={isSubmitting}>
         Reset
@@ -198,7 +198,7 @@ const RegistrationForm: React.FC = () => {
       {hasErrors &&
         isSubmitting === false &&
         Object.keys(touched).some((k) => touched[k]) && (
-          <p style={{ color: "red", marginTop: "10px" }}>
+          <p style={{ color: 'red', marginTop: '10px' }}>
             Please fix the errors above.
           </p>
         )}

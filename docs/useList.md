@@ -7,6 +7,7 @@ The `useList` hook provides a convenient way to manage a list of items with comm
 ## Usage
 
 Here's a basic example of how to use the `useList` hook:
+
 ```
 typescript
 import { useList } from '@supunlakmal/hooks';
@@ -29,7 +30,9 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
+
 ```
 typescript
 type ListActions<T> = {
@@ -42,33 +45,34 @@ type ListActions<T> = {
 
 function useList<T>(initialList: T[]): ListActions<T>;
 ```
+
 ## Parameters
 
-*   **`initialList`**: `T[]`
-    *   The initial array of items for the list. This is an array of type `T`.
+- **`initialList`**: `T[]`
+  - The initial array of items for the list. This is an array of type `T`.
 
 ## Returns
 
 The `useList` hook returns an object with the following properties:
 
-*   **`list`**: `T[]`
-    *   The current list of items.
-*   **`add`**: `(item: T) => void`
-    *   A function to add a new item to the end of the list.
-*   **`remove`**: `(index: number) => void`
-    *   A function to remove an item from the list at the specified index.
-*   **`update`**: `(index: number, newItem: T) => void`
-    *   A function to update an existing item at the specified index with a new item.
-*   **`clear`**: `() => void`
-    *   A function to remove all items from the list.
+- **`list`**: `T[]`
+  - The current list of items.
+- **`add`**: `(item: T) => void`
+  - A function to add a new item to the end of the list.
+- **`remove`**: `(index: number) => void`
+  - A function to remove an item from the list at the specified index.
+- **`update`**: `(index: number, newItem: T) => void`
+  - A function to update an existing item at the specified index with a new item.
+- **`clear`**: `() => void`
+  - A function to remove all items from the list.
 
 ## How it Works
 
 The `useList` hook internally uses the `useState` hook to manage the list of items. The `add`, `remove`, `update`, and `clear` functions are designed to update this state with immutable operations:
 
-*   **`useState`**: Manages the list state.
-*   **`add`**: Creates a new array with the new item appended and updates the state.
-*   **`remove`**: Creates a new array excluding the item at the specified index and updates the state.
-*   **`update`**: Creates a new array with the item at the specified index replaced and updates the state.
-*   **`clear`**: Clears the array and updates the state.
-*   **Immutability**: Each operation creates a new array instead of modifying the existing one, which is essential for predictable state management in React.
+- **`useState`**: Manages the list state.
+- **`add`**: Creates a new array with the new item appended and updates the state.
+- **`remove`**: Creates a new array excluding the item at the specified index and updates the state.
+- **`update`**: Creates a new array with the item at the specified index replaced and updates the state.
+- **`clear`**: Clears the array and updates the state.
+- **Immutability**: Each operation creates a new array instead of modifying the existing one, which is essential for predictable state management in React.

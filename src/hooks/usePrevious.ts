@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 /**
  * Custom hook to get the previous value of a prop or state.
@@ -18,6 +18,4 @@ export const usePrevious = <T>(value: T): T | undefined => {
 
   // Return previous value (value from previous render)
   return ref.current;
-}
-
-
+};

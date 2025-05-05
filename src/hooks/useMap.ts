@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
 // Define the actions interface for manipulating the map
 interface MapActions<K, V> {
@@ -79,5 +79,3 @@ export function useMap<K, V>(
 
   return [map, actions];
 }
-
-

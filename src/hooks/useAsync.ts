@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Represents the state of an asynchronous operation.
@@ -74,6 +74,4 @@ export const useAsync = <T, E = Error>(
   }, [immediate]); // Only re-run if immediate changes, execute dependency is managed by useCallback
 
   return { ...state, execute };
-}
-
-
+};

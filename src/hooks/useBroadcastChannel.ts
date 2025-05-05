@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 /**
  * Enables cross-tab/window communication between same-origin contexts using the Broadcast Channel API.
@@ -12,8 +12,8 @@ export const useBroadcastChannel = <T = any>(channelName: string) => {
 
   useEffect(() => {
     // Ensure BroadcastChannel is supported
-    if (typeof BroadcastChannel === "undefined") {
-      console.warn("BroadcastChannel API is not supported in this browser.");
+    if (typeof BroadcastChannel === 'undefined') {
+      console.warn('BroadcastChannel API is not supported in this browser.');
       return;
     }
 
@@ -24,11 +24,11 @@ export const useBroadcastChannel = <T = any>(channelName: string) => {
       setData(event.data);
     };
 
-    channel.addEventListener("message", handleMessage);
+    channel.addEventListener('message', handleMessage);
 
     // Cleanup function
     return () => {
-      channel.removeEventListener("message", handleMessage);
+      channel.removeEventListener('message', handleMessage);
       channel.close();
       channelRef.current = null;
     };
@@ -49,5 +49,3 @@ export const useBroadcastChannel = <T = any>(channelName: string) => {
 
   return { data, postMessage };
 };
-
-

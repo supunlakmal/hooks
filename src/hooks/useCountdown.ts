@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface CountdownOptions {
   /** Initial number of seconds for the countdown. */
@@ -103,5 +103,3 @@ export const useCountdown = ({
 
   return { remainingSeconds, isRunning, start, pause, reset };
 };
-
-

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
 interface ScrollToTopOptions {
   behavior?: ScrollBehavior; // 'auto' or 'smooth'
@@ -12,13 +12,11 @@ interface ScrollToTopOptions {
  * @returns {() => void} A function that scrolls the window to the top when called.
  */
 export const useScrollToTop = ({
-  behavior = "auto",
+  behavior = 'auto',
 }: ScrollToTopOptions = {}): (() => void) => {
-
-
   const scrollToTop: () => void = useCallback(() => {
     // Check if window is defined (for SSR compatibility)
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       try {
         window.scrollTo({
           top: 0,
@@ -28,7 +26,7 @@ export const useScrollToTop = ({
       } catch (e) {
         // Fallback for browsers that don't support smooth scrolling options
         console.warn(
-          "ScrollToOptions not supported, falling back to simple scroll."
+          'ScrollToOptions not supported, falling back to simple scroll.'
         );
         window.scrollTo(0, 0);
       }
@@ -36,6 +34,4 @@ export const useScrollToTop = ({
   }, [behavior]);
 
   return scrollToTop;
-}
-
-
+};

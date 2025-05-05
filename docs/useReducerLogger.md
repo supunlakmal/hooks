@@ -115,7 +115,7 @@ export default ReducerLoggerExample;
 ## API
 
 ```typescript
-import { Reducer, Dispatch } from "react";
+import { Reducer, Dispatch } from 'react';
 
 function useReducerLogger<S, A>(
   reducer: Reducer<S, A>,

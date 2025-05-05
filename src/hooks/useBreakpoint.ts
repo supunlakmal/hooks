@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 // Define default breakpoints (inspired by Tailwind CSS)
 const defaultBreakpoints = {
-  sm: "(min-width: 640px)",
-  md: "(min-width: 768px)",
-  lg: "(min-width: 1024px)",
-  xl: "(min-width: 1280px)",
-  "2xl": "(min-width: 1536px)",
+  sm: '(min-width: 640px)',
+  md: '(min-width: 768px)',
+  lg: '(min-width: 1024px)',
+  xl: '(min-width: 1280px)',
+  '2xl': '(min-width: 1536px)',
 } as const; // Use 'as const' for stricter type inference
 
 type DefaultBreakpointKey = keyof typeof defaultBreakpoints;
@@ -25,7 +25,7 @@ export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
   const [activeBreakpoint, setActiveBreakpoint] = useState<K | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) {
+    if (typeof window === 'undefined' || !window.matchMedia) {
       return; // Cannot determine breakpoint on server or without matchMedia
     }
 
@@ -40,11 +40,11 @@ export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
       const sortedKeys = Object.entries(breakpoints)
         .sort(([, queryA], [, queryB]) => {
           const widthA = parseInt(
-            (queryA as string).match(/\d+/)?.[0] || "0",
+            (queryA as string).match(/\d+/)?.[0] || '0',
             10
           );
           const widthB = parseInt(
-            (queryB as string).match(/\d+/)?.[0] || "0",
+            (queryB as string).match(/\d+/)?.[0] || '0',
             10
           );
           return widthB - widthA; // Sort descending by width
@@ -74,7 +74,7 @@ export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
       };
 
       if (mql.addEventListener) {
-        mql.addEventListener("change", listener);
+        mql.addEventListener('change', listener);
       } else {
         mql.addListener(listener); // Deprecated fallback
       }
@@ -86,7 +86,7 @@ export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
     return () => {
       listeners.forEach(({ mql, listener }) => {
         if (mql.removeEventListener) {
-          mql.removeEventListener("change", listener);
+          mql.removeEventListener('change', listener);
         } else {
           mql.removeListener(listener);
         }
@@ -95,6 +95,4 @@ export const useBreakpoint = <K extends string = DefaultBreakpointKey>(
   }, [breakpoints]); // Re-run effect if breakpoints object changes
 
   return activeBreakpoint;
-}
-
-
+};

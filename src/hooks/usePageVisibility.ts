@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 // Helper function to get the correct visibility property names
 const getVisibilityProperties = (): {
   hidden: string | null;
   visibilityChange: string | null;
 } => {
-  if (typeof document === "undefined") {
+  if (typeof document === 'undefined') {
     return { hidden: null, visibilityChange: null };
   }
-  if (typeof document.hidden !== "undefined") {
+  if (typeof document.hidden !== 'undefined') {
     // Opera 12.10 and Firefox 18 and later support
-    return { hidden: "hidden", visibilityChange: "visibilitychange" };
-  } else if (typeof (document as any).msHidden !== "undefined") {
-    return { hidden: "msHidden", visibilityChange: "msvisibilitychange" };
-  } else if (typeof (document as any).webkitHidden !== "undefined") {
+    return { hidden: 'hidden', visibilityChange: 'visibilitychange' };
+  } else if (typeof (document as any).msHidden !== 'undefined') {
+    return { hidden: 'msHidden', visibilityChange: 'msvisibilitychange' };
+  } else if (typeof (document as any).webkitHidden !== 'undefined') {
     return {
-      hidden: "webkitHidden",
-      visibilityChange: "webkitvisibilitychange",
+      hidden: 'webkitHidden',
+      visibilityChange: 'webkitvisibilitychange',
     };
   }
   return { hidden: null, visibilityChange: null }; // Not supported
@@ -33,7 +33,7 @@ export function usePageVisibility(): boolean {
   const isSupported = !!visibilityProps.hidden;
 
   const [isVisible, setIsVisible] = useState<boolean>(() => {
-    if (!isSupported || typeof document === "undefined") {
+    if (!isSupported || typeof document === 'undefined') {
       return true; // Assume visible if API not supported or SSR
     }
     return !document[visibilityProps.hidden as keyof Document];
@@ -43,7 +43,7 @@ export function usePageVisibility(): boolean {
     if (
       !isSupported ||
       !visibilityProps.visibilityChange ||
-      typeof document === "undefined"
+      typeof document === 'undefined'
     ) {
       return;
     }
@@ -68,5 +68,3 @@ export function usePageVisibility(): boolean {
 
   return isVisible;
 }
-
-

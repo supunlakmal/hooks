@@ -1,5 +1,5 @@
-import {type MutableRefObject, useMemo} from 'react';
-import {useSyncedRef} from './useSyncedRef';
+import { type MutableRefObject, useMemo } from 'react';
+import { useSyncedRef } from './useSyncedRef';
 
 export type HookableRefHandler<T> = (v: T) => T;
 
@@ -9,7 +9,9 @@ export function useHookableRef<T>(
   onGet?: HookableRefHandler<T>
 ): MutableRefObject<T>;
 
-export function useHookableRef<T = undefined>(): MutableRefObject<T | null | undefined>;
+export function useHookableRef<T = undefined>(): MutableRefObject<
+  T | null | undefined
+>;
 
 /**
  * Like `React.useRef` but it is possible to define get and set handlers
@@ -23,7 +25,7 @@ export function useHookableRef<T = undefined>(): MutableRefObject<T | null | und
 export function useHookableRef<T>(
   initialValue?: T,
   onSet?: HookableRefHandler<T>,
-  onGet?: HookableRefHandler<T>,
+  onGet?: HookableRefHandler<T>
 ): MutableRefObject<T | null | undefined> {
   const onSetRef = useSyncedRef(onSet);
   const onGetRef = useSyncedRef(onGet);
@@ -37,7 +39,8 @@ export function useHookableRef<T>(
       },
 
       set current(value) {
-        v = onSetRef.current === undefined ? value : onSetRef.current(value as T);
+        v =
+          onSetRef.current === undefined ? value : onSetRef.current(value as T);
       },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

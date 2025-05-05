@@ -1,5 +1,5 @@
-import { RefObject, useCallback, useState } from "react";
-import {useEventListener} from "./useEventListener"; // Reuse useEventListener
+import { RefObject, useCallback, useState } from 'react';
+import { useEventListener } from './useEventListener'; // Reuse useEventListener
 
 interface ContextMenuState {
   isOpen: boolean;
@@ -43,18 +43,15 @@ export const useContextMenu = (
   );
 
   // Handler for clicks outside the menu area (or anywhere)
-  const handleClickOutside = useCallback(
-    () => {
-      // We simply close the menu on any click outside the context menu itself.
-      // More sophisticated logic might involve checking if the click was inside
-      // the custom menu component, but this hook doesn't know about that component.
-      if (isOpen) {
-        // Let potential menu item clicks be handled before closing
-        setTimeout(() => setIsOpen(false), 0);
-      }
-    },
-    [isOpen]
-  );
+  const handleClickOutside = useCallback(() => {
+    // We simply close the menu on any click outside the context menu itself.
+    // More sophisticated logic might involve checking if the click was inside
+    // the custom menu component, but this hook doesn't know about that component.
+    if (isOpen) {
+      // Let potential menu item clicks be handled before closing
+      setTimeout(() => setIsOpen(false), 0);
+    }
+  }, [isOpen]);
 
   // Handler for scroll events - close menu on scroll
   const handleScroll = useCallback(() => {
@@ -65,19 +62,19 @@ export const useContextMenu = (
 
   // Add listeners using useEventListener for conciseness
   useEventListener(
-    "contextmenu",
+    'contextmenu',
     handleContextMenu,
-    typeof document !== "undefined" ? document : undefined
+    typeof document !== 'undefined' ? document : undefined
   );
   useEventListener(
-    "click",
+    'click',
     handleClickOutside,
-    typeof document !== "undefined" ? document : undefined
+    typeof document !== 'undefined' ? document : undefined
   );
   useEventListener(
-    "scroll",
+    'scroll',
     handleScroll,
-    typeof document !== "undefined" ? document : undefined,
+    typeof document !== 'undefined' ? document : undefined,
     { capture: true }
   ); // Use capture for scroll
 
@@ -97,6 +94,4 @@ export const useContextMenu = (
     open,
     close,
   };
-}
-
-
+};

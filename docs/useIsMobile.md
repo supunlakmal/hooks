@@ -15,7 +15,7 @@ yarn add @supunlakmal/hooks
 ## Usage
 
 ```jsx
-import { useIsMobile } from "@supunlakmal/hooks";
+import { useIsMobile } from '@supunlakmal/hooks';
 
 function MyComponent() {
   // Using the default breakpoint (768px)
@@ -24,7 +24,7 @@ function MyComponent() {
   // Or with a custom breakpoint
   // const isMobile = useIsMobile(480);
 
-  return <div>{isMobile ? "Mobile View" : "Desktop View"}</div>;
+  return <div>{isMobile ? 'Mobile View' : 'Desktop View'}</div>;
 }
 ```
 
@@ -56,17 +56,17 @@ Returns a boolean indicating whether the current viewport width is less than the
 ## Example: Responsive Layout
 
 ```jsx
-import React from "react";
-import { useIsMobile } from "@supunlakmal/hooks";
+import React from 'react';
+import { useIsMobile } from '@supunlakmal/hooks';
 
 function ResponsiveLayout() {
   const isMobile = useIsMobile();
 
   return (
-    <div className={`layout ${isMobile ? "mobile" : "desktop"}`}>
+    <div className={`layout ${isMobile ? 'mobile' : 'desktop'}`}>
       {isMobile ? <MobileNavigation /> : <DesktopNavigation />}
 
-      <main style={{ padding: isMobile ? "10px" : "20px" }}>
+      <main style={{ padding: isMobile ? '10px' : '20px' }}>
         {/* Content here */}
       </main>
     </div>
@@ -77,18 +77,18 @@ function ResponsiveLayout() {
 ## Example: Custom Breakpoints
 
 ```jsx
-import React from "react";
-import { useIsMobile } from "@supunlakmal/hooks";
+import React from 'react';
+import { useIsMobile } from '@supunlakmal/hooks';
 
 function ComplexResponsiveUI() {
   const isSmallMobile = useIsMobile(480);
   const isTablet = useIsMobile(1024);
 
-  let deviceType = "desktop";
+  let deviceType = 'desktop';
   if (isSmallMobile) {
-    deviceType = "small-mobile";
+    deviceType = 'small-mobile';
   } else if (isTablet) {
-    deviceType = "tablet";
+    deviceType = 'tablet';
   }
 
   return (

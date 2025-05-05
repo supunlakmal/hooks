@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
   useState,
-} from "react";
+} from 'react';
 
 // Type definition for the return value, similar to useState
 type SetValue<T> = Dispatch<SetStateAction<T>>;
@@ -16,10 +16,10 @@ function getSessionStorageValue<T>(
 ): T {
   // Check if sessionStorage is available (client-side)
   if (
-    typeof window === "undefined" ||
-    typeof window.sessionStorage === "undefined"
+    typeof window === 'undefined' ||
+    typeof window.sessionStorage === 'undefined'
   ) {
-    return typeof initialValue === "function"
+    return typeof initialValue === 'function'
       ? (initialValue as () => T)()
       : initialValue;
   }
@@ -29,13 +29,13 @@ function getSessionStorageValue<T>(
     // Parse stored json or return initialValue if item is null/undefined
     return item
       ? (JSON.parse(item) as T)
-      : typeof initialValue === "function"
-      ? (initialValue as () => T)()
-      : initialValue;
+      : typeof initialValue === 'function'
+        ? (initialValue as () => T)()
+        : initialValue;
   } catch (error) {
     // Return initialValue if error parsing JSON or accessing storage
     console.warn(`Error reading sessionStorage key “${key}”:`, error);
-    return typeof initialValue === "function"
+    return typeof initialValue === 'function'
       ? (initialValue as () => T)()
       : initialValue;
   }
@@ -70,7 +70,7 @@ export const useSessionStorage = <T>(
         // Save state
         setStoredValue(valueToStore);
         // Save to sessionStorage
-        if (typeof window !== "undefined" && window.sessionStorage) {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
           window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
         }
       } catch (error) {
@@ -93,6 +93,4 @@ export const useSessionStorage = <T>(
   // For simplicity, we'll omit direct cross-component sync via storage events here.
 
   return [storedValue, setValue];
-}
-
-
+};

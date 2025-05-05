@@ -111,7 +111,7 @@ export default ContextMenuExample;
 ## API
 
 ```typescript
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
 interface ContextMenuState {
   isOpen: boolean;

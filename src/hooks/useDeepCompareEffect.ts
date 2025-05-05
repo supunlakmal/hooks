@@ -1,13 +1,13 @@
-import { useEffect, useRef, EffectCallback, DependencyList } from "react";
+import { useEffect, useRef, EffectCallback, DependencyList } from 'react';
 
 // Basic deep comparison function (consider using lodash.isequal for robustness)
 export const isDeepEqual = (objA: any, objB: any): boolean => {
   if (objA === objB) return true;
 
   if (
-    typeof objA !== "object" ||
+    typeof objA !== 'object' ||
     objA === null ||
-    typeof objB !== "object" ||
+    typeof objB !== 'object' ||
     objB === null
   ) {
     return false;
@@ -29,7 +29,7 @@ export const isDeepEqual = (objA: any, objB: any): boolean => {
   }
 
   return true;
-}
+};
 
 function useDeepCompareMemoize(value: DependencyList): DependencyList {
   const ref = useRef<DependencyList>([]);
@@ -64,6 +64,4 @@ export const useDeepCompareEffect = (
 
   // Use the memoized dependencies for the standard useEffect
   useEffect(effect, memoizedDependencies);
-}
-
-
+};

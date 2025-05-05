@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // Type Definitions
 type CacheStore<T> = Map<string, CacheEntry<T>>;
@@ -8,7 +8,7 @@ interface CacheEntry<T> {
   timestamp: number;
 }
 
-type FetchStatus = "idle" | "loading" | "success" | "error";
+type FetchStatus = 'idle' | 'loading' | 'success' | 'error';
 
 // Hook Options
 interface UseCachedFetchOptions {
@@ -58,10 +58,10 @@ export const useCachedFetch = <T = any>(
     getCacheKey = (u) => u, // Default key is just the URL
   } = options;
 
-  const cacheKey = url ? getCacheKey(url, fetchOptions) : ""; // Generate cache key
+  const cacheKey = url ? getCacheKey(url, fetchOptions) : ''; // Generate cache key
 
   // State for the fetch status
-  const [status, setStatus] = useState<FetchStatus>("idle");
+  const [status, setStatus] = useState<FetchStatus>('idle');
   const [data, setData] = useState<T | undefined>(() => {
     // Initialize state from cache if available and valid
     const cachedEntry = globalCache.get(cacheKey);
@@ -91,7 +91,7 @@ export const useCachedFetch = <T = any>(
     async (ignoreCache = false) => {
       if (!url) {
         if (isMounted.current) {
-          setStatus("idle");
+          setStatus('idle');
           setData(undefined);
           setError(undefined);
         }
@@ -111,7 +111,7 @@ export const useCachedFetch = <T = any>(
         if (cachedEntry && (isFresh || !currentCacheOnlyIfFresh)) {
           if (isMounted.current) {
             setData(cachedEntry.data as T);
-            setStatus("success");
+            setStatus('success');
             setError(undefined);
           }
           return; // Serve from cache
@@ -119,7 +119,7 @@ export const useCachedFetch = <T = any>(
       }
 
       if (isMounted.current) {
-        setStatus("loading");
+        setStatus('loading');
         setError(undefined); // Clear previous error on new fetch
       }
 
@@ -133,7 +133,7 @@ export const useCachedFetch = <T = any>(
             errorPayload = response.statusText; // Fallback to status text
           }
           throw new Error(
-            typeof errorPayload === "string"
+            typeof errorPayload === 'string'
               ? errorPayload
               : JSON.stringify(errorPayload)
           );
@@ -143,7 +143,7 @@ export const useCachedFetch = <T = any>(
 
         if (isMounted.current) {
           setData(result as T);
-          setStatus("success");
+          setStatus('success');
           setError(undefined);
           // Update cache
           globalCache.set(currentCacheKey, {
@@ -154,7 +154,7 @@ export const useCachedFetch = <T = any>(
       } catch (err: any) {
         if (isMounted.current) {
           setError(err instanceof Error ? err : new Error(String(err)));
-          setStatus("error");
+          setStatus('error');
         }
       }
     },
@@ -177,11 +177,10 @@ export const useCachedFetch = <T = any>(
     data,
     error,
     status,
-    isLoading: status === "loading",
-    isSuccess: status === "success",
-    isError: status === "error",
-    isIdle: status === "idle",
+    isLoading: status === 'loading',
+    isSuccess: status === 'success',
+    isError: status === 'error',
+    isIdle: status === 'idle',
     refetch,
   };
-}
-
+};

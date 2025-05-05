@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Throttles a value.
@@ -13,12 +13,15 @@ export const useThrottle = <T>(value: T, limit: number): T => {
   const lastRan = useRef<number>(Date.now());
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }
-    }, limit - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        if (Date.now() - lastRan.current >= limit) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      },
+      limit - (Date.now() - lastRan.current)
+    );
 
     // Set throttledValue immediately on the first render or when the value changes significantly
     // This ensures responsiveness for the initial value or large jumps
@@ -34,6 +37,4 @@ export const useThrottle = <T>(value: T, limit: number): T => {
   }, [value, limit]); // Recalculate effect if value or limit changes
 
   return throttledValue;
-}
-
-
+};

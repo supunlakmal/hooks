@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import {useMount} from "./useMount"; // For mount log
-import {useUnmount} from "./useUnmount"; // For unmount log
-import {useUpdateEffect} from "./useUpdateEffect"; // For update log
+import { useRef } from 'react';
+import { useMount } from './useMount'; // For mount log
+import { useUnmount } from './useUnmount'; // For unmount log
+import { useUpdateEffect } from './useUpdateEffect'; // For update log
 
 // Helper to compare props (simple shallow comparison)
 const propsChanged = (prevProps: any, nextProps: any): boolean => {
@@ -32,14 +32,14 @@ export function useLogger(componentName: string, props?: any): void {
   // Note: This relies on the build process setting NODE_ENV correctly.
   // In some environments (like pure client-side setups without a build step),
   // this check might not work as expected.
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   useMount(() => {
     if (isDevelopment) {
       console.log(
         `%c[Mount] ${componentName}`,
-        "color: green; font-weight: bold;",
-        props ? { props } : ""
+        'color: green; font-weight: bold;',
+        props ? { props } : ''
       );
     }
   });
@@ -49,10 +49,10 @@ export function useLogger(componentName: string, props?: any): void {
       const changed = propsChanged(prevPropsRef.current, props);
       console.log(
         `%c[Update] ${componentName}`,
-        changed ? "color: orange; font-weight: bold;" : "color: blue;",
+        changed ? 'color: orange; font-weight: bold;' : 'color: blue;',
         props
           ? { props, prevProps: prevPropsRef.current, changed }
-          : { changed: "No props provided" }
+          : { changed: 'No props provided' }
       );
       prevPropsRef.current = props; // Update previous props for next comparison
     }
@@ -62,12 +62,10 @@ export function useLogger(componentName: string, props?: any): void {
     if (isDevelopment) {
       console.log(
         `%c[Unmount] ${componentName}`,
-        "color: red; font-weight: bold;"
+        'color: red; font-weight: bold;'
       );
     }
   });
 
   // No need to return anything, the hook just performs side effects (logging)
 }
-
-

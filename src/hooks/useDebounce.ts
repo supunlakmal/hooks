@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  * Debounces a value.
@@ -33,6 +33,4 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   );
 
   return debouncedValue;
-}
-
-
+};

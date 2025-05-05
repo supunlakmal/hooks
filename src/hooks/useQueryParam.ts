@@ -1,10 +1,10 @@
-import { useState, useCallback, useEffect } from "react";
-import {useEventListener} from "./useEventListener";
+import { useState, useCallback, useEffect } from 'react';
+import { useEventListener } from './useEventListener';
 
 // Helper to safely get query param value (handles SSR)
 const getQueryParamValue = (paramName: string): string | null => {
   if (
-    typeof window === "undefined" ||
+    typeof window === 'undefined' ||
     !window.location ||
     !window.location.search
   ) {
@@ -16,7 +16,7 @@ const getQueryParamValue = (paramName: string): string | null => {
 
 // Helper to update query param in URL without adding history entry
 const updateUrlQueryParam = (paramName: string, value: string | null) => {
-  if (typeof window === "undefined" || !window.history || !window.location) {
+  if (typeof window === 'undefined' || !window.history || !window.location) {
     return;
   }
   const params = new URLSearchParams(window.location.search);
@@ -28,11 +28,11 @@ const updateUrlQueryParam = (paramName: string, value: string | null) => {
   const newSearch = params.toString();
   // Create new URL preserving path and hash
   const newUrl = `${window.location.pathname}${
-    newSearch ? "?" + newSearch : ""
+    newSearch ? '?' + newSearch : ''
   }${window.location.hash}`;
 
   // Use replaceState to avoid polluting browser history
-  window.history.replaceState(window.history.state, "", newUrl);
+  window.history.replaceState(window.history.state, '', newUrl);
 };
 
 /**
@@ -47,9 +47,9 @@ const updateUrlQueryParam = (paramName: string, value: string | null) => {
  */
 export const useQueryParam = (
   paramName: string,
-  initialValue: string = ""
+  initialValue: string = ''
 ): [string, (newValue: string | null) => void] => {
-   // State reflects the param value, falling back to initialValue if absent
+  // State reflects the param value, falling back to initialValue if absent
   const [value, setValue] = useState<string>(() => {
     return getQueryParamValue(paramName) ?? initialValue;
   });
@@ -71,7 +71,7 @@ export const useQueryParam = (
     setValue(getQueryParamValue(paramName) ?? initialValue);
   }, [paramName, initialValue]);
 
-  useEventListener("popstate", handlePopState);
+  useEventListener('popstate', handlePopState);
 
   // Effect to ensure state is synced if paramName changes or on initial load
   // (Handles cases where URL might change externally without popstate, though less common)
@@ -85,6 +85,4 @@ export const useQueryParam = (
   }, [paramName, initialValue, value]); // Include value to prevent unnecessary updates if URL matches state
 
   return [value, updateParam];
-}
-
-
+};

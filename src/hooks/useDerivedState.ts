@@ -1,4 +1,4 @@
-import { useMemo, DependencyList } from "react";
+import { useMemo, DependencyList } from 'react';
 
 /**
  * Calculates derived state based on other values (props, state, etc.).
@@ -17,6 +17,4 @@ export const useDerivedState = <T>(
   // Directly use useMemo as the core implementation
   const derivedState = useMemo(factoryFn, dependencies);
   return derivedState;
-}
-
-
+};

@@ -7,11 +7,14 @@ The `useWakeLock` hook provides a simple way to utilize the Screen Wake Lock API
 ## Usage
 
 ### Import
+
 ```
 typescript
 import { useWakeLock } from '@supunlakmal/hooks';
 ```
+
 ### Basic Example
+
 ```
 typescript
 import React, { useEffect } from 'react';
@@ -47,7 +50,9 @@ function MyComponent() {
   );
 }
 ```
+
 ### Example with Toggle
+
 ```
 typescript
 import React, { useState } from 'react';
@@ -85,6 +90,7 @@ function MyComponent() {
   );
 }
 ```
+
 ## Parameters
 
 This hook does not take any parameters.
@@ -93,12 +99,12 @@ This hook does not take any parameters.
 
 The `useWakeLock` hook returns an object with the following properties:
 
--   **`isSupported: boolean`**: Indicates whether the Screen Wake Lock API is supported by the current browser.
--   **`isLocked: boolean`**: Indicates if the wake lock is currently active.
--   **`request: () => Promise<void>`**: A function to request the activation of the wake lock. It returns a Promise that resolves when the lock is acquired.
--   **`release: () => Promise<void>`**: A function to release the wake lock, allowing the screen to dim or lock automatically. It returns a Promise that resolves when the lock is released.
+- **`isSupported: boolean`**: Indicates whether the Screen Wake Lock API is supported by the current browser.
+- **`isLocked: boolean`**: Indicates if the wake lock is currently active.
+- **`request: () => Promise<void>`**: A function to request the activation of the wake lock. It returns a Promise that resolves when the lock is acquired.
+- **`release: () => Promise<void>`**: A function to release the wake lock, allowing the screen to dim or lock automatically. It returns a Promise that resolves when the lock is released.
 
 ## Related Hooks
 
--   [`useFullscreen`](./useFullscreen.md): A hook for using the Fullscreen API.
--   [`useVisibility`](./useVisibility.md): A hook for monitoring the visibility state of a document.
+- [`useFullscreen`](./useFullscreen.md): A hook for using the Fullscreen API.
+- [`useVisibility`](./useVisibility.md): A hook for monitoring the visibility state of a document.

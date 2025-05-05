@@ -1,12 +1,15 @@
-import {type DependencyList, useMemo, useRef} from 'react';
+import { type DependencyList, useMemo, useRef } from 'react';
 
-export type DependenciesComparator<Deps extends DependencyList = DependencyList> = (
-	a: Deps,
-	b: Deps
-) => boolean;
+export type DependenciesComparator<
+  Deps extends DependencyList = DependencyList,
+> = (a: Deps, b: Deps) => boolean;
 
-export const basicDepsComparator: DependenciesComparator = (prevDeps, nextDeps): boolean =>
-	prevDeps.length === nextDeps.length && prevDeps.every((item, i) => item === nextDeps[i]);
+export const basicDepsComparator: DependenciesComparator = (
+  prevDeps,
+  nextDeps
+): boolean =>
+  prevDeps.length === nextDeps.length &&
+  prevDeps.every((item, i) => item === nextDeps[i]);
 
 /**
  * Like `useMemo` but uses provided comparator function to validate dependency changes.
@@ -16,21 +19,26 @@ export const basicDepsComparator: DependenciesComparator = (prevDeps, nextDeps):
  * @param comparator Function that compares two dependency arrays,
  * and returns `true` if they're equal.
  */
-export const useCustomCompareMemo = <T, Deps extends DependencyList = DependencyList>(
-	factory: () => T,
-	deps: Deps,
-	comparator: DependenciesComparator<Deps> = basicDepsComparator,
+export const useCustomCompareMemo = <
+  T,
+  Deps extends DependencyList = DependencyList,
+>(
+  factory: () => T,
+  deps: Deps,
+  comparator: DependenciesComparator<Deps> = basicDepsComparator
 ): T => {
-	const dependencies = useRef<Deps>(undefined);
-	const result = useRef<T>(undefined as T)
+  const dependencies = useRef<Deps>(undefined);
+  const result = useRef<T>(undefined as T);
 
-	return useMemo(() => {
-		if (dependencies.current === undefined || !comparator(dependencies.current, deps)) {
-			dependencies.current = deps;
-			return factory()
-		}else{
-            return result.current as T;
-        }
-	},deps)
-}
-
+  return useMemo(() => {
+    if (
+      dependencies.current === undefined ||
+      !comparator(dependencies.current, deps)
+    ) {
+      dependencies.current = deps;
+      return factory();
+    } else {
+      return result.current as T;
+    }
+  }, deps);
+};

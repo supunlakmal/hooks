@@ -7,8 +7,8 @@ A hook designed to simplify handling asynchronous operations that modify data (l
 Provide an asynchronous function (`mutationFn`) that performs the operation. Call the returned `mutate` or `mutateAsync` function to trigger it.
 
 ```tsx
-import React, { useState } from "react";
-import { useMutation } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useState } from 'react';
+import { useMutation } from '@supunlakmal/hooks'; // Adjust import path
 
 interface Post {
   id?: number;
@@ -24,11 +24,11 @@ interface ApiError {
 
 // Define the actual API call function
 const createPost = async (newPost: Post): Promise<Post> => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
     body: JSON.stringify(newPost),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      'Content-type': 'application/json; charset=UTF-8',
     },
   });
   if (!response.ok) {
@@ -43,8 +43,8 @@ const createPost = async (newPost: Post): Promise<Post> => {
 };
 
 const PostCreator: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
   const {
     mutate,
@@ -56,25 +56,25 @@ const PostCreator: React.FC = () => {
     isSuccess,
     isError,
     reset,
-  } = useMutation<Post, ApiError, Omit<Post, "id">>(createPost, {
+  } = useMutation<Post, ApiError, Omit<Post, 'id'>>(createPost, {
     onMutate: (variables) => {
-      console.log("Mutation started with:", variables);
+      console.log('Mutation started with:', variables);
       // Optionally return context for optimistic updates rollback
     },
     onSuccess: (createdPost, variables) => {
-      console.log("Post created successfully:", createdPost);
+      console.log('Post created successfully:', createdPost);
       alert(`Success! Post created with ID: ${createdPost.id}`);
       // Invalidate queries, update cache, show notification, etc.
-      setTitle("");
-      setBody("");
+      setTitle('');
+      setBody('');
     },
     onError: (err, variables) => {
-      console.error("Mutation failed:", err);
-      alert(`Error: ${err.message} (Status: ${err.status || "N/A"})`);
+      console.error('Mutation failed:', err);
+      alert(`Error: ${err.message} (Status: ${err.status || 'N/A'})`);
       // Log error, show error message
     },
     onSettled: (data, error, variables) => {
-      console.log("Mutation settled (finished)", { data, error });
+      console.log('Mutation settled (finished)', { data, error });
       // Runs after onSuccess or onError
     },
   });
@@ -89,10 +89,10 @@ const PostCreator: React.FC = () => {
     // Option 2: Using async/await for more control after mutation
     try {
       const result = await mutateAsync(newPostData);
-      console.log("Mutation finished in submit handler with result:", result);
+      console.log('Mutation finished in submit handler with result:', result);
       // Perform actions *after* successful async mutation completes
     } catch (err) {
-      console.error("Caught mutation error in submit handler:", err);
+      console.error('Caught mutation error in submit handler:', err);
       // Handle error specifically in the submit handler if needed
     }
   };
@@ -124,23 +124,23 @@ const PostCreator: React.FC = () => {
       </div>
 
       <button type="submit" disabled={isLoading}>
-        {isLoading ? "Creating..." : "Create Post"}
+        {isLoading ? 'Creating...' : 'Create Post'}
       </button>
       <button
         type="button"
         onClick={reset}
-        disabled={isLoading || status === "idle"}
+        disabled={isLoading || status === 'idle'}
       >
         Reset Mutation State
       </button>
 
       {isSuccess && (
-        <div style={{ color: "green", marginTop: "10px" }}>
+        <div style={{ color: 'green', marginTop: '10px' }}>
           Success! Last created post ID: {data?.id}
         </div>
       )}
       {isError && (
-        <div style={{ color: "red", marginTop: "10px" }}>
+        <div style={{ color: 'red', marginTop: '10px' }}>
           Error creating post: {error?.message}
         </div>
       )}

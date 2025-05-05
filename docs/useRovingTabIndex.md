@@ -5,13 +5,13 @@ Implements the [roving tabindex](https://www.w3.org/WAI/ARIA/apg/patterns/landma
 ## Usage
 
 ```tsx
-import React, { useRef } from "react";
-import { useRovingTabIndex } from "@supunlakmal/hooks"; // Adjust the import path
+import React, { useRef } from 'react';
+import { useRovingTabIndex } from '@supunlakmal/hooks'; // Adjust the import path
 
 const Toolbar: React.FC = () => {
   const toolbarRef = useRef<any>(null);
   useRovingTabIndex(toolbarRef, {
-    orientation: "horizontal", // Navigate with left/right arrows
+    orientation: 'horizontal', // Navigate with left/right arrows
     wrapAround: true, // Wrap focus from last to first element
   });
 
@@ -21,10 +21,10 @@ const Toolbar: React.FC = () => {
       role="toolbar"
       aria-label="Formatting options"
       style={{
-        border: "1px solid grey",
-        padding: "5px",
-        display: "flex",
-        gap: "5px",
+        border: '1px solid grey',
+        padding: '5px',
+        display: 'flex',
+        gap: '5px',
       }}
     >
       <button>Bold</button>
@@ -39,7 +39,7 @@ const Toolbar: React.FC = () => {
 const SelectableList: React.FC = () => {
   const listRef = useRef<HTMLUListElement>(null);
   const { activeIndex } = useRovingTabIndex(listRef, {
-    orientation: "vertical", // Navigate with up/down arrows
+    orientation: 'vertical', // Navigate with up/down arrows
     initialIndex: 1,
     focusableSelector: '[role="option"]', // Only target elements with role="option"
     onIndexChange: (index, element) => {
@@ -53,9 +53,9 @@ const SelectableList: React.FC = () => {
       role="listbox"
       aria-label="Choose an option"
       style={{
-        border: "1px solid lightblue",
-        padding: "10px",
-        listStyle: "none",
+        border: '1px solid lightblue',
+        padding: '10px',
+        listStyle: 'none',
       }}
     >
       <li role="option" id="opt1">

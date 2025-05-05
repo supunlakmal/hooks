@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 interface RovingTabIndexOptions {
   /** Selector for focusable elements within the container (default: '[role="option"], button, [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])') */
@@ -8,7 +8,7 @@ interface RovingTabIndexOptions {
   /** Allow focus to wrap around (default: true) */
   wrapAround?: boolean;
   /** Orientation of the group for arrow key navigation (default: 'horizontal') */
-  orientation?: "horizontal" | "vertical" | "both";
+  orientation?: 'horizontal' | 'vertical' | 'both';
   /** Function to call when the active index changes */
   onIndexChange?: (newIndex: number, element: HTMLElement) => void;
 }
@@ -31,7 +31,7 @@ export const useRovingTabIndex = <T extends HTMLElement>(
     focusableSelector = defaultFocusableSelector,
     initialIndex = 0,
     wrapAround = true,
-    orientation = "horizontal",
+    orientation = 'horizontal',
     onIndexChange,
   } = options;
 
@@ -50,7 +50,7 @@ export const useRovingTabIndex = <T extends HTMLElement>(
       );
       // Ensure initial tabindex setup
       focusableElementsRef.current.forEach((el, index) => {
-        el.setAttribute("tabindex", index === activeIndex ? "0" : "-1");
+        el.setAttribute('tabindex', index === activeIndex ? '0' : '-1');
       });
       // Validate initialIndex
       if (
@@ -96,39 +96,39 @@ export const useRovingTabIndex = <T extends HTMLElement>(
       let shouldPreventDefault = false;
 
       const isHorizontal =
-        orientation === "horizontal" || orientation === "both";
-      const isVertical = orientation === "vertical" || orientation === "both";
+        orientation === 'horizontal' || orientation === 'both';
+      const isVertical = orientation === 'vertical' || orientation === 'both';
 
       switch (event.key) {
-        case "ArrowRight":
+        case 'ArrowRight':
           if (isHorizontal) {
             newIndex = activeIndex + 1;
             shouldPreventDefault = true;
           }
           break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
           if (isHorizontal) {
             newIndex = activeIndex - 1;
             shouldPreventDefault = true;
           }
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           if (isVertical) {
             newIndex = activeIndex + 1;
             shouldPreventDefault = true;
           }
           break;
-        case "ArrowUp":
+        case 'ArrowUp':
           if (isVertical) {
             newIndex = activeIndex - 1;
             shouldPreventDefault = true;
           }
           break;
-        case "Home":
+        case 'Home':
           newIndex = 0;
           shouldPreventDefault = true;
           break;
-        case "End":
+        case 'End':
           newIndex = elements.length - 1;
           shouldPreventDefault = true;
           break;
@@ -148,9 +148,9 @@ export const useRovingTabIndex = <T extends HTMLElement>(
       }
 
       if (newIndex !== activeIndex) {
-        elements[activeIndex].setAttribute("tabindex", "-1");
+        elements[activeIndex].setAttribute('tabindex', '-1');
         const newElement = elements[newIndex];
-        newElement.setAttribute("tabindex", "0");
+        newElement.setAttribute('tabindex', '0');
         newElement.focus();
         setActiveIndex(newIndex);
         onIndexChangeRef.current?.(newIndex, newElement);
@@ -164,7 +164,7 @@ export const useRovingTabIndex = <T extends HTMLElement>(
     if (!container) return;
 
     // Attach keydown listener to the container
-    container.addEventListener("keydown", handleKeyDown as EventListener);
+    container.addEventListener('keydown', handleKeyDown as EventListener);
 
     // Initial focus setup if needed (e.g., on mount)
     // This might conflict with autoFocus or other focus management, use carefully.
@@ -173,7 +173,7 @@ export const useRovingTabIndex = <T extends HTMLElement>(
     // }
 
     return () => {
-      container.removeEventListener("keydown", handleKeyDown as EventListener);
+      container.removeEventListener('keydown', handleKeyDown as EventListener);
     };
   }, [containerRef, handleKeyDown]);
 
@@ -185,4 +185,3 @@ export const useRovingTabIndex = <T extends HTMLElement>(
     focusableElements: focusableElementsRef.current, // Expose the elements
   };
 };
-

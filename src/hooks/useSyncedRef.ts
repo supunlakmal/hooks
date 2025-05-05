@@ -19,4 +19,4 @@ export const useSyncedRef = <T>(value: T): { readonly current: T } => {
       }),
     []
   );
-}
+};

@@ -7,6 +7,7 @@ The `useSyncedRef` hook provides a way to create a ref that automatically stays 
 ## Usage
 
 Here's an example of how to use the `useSyncedRef` hook:
+
 ```
 typescript
 import { useSyncedRef } from '@supunlakmal/hooks';
@@ -25,22 +26,25 @@ function MyComponent({ value }: { value: number }) {
   return <div>Synced Ref: {syncedRef.current}</div>;
 }
 ```
+
 ## API
+
 ```
 typescript
 function useSyncedRef<T>(value: T): React.MutableRefObject<T>;
 ```
+
 ## Parameters
 
-*   **`value`**:
-    *   **Type:** `T`
-    *   **Description:** The value that the ref should be synced with. This can be of any type.
+- **`value`**:
+  - **Type:** `T`
+  - **Description:** The value that the ref should be synced with. This can be of any type.
 
 ## Returns
 
-*   **Return Type:** `React.MutableRefObject<T>`
-*   **Details:** The hook returns a mutable ref object that holds the current value of `value`. Changes to `value` will automatically update the ref's `.current` property.
-*   **Behavior Explanation:** Every time the `value` prop passed to the hook changes, the ref's `.current` property will be updated to the new value.
+- **Return Type:** `React.MutableRefObject<T>`
+- **Details:** The hook returns a mutable ref object that holds the current value of `value`. Changes to `value` will automatically update the ref's `.current` property.
+- **Behavior Explanation:** Every time the `value` prop passed to the hook changes, the ref's `.current` property will be updated to the new value.
 
 ## How it Works
 

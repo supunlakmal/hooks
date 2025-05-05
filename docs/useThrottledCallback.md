@@ -7,6 +7,7 @@ The `useThrottledCallback` hook is used to throttle a callback function, limitin
 ## Usage
 
 Here's an example of how to use the `useThrottledCallback` hook:
+
 ```
 typescript
 import { useThrottledCallback } from '@supunlakmal/hooks';
@@ -30,7 +31,9 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
+
 ```
 typescript
 function useThrottledCallback<T extends any[]>(
@@ -39,29 +42,30 @@ function useThrottledCallback<T extends any[]>(
   options?: { leading?: boolean; trailing?: boolean }
 ): (...args: T) => void;
 ```
+
 ## Parameters
 
-*   **`callback`**: `(...args: T) => void`
-    *   Type: `function`
-    *   Description: The callback function to be throttled. It can accept any number of arguments.
-*   **`delay`**: `number`
-    *   Type: `number`
-    *   Description: The time delay in milliseconds during which the callback will be throttled.
-*   **`options`**: `object` (optional)
-    *   Type: `{ leading?: boolean; trailing?: boolean }`
-    *   Description: An optional object to control the throttling behavior.
-        *   **`leading`**: `boolean` (optional)
-            *   Type: `boolean`
-            *   Description: If true, the callback will be executed on the leading edge of the delay. Defaults to `true`.
-        *   **`trailing`**: `boolean` (optional)
-            *   Type: `boolean`
-            *   Description: If true, the callback will be executed on the trailing edge of the delay. Defaults to `true`.
+- **`callback`**: `(...args: T) => void`
+  - Type: `function`
+  - Description: The callback function to be throttled. It can accept any number of arguments.
+- **`delay`**: `number`
+  - Type: `number`
+  - Description: The time delay in milliseconds during which the callback will be throttled.
+- **`options`**: `object` (optional)
+  - Type: `{ leading?: boolean; trailing?: boolean }`
+  - Description: An optional object to control the throttling behavior.
+    - **`leading`**: `boolean` (optional)
+      - Type: `boolean`
+      - Description: If true, the callback will be executed on the leading edge of the delay. Defaults to `true`.
+    - **`trailing`**: `boolean` (optional)
+      - Type: `boolean`
+      - Description: If true, the callback will be executed on the trailing edge of the delay. Defaults to `true`.
 
 ## Returns
 
-*   **`throttledCallback`**: `(...args: T) => void`
-    *   Type: `function`
-    *   Description: A throttled version of the input callback. This function can be called with any arguments, and it will execute the original callback according to the throttle settings.
+- **`throttledCallback`**: `(...args: T) => void`
+  - Type: `function`
+  - Description: A throttled version of the input callback. This function can be called with any arguments, and it will execute the original callback according to the throttle settings.
 
 ## How it Works
 
@@ -69,6 +73,6 @@ The `useThrottledCallback` hook utilizes the `useRef` hook to maintain reference
 
 1.  **Timer and Last Executed Timestamp:** It uses refs to store the timer ID and the timestamp of the last execution.
 2.  **Throttling Logic:** When the throttled callback is invoked, it checks if the delay has passed since the last execution. If so, it executes the callback immediately.
-3. **Leading and trailing**: we can config the  leading and trailing logic.
+3.  **Leading and trailing**: we can config the leading and trailing logic.
 4.  **Cleanup:** A cleanup function is used to clear the timeout when the component unmounts, preventing potential memory leaks.
-5. **useCallback**: use to memoize the throtteled function.
+5.  **useCallback**: use to memoize the throtteled function.

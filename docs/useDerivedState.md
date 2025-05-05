@@ -7,8 +7,8 @@ A hook to compute derived state based on other values (like props or other state
 Provide a factory function that calculates the desired state and an array of dependencies.
 
 ```tsx
-import React, { useState } from "react";
-import { useDerivedState } from "@supunlakmal/hooks"; // Adjust import path
+import React, { useState } from 'react';
+import { useDerivedState } from '@supunlakmal/hooks'; // Adjust import path
 
 interface User {
   id: number;
@@ -20,14 +20,14 @@ interface User {
 const UserProfile: React.FC<{ user: User }> = ({ user }) => {
   // Derive fullName only when user.firstName or user.lastName changes
   const fullName = useDerivedState(() => {
-    console.log("[Derived State] Calculating fullName...");
+    console.log('[Derived State] Calculating fullName...');
     return `${user.firstName} ${user.lastName}`;
   }, [user.firstName, user.lastName]);
 
   // Derive permissions string only when user.isAdmin changes
   const permissions = useDerivedState(() => {
-    console.log("[Derived State] Calculating permissions...");
-    return user.isAdmin ? "Admin" : "User";
+    console.log('[Derived State] Calculating permissions...');
+    return user.isAdmin ? 'Admin' : 'User';
   }, [user.isAdmin]);
 
   // This state change should NOT trigger fullName or permissions recalculation
@@ -51,13 +51,13 @@ const UserProfile: React.FC<{ user: User }> = ({ user }) => {
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User>({
     id: 1,
-    firstName: "Jane",
-    lastName: "Doe",
+    firstName: 'Jane',
+    lastName: 'Doe',
     isAdmin: false,
   });
 
   const updateUser = () => {
-    setCurrentUser((prev) => ({ ...prev, firstName: "Janet" }));
+    setCurrentUser((prev) => ({ ...prev, firstName: 'Janet' }));
   };
 
   const toggleAdmin = () => {

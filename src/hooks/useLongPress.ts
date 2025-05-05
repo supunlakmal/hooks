@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useRef } from "react";
+import { RefObject, useCallback, useEffect, useRef } from 'react';
 
 // Define the type for the callback function
 type LongPressCallback = (event: MouseEvent | TouchEvent) => void;
@@ -13,7 +13,7 @@ interface UseLongPressOptions {
 
 // Default options
 const defaultOptions: Required<
-  Omit<UseLongPressOptions, "onStart" | "onEnd" | "onCancel">
+  Omit<UseLongPressOptions, 'onStart' | 'onEnd' | 'onCancel'>
 > = {
   threshold: 400, // Default long press duration
 };
@@ -38,7 +38,7 @@ export const useLongPress = (
     onEnd,
     onCancel,
   } = {} as UseLongPressOptions
-): void =>{
+): void => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const targetRef = useRef<EventTarget | null>(null); // Store the target element
 
@@ -67,7 +67,7 @@ export const useLongPress = (
   const start = useCallback(
     (event: MouseEvent | TouchEvent) => {
       // Prevent default behavior for touch events, like scrolling
-      if (event.type === "touchstart") {
+      if (event.type === 'touchstart') {
         // event.preventDefault(); // Consider adding an option for this
       }
 
@@ -77,7 +77,7 @@ export const useLongPress = (
         onStart?.(event); // Fire onStart callback
 
         // Clear any existing timer
-       clearTimer();
+        clearTimer();
 
         // Set a new timer
         timeoutRef.current = setTimeout(() => onLongPress(event), threshold);
@@ -142,41 +142,41 @@ export const useLongPress = (
   useEffect(() => {
     const element = ref.current;
     if (element) {
-      element.addEventListener("mousedown", handleMouseDown as EventListener);
-      element.addEventListener("mouseup", handleMouseUp as EventListener);
-      element.addEventListener("mouseleave", handleMouseLeave as EventListener);
+      element.addEventListener('mousedown', handleMouseDown as EventListener);
+      element.addEventListener('mouseup', handleMouseUp as EventListener);
+      element.addEventListener('mouseleave', handleMouseLeave as EventListener);
       element.addEventListener(
-        "touchstart",
+        'touchstart',
         handleTouchStart as EventListener,
         { passive: true }
       ); // Use passive for touchstart for performance
-      element.addEventListener("touchend", handleTouchEnd as EventListener);
+      element.addEventListener('touchend', handleTouchEnd as EventListener);
       element.addEventListener(
-        "touchcancel",
+        'touchcancel',
         handleTouchCancel as EventListener
       );
 
       // Cleanup listeners on component unmount or ref change
       return () => {
         element.removeEventListener(
-          "mousedown",
+          'mousedown',
           handleMouseDown as EventListener
         );
-        element.removeEventListener("mouseup", handleMouseUp as EventListener);
+        element.removeEventListener('mouseup', handleMouseUp as EventListener);
         element.removeEventListener(
-          "mouseleave",
+          'mouseleave',
           handleMouseLeave as EventListener
         );
         element.removeEventListener(
-          "touchstart",
+          'touchstart',
           handleTouchStart as EventListener
         );
         element.removeEventListener(
-          "touchend",
+          'touchend',
           handleTouchEnd as EventListener
         );
         element.removeEventListener(
-          "touchcancel",
+          'touchcancel',
           handleTouchCancel as EventListener
         );
 
@@ -204,4 +204,4 @@ export const useLongPress = (
   ]);
 
   // This hook doesn't return anything directly, it attaches listeners
-}
+};

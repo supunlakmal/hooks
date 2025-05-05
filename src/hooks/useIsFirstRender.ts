@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 /**
  * A simple utility hook that returns true only on the initial render of a component.
@@ -19,5 +19,4 @@ export const useIsFirstRender = (): boolean => {
   // Return the *current* value of the ref. On the first render pass, it's true.
   // On subsequent renders, the ref will have been set to false by the effect.
   return isFirst.current;
-}
-
+};

@@ -21,25 +21,25 @@ yarn add @supunlakmal/hooks
 ## Usage
 
 ```tsx
-import React, { useState, useCallback } from "react";
-import { useWebSocket, ReadyState } from "@supunlakmal/hooks"; // Adjust the import path
+import React, { useState, useCallback } from 'react';
+import { useWebSocket, ReadyState } from '@supunlakmal/hooks'; // Adjust the import path
 
 function WebSocketComponent() {
-  const [socketUrl, setSocketUrl] = useState("wss://echo.websocket.org");
+  const [socketUrl, setSocketUrl] = useState('wss://echo.websocket.org');
   const [messageHistory, setMessageHistory] = useState<MessageEvent[]>([]);
 
   const { sendMessage, lastMessage, readyState, connect, disconnect, error } =
     useWebSocket(socketUrl, {
-      onOpen: () => console.log("WebSocket opened"),
-      onClose: () => console.log("WebSocket closed"),
+      onOpen: () => console.log('WebSocket opened'),
+      onClose: () => console.log('WebSocket closed'),
       shouldReconnect: (closeEvent) => true, // Auto reconnect
       reconnectIntervalMs: 3000,
       reconnectAttempts: 5,
       onMessage: (event) => {
-        console.log("Received message:", event.data);
+        console.log('Received message:', event.data);
         // Optionally handle message here directly or use lastMessage
       },
-      onError: (event) => console.error("WebSocket error:", event),
+      onError: (event) => console.error('WebSocket error:', event),
     });
 
   // Update message history when lastMessage changes
@@ -50,15 +50,15 @@ function WebSocketComponent() {
   }, [lastMessage]);
 
   const handleClickSendMessage = useCallback(() => {
-    sendMessage("Hello from React hook!");
+    sendMessage('Hello from React hook!');
   }, [sendMessage]);
 
   const connectionStatus = {
-    [ReadyState.Connecting]: "Connecting",
-    [ReadyState.Open]: "Open",
-    [ReadyState.Closing]: "Closing",
-    [ReadyState.Closed]: "Closed",
-    [ReadyState.Uninstantiated]: "Uninstantiated",
+    [ReadyState.Connecting]: 'Connecting',
+    [ReadyState.Open]: 'Open',
+    [ReadyState.Closing]: 'Closing',
+    [ReadyState.Closed]: 'Closed',
+    [ReadyState.Uninstantiated]: 'Uninstantiated',
   }[readyState];
 
   return (
@@ -87,7 +87,7 @@ function WebSocketComponent() {
       <p>
         Connection Status: <span>{connectionStatus}</span>
       </p>
-      {error && <p style={{ color: "red" }}>Error: WebSocket error occurred</p>}
+      {error && <p style={{ color: 'red' }}>Error: WebSocket error occurred</p>}
       <h2>Message History</h2>
       <ul>
         {messageHistory.map((message, idx) => (

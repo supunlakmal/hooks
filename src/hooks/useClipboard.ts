@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 interface UseClipboardReturn {
   value: string | null;
@@ -20,12 +20,12 @@ export const useClipboard = (): UseClipboardReturn => {
 
   // Check if Clipboard API is available
   const isClipboardApiAvailable =
-    typeof navigator !== "undefined" && !!navigator.clipboard;
+    typeof navigator !== 'undefined' && !!navigator.clipboard;
 
   const copy = useCallback(
     async (text: string): Promise<void> => {
       if (!isClipboardApiAvailable) {
-        const err = new Error("Clipboard API not available.");
+        const err = new Error('Clipboard API not available.');
         setError(err);
         return Promise.reject(err);
       }
@@ -37,11 +37,11 @@ export const useClipboard = (): UseClipboardReturn => {
         setError(null);
         return Promise.resolve();
       } catch (err) {
-        console.error("Failed to copy text to clipboard:", err);
+        console.error('Failed to copy text to clipboard:', err);
         setError(
           err instanceof Error || err instanceof DOMException
             ? err
-            : new Error("Copy failed")
+            : new Error('Copy failed')
         );
         setValue(null); // Clear value state on copy error
         return Promise.reject(err);
@@ -52,7 +52,7 @@ export const useClipboard = (): UseClipboardReturn => {
 
   const paste = useCallback(async (): Promise<string> => {
     if (!isClipboardApiAvailable) {
-      const err = new Error("Clipboard API not available.");
+      const err = new Error('Clipboard API not available.');
       setError(err);
       return Promise.reject(err);
     }
@@ -63,11 +63,11 @@ export const useClipboard = (): UseClipboardReturn => {
       setError(null);
       return Promise.resolve(text);
     } catch (err) {
-      console.error("Failed to read text from clipboard:", err);
+      console.error('Failed to read text from clipboard:', err);
       setError(
         err instanceof Error || err instanceof DOMException
           ? err
-          : new Error("Paste failed")
+          : new Error('Paste failed')
       );
       setValue(null); // Clear value state on paste error
       return Promise.reject(err);
@@ -80,6 +80,4 @@ export const useClipboard = (): UseClipboardReturn => {
     copy,
     paste,
   };
-}
-
-
+};

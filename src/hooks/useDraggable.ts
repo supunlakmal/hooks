@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 interface DraggableOptions {
   /** Initial position of the element. */
@@ -15,10 +15,7 @@ interface DraggableOptions {
   /** Callback fired continuously during dragging. */
   onDrag?: (position: { x: number; y: number }, event: PointerEvent) => void;
   /** Callback fired when dragging stops. */
-  onDragEnd?: (
-    position: { x: number; y: number },
-    event: PointerEvent
-  ) => void;
+  onDragEnd?: (position: { x: number; y: number }, event: PointerEvent) => void;
   /** Control the position externally. If provided, the hook operates in controlled mode. */
   position?: { x: number; y: number };
   /** Callback to update the position in controlled mode. */
@@ -185,31 +182,31 @@ export const useDraggable = <T extends HTMLElement>(
     if (!element) return;
 
     // Use pointer events for better compatibility across devices
-    element.addEventListener("pointerdown", handlePointerDown as EventListener);
+    element.addEventListener('pointerdown', handlePointerDown as EventListener);
     // Attach move and up listeners to the window to handle dragging outside the element
-    window.addEventListener("pointermove", handlePointerMove as EventListener);
-    window.addEventListener("pointerup", handlePointerUp as EventListener);
-    window.addEventListener("pointercancel", handlePointerUp as EventListener); // Handle cancellations
+    window.addEventListener('pointermove', handlePointerMove as EventListener);
+    window.addEventListener('pointerup', handlePointerUp as EventListener);
+    window.addEventListener('pointercancel', handlePointerUp as EventListener); // Handle cancellations
 
     // Apply initial/current position using transform for performance
     element.style.transform = `translate(${position.x}px, ${position.y}px)`;
     // Ensure position: relative or absolute is set on the element by the user for transform to work as expected
     // element.style.position = 'relative'; // Or 'absolute' - uncomment if needed, but better set via CSS
-    element.style.cursor = isDragging ? "grabbing" : "grab";
-    element.style.userSelect = isDragging ? "none" : "auto"; // Prevent text selection while dragging
+    element.style.cursor = isDragging ? 'grabbing' : 'grab';
+    element.style.userSelect = isDragging ? 'none' : 'auto'; // Prevent text selection while dragging
 
     return () => {
       element.removeEventListener(
-        "pointerdown",
+        'pointerdown',
         handlePointerDown as EventListener
       );
       window.removeEventListener(
-        "pointermove",
+        'pointermove',
         handlePointerMove as EventListener
       );
-      window.removeEventListener("pointerup", handlePointerUp as EventListener);
+      window.removeEventListener('pointerup', handlePointerUp as EventListener);
       window.removeEventListener(
-        "pointercancel",
+        'pointercancel',
         handlePointerUp as EventListener
       );
       // Cleanup inline styles potentially?
@@ -231,5 +228,3 @@ export const useDraggable = <T extends HTMLElement>(
     isDragging,
   };
 };
-
-

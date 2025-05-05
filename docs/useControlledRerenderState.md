@@ -7,6 +7,7 @@ The `useControlledRerenderState` hook provides a mechanism to manually trigger r
 ## Usage
 
 Here's how to use the `useControlledRerenderState` hook in a React component:
+
 ```
 typescript
 import { useControlledRerenderState } from 'your-library'; // Replace 'your-library' with the actual library name
@@ -15,7 +16,7 @@ function MyComponent({ condition }: { condition: boolean }) {
   const [shouldRerender, triggerRerender] = useControlledRerenderState(condition);
 
   //...your logic here...
-  
+
   return (
     <div>
         {/* the component render if the condition change */}
@@ -25,28 +26,31 @@ function MyComponent({ condition }: { condition: boolean }) {
   );
 }
 ```
+
 ## API
 
 ### Types
+
 ```
 typescript
 type TriggerRerender = (condition: boolean) => void;
 ```
+
 ### Parameters
 
--   **condition**
-    -   Type: `boolean`
-    -   Description: A boolean value that determines whether a re-render should be triggered. When this value changes, the `shouldRerender` will be updated and the component will rerender.
-    -   Optional: No
+- **condition**
+  - Type: `boolean`
+  - Description: A boolean value that determines whether a re-render should be triggered. When this value changes, the `shouldRerender` will be updated and the component will rerender.
+  - Optional: No
 
 ### Returns
 
--   **shouldRerender**
-    -   Type: `boolean`
-    -   Description: A boolean value that indicates if the component should render. It's updated when the `condition` changes.
--   **triggerRerender**
-    -   Type: `TriggerRerender`
-    -   Description: A function that allows you to manually force a re-render of the component.
+- **shouldRerender**
+  - Type: `boolean`
+  - Description: A boolean value that indicates if the component should render. It's updated when the `condition` changes.
+- **triggerRerender**
+  - Type: `TriggerRerender`
+  - Description: A function that allows you to manually force a re-render of the component.
 
 ## How it Works
 

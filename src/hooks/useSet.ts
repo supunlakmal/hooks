@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
 // Define the actions interface for manipulating the set
 interface SetActions<T> {
@@ -74,5 +74,3 @@ export function useSet<T>(initialSet?: Set<T> | Iterable<T>): UseSetResult<T> {
 
   return [set, actions];
 }
-
-

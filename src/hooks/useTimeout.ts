@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  * Custom hook for setting a timeout that can be cleared.
@@ -17,7 +17,7 @@ export function useTimeout(callback: () => void, delay: number | null): void {
   // Set up the timeout.
   useEffect(() => {
     // Don't schedule if delay is null or undefined
-    if (delay === null || typeof delay === "undefined") {
+    if (delay === null || typeof delay === 'undefined') {
       return;
     }
 
@@ -31,5 +31,3 @@ export function useTimeout(callback: () => void, delay: number | null): void {
     return () => clearTimeout(id);
   }, [delay]); // Re-run effect only if delay changes
 }
-
-

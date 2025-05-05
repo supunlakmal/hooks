@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 interface UseStepperProps {
   initialStep?: number;
@@ -30,7 +30,6 @@ export const useStepper = ({
   initialStep = 1,
   totalSteps,
 }: UseStepperProps): UseStepperReturn => {
-
   // Ensure totalSteps is at least 1
   const safeTotalSteps = useMemo(() => Math.max(1, totalSteps), [totalSteps]);
 
@@ -96,6 +95,4 @@ export const useStepper = ({
     goToStep,
     reset,
   };
-}
-
-
+};

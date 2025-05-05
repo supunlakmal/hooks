@@ -90,7 +90,7 @@ export default PermissionsExample;
 ## API
 
 ```typescript
-type PermissionState = PermissionStatus["state"] | "unsupported" | "querying";
+type PermissionState = PermissionStatus['state'] | 'unsupported' | 'querying';
 
 interface UsePermissionState {
   state: PermissionState;

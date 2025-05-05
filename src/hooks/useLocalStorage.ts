@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Type for the function that updates the stored value.
@@ -13,11 +13,14 @@ type SetValue<T> = (value: T | ((prevValue: T) => T)) => void;
  * @param initialValue - The initial value to use if no value is found in localStorage
  * @returns A tuple containing the current value and a function to update it
  */
-export const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T>] => {
+export const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): [T, SetValue<T>] => {
   // Create state to store our value
   // Pass initialState function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return initialValue;
     }
 
@@ -46,7 +49,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T
         setStoredValue(valueToStore);
 
         // Save to local storage
-        if (typeof window !== "undefined") {
+        if (typeof window !== 'undefined') {
           window.localStorage.setItem(key, JSON.stringify(valueToStore));
         }
       } catch (error) {
@@ -73,14 +76,12 @@ export const useLocalStorage = <T>(key: string, initialValue: T): [T, SetValue<T
     }
 
     // Add event listener for 'storage' events
-    if (typeof window !== "undefined") {
-      window.addEventListener("storage", handleStorageChange);
-      return () => window.removeEventListener("storage", handleStorageChange);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('storage', handleStorageChange);
+      return () => window.removeEventListener('storage', handleStorageChange);
     }
     return undefined;
   }, [key]);
 
   return [storedValue, setValue];
-}
-
-
+};

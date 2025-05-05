@@ -83,7 +83,7 @@ export default FullscreenExample;
 ## API
 
 ```typescript
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
 interface UseFullscreenResult {
   isFullscreen: boolean;

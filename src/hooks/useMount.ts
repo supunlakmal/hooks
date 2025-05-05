@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  * Custom hook that runs a callback function exactly once when the component mounts.
@@ -21,5 +21,3 @@ export const useMount = (onMount: () => void): void => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once after initial mount
 };
-
-

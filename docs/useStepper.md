@@ -76,9 +76,9 @@ function MultiStepWizard() {
         {/* Optional: Direct step navigation */}
         {/* <div>
              {Array.from({ length: totalSteps }, (_, i) => i + 1).map(stepNum => (
-                 <button 
-                    key={stepNum} 
-                    onClick={() => goToStep(stepNum)} 
+                 <button
+                    key={stepNum}
+                    onClick={() => goToStep(stepNum)}
                     disabled={currentStep === stepNum}
                     style={{ marginLeft: '5px' }} >
                     {stepNum}

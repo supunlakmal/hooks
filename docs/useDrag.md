@@ -5,8 +5,8 @@ Provides basic drag event handling (`dragstart`, `drag`, `dragend`) for an eleme
 ## Usage
 
 ```tsx
-import React, { useRef, useState } from "react";
-import { useDrag } from "@supunlakmal/hooks"; // Adjust the import path
+import React, { useRef, useState } from 'react';
+import { useDrag } from '@supunlakmal/hooks'; // Adjust the import path
 
 const DraggableItem: React.FC<{ id: string; label: string }> = ({
   id,
@@ -14,9 +14,9 @@ const DraggableItem: React.FC<{ id: string; label: string }> = ({
 }) => {
   const dragRef = useRef<any>(null);
   const { isDragging } = useDrag(dragRef, {
-    transferData: { id, type: "item" }, // Data to send on drop
-    dataFormat: "application/json", // Format of the data
-    dragEffect: "move", // Indicate the operation type
+    transferData: { id, type: 'item' }, // Data to send on drop
+    dataFormat: 'application/json', // Format of the data
+    dragEffect: 'move', // Indicate the operation type
     onDragStart: (e) => console.log(`DragStart: ${label}`, e),
     onDrag: (e) => console.log(`Dragging: ${label}`),
     onDragEnd: (e) =>
@@ -24,12 +24,12 @@ const DraggableItem: React.FC<{ id: string; label: string }> = ({
   });
 
   const style: React.CSSProperties = {
-    padding: "10px",
-    border: "1px solid black",
-    marginBottom: "5px",
-    cursor: "grab",
+    padding: '10px',
+    border: '1px solid black',
+    marginBottom: '5px',
+    cursor: 'grab',
     opacity: isDragging ? 0.5 : 1,
-    backgroundColor: isDragging ? "lightblue" : "white",
+    backgroundColor: isDragging ? 'lightblue' : 'white',
   };
 
   return (
@@ -46,7 +46,7 @@ const DropZone: React.FC = () => {
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault(); // Necessary to allow dropping
-    event.dataTransfer.dropEffect = "move"; // Match the drag source effect
+    event.dataTransfer.dropEffect = 'move'; // Match the drag source effect
     setIsOver(true);
   };
 
@@ -58,22 +58,22 @@ const DropZone: React.FC = () => {
     event.preventDefault();
     setIsOver(false);
     try {
-      const dataString = event.dataTransfer.getData("application/json");
+      const dataString = event.dataTransfer.getData('application/json');
       const data = JSON.parse(dataString);
-      console.log("Dropped data:", data);
+      console.log('Dropped data:', data);
       setDroppedItem(data);
     } catch (e) {
-      console.error("Error parsing dropped data:", e);
-      setDroppedItem({ error: "Failed to parse data" });
+      console.error('Error parsing dropped data:', e);
+      setDroppedItem({ error: 'Failed to parse data' });
     }
   };
 
   const style: React.CSSProperties = {
-    padding: "20px",
-    border: isOver ? "2px dashed blue" : "2px dashed grey",
-    minHeight: "100px",
-    marginTop: "20px",
-    backgroundColor: isOver ? "lightyellow" : "#f9f9f9",
+    padding: '20px',
+    border: isOver ? '2px dashed blue' : '2px dashed grey',
+    minHeight: '100px',
+    marginTop: '20px',
+    backgroundColor: isOver ? 'lightyellow' : '#f9f9f9',
   };
 
   return (

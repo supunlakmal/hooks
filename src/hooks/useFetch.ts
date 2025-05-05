@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 interface FetchOptions extends RequestInit {
   // Allows extending with custom options if needed in the future
@@ -23,7 +23,7 @@ export const useFetch = <T>(
   options?: FetchOptions
 ): FetchState<T> => {
   const [state, setState] = useState<FetchState<T>>({
-     data: null,
+    data: null,
     loading: false,
     error: null,
   });
@@ -61,7 +61,7 @@ export const useFetch = <T>(
           error:
             error instanceof Error
               ? error
-              : new Error("An unknown error occurred"),
+              : new Error('An unknown error occurred'),
         });
       }
     };
@@ -72,6 +72,4 @@ export const useFetch = <T>(
   }, [url]); // Re-run effect only if URL changes. Options dependency managed via ref.
 
   return state;
-}
-
-
+};

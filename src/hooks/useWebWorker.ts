@@ -16,7 +16,8 @@ type WorkerFunction<T, A extends any[]> = (...args: A) => T;
  * @returns An object containing the result, error, loading state, and functions to execute or terminate the worker.
  */
 export const useWebWorker = <T, A extends any[]>(
-  workerFunction: WorkerFunction<T, A>) => {
+  workerFunction: WorkerFunction<T, A>
+) => {
   const [workerState, setWorkerState] = useState<WorkerState<T>>({
     result: null,
     error: null,
@@ -48,21 +49,39 @@ export const useWebWorker = <T, A extends any[]>(
     const url = URL.createObjectURL(blob);
     workerRef.current = new Worker(url);
 
-    workerRef.current.onmessage = (event: MessageEvent<{ type: 'success' | 'error'; result?: T; error?: string }>) => {
+    workerRef.current.onmessage = (
+      event: MessageEvent<{
+        type: 'success' | 'error';
+        result?: T;
+        error?: string;
+      }>
+    ) => {
       if (event.data.type === 'success') {
-        setWorkerState({ result: event.data.result!, error: null, isLoading: false });
+        setWorkerState({
+          result: event.data.result!,
+          error: null,
+          isLoading: false,
+        });
       } else if (event.data.type === 'error') {
-        setWorkerState({ result: null, error: new Error(event.data.error), isLoading: false });
+        setWorkerState({
+          result: null,
+          error: new Error(event.data.error),
+          isLoading: false,
+        });
       }
-      
+
       URL.revokeObjectURL(url);
       workerRef.current?.terminate();
     };
 
     workerRef.current.onerror = (error) => {
-        setWorkerState({ result: null, error: new Error(error.message), isLoading: false });
-        URL.revokeObjectURL(url);
-        workerRef.current?.terminate();
+      setWorkerState({
+        result: null,
+        error: new Error(error.message),
+        isLoading: false,
+      });
+      URL.revokeObjectURL(url);
+      workerRef.current?.terminate();
     };
 
     workerRef.current.postMessage(args);
@@ -87,5 +106,4 @@ export const useWebWorker = <T, A extends any[]>(
     executeWorker,
     terminateWorker,
   };
-}
-
+};

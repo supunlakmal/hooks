@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export enum ReadyState {
   Connecting = 0,
@@ -8,10 +8,10 @@ export enum ReadyState {
 }
 
 export interface UseWebSocketOptions {
-  onOpen?: (event: WebSocketEventMap["open"]) => void;
-  onClose?: (event: WebSocketEventMap["close"]) => void;
-  onMessage?: (event: WebSocketEventMap["message"]) => void;
-  onError?: (event: WebSocketEventMap["error"]) => void;
+  onOpen?: (event: WebSocketEventMap['open']) => void;
+  onClose?: (event: WebSocketEventMap['close']) => void;
+  onMessage?: (event: WebSocketEventMap['message']) => void;
+  onError?: (event: WebSocketEventMap['error']) => void;
   reconnectLimit?: number;
   reconnectIntervalMs?: number;
   // Add more options as needed, e.g., protocols
@@ -78,7 +78,7 @@ export const useWebSocket = (
       reconnectTimerRef.current = null;
     }
     if (wsRef.current && readyState !== ReadyState.Closed) {
-      console.warn("WebSocket already connected or connecting.");
+      console.warn('WebSocket already connected or connecting.');
       return;
     }
 
@@ -91,7 +91,7 @@ export const useWebSocket = (
       wsRef.current = socket;
 
       socket.onopen = (event) => {
-        console.log("WebSocket opened");
+        console.log('WebSocket opened');
         reconnectAttemptsRef.current = 0; // Reset reconnect attempts on successful open
         setReadyState(ReadyState.Open);
         savedOnOpen.current?.(event);
@@ -103,7 +103,7 @@ export const useWebSocket = (
       };
 
       socket.onerror = (event) => {
-        console.error("WebSocket error:", event);
+        console.error('WebSocket error:', event);
         setError(event);
         setReadyState(ReadyState.Closed); // Often errors lead to closure
         savedOnError.current?.(event);
@@ -112,7 +112,7 @@ export const useWebSocket = (
       };
 
       socket.onclose = (event) => {
-        console.log("WebSocket closed:", event.code, event.reason);
+        console.log('WebSocket closed:', event.code, event.reason);
         // Only set Closed state here if not already handled by error
         // and not explicitly disconnected
         if (readyState !== ReadyState.Closed) {
@@ -124,12 +124,12 @@ export const useWebSocket = (
         handleClose(explicitDisconnectRef.current);
       };
     } catch (err) {
-      console.error("Failed to create WebSocket:", err);
+      console.error('Failed to create WebSocket:', err);
       // Ensure we pass an Event or null to setError
       const errorEvent =
         err instanceof Event
           ? err
-          : new Event("error", {
+          : new Event('error', {
               // Create a generic event if err is not an Event
               // You might want to add more details to this synthetic event if possible
             });
@@ -153,11 +153,14 @@ export const useWebSocket = (
         console.log(
           `WebSocket closed unexpectedly. Attempting reconnect ${reconnectAttemptsRef.current}/${reconnectLimit}...`
         );
-        reconnectTimerRef.current = setTimeout(() => {
-          connectWebSocket();
-        }, reconnectIntervalMs * Math.pow(2, reconnectAttemptsRef.current - 1)); // Exponential backoff
+        reconnectTimerRef.current = setTimeout(
+          () => {
+            connectWebSocket();
+          },
+          reconnectIntervalMs * Math.pow(2, reconnectAttemptsRef.current - 1)
+        ); // Exponential backoff
       } else if (!wasExplicit) {
-        console.log("WebSocket reconnect limit reached.");
+        console.log('WebSocket reconnect limit reached.');
       }
     },
     [reconnectLimit, reconnectIntervalMs, connectWebSocket, readyState]
@@ -169,7 +172,7 @@ export const useWebSocket = (
       reconnectTimerRef.current = null;
     }
     if (wsRef.current) {
-      console.log("Disconnecting WebSocket explicitly.");
+      console.log('Disconnecting WebSocket explicitly.');
       explicitDisconnectRef.current = true;
       setReadyState(ReadyState.Closing);
       wsRef.current.close();
@@ -198,7 +201,7 @@ export const useWebSocket = (
       if (wsRef.current && wsRef.current.readyState === ReadyState.Open) {
         wsRef.current.send(data);
       } else {
-        console.warn("WebSocket not open. Cannot send message.");
+        console.warn('WebSocket not open. Cannot send message.');
       }
     },
     []
@@ -215,6 +218,4 @@ export const useWebSocket = (
     disconnect: disconnectWebSocket,
     getWebSocket,
   };
-}
-
-
+};

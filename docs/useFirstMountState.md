@@ -5,6 +5,7 @@
 The `useFirstMountState` hook provides a boolean value indicating whether the component is being mounted for the first time. This is useful for distinguishing the initial render from subsequent updates within a component's lifecycle.
 
 ## Usage
+
 ```
 typescript
 import { useFirstMountState } from '@supunlakmal/hooks';
@@ -21,19 +22,22 @@ function MyComponent() {
   return <div>My Component</div>;
 }
 ```
+
 ## API
+
 ```
 typescript
 function useFirstMountState(): boolean;
 ```
+
 ## Parameters
 
 This hook does not take any parameters.
 
 ## Returns
 
-*   **Return type:** `boolean`
-*   **Details:** Returns `true` if the component is being mounted for the first time; otherwise, it returns `false`.
+- **Return type:** `boolean`
+- **Details:** Returns `true` if the component is being mounted for the first time; otherwise, it returns `false`.
 
 ## How it Works
 

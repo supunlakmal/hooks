@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef} from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 /**
  * Returns a function that returns the current mount state. This hook is useful when you have to
@@ -8,18 +8,17 @@ import {useCallback, useEffect, useRef} from 'react';
  *
  * @return Function that returns `true` only if the component is mounted.
  */
-export const useIsMounted = (initialValue = false): () => boolean => {
-	const isMounted = useRef(initialValue);
-	const get = useCallback(() => isMounted.current, []);
+export const useIsMounted = (initialValue = false): (() => boolean) => {
+  const isMounted = useRef(initialValue);
+  const get = useCallback(() => isMounted.current, []);
 
-	useEffect(() => {
-			isMounted.current = true;
+  useEffect(() => {
+    isMounted.current = true;
 
-			return () => {
-					isMounted.current = false;
-			};
-	}, []);
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
-	return get;
-}
-
+  return get;
+};
