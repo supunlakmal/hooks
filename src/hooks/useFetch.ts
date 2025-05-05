@@ -4,12 +4,6 @@ interface FetchOptions extends RequestInit {
   // Allows extending with custom options if needed in the future
 }
 
-interface FetchState<T> {
-  data: T | null;
-  loading: boolean;
-  error: Error | null;
-}
-
 /**
  * Custom hook for fetching data from an API endpoint.
  *
@@ -18,6 +12,12 @@ interface FetchState<T> {
  * @param {FetchOptions} [options] Optional fetch options (e.g., method, headers, body).
  * @returns {FetchState<T>} An object containing the fetched data, loading state, and error state.
  */
+export interface FetchState<T> {
+  data: T | null;
+  loading: boolean;
+  error: Error | null;
+}
+
 export const useFetch = <T>(
   url: string | null | undefined,
   options?: FetchOptions

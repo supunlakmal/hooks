@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-interface UseIdleTimerProps {
+export interface UseIdleTimerProps {
   onIdle: () => void;
   onActive?: () => void;
   timeout: number; // in milliseconds
