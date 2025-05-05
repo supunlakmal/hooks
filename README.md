@@ -183,6 +183,24 @@ Debounces a state, delaying updates until a certain time has passed without chan
 
 ---
 
+### [**`useDebouncedFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedFetch.md)
+
+A `useFetch` variant that debounces the fetch call.
+
+---
+
+### [**`useDebouncedGeolocation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedGeolocation.md)
+
+Tracks the user's geographic location using the Geolocation API, with debouncing.
+
+---
+
+### [**`useDebouncedMediaQuery`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedMediaQuery.md)
+
+Debounces a state, delaying updates until a certain time has passed without changes.
+
+---
+
 ### [**`useDebounce`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebounce.md)
 
 Debounces a value, delaying updates until a certain time has passed without changes.
@@ -213,9 +231,27 @@ Computes derived state based on other values, recomputing only when dependencies
 
 ---
 
+### [**`useDefault`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDefault.md)
+
+Provides a state hook with a default value that is used when the state is `undefined` or `null`.
+
+---
+
+### [**`useDocumentTitle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDocumentTitle.md)
+
+Sets and manages the document title.
+
+---
+
 ### [**`useDeviceMotion`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDeviceMotion.md)
 
 Tracks device motion information (acceleration, rotation rate) via the `devicemotion` event.
+
+---
+
+### [**`useLocationBasedFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocationBasedFetch.md)
+
+A fetch variant that uses the user's location for the API endpoint.
 
 ---
 
@@ -226,6 +262,18 @@ Tracks the physical orientation of the device via the `deviceorientation` event.
 ---
 
 ### [**`useDrag`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDrag.md)
+
+Provides basic HTML Drag and Drop API event handling (`dragstart`, `drag`, `dragend`) for an element.
+
+---
+
+### [**`useEyeDropper`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEyeDropper.md)
+
+Utilizes the EyeDropper API to select colors from the screen.
+
+---
+
+### [**`useFavicon`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFavicon.md)
 
 Provides basic HTML Drag and Drop API event handling (`dragstart`, `drag`, `dragend`) for an element.
 
@@ -369,6 +417,18 @@ Get the value from local storage.
 
 ---
 
+### [**`useLocalStorageQueue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorageQueue.md)
+
+Manages a queue of items persisted in local storage.
+
+---
+
+### [**`useMediaStream`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediaStream.md)
+
+Get the value from local storage.
+
+---
+
 ### [**`useMeasure`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMeasure.md)
 
 Get the size of an element.
@@ -396,6 +456,12 @@ A `useMemo` variant that allow to provide custom compore logic.
 ### [**`usePreviousDifferent`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePreviousDifferent.md)
 
 Tracks the previous different value of a state or prop from the last render.
+
+---
+
+### [**`usePersistentToggle`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePersistentToggle.md)
+
+Manages boolean state that persists in local storage.
 
 ---
 
@@ -501,6 +567,24 @@ Simplifies handling promises, managing loading, error, and success states.
 
 ---
 
+### [**`useNetworkAwareFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkAwareFetch.md)
+
+A `useFetch` variant that automatically refetches when the network status changes from offline to online.
+
+---
+
+### [**`useNetworkAwareWebSocket`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkAwareWebSocket.md)
+
+A `useWebSocket` variant that automatically reconnects when the network status changes from offline to online.
+
+---
+
+### [**`useNotification`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNotification.md)
+
+Utilizes the Notification API to display desktop notifications.
+
+---
+
 ### [**`useOnlineStatus`**](https://github.com/supunlakmal/hooks/blob/main/docs/useOnlineStatus.md)
 
 Tracks the browser's online/offline connection status.
@@ -510,6 +594,12 @@ Tracks the browser's online/offline connection status.
 ### [**`usePageVisibility`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePageVisibility.md)
 
 Tracks the visibility state of the current browser tab/page using the Page Visibility API.
+
+---
+
+### [**`useOrientation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useOrientation.md)
+
+Tracks the screen orientation (landscape or portrait).
 
 ---
 
@@ -525,6 +615,12 @@ Manages pagination logic for client-side data sets.
 
 ---
 
+### [**`usePersistentCounter`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePersistentCounter.md)
+
+Manages a counter state that persists in local storage.
+
+---
+
 ### [**`usePermission`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePermission.md)
 
 Queries the status of browser permissions (geolocation, notifications, etc.) using the Permissions API.
@@ -534,6 +630,12 @@ Queries the status of browser permissions (geolocation, notifications, etc.) usi
 ### [**`usePortal`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePortal.md)
 
 Simplifies the creation and management of React Portals.
+
+---
+
+### [**`usePrefersReducedMotion`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePrefersReducedMotion.md)
+
+Tracks the user's preference for reduced motion using the `prefers-reduced-motion` media query.
 
 ---
 
@@ -567,6 +669,12 @@ Creates a callback based on requestAnimationFrame.
 
 ---
 
+### [**`useRafState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRafState.md)
+
+Creates a callback based on requestAnimationFrame.
+
+---
+
 ### [**`useResizeObserver`**](https://github.com/supunlakmal/hooks/blob/main/docs/useResizeObserver.md)
 
 Monitors changes to the dimensions of a target element using the `ResizeObserver` API.
@@ -585,6 +693,12 @@ Implements the roving tabindex accessibility pattern for keyboard navigation wit
 
 ---
 
+### [**`useScreenOrientation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScreenOrientation.md)
+
+Tracks the screen orientation (angle, type) using the Screen Orientation API.
+
+---
+
 ### [**`useScrollPosition`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollPosition.md)
 
 Tracks the current X and Y scroll position of the window or a specified element.
@@ -594,6 +708,12 @@ Tracks the current X and Y scroll position of the window or a specified element.
 ### [**`useScrollSpy`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollSpy.md)
 
 Monitors scroll position to determine which section element is currently active in the viewport.
+
+---
+
+### [**`useScrollLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollLock.md)
+
+Prevents scrolling on the `body` element.
 
 ---
 
@@ -616,6 +736,12 @@ Manages state in the form of a JavaScript `Set`, providing immutable update acti
 ---
 
 ### [**`useStateWithHistory`**](https://github.com/supunlakmal/hooks/blob/main/docs/useStateWithHistory.md)
+
+Manages state with undo/redo history tracking.
+
+---
+
+### [**`useSyncedLocalStorage`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSyncedLocalStorage.md)
 
 Manages state with undo/redo history tracking.
 
@@ -651,6 +777,12 @@ A hook to get the value from local or session storage.
 
 ---
 
+### [**`useTextSelection`**](https://github.com/supunlakmal/hooks/blob/main/docs/useTextSelection.md)
+
+A hook to get the value from local or session storage.
+
+---
+
 ### [**`useThrottledState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledState.md)
 
 Throttles a state, ensuring updates do not occur more frequently than a specified limit.
@@ -660,6 +792,12 @@ Throttles a state, ensuring updates do not occur more frequently than a specifie
 ### [**`useThrottledCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledCallback.md)
 
 Throttles a callback, ensuring updates do not occur more frequently than a specified limit.
+
+---
+
+### [**`useThrottledEventListener`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledEventListener.md)
+
+Attaches an event listener and throttles the callback execution.
 
 ---
 
@@ -694,6 +832,18 @@ A `useEffect` variant that skips the effect execution after the initial render (
 ---
 
 ### [**`useVirtualList`**](https://github.com/supunlakmal/hooks/blob/main/docs/useVirtualList.md)
+
+Performance optimization for rendering long lists by rendering only visible items (fixed height).
+
+---
+
+### [**`useVibration`**](https://github.com/supunlakmal/hooks/blob/main/docs/useVibration.md)
+
+Utilizes the Vibration API to trigger device vibrations.
+
+---
+
+### [**`useWakeLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWakeLock.md)
 
 Performance optimization for rendering long lists by rendering only visible items (fixed height).
 
