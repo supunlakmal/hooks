@@ -7,7 +7,9 @@ import { useState, useCallback, useRef, RefObject, useEffect } from 'react';
  * @param elementRef The React ref attached to the container element.
  * @returns `true` if the element or a descendant has focus, `false` otherwise.
  */
-export function useFocusWithinState(elementRef: RefObject<HTMLElement>): boolean {
+export function useFocusWithinState(
+  elementRef: RefObject<HTMLElement>
+): boolean {
   const [isFocusWithin, setIsFocusWithin] = useState<boolean>(false);
   // Ref to track if the blur event is happening due to a focus shift *within* the element
   const internalFocusChange = useRef(false);
@@ -23,12 +25,16 @@ export function useFocusWithinState(elementRef: RefObject<HTMLElement>): boolean
     internalFocusChange.current = true;
     // Use a microtask (Promise) to check after the potential relatedTarget focus event
     Promise.resolve().then(() => {
-        // Check if focus is still within the element after focusout potentially triggered a focusin
-        // Also check if the ref is still attached
-        if (internalFocusChange.current && elementRef.current && !elementRef.current.contains(document.activeElement)) {
-            setIsFocusWithin(false);
-        }
-        internalFocusChange.current = false; // Reset flag
+      // Check if focus is still within the element after focusout potentially triggered a focusin
+      // Also check if the ref is still attached
+      if (
+        internalFocusChange.current &&
+        elementRef.current &&
+        !elementRef.current.contains(document.activeElement)
+      ) {
+        setIsFocusWithin(false);
+      }
+      internalFocusChange.current = false; // Reset flag
     });
   }, [elementRef]); // Depend on elementRef
 

@@ -15,10 +15,14 @@ export function useDebouncedFetch<T = any>(
   initialUrl: string | undefined,
   options: RequestInit = {},
   delay: number
-): any { // Return type explicitly set to any
+): any {
+  // Return type explicitly set to any
   // Debounce the URL and options that trigger the fetch
   const [debouncedUrl, setDebouncedUrl] = useDebouncedState(initialUrl, delay);
-  const [debouncedOptions, setDebouncedOptions] = useDebouncedState(options, delay);
+  const [debouncedOptions, setDebouncedOptions] = useDebouncedState(
+    options,
+    delay
+  );
 
   // Update debounced values when inputs change
   useEffect(() => {

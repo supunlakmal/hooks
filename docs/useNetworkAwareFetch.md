@@ -53,20 +53,20 @@ export default OnlinePostsList;
 
 ## Parameters
 
--   **`targetUrl`**: `string` (Required)
-    -   The URL from which to fetch data. The fetch will only proceed if the user is online.
--   **`options`**: `UseNetworkAwareFetchOptions` (Optional)
-    -   Standard `RequestInit` options to pass to the underlying `fetch` call (e.g., `method`, `headers`, `body`). This interface currently just extends `RequestInit`.
+- **`targetUrl`**: `string` (Required)
+  - The URL from which to fetch data. The fetch will only proceed if the user is online.
+- **`options`**: `UseNetworkAwareFetchOptions` (Optional)
+  - Standard `RequestInit` options to pass to the underlying `fetch` call (e.g., `method`, `headers`, `body`). This interface currently just extends `RequestInit`.
 
 ## Return Value
 
--   **`FetchState<T>`**: An object representing the state of the fetch operation, directly returned from the underlying `useFetch` hook. It contains:
-    -   **`data`**: `T | null` - The fetched data. `null` initially, when offline, or if an error occurs.
-    -   **`error`**: `Error | null` - Any error object encountered during the fetch. `null` otherwise.
-    -   **`loading`**: `boolean` - `true` if the fetch is currently active (which requires being online), `false` otherwise.
+- **`FetchState<T>`**: An object representing the state of the fetch operation, directly returned from the underlying `useFetch` hook. It contains:
+  - **`data`**: `T | null` - The fetched data. `null` initially, when offline, or if an error occurs.
+  - **`error`**: `Error | null` - Any error object encountered during the fetch. `null` otherwise.
+  - **`loading`**: `boolean` - `true` if the fetch is currently active (which requires being online), `false` otherwise.
 
 ## Notes
 
--   This hook monitors the network status using `useNetworkState`.
--   The underlying `useFetch` hook is only provided with the `targetUrl` when the `online` status is `true`. When `online` is `false`, `null` is passed to `useFetch`, preventing it from fetching or potentially cancelling an ongoing request depending on `useFetch`'s implementation details.
--   If the `targetUrl` changes while the user is offline, the fetch for the new URL will be initiated automatically when the user comes back online.
+- This hook monitors the network status using `useNetworkState`.
+- The underlying `useFetch` hook is only provided with the `targetUrl` when the `online` status is `true`. When `online` is `false`, `null` is passed to `useFetch`, preventing it from fetching or potentially cancelling an ongoing request depending on `useFetch`'s implementation details.
+- If the `targetUrl` changes while the user is offline, the fetch for the new URL will be initiated automatically when the user comes back online.

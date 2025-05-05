@@ -40,13 +40,13 @@ function VibrationComponent() {
 
 ### Return Value (`UseVibrationReturn`)
 
--   `isSupported: boolean`: Indicates if the Vibration API is available in the browser.
--   `vibrate(pattern: VibrationPattern): void`: Triggers vibration.
-    -   `pattern`: A number (duration in ms) or an array of numbers (duration, pause, duration, ...).
--   `cancelVibration(): void`: Stops any currently active vibration pattern.
+- `isSupported: boolean`: Indicates if the Vibration API is available in the browser.
+- `vibrate(pattern: VibrationPattern): void`: Triggers vibration.
+  - `pattern`: A number (duration in ms) or an array of numbers (duration, pause, duration, ...).
+- `cancelVibration(): void`: Stops any currently active vibration pattern.
 
 ### Notes
 
--   Support for the Vibration API varies across browsers and devices (especially desktops).
--   Vibration might not work if the device is in silent mode or the user has disabled vibration.
--   Excessive use of vibration can be annoying to users and drain battery.
+- Support for the Vibration API varies across browsers and devices (especially desktops).
+- Vibration might not work if the device is in silent mode or the user has disabled vibration.
+- Excessive use of vibration can be annoying to users and drain battery.

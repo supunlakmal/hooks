@@ -34,47 +34,44 @@ const isBrowser = typeof window !== 'undefined';
  * @returns A tuple containing functions to `start` and `cancel` the scheduled callback.
  */
 export function useIdleCallback(
-    callback: (deadline: RequestIdleCallbackDeadline) => void,
-    options?: RequestIdleCallbackOptions
+  callback: (deadline: RequestIdleCallbackDeadline) => void,
+  options?: RequestIdleCallbackOptions
 ): { start: () => void; cancel: () => void; isActive: boolean } {
-    const idleCallbackHandleRef = useRef<RequestIdleCallbackHandle | null>(null);
-    const [isActive, setIsActive] = useState(false);
-    const callbackRef = useRef(callback);
+  const idleCallbackHandleRef = useRef<RequestIdleCallbackHandle | null>(null);
+  const [isActive, setIsActive] = useState(false);
+  const callbackRef = useRef(callback);
 
-    // Keep the callback ref updated
-    useEffect(() => {
-        callbackRef.current = callback;
-    }, [callback]);
+  // Keep the callback ref updated
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
 
-    const cancel = useCallback(() => {
-        if (isBrowser && idleCallbackHandleRef.current !== null) {
-            window.cancelIdleCallback(idleCallbackHandleRef.current);
-            idleCallbackHandleRef.current = null;
-            setIsActive(false);
-        }
-    }, []);
+  const cancel = useCallback(() => {
+    if (isBrowser && idleCallbackHandleRef.current !== null) {
+      window.cancelIdleCallback(idleCallbackHandleRef.current);
+      idleCallbackHandleRef.current = null;
+      setIsActive(false);
+    }
+  }, []);
 
-    const start = useCallback(() => {
-        if (!isBrowser) return;
+  const start = useCallback(() => {
+    if (!isBrowser) return;
 
-        // Cancel any existing callback before starting a new one
-        cancel();
+    // Cancel any existing callback before starting a new one
+    cancel();
 
-        idleCallbackHandleRef.current = window.requestIdleCallback(
-            (deadline) => {
-                 callbackRef.current(deadline);
-                 idleCallbackHandleRef.current = null; // Callback executed, clear handle
-                 setIsActive(false);
-            },
-            options
-        );
-        setIsActive(true);
-    }, [options, cancel]);
+    idleCallbackHandleRef.current = window.requestIdleCallback((deadline) => {
+      callbackRef.current(deadline);
+      idleCallbackHandleRef.current = null; // Callback executed, clear handle
+      setIsActive(false);
+    }, options);
+    setIsActive(true);
+  }, [options, cancel]);
 
-    // Cleanup on unmount
-    useEffect(() => {
-        return cancel; // Cancel callback when component unmounts
-    }, [cancel]);
+  // Cleanup on unmount
+  useEffect(() => {
+    return cancel; // Cancel callback when component unmounts
+  }, [cancel]);
 
-    return { start, cancel, isActive };
+  return { start, cancel, isActive };
 }

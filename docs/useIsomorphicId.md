@@ -19,14 +19,16 @@ function AccessibleComponent() {
   return (
     <div>
       <h2 id={titleId}>Accessible Form Section</h2>
-      <p id={descriptionId}>This section demonstrates using IDs for ARIA attributes.</p>
-      
+      <p id={descriptionId}>
+        This section demonstrates using IDs for ARIA attributes.
+      </p>
+
       <label htmlFor={inputId}>Enter Value:</label>
-      <input 
-        id={inputId} 
-        type="text" 
-        aria-labelledby={titleId} 
-        aria-describedby={descriptionId} 
+      <input
+        id={inputId}
+        type="text"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
       />
 
       <p>
@@ -53,14 +55,14 @@ None.
 
 ### Return Value
 
--   `id`: `string`
-    -   A unique and stable ID string suitable for use in HTML attributes like `id`, `htmlFor`, `aria-labelledby`, etc.
+- `id`: `string`
+  - A unique and stable ID string suitable for use in HTML attributes like `id`, `htmlFor`, `aria-labelledby`, etc.
 
 ## Behavior
 
--   **React 18+:** If `React.useId` is available, the hook directly calls and returns its result. This is the preferred and safest method for SSR hydration.
--   **React < 18 / No `useId`:**
-    -   It uses a simple incrementing counter (`serverId`) during server rendering or the initial client render to generate a basic ID (e.g., `fallback-id-1`).
-    -   It stores this ID using `useState`.
-    -   **Important:** This fallback mechanism might lead to hydration mismatches in React versions below 18 if the server-generated ID doesn't perfectly align with what the client expects or generates before hydration completes. Consider upgrading React or using a dedicated SSR-safe ID library for React < 18 if strict hydration safety is required.
--   The hook ensures that the ID generated remains stable for the lifetime of the component instance.
+- **React 18+:** If `React.useId` is available, the hook directly calls and returns its result. This is the preferred and safest method for SSR hydration.
+- **React < 18 / No `useId`:**
+  - It uses a simple incrementing counter (`serverId`) during server rendering or the initial client render to generate a basic ID (e.g., `fallback-id-1`).
+  - It stores this ID using `useState`.
+  - **Important:** This fallback mechanism might lead to hydration mismatches in React versions below 18 if the server-generated ID doesn't perfectly align with what the client expects or generates before hydration completes. Consider upgrading React or using a dedicated SSR-safe ID library for React < 18 if strict hydration safety is required.
+- The hook ensures that the ID generated remains stable for the lifetime of the component instance.

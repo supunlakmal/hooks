@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { useIdleTimer } from './useIdleTimer'; 
-import { useFetch, FetchState } from './useFetch'; 
+import { useIdleTimer } from './useIdleTimer';
+import { useFetch, FetchState } from './useFetch';
 
 // Define options type for useIdleFetch
 interface UseIdleFetchOptions {

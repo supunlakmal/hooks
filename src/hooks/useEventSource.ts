@@ -66,58 +66,57 @@ export function useEventSource<T = any>(
     setLastMessage(null);
 
     try {
-        const es = new EventSource(url, { withCredentials });
-        eventSourceRef.current = es;
+      const es = new EventSource(url, { withCredentials });
+      eventSourceRef.current = es;
 
-        es.onopen = () => {
-            setStatus('open');
-            // console.log('EventSource connection opened');
-        };
+      es.onopen = () => {
+        setStatus('open');
+        // console.log('EventSource connection opened');
+      };
 
-        es.onmessage = (event: MessageEvent<T>) => {
-            setLastMessage(event);
-            // Optionally try to parse data
-            // try {
-            //     const parsedData = JSON.parse(event.data);
-            //     setLastMessage({ ...event, data: parsedData });
-            // } catch (e) {
-            //     setLastMessage(event); // Store raw data if JSON parsing fails
-            // }
-        };
+      es.onmessage = (event: MessageEvent<T>) => {
+        setLastMessage(event);
+        // Optionally try to parse data
+        // try {
+        //     const parsedData = JSON.parse(event.data);
+        //     setLastMessage({ ...event, data: parsedData });
+        // } catch (e) {
+        //     setLastMessage(event); // Store raw data if JSON parsing fails
+        // }
+      };
 
-        es.onerror = (errEvent) => {
-            setError(errEvent);
-            setStatus('error');
-            // console.error('EventSource error:', errEvent);
-            close(); // Close on error
-        };
-
-        // Register custom event listeners
-        Object.entries(listenersRef.current).forEach(([eventName, handler]) => {
-            if (es) {
-                es.addEventListener(eventName, handler);
-            }
-        });
-
-    } catch (err: any) {
-        console.error("Failed to create EventSource:", err);
-        setError(null); // Set error state to null, type is Event | null
+      es.onerror = (errEvent) => {
+        setError(errEvent);
         setStatus('error');
-        eventSourceRef.current = null;
+        // console.error('EventSource error:', errEvent);
+        close(); // Close on error
+      };
+
+      // Register custom event listeners
+      Object.entries(listenersRef.current).forEach(([eventName, handler]) => {
+        if (es) {
+          es.addEventListener(eventName, handler);
+        }
+      });
+    } catch (err: any) {
+      console.error('Failed to create EventSource:', err);
+      setError(null); // Set error state to null, type is Event | null
+      setStatus('error');
+      eventSourceRef.current = null;
     }
 
     // Cleanup function
     return () => {
-        // Remove custom listeners before closing
-        if (eventSourceRef.current) {
-            const es = eventSourceRef.current;
-            Object.entries(listenersRef.current).forEach(([eventName, handler]) => {
-                es.removeEventListener(eventName, handler);
-            });
-        }
-        close();
+      // Remove custom listeners before closing
+      if (eventSourceRef.current) {
+        const es = eventSourceRef.current;
+        Object.entries(listenersRef.current).forEach(([eventName, handler]) => {
+          es.removeEventListener(eventName, handler);
+        });
+      }
+      close();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, withCredentials]); // Dependencies: url, withCredentials. listenersRef handles listener changes.
 
   return { status, lastMessage, error, close };

@@ -29,7 +29,9 @@ function ScrollIndicator() {
   };
 
   return (
-    <div style={{ height: '200vh', border: '1px dashed gray', padding: '10px' }}>
+    <div
+      style={{ height: '200vh', border: '1px dashed gray', padding: '10px' }}
+    >
       <h1>Throttled Scroll Position</h1>
       <p>Scroll down to see the effect.</p>
       <p>Throttled Y Position: {scrollY}px</p>
@@ -51,22 +53,22 @@ export default ScrollIndicator;
 
 ## Parameters
 
--   **`delay`**: `number` (Required)
-    -   The throttle delay in milliseconds. State updates for `scrollX` and `scrollY` will occur at most once per `delay` milliseconds while scrolling.
--   **`throttleOptions`**: `ThrottleOptions` (Optional)
-    -   An object containing options passed to the underlying `useThrottledCallback`. Common options might include:
-        -   `leading`: `boolean` (Default: `true`) - Invoke the callback on the leading edge of the timeout.
-        -   `trailing`: `boolean` (Default: `true`) - Invoke the callback on the trailing edge of the timeout.
-        -   `noTrailing`: `boolean` (As seen in the code) - Might be a specific option from your `useThrottledCallback` implementation to disable the trailing call. Refer to `useThrottledCallback` documentation for exact behavior.
+- **`delay`**: `number` (Required)
+  - The throttle delay in milliseconds. State updates for `scrollX` and `scrollY` will occur at most once per `delay` milliseconds while scrolling.
+- **`throttleOptions`**: `ThrottleOptions` (Optional)
+  - An object containing options passed to the underlying `useThrottledCallback`. Common options might include:
+    - `leading`: `boolean` (Default: `true`) - Invoke the callback on the leading edge of the timeout.
+    - `trailing`: `boolean` (Default: `true`) - Invoke the callback on the trailing edge of the timeout.
+    - `noTrailing`: `boolean` (As seen in the code) - Might be a specific option from your `useThrottledCallback` implementation to disable the trailing call. Refer to `useThrottledCallback` documentation for exact behavior.
 
 ## Return Value
 
--   **`ScrollPosition`**: An object `{ scrollX: number; scrollY: number }`
-    -   Contains the throttled horizontal (`scrollX`) and vertical (`scrollY`) scroll position of the window.
-    -   Defaults to `{ scrollX: 0, scrollY: 0 }` during server-side rendering or if `window` is not available.
+- **`ScrollPosition`**: An object `{ scrollX: number; scrollY: number }`
+  - Contains the throttled horizontal (`scrollX`) and vertical (`scrollY`) scroll position of the window.
+  - Defaults to `{ scrollX: 0, scrollY: 0 }` during server-side rendering or if `window` is not available.
 
 ## Notes
 
--   This hook attaches a throttled event listener to the `window`'s `scroll` event.
--   The listener is automatically cleaned up when the component unmounts.
--   Throttling prevents the component state from updating on every single pixel scrolled, which can significantly improve performance for complex components that depend on scroll position.
+- This hook attaches a throttled event listener to the `window`'s `scroll` event.
+- The listener is automatically cleaned up when the component unmounts.
+- Throttling prevents the component state from updating on every single pixel scrolled, which can significantly improve performance for complex components that depend on scroll position.

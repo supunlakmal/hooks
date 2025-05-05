@@ -38,7 +38,7 @@ function ConditionalCounter() {
         {isRunning ? 'Pause' : 'Resume'}
       </button>
 
-      <button onClick={() => setDelay(prev => (prev === 1000 ? 500 : 1000))}>
+      <button onClick={() => setDelay((prev) => (prev === 1000 ? 500 : 1000))}>
         Toggle Delay (500ms / 1000ms)
       </button>
 
@@ -48,7 +48,6 @@ function ConditionalCounter() {
 }
 
 export default ConditionalCounter;
-
 ```
 
 ## API
@@ -57,16 +56,16 @@ export default ConditionalCounter;
 
 ### Parameters
 
--   **`callback`**: `() => void`
-    -   The function to be executed at each interval when the condition is met.
--   **`delay`**: `number | null | undefined`
-    -   The interval duration in milliseconds.
-    -   The interval is paused (will not run) if `delay` is `null`, `undefined`, or if the `when` option is `false`.
--   **`options`**: `object` (optional)
-    An object containing configuration options:
-    -   `when?`: `boolean` - A condition controlling whether the interval should run. Defaults to `true`. The interval is active only when `when` is `true` and `delay` is a valid number.
-    -   `startImmediate?`: `boolean` - If `true`, the `callback` function is executed immediately once the interval becomes active (i.e., when `when` is `true` and `delay` is valid, or when these conditions become true after being false). Defaults to `false`.
+- **`callback`**: `() => void`
+  - The function to be executed at each interval when the condition is met.
+- **`delay`**: `number | null | undefined`
+  - The interval duration in milliseconds.
+  - The interval is paused (will not run) if `delay` is `null`, `undefined`, or if the `when` option is `false`.
+- **`options`**: `object` (optional)
+  An object containing configuration options:
+  - `when?`: `boolean` - A condition controlling whether the interval should run. Defaults to `true`. The interval is active only when `when` is `true` and `delay` is a valid number.
+  - `startImmediate?`: `boolean` - If `true`, the `callback` function is executed immediately once the interval becomes active (i.e., when `when` is `true` and `delay` is valid, or when these conditions become true after being false). Defaults to `false`.
 
 ### Returns
 
--   `void` - This hook does not return any value.
+- `void` - This hook does not return any value.

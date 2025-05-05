@@ -23,7 +23,8 @@ function ScriptLoaderComponent() {
       onError: (error) => {
         console.error('Failed to load jQuery:', error);
       },
-      attrs: { // Example: Add integrity and crossorigin attributes
+      attrs: {
+        // Example: Add integrity and crossorigin attributes
         integrity: 'sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=',
         crossorigin: 'anonymous',
       },
@@ -32,7 +33,10 @@ function ScriptLoaderComponent() {
 
   return (
     <div>
-      <button onClick={() => setLoadJquery(true)} disabled={loadJquery || jqueryStatus === 'loading'}>
+      <button
+        onClick={() => setLoadJquery(true)}
+        disabled={loadJquery || jqueryStatus === 'loading'}
+      >
         Load jQuery
       </button>
       <p>jQuery Status: {jqueryStatus}</p>
@@ -51,21 +55,21 @@ export default ScriptLoaderComponent;
 
 ### Parameters
 
--   **`src`**: `string | null | undefined`
-    -   The source URL of the script to load.
-    -   If `null` or `undefined`, the hook will effectively unload any previously managed script (if `removeOnUnmount` is true) or simply remain in an 'idle' state.
--   **`options`**: `object` (optional)
-    An object containing configuration options:
-    -   `attrs?`: `Record<string, string | boolean>` - HTML attributes to set on the script element (e.g., `async`, `defer`, `integrity`, `crossorigin`). Boolean attributes like `async` or `defer` should be set to `true` if needed.
-    -   `onLoad?`: `() => void` - Optional callback function that executes when the script successfully loads.
-    -   `onError?`: `(error: Event | string) => void` - Optional callback function that executes if the script fails to load.
-    -   `removeOnUnmount?`: `boolean` - If `true` (the default), the script tag will be removed from the DOM when the component unmounts. Set to `false` to keep the script loaded.
+- **`src`**: `string | null | undefined`
+  - The source URL of the script to load.
+  - If `null` or `undefined`, the hook will effectively unload any previously managed script (if `removeOnUnmount` is true) or simply remain in an 'idle' state.
+- **`options`**: `object` (optional)
+  An object containing configuration options:
+  - `attrs?`: `Record<string, string | boolean>` - HTML attributes to set on the script element (e.g., `async`, `defer`, `integrity`, `crossorigin`). Boolean attributes like `async` or `defer` should be set to `true` if needed.
+  - `onLoad?`: `() => void` - Optional callback function that executes when the script successfully loads.
+  - `onError?`: `(error: Event | string) => void` - Optional callback function that executes if the script fails to load.
+  - `removeOnUnmount?`: `boolean` - If `true` (the default), the script tag will be removed from the DOM when the component unmounts. Set to `false` to keep the script loaded.
 
 ### Returns
 
--   **`status`**: `'idle' | 'loading' | 'ready' | 'error'`
-    -   The current loading status of the script.
-    -   `idle`: No `src` provided or script is unloaded.
-    -   `loading`: Script is currently being loaded.
-    -   `ready`: Script has loaded successfully.
-    -   `error`: An error occurred while loading the script.
+- **`status`**: `'idle' | 'loading' | 'ready' | 'error'`
+  - The current loading status of the script.
+  - `idle`: No `src` provided or script is unloaded.
+  - `loading`: Script is currently being loaded.
+  - `ready`: Script has loaded successfully.
+  - `error`: An error occurred while loading the script.

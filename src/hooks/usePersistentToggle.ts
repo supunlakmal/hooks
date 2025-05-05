@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useLocalStorage } from './useLocalStorage'; 
+import { useLocalStorage } from './useLocalStorage';
 
 /**
  * A hook that provides a boolean state that persists in local storage,
@@ -12,12 +12,19 @@ import { useLocalStorage } from './useLocalStorage';
 export function usePersistentToggle(
   key: string,
   initialValue: boolean
-): [boolean, () => void, (value: boolean | ((prevState: boolean) => boolean)) => void] { 
-  const [storedValue, setStoredValue] = useLocalStorage<boolean>(key, initialValue);
+): [
+  boolean,
+  () => void,
+  (value: boolean | ((prevState: boolean) => boolean)) => void,
+] {
+  const [storedValue, setStoredValue] = useLocalStorage<boolean>(
+    key,
+    initialValue
+  );
 
   const toggle = useCallback(() => {
     // Use functional update for robustness
-    setStoredValue((prevValue) => !prevValue); 
+    setStoredValue((prevValue) => !prevValue);
   }, [setStoredValue]);
 
   return [storedValue, toggle, setStoredValue];

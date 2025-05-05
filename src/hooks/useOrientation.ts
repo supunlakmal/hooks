@@ -10,14 +10,14 @@ interface OrientationState {
 
 const isBrowser = typeof window !== 'undefined';
 const initialOrientation = (): OrientationState => {
-    if (!isBrowser || !window.screen || !window.screen.orientation) {
-        return { angle: 0, type: 'landscape-primary', isSupported: false };
-    }
-    return {
-        angle: window.screen.orientation.angle,
-        type: window.screen.orientation.type,
-        isSupported: true,
-    };
+  if (!isBrowser || !window.screen || !window.screen.orientation) {
+    return { angle: 0, type: 'landscape-primary', isSupported: false };
+  }
+  return {
+    angle: window.screen.orientation.angle,
+    type: window.screen.orientation.type,
+    isSupported: true,
+  };
 };
 
 /**
@@ -27,7 +27,8 @@ const initialOrientation = (): OrientationState => {
  * @returns An object containing the current orientation angle and type.
  */
 export function useOrientation(): OrientationState {
-  const [orientation, setOrientation] = useState<OrientationState>(initialOrientation);
+  const [orientation, setOrientation] =
+    useState<OrientationState>(initialOrientation);
 
   useEffect(() => {
     if (!orientation.isSupported) {

@@ -25,11 +25,14 @@ export function useLocationBasedFetch<T = any>(
   useEffect(() => {
     if (geolocationState.latitude && geolocationState.longitude) {
       // Pass lat/lon directly to simplified builder
-      const newUrl = urlBuilder(geolocationState.latitude, geolocationState.longitude);
+      const newUrl = urlBuilder(
+        geolocationState.latitude,
+        geolocationState.longitude
+      );
       setFetchUrl(newUrl);
     } else {
-        // Optionally clear fetchUrl or handle cases where location is not available
-        setFetchUrl(undefined);
+      // Optionally clear fetchUrl or handle cases where location is not available
+      setFetchUrl(undefined);
     }
   }, [
     geolocationState.latitude,

@@ -35,7 +35,8 @@ const getInitialState = (): TextSelectionState => ({
  * @returns {TextSelectionState} An object containing details about the current text selection.
  */
 export function useTextSelection(): TextSelectionState {
-  const [selectionState, setSelectionState] = useState<TextSelectionState>(getInitialState);
+  const [selectionState, setSelectionState] =
+    useState<TextSelectionState>(getInitialState);
 
   const handleSelectionChange = useCallback(() => {
     if (!isBrowser) return;
@@ -46,7 +47,7 @@ export function useTextSelection(): TextSelectionState {
       // If no selection or selection is collapsed, reset state
       // Check if current state is already reset to avoid unnecessary updates
       if (selectionState.text !== '' || selectionState.range !== null) {
-          setSelectionState(getInitialState());
+        setSelectionState(getInitialState());
       }
       return;
     }
@@ -55,32 +56,34 @@ export function useTextSelection(): TextSelectionState {
     const text = selection.toString();
     let rect: DOMRect | null = null;
     try {
-         rect = range.getBoundingClientRect();
+      rect = range.getBoundingClientRect();
     } catch (e) {
-        console.warn('Could not get bounding client rect for selection range:', e);
+      console.warn(
+        'Could not get bounding client rect for selection range:',
+        e
+      );
     }
 
     // Check if the new state is different from the current one before updating
     if (
-        text !== selectionState.text ||
-        range.startOffset !== selectionState.startOffset ||
-        range.endOffset !== selectionState.endOffset ||
-        range.startContainer !== selectionState.startNode ||
-        range.endContainer !== selectionState.endNode
-       // Note: Comparing DOMRect objects directly might be tricky due to float precision.
-       // A shallow comparison or comparing specific properties might be better if needed.
+      text !== selectionState.text ||
+      range.startOffset !== selectionState.startOffset ||
+      range.endOffset !== selectionState.endOffset ||
+      range.startContainer !== selectionState.startNode ||
+      range.endContainer !== selectionState.endNode
+      // Note: Comparing DOMRect objects directly might be tricky due to float precision.
+      // A shallow comparison or comparing specific properties might be better if needed.
     ) {
-         setSelectionState({
-            text,
-            rect,
-            startOffset: range.startOffset,
-            endOffset: range.endOffset,
-            startNode: range.startContainer,
-            endNode: range.endContainer,
-            range: range, // Store the range itself if needed
-        });
+      setSelectionState({
+        text,
+        rect,
+        startOffset: range.startOffset,
+        endOffset: range.endOffset,
+        startNode: range.startContainer,
+        endNode: range.endContainer,
+        range: range, // Store the range itself if needed
+      });
     }
-
   }, [selectionState]); // Depend on selectionState to compare against new selection
 
   useEffect(() => {

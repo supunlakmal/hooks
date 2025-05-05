@@ -44,7 +44,9 @@ function NotificationComponent() {
         icon: '/path/to/icon.png', // Optional icon
       });
     } else {
-      alert('Notification permission is not granted. Please request permission first.');
+      alert(
+        'Notification permission is not granted. Please request permission first.'
+      );
     }
   };
 
@@ -55,11 +57,16 @@ function NotificationComponent() {
   return (
     <div>
       <h2>useNotification Example</h2>
-      <p>Notification Permission: <strong>{permission}</strong></p>
+      <p>
+        Notification Permission: <strong>{permission}</strong>
+      </p>
       {permission !== 'granted' && (
         <button onClick={handleRequestPermission}>Request Permission</button>
       )}
-      <button onClick={handleShowNotification} disabled={permission !== 'granted'}>
+      <button
+        onClick={handleShowNotification}
+        disabled={permission !== 'granted'}
+      >
         Show Notification
       </button>
       {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
@@ -74,37 +81,37 @@ export default NotificationComponent;
 
 ### Parameters
 
--   `options?`: `UseNotificationOptions`
-    -   Optional object to configure the hook:
-    -   `defaultOptions?`: `NotificationOptions` - Default options applied to all notifications shown by this hook instance.
-    -   `onClick?`: `(this: Notification, ev: Event) => any` - Default handler for the `click` event.
-    -   `onShow?`: `(this: Notification, ev: Event) => any` - Default handler for the `show` event.
-    -   `onClose?`: `(this: Notification, ev: Event) => any` - Default handler for the `close` event.
-    -   `onError?`: `(this: Notification, ev: Event) => any` - Default handler for the `error` event.
+- `options?`: `UseNotificationOptions`
+  - Optional object to configure the hook:
+  - `defaultOptions?`: `NotificationOptions` - Default options applied to all notifications shown by this hook instance.
+  - `onClick?`: `(this: Notification, ev: Event) => any` - Default handler for the `click` event.
+  - `onShow?`: `(this: Notification, ev: Event) => any` - Default handler for the `show` event.
+  - `onClose?`: `(this: Notification, ev: Event) => any` - Default handler for the `close` event.
+  - `onError?`: `(this: Notification, ev: Event) => any` - Default handler for the `error` event.
 
 ### Return Value
 
 The hook returns an object with the following properties:
 
--   `isSupported`: `boolean`
-    -   Indicates whether the Web Notifications API is supported by the browser.
--   `permission`: `NotificationPermission`
-    -   The current permission state (`'default'`, `'granted'`, or `'denied'`).
--   `requestPermission`: `() => Promise<NotificationPermission>`
-    -   An asynchronous function to request notification permission from the user. Returns the resulting permission state.
--   `showNotification`: `(title: string, options?: NotificationOptions, events?: NotificationEvents) => Notification | null`
-    -   A function to display a notification.
-        -   `title`: **Required**. The title of the notification.
-        -   `options?`: `NotificationOptions` - Options for this specific notification (e.g., `body`, `icon`, `badge`, `data`, `requireInteraction`). These merge with `defaultOptions`.
-        -   `events?`: `NotificationEvents` - Event handlers (`onClick`, `onShow`, `onClose`, `onError`) specific to this notification instance. These override the default handlers provided in `UseNotificationOptions`.
-    -   Returns the created `Notification` object or `null` if permission is not granted or the API is not supported.
--   `error`: `Error | null`
-    -   Stores any error encountered during permission requests or notification creation.
+- `isSupported`: `boolean`
+  - Indicates whether the Web Notifications API is supported by the browser.
+- `permission`: `NotificationPermission`
+  - The current permission state (`'default'`, `'granted'`, or `'denied'`).
+- `requestPermission`: `() => Promise<NotificationPermission>`
+  - An asynchronous function to request notification permission from the user. Returns the resulting permission state.
+- `showNotification`: `(title: string, options?: NotificationOptions, events?: NotificationEvents) => Notification | null`
+  - A function to display a notification.
+    - `title`: **Required**. The title of the notification.
+    - `options?`: `NotificationOptions` - Options for this specific notification (e.g., `body`, `icon`, `badge`, `data`, `requireInteraction`). These merge with `defaultOptions`.
+    - `events?`: `NotificationEvents` - Event handlers (`onClick`, `onShow`, `onClose`, `onError`) specific to this notification instance. These override the default handlers provided in `UseNotificationOptions`.
+  - Returns the created `Notification` object or `null` if permission is not granted or the API is not supported.
+- `error`: `Error | null`
+  - Stores any error encountered during permission requests or notification creation.
 
 ## Behavior
 
--   Checks for Notifications API support and initial permission state on mount.
--   `requestPermission` uses `Notification.requestPermission()`.
--   `showNotification` creates a new `Notification` instance if permission is granted.
--   Event listeners specified in `options` or `events` are attached to the `Notification` instance.
--   Handles cleanup of internal state and references on unmount.
+- Checks for Notifications API support and initial permission state on mount.
+- `requestPermission` uses `Notification.requestPermission()`.
+- `showNotification` creates a new `Notification` instance if permission is granted.
+- Event listeners specified in `options` or `events` are attached to the `Notification` instance.
+- Handles cleanup of internal state and references on unmount.

@@ -37,15 +37,14 @@ export function useQueue<T>(initialQueue: T[] = []): QueueMethods<T> {
   }, []);
 
   /** Removes the item from the front of the queue. */
-   const remove = useCallback((): void => {
-       setQueue((prevQueue) => {
-           if (prevQueue.length === 0) {
-               return [];
-           }
-           return prevQueue.slice(1); // Return new array excluding the first item
-       });
-   }, []);
-
+  const remove = useCallback((): void => {
+    setQueue((prevQueue) => {
+      if (prevQueue.length === 0) {
+        return [];
+      }
+      return prevQueue.slice(1); // Return new array excluding the first item
+    });
+  }, []);
 
   /** Returns the item at the front of the queue without removing it. */
   const peek = useCallback((): T | undefined => {
@@ -53,16 +52,14 @@ export function useQueue<T>(initialQueue: T[] = []): QueueMethods<T> {
   }, [queue]); // Depends on the current queue state
 
   /** Removes all items from the queue. */
-   const clear = useCallback(() => {
-       setQueue([]);
-   }, []);
-
+  const clear = useCallback(() => {
+    setQueue([]);
+  }, []);
 
   // Memoize derived values to avoid recalculating on every render
   const size = useMemo(() => queue.length, [queue]);
   const first = useMemo(() => queue[0], [queue]);
   const last = useMemo(() => queue[queue.length - 1], [queue]);
-
 
   // Return the state and the memoized methods
   return {
@@ -73,6 +70,6 @@ export function useQueue<T>(initialQueue: T[] = []): QueueMethods<T> {
     first,
     last,
     queue, // Provide read-only access
-    clear
+    clear,
   };
 }

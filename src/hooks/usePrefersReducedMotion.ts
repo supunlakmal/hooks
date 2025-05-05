@@ -11,9 +11,9 @@ const QUERY = '(prefers-reduced-motion: reduce)';
  * @returns {boolean} True if the user prefers reduced motion, false otherwise, or null if not supported/determined yet.
  */
 export function usePrefersReducedMotion(): boolean | null {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean | null>(
-    isBrowser ? window.matchMedia(QUERY).matches : null
-  );
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<
+    boolean | null
+  >(isBrowser ? window.matchMedia(QUERY).matches : null);
 
   useEffect(() => {
     if (!isBrowser) {

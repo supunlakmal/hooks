@@ -17,7 +17,8 @@ function ResponsiveDisplay() {
     <div>
       <h1>Debounced Window Size</h1>
       <p>
-        The debounced window dimensions will update 500ms after you stop resizing.
+        The debounced window dimensions will update 500ms after you stop
+        resizing.
       </p>
       <p>Debounced Width: {width}px</p>
       <p>Debounced Height: {height}px</p>
@@ -40,16 +41,16 @@ export default ResponsiveDisplay;
 
 ## Parameters
 
--   **`delay`**: `number` (Required)
-    -   The debounce delay in milliseconds. The returned `width` and `height` will only update `delay` milliseconds after the window resize events have stopped.
+- **`delay`**: `number` (Required)
+  - The debounce delay in milliseconds. The returned `width` and `height` will only update `delay` milliseconds after the window resize events have stopped.
 
 ## Return Value
 
--   **`WindowSize`**: An object `{ width: number; height: number }`
-    -   Contains the debounced `width` and `height` of the browser window in pixels.
-    -   During server-side rendering or if `window` is unavailable, it defaults to `{ width: 0, height: 0 }` (behavior inherited from the underlying `useWindowSize`).
+- **`WindowSize`**: An object `{ width: number; height: number }`
+  - Contains the debounced `width` and `height` of the browser window in pixels.
+  - During server-side rendering or if `window` is unavailable, it defaults to `{ width: 0, height: 0 }` (behavior inherited from the underlying `useWindowSize`).
 
 ## Notes
 
--   This hook relies internally on `useWindowSize` to get the real-time dimensions and `useDebouncedState` to apply the debounce logic.
--   It helps improve performance by reducing the frequency of updates triggered by window resize events.
+- This hook relies internally on `useWindowSize` to get the real-time dimensions and `useDebouncedState` to apply the debounce logic.
+- It helps improve performance by reducing the frequency of updates triggered by window resize events.

@@ -14,7 +14,9 @@ export interface UseNetworkAwareWebSocketReturn<T = any> {
   lastMessage: MessageEvent<T> | null;
   isConnected: boolean;
   error: Event | null;
-  sendMessage: (data: string | ArrayBufferLike | Blob | ArrayBufferView) => void;
+  sendMessage: (
+    data: string | ArrayBufferLike | Blob | ArrayBufferView
+  ) => void;
   websocket: WebSocket | null; // Expose the instance directly if needed
 }
 
@@ -97,32 +99,49 @@ export function useNetworkAwareWebSocket<T = any>(
     ws.onclose = (event) => {
       console.log('WebSocket closed:', url, 'Clean close:', event.wasClean);
       // Only update state if it wasn't an explicit close initiated by the hook logic
-      if (wsRef.current === ws) { // Ensure this close event belongs to the current ref instance
-          wsRef.current = null;
-          setIsConnected(false);
-          if (!explicitCloseRef.current) {
-              setError(null); // Clear error only if not an explicit close/error handled by onError
-          }
-          onClose?.(event);
+      if (wsRef.current === ws) {
+        // Ensure this close event belongs to the current ref instance
+        wsRef.current = null;
+        setIsConnected(false);
+        if (!explicitCloseRef.current) {
+          setError(null); // Clear error only if not an explicit close/error handled by onError
+        }
+        onClose?.(event);
 
-          // Retry logic (also on unclean close if retrying enabled)
-          if (!event.wasClean && !explicitCloseRef.current && retryOnError && online) {
-              console.log(`WebSocket attempting retry (unclean close) in ${retryDelay}ms...`);
-              clearRetryTimeout();
-              retryTimeoutRef.current = setTimeout(connectWebSocket, retryDelay);
-          }
+        // Retry logic (also on unclean close if retrying enabled)
+        if (
+          !event.wasClean &&
+          !explicitCloseRef.current &&
+          retryOnError &&
+          online
+        ) {
+          console.log(
+            `WebSocket attempting retry (unclean close) in ${retryDelay}ms...`
+          );
+          clearRetryTimeout();
+          retryTimeoutRef.current = setTimeout(connectWebSocket, retryDelay);
+        }
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url, retryOnError, retryDelay, onOpen, onClose, onError, onMessage, online]); // Reconnect if URL/options/network change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    url,
+    retryOnError,
+    retryDelay,
+    onOpen,
+    onClose,
+    onError,
+    onMessage,
+    online,
+  ]); // Reconnect if URL/options/network change
 
   const disconnectWebSocket = useCallback(() => {
     clearRetryTimeout();
     explicitCloseRef.current = true; // Mark as intentional close
     if (wsRef.current) {
-        console.log('Disconnecting WebSocket explicitly:', url);
-        wsRef.current.close(1000, 'Hook cleanup or explicit disconnect'); // 1000: Normal Closure
-        // wsRef.current will be set to null in the onclose handler
+      console.log('Disconnecting WebSocket explicitly:', url);
+      wsRef.current.close(1000, 'Hook cleanup or explicit disconnect'); // 1000: Normal Closure
+      // wsRef.current will be set to null in the onclose handler
     }
   }, [url]);
 
@@ -138,7 +157,7 @@ export function useNetworkAwareWebSocket<T = any>(
 
     // Cleanup function on unmount or if dependencies change
     return () => {
-        disconnectWebSocket();
+      disconnectWebSocket();
     };
   }, [online, url, connectWebSocket, disconnectWebSocket]);
 

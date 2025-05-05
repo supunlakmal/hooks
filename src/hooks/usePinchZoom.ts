@@ -23,7 +23,7 @@ const getDistance = (touches: TouchList): number => {
   const touch2 = touches[1];
   return Math.sqrt(
     Math.pow(touch2.clientX - touch1.clientX, 2) +
-    Math.pow(touch2.clientY - touch1.clientY, 2),
+      Math.pow(touch2.clientY - touch1.clientY, 2)
   );
 };
 
@@ -45,9 +45,15 @@ const getCenter = (touches: TouchList): { x: number; y: number } => {
  */
 export function usePinchZoom(
   targetRef: React.RefObject<HTMLElement>,
-  options: PinchZoomOptions,
+  options: PinchZoomOptions
 ): void {
-  const { onPinchStart, onPinchMove, onPinchEnd, minScale = 0.5, maxScale = 4 } = options;
+  const {
+    onPinchStart,
+    onPinchMove,
+    onPinchEnd,
+    minScale = 0.5,
+    maxScale = 4,
+  } = options;
 
   const pinchStateRef = useRef<{
     isPinching: boolean;
@@ -55,11 +61,23 @@ export function usePinchZoom(
     currentScale: number;
     lastScale: number;
     origin: { x: number; y: number };
-  }>({ isPinching: false, initialDistance: 0, currentScale: 1, lastScale: 1, origin: { x: 0, y: 0 } });
+  }>({
+    isPinching: false,
+    initialDistance: 0,
+    currentScale: 1,
+    lastScale: 1,
+    origin: { x: 0, y: 0 },
+  });
 
-  const stableOnPinchStart = useEventCallback((state: PinchZoomState, event: TouchEvent) => onPinchStart?.(state, event));
-  const stableOnPinchMove = useEventCallback((state: PinchZoomState, event: TouchEvent) => onPinchMove?.(state, event));
-  const stableOnPinchEnd = useEventCallback((state: PinchZoomState, event: TouchEvent) => onPinchEnd?.(state, event));
+  const stableOnPinchStart = useEventCallback(
+    (state: PinchZoomState, event: TouchEvent) => onPinchStart?.(state, event)
+  );
+  const stableOnPinchMove = useEventCallback(
+    (state: PinchZoomState, event: TouchEvent) => onPinchMove?.(state, event)
+  );
+  const stableOnPinchEnd = useEventCallback(
+    (state: PinchZoomState, event: TouchEvent) => onPinchEnd?.(state, event)
+  );
 
   useEffect(() => {
     const element = targetRef.current;
@@ -80,9 +98,9 @@ export function usePinchZoom(
           origin,
         };
         const state: PinchZoomState = {
-            scale: pinchStateRef.current.currentScale,
-            delta: 0,
-            origin: pinchStateRef.current.origin,
+          scale: pinchStateRef.current.currentScale,
+          delta: 0,
+          origin: pinchStateRef.current.origin,
         };
         stableOnPinchStart(state, event);
       }
@@ -95,7 +113,8 @@ export function usePinchZoom(
       event.preventDefault();
 
       const currentDistance = getDistance(event.touches);
-      const scaleDelta = currentDistance / pinchStateRef.current.initialDistance;
+      const scaleDelta =
+        currentDistance / pinchStateRef.current.initialDistance;
       let newScale = pinchStateRef.current.lastScale * scaleDelta;
 
       // Clamp scale within bounds
@@ -106,20 +125,22 @@ export function usePinchZoom(
       // Update origin if needed (can make movement feel more natural)
       pinchStateRef.current.origin = getCenter(event.touches);
 
-       const state: PinchZoomState = {
-            scale: pinchStateRef.current.currentScale,
-            delta: scaleChange,
-            origin: pinchStateRef.current.origin,
-        };
+      const state: PinchZoomState = {
+        scale: pinchStateRef.current.currentScale,
+        delta: scaleChange,
+        origin: pinchStateRef.current.origin,
+      };
       stableOnPinchMove(state, event);
     };
 
     const handleTouchEnd = (event: TouchEvent) => {
       if (pinchStateRef.current.isPinching) {
-         const state: PinchZoomState = {
-            scale: pinchStateRef.current.currentScale,
-            delta: pinchStateRef.current.currentScale - pinchStateRef.current.lastScale,
-            origin: pinchStateRef.current.origin,
+        const state: PinchZoomState = {
+          scale: pinchStateRef.current.currentScale,
+          delta:
+            pinchStateRef.current.currentScale -
+            pinchStateRef.current.lastScale,
+          origin: pinchStateRef.current.origin,
         };
 
         pinchStateRef.current.isPinching = false;
@@ -130,7 +151,9 @@ export function usePinchZoom(
     };
 
     // Add passive: false for touchstart/touchmove to allow preventDefault
-    element.addEventListener('touchstart', handleTouchStart, { passive: false });
+    element.addEventListener('touchstart', handleTouchStart, {
+      passive: false,
+    });
     element.addEventListener('touchmove', handleTouchMove, { passive: false });
     element.addEventListener('touchend', handleTouchEnd, { passive: true });
     element.addEventListener('touchcancel', handleTouchEnd, { passive: true }); // Also handle cancel
@@ -141,5 +164,12 @@ export function usePinchZoom(
       element.removeEventListener('touchend', handleTouchEnd);
       element.removeEventListener('touchcancel', handleTouchEnd);
     };
-  }, [targetRef, minScale, maxScale, stableOnPinchStart, stableOnPinchMove, stableOnPinchEnd]);
+  }, [
+    targetRef,
+    minScale,
+    maxScale,
+    stableOnPinchStart,
+    stableOnPinchMove,
+    stableOnPinchEnd,
+  ]);
 }

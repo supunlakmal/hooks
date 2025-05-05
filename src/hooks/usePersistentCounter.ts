@@ -23,7 +23,7 @@ export function usePersistentCounter(
   key: string,
   initialValue: number = 0,
   options?: { min?: number; max?: number; step?: number }
-): UseCounterReturn { 
+): UseCounterReturn {
   const [count, setCount] = useLocalStorage<number>(key, initialValue);
 
   // Destructure options with default step
@@ -51,11 +51,17 @@ export function usePersistentCounter(
     });
   }, [setCount, min, step]);
 
-  const set = useCallback((newCount: number) => {
-     // Clamp the new value according to min/max if defined
-     const clampedValue = Math.max(min ?? -Infinity, Math.min(max ?? Infinity, newCount));
-     setCount(clampedValue);
-  }, [setCount, min, max]);
+  const set = useCallback(
+    (newCount: number) => {
+      // Clamp the new value according to min/max if defined
+      const clampedValue = Math.max(
+        min ?? -Infinity,
+        Math.min(max ?? Infinity, newCount)
+      );
+      setCount(clampedValue);
+    },
+    [setCount, min, max]
+  );
 
   const reset = useCallback(() => {
     // Reset sets back to the initial value provided to the hook

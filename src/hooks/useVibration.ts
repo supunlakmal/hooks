@@ -40,9 +40,9 @@ export function useVibration(): UseVibrationReturn {
     (pattern: VibrationPattern) => {
       if (isSupported) {
         try {
-            navigator.vibrate(pattern);
+          navigator.vibrate(pattern);
         } catch (error) {
-            console.error("Vibration failed:", error);
+          console.error('Vibration failed:', error);
         }
       } else {
         console.warn('Vibration API not supported.');
@@ -56,7 +56,7 @@ export function useVibration(): UseVibrationReturn {
       try {
         navigator.vibrate(0); // Passing 0 cancels vibration
       } catch (error) {
-        console.error("Failed to cancel vibration:", error);
+        console.error('Failed to cancel vibration:', error);
       }
     } else {
       console.warn('Vibration API not supported.');

@@ -22,13 +22,16 @@ interface UseScriptOptions {
  * @param options Configuration options for loading and handling the script.
  * @returns The loading status of the script ('idle', 'loading', 'ready', 'error').
  */
-export function useScript(src: string | null | undefined, options?: UseScriptOptions): ScriptStatus {
+export function useScript(
+  src: string | null | undefined,
+  options?: UseScriptOptions
+): ScriptStatus {
   const [status, setStatus] = useState<ScriptStatus>(src ? 'loading' : 'idle');
   const optionsRef = useRef(options); // Ref to keep options up-to-date without triggering effect
 
   // Update optionsRef if options object changes identity
   useEffect(() => {
-      optionsRef.current = options;
+    optionsRef.current = options;
   }, [options]);
 
   useEffect(() => {
@@ -38,7 +41,9 @@ export function useScript(src: string | null | undefined, options?: UseScriptOpt
     }
 
     // Check if the script tag with this src already exists
-    let script = document.querySelector(`script[src="${src}"]`) as HTMLScriptElement | null;
+    let script = document.querySelector(
+      `script[src="${src}"]`
+    ) as HTMLScriptElement | null;
 
     if (!script) {
       // Script doesn't exist, create and append it
@@ -49,44 +54,43 @@ export function useScript(src: string | null | undefined, options?: UseScriptOpt
       // Apply custom attributes from options
       const currentAttrs = optionsRef.current?.attrs;
       if (currentAttrs) {
-          Object.keys(currentAttrs).forEach(key => {
-              // Handle boolean attributes correctly
-              if (typeof currentAttrs[key] === 'boolean') {
-                  if (currentAttrs[key]) {
-                      script?.setAttribute(key, ''); // Presence indicates true (e.g., async, defer)
-                  }
-              } else {
-                   script?.setAttribute(key, currentAttrs[key] as string);
-              }
-          });
+        Object.keys(currentAttrs).forEach((key) => {
+          // Handle boolean attributes correctly
+          if (typeof currentAttrs[key] === 'boolean') {
+            if (currentAttrs[key]) {
+              script?.setAttribute(key, ''); // Presence indicates true (e.g., async, defer)
+            }
+          } else {
+            script?.setAttribute(key, currentAttrs[key] as string);
+          }
+        });
       }
 
       document.body.appendChild(script);
       setStatus('loading');
-
     } else if (script.getAttribute('data-status') === 'ready') {
       // Script already exists and is marked as ready by a previous instance of this hook
       setStatus('ready');
       optionsRef.current?.onLoad?.(); // Call onLoad if already ready
       return; // No need for event listeners if already loaded
     } else if (script.getAttribute('data-status') === 'error') {
-        setStatus('error');
-        optionsRef.current?.onError?.('Script previously failed to load.');
-        return; // No need for event listeners if previously errored
+      setStatus('error');
+      optionsRef.current?.onError?.('Script previously failed to load.');
+      return; // No need for event listeners if previously errored
     }
-     // If script exists but status is unknown (or still loading), attach listeners
+    // If script exists but status is unknown (or still loading), attach listeners
 
     // Event listeners
     const handleLoad = () => {
-        script?.setAttribute('data-status', 'ready'); // Mark as ready for other hook instances
-        setStatus('ready');
-        optionsRef.current?.onLoad?.();
+      script?.setAttribute('data-status', 'ready'); // Mark as ready for other hook instances
+      setStatus('ready');
+      optionsRef.current?.onLoad?.();
     };
 
     const handleError = (event: Event | string) => {
-        script?.setAttribute('data-status', 'error'); // Mark as error
-        setStatus('error');
-        optionsRef.current?.onError?.(event);
+      script?.setAttribute('data-status', 'error'); // Mark as error
+      setStatus('error');
+      optionsRef.current?.onError?.(event);
     };
 
     script.addEventListener('load', handleLoad);
@@ -101,14 +105,14 @@ export function useScript(src: string | null | undefined, options?: UseScriptOpt
       // Optionally remove the script tag on unmount
       const shouldRemove = optionsRef.current?.removeOnUnmount ?? true;
       if (shouldRemove && script && document.body.contains(script)) {
-            // Only remove if no other hook instance might still need it
-            // Basic check: see if another identical script tag exists.
-            // A more robust solution might involve reference counting if multiple
-            // components load the same script with removeOnUnmount=true.
-            const allScripts = document.querySelectorAll(`script[src="${src}"]`);
-            if (allScripts.length === 1) {
-                 document.body.removeChild(script);
-            }
+        // Only remove if no other hook instance might still need it
+        // Basic check: see if another identical script tag exists.
+        // A more robust solution might involve reference counting if multiple
+        // components load the same script with removeOnUnmount=true.
+        const allScripts = document.querySelectorAll(`script[src="${src}"]`);
+        if (allScripts.length === 1) {
+          document.body.removeChild(script);
+        }
       }
     };
   }, [src]); // Re-run effect only if src changes

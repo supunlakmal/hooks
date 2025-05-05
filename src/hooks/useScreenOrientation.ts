@@ -28,10 +28,14 @@ export function useScreenOrientation(): Readonly<ScreenOrientationState> {
   const [state, setState] = useState<ScreenOrientationState>(initialState);
 
   useIsomorphicLayoutEffect(() => {
-    if (typeof window !== 'undefined' && 'screen' in window && 'orientation' in window.screen) {
-      setState(prevState => ({ ...prevState, isSupported: true }));
+    if (
+      typeof window !== 'undefined' &&
+      'screen' in window &&
+      'orientation' in window.screen
+    ) {
+      setState((prevState) => ({ ...prevState, isSupported: true }));
     } else {
-      setState(prevState => ({ ...prevState, isSupported: false }));
+      setState((prevState) => ({ ...prevState, isSupported: false }));
       return;
     }
 

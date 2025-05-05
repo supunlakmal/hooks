@@ -1,6 +1,6 @@
 # useIdleFetch
 
-A custom React hook that initiates a data fetch request using `useFetch` only *after* the user becomes active following a specified period of inactivity, as determined by `useIdleTimer`.
+A custom React hook that initiates a data fetch request using `useFetch` only _after_ the user becomes active following a specified period of inactivity, as determined by `useIdleTimer`.
 
 This can be useful for deferring non-critical data loading until the user actively engages with the application again after being idle, potentially saving resources.
 
@@ -56,23 +56,23 @@ export default UserProfileDisplay;
 
 ## Parameters
 
--   **`targetUrl`**: `string` (Required)
-    -   The URL from which to fetch data when the user becomes active after being idle.
--   **`options`**: `UseIdleFetchOptions` (Required)
-    -   An object containing configuration options:
-        -   **`idleTimeout`**: `number` (Required) - The duration in milliseconds of user inactivity required before the user is considered idle. The fetch will trigger when the user becomes active *after* this period.
-        -   **`fetchOptions`**: `RequestInit` (Optional) - Standard options to pass to the underlying `fetch` call (e.g., `method`, `headers`, `body`, `credentials`).
-        -   **`idleDebounce`**: `number` (Optional) - A debounce time in milliseconds for the idle/active events, passed to the underlying `useIdleTimer`.
+- **`targetUrl`**: `string` (Required)
+  - The URL from which to fetch data when the user becomes active after being idle.
+- **`options`**: `UseIdleFetchOptions` (Required)
+  - An object containing configuration options:
+    - **`idleTimeout`**: `number` (Required) - The duration in milliseconds of user inactivity required before the user is considered idle. The fetch will trigger when the user becomes active _after_ this period.
+    - **`fetchOptions`**: `RequestInit` (Optional) - Standard options to pass to the underlying `fetch` call (e.g., `method`, `headers`, `body`, `credentials`).
+    - **`idleDebounce`**: `number` (Optional) - A debounce time in milliseconds for the idle/active events, passed to the underlying `useIdleTimer`.
 
 ## Return Value
 
--   **`FetchState<T>`**: An object representing the state of the fetch operation, directly returned from the underlying `useFetch` hook. It typically includes:
-    -   **`data`**: `T | null` - The fetched data once the request completes successfully. Initially `null`.
-    -   **`error`**: `Error | null` - Any error object encountered during the fetch. Initially `null`.
-    -   **`loading`**: `boolean` - A boolean indicating whether the fetch request is currently in progress. Becomes `true` when the fetch starts (after user becomes active) and `false` when it completes or errors out.
+- **`FetchState<T>`**: An object representing the state of the fetch operation, directly returned from the underlying `useFetch` hook. It typically includes:
+  - **`data`**: `T | null` - The fetched data once the request completes successfully. Initially `null`.
+  - **`error`**: `Error | null` - Any error object encountered during the fetch. Initially `null`.
+  - **`loading`**: `boolean` - A boolean indicating whether the fetch request is currently in progress. Becomes `true` when the fetch starts (after user becomes active) and `false` when it completes or errors out.
 
 ## Notes
 
--   The fetch request is **not** initiated on component mount.
--   The fetch request is triggered specifically when the `onActive` callback from the internal `useIdleTimer` fires (i.e., when the user transitions from idle to active).
--   Based on the current implementation, the fetch occurs only the *first* time the user becomes active after the initial idle period per component mount/URL change. If the user goes idle and becomes active again later, it won't refetch unless the `targetUrl` or `options` change, causing the hook to re-run its setup.
+- The fetch request is **not** initiated on component mount.
+- The fetch request is triggered specifically when the `onActive` callback from the internal `useIdleTimer` fires (i.e., when the user transitions from idle to active).
+- Based on the current implementation, the fetch occurs only the _first_ time the user becomes active after the initial idle period per component mount/URL change. If the user goes idle and becomes active again later, it won't refetch unless the `targetUrl` or `options` change, causing the hook to re-run its setup.

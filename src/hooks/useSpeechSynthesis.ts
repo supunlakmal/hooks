@@ -47,8 +47,10 @@ export function useSpeechSynthesis(): UseSpeechSynthesisReturn {
         setVoices(availableVoices);
         setError(null); // Clear previous error if voices load now
       } catch (err) {
-        console.error("Error getting voices:", err);
-        setError(err instanceof Error ? err : new Error("Failed to get voices"));
+        console.error('Error getting voices:', err);
+        setError(
+          err instanceof Error ? err : new Error('Failed to get voices')
+        );
       }
     }
   }, [isSupported]);
@@ -66,53 +68,58 @@ export function useSpeechSynthesis(): UseSpeechSynthesisReturn {
       synth?.removeEventListener('voiceschanged', updateVoices);
       // Cancel any ongoing speech on unmount
       if (utteranceRef.current) {
-           synth?.cancel();
+        synth?.cancel();
       }
     };
   }, [isSupported, updateVoices]);
 
-  const speak = useCallback((text: string, options: SpeechSynthesisOptions = {}) => {
-    if (!isSupported || speaking) return; // Not supported or already speaking
+  const speak = useCallback(
+    (text: string, options: SpeechSynthesisOptions = {}) => {
+      if (!isSupported || speaking) return; // Not supported or already speaking
 
-    // Cancel previous utterance if any (shouldn't be needed if speaking state is accurate, but safe)
-    synth?.cancel();
+      // Cancel previous utterance if any (shouldn't be needed if speaking state is accurate, but safe)
+      synth?.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utteranceRef.current = utterance; // Store ref
+      const utterance = new SpeechSynthesisUtterance(text);
+      utteranceRef.current = utterance; // Store ref
 
-    // Apply options
-    utterance.voice = options.voice || null;
-    utterance.lang = options.lang || voices[0]?.lang || 'en-US'; // Default lang
-    utterance.pitch = options.pitch ?? 1;
-    utterance.rate = options.rate ?? 1;
-    utterance.volume = options.volume ?? 1;
+      // Apply options
+      utterance.voice = options.voice || null;
+      utterance.lang = options.lang || voices[0]?.lang || 'en-US'; // Default lang
+      utterance.pitch = options.pitch ?? 1;
+      utterance.rate = options.rate ?? 1;
+      utterance.volume = options.volume ?? 1;
 
-    utterance.onstart = () => {
-      setSpeaking(true);
-      setError(null);
-    };
+      utterance.onstart = () => {
+        setSpeaking(true);
+        setError(null);
+      };
 
-    utterance.onend = () => {
-      setSpeaking(false);
-      utteranceRef.current = null;
-    };
+      utterance.onend = () => {
+        setSpeaking(false);
+        utteranceRef.current = null;
+      };
 
-    utterance.onerror = (event) => {
-      console.error('Speech synthesis error:', event.error);
-      setError(new Error(`Speech error: ${event.error}`));
-      setSpeaking(false);
-       utteranceRef.current = null;
-    };
+      utterance.onerror = (event) => {
+        console.error('Speech synthesis error:', event.error);
+        setError(new Error(`Speech error: ${event.error}`));
+        setSpeaking(false);
+        utteranceRef.current = null;
+      };
 
-    try {
-       synth?.speak(utterance);
-    } catch (err) {
-        console.error("Error calling synth.speak:", err);
-        setError(err instanceof Error ? err : new Error("Failed to initiate speech"));
+      try {
+        synth?.speak(utterance);
+      } catch (err) {
+        console.error('Error calling synth.speak:', err);
+        setError(
+          err instanceof Error ? err : new Error('Failed to initiate speech')
+        );
         setSpeaking(false); // Ensure speaking is false if speak fails immediately
         utteranceRef.current = null;
-    }
-  }, [isSupported, speaking, voices]); // voices needed for default lang
+      }
+    },
+    [isSupported, speaking, voices]
+  ); // voices needed for default lang
 
   const cancel = useCallback(() => {
     if (!isSupported || !speaking) return;

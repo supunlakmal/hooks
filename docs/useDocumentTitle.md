@@ -77,12 +77,12 @@ export default App;
 
 ### Parameters
 
--   **`title`**: `string`
-    -   The string to set as the document's title.
--   **`options`**: `object` (optional)
-    An object containing configuration options:
-    -   `restoreOnUnmount?`: `boolean` - If `true`, the hook will store the current `document.title` when the component mounts and restore it when the component unmounts. Defaults to `false`.
+- **`title`**: `string`
+  - The string to set as the document's title.
+- **`options`**: `object` (optional)
+  An object containing configuration options:
+  - `restoreOnUnmount?`: `boolean` - If `true`, the hook will store the current `document.title` when the component mounts and restore it when the component unmounts. Defaults to `false`.
 
 ### Returns
 
--   `void` - This hook does not return any value.
+- `void` - This hook does not return any value.

@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useClipboard } from './useClipboard'; 
+import { useClipboard } from './useClipboard';
 
 type UseClipboardWithFeedbackReturn = [
-    string | null, 
-    (text: string) => Promise<boolean>, 
-    boolean 
+  string | null,
+  (text: string) => Promise<boolean>,
+  boolean,
 ];
 
 /**
@@ -19,9 +19,9 @@ type UseClipboardWithFeedbackReturn = [
 export function useClipboardWithFeedback(
   feedbackDuration: number = 2000
 ): UseClipboardWithFeedbackReturn {
-  const { value, copy: baseCopyFn } = useClipboard(); 
+  const { value, copy: baseCopyFn } = useClipboard();
   const [isCopied, setIsCopied] = useState<boolean>(false);
-  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null); 
+  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
 
   const clearExistingTimeout = useCallback(() => {
     if (timeoutIdRef.current) {
@@ -36,23 +36,26 @@ export function useClipboardWithFeedback(
     };
   }, [clearExistingTimeout]);
 
-  const copyFn = useCallback(async (text: string): Promise<boolean> => {
-    clearExistingTimeout();
+  const copyFn = useCallback(
+    async (text: string): Promise<boolean> => {
+      clearExistingTimeout();
 
-    try {
-      await baseCopyFn(text); 
-      setIsCopied(true);
-      timeoutIdRef.current = setTimeout(() => {
+      try {
+        await baseCopyFn(text);
+        setIsCopied(true);
+        timeoutIdRef.current = setTimeout(() => {
+          setIsCopied(false);
+          timeoutIdRef.current = null;
+        }, feedbackDuration);
+        return true;
+      } catch (err) {
+        console.error('Clipboard copy failed:', err);
         setIsCopied(false);
-        timeoutIdRef.current = null; 
-      }, feedbackDuration);
-      return true; 
-    } catch (err) {
-      console.error("Clipboard copy failed:", err); 
-      setIsCopied(false); 
-      return false; 
-    }
-  }, [baseCopyFn, feedbackDuration, clearExistingTimeout]);
+        return false;
+      }
+    },
+    [baseCopyFn, feedbackDuration, clearExistingTimeout]
+  );
 
   return [value, copyFn, isCopied];
 }

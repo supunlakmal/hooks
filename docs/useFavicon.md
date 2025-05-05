@@ -42,14 +42,14 @@ export default FaviconSwitcher;
 
 ### Parameters
 
--   **`url`**: `string | null | undefined`
-    -   The URL of the new favicon image (e.g., `/favicon.ico`, `/path/to/logo.png`, data URI).
-    -   If `null`, `undefined`, or an empty string, the hook will not attempt to set the favicon.
--   **`rel`**: `string` (optional)
-    -   The `rel` attribute for the `<link>` tag. This is typically `'icon'` or `'shortcut icon'`.
-    -   Defaults to `'icon'`.
-    -   The hook attempts to find an existing link with this `rel` attribute first.
+- **`url`**: `string | null | undefined`
+  - The URL of the new favicon image (e.g., `/favicon.ico`, `/path/to/logo.png`, data URI).
+  - If `null`, `undefined`, or an empty string, the hook will not attempt to set the favicon.
+- **`rel`**: `string` (optional)
+  - The `rel` attribute for the `<link>` tag. This is typically `'icon'` or `'shortcut icon'`.
+  - Defaults to `'icon'`.
+  - The hook attempts to find an existing link with this `rel` attribute first.
 
 ### Returns
 
--   `void` - This hook does not return any value.
+- `void` - This hook does not return any value.

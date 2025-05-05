@@ -30,7 +30,8 @@ const initialState: MousePosition = {
  * @returns An object containing the mouse coordinates (relative to viewport, screen, and page).
  */
 export function useMousePosition(): Readonly<MousePosition> {
-  const [mousePosition, setMousePosition] = useState<MousePosition>(initialState);
+  const [mousePosition, setMousePosition] =
+    useState<MousePosition>(initialState);
 
   useEffect(() => {
     if (typeof window === 'undefined') {

@@ -14,8 +14,8 @@ import { useLocalStorageQueue } from '@supunlakmal/hooks'; // Adjust import path
 
 function PersistentTaskQueue() {
   // Use a unique key for Local Storage
-  const { add, remove, peek, size, first, last, queue, clear } = 
-    useLocalStorageQueue<string>('myAppTaskQueue', []); // Start empty if nothing in storage
+  const { add, remove, peek, size, first, last, queue, clear } =
+    useLocalStorageQueue < string > ('myAppTaskQueue', []); // Start empty if nothing in storage
 
   const handleAddTask = () => {
     const newTask = `Persisted Task ${Date.now()}`;
@@ -60,25 +60,25 @@ export default PersistentTaskQueue;
 
 ### Type Parameters
 
--   **`T`**: The type of items the queue will hold. **Must be JSON-serializable.**
+- **`T`**: The type of items the queue will hold. **Must be JSON-serializable.**
 
 ### Parameters
 
--   **`key`**: `string`
-    -   The unique key under which the queue array will be stored in Local Storage.
--   **`initialValue`**: `T[]` (optional)
-    -   An array of items to initialize the queue with *only if* no value already exists in Local Storage for the given `key`.
-    -   Defaults to an empty array `[]`.
+- **`key`**: `string`
+  - The unique key under which the queue array will be stored in Local Storage.
+- **`initialValue`**: `T[]` (optional)
+  - An array of items to initialize the queue with _only if_ no value already exists in Local Storage for the given `key`.
+  - Defaults to an empty array `[]`.
 
 ### Returns
 
--   **`queueMethods`**: `object`
-    An object containing the queue state and methods (identical interface to `useQueue`, but operates on the persisted state):
-    -   `add(item: T): void` - Adds an item to the end of the queue and saves to Local Storage.
-    -   `remove(): void` - Removes the item from the front of the queue and saves to Local Storage. Does nothing if the queue is empty.
-    -   `peek(): T | undefined` - Returns the item at the front of the queue without removing it. Reads from the current state derived from Local Storage.
-    -   `size`: `number` - The current number of items in the queue.
-    -   `first`: `T | undefined` - The first item in the queue, or `undefined` if empty.
-    -   `last`: `T | undefined` - The last item in the queue, or `undefined` if empty.
-    -   `queue`: `readonly T[]` - A read-only array representing the current items in the queue, reflecting the state in Local Storage.
-    -   `clear(): void` - Removes all items from the queue and saves the empty state to Local Storage.
+- **`queueMethods`**: `object`
+  An object containing the queue state and methods (identical interface to `useQueue`, but operates on the persisted state):
+  - `add(item: T): void` - Adds an item to the end of the queue and saves to Local Storage.
+  - `remove(): void` - Removes the item from the front of the queue and saves to Local Storage. Does nothing if the queue is empty.
+  - `peek(): T | undefined` - Returns the item at the front of the queue without removing it. Reads from the current state derived from Local Storage.
+  - `size`: `number` - The current number of items in the queue.
+  - `first`: `T | undefined` - The first item in the queue, or `undefined` if empty.
+  - `last`: `T | undefined` - The last item in the queue, or `undefined` if empty.
+  - `queue`: `readonly T[]` - A read-only array representing the current items in the queue, reflecting the state in Local Storage.
+  - `clear(): void` - Removes all items from the queue and saves the empty state to Local Storage.

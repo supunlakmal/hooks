@@ -54,7 +54,7 @@ const getOrCreatePortalRoot = (
 export const usePortal = ({
   id = 'react-portal-root', // Default ID
   attributes = defaultAttributes,
-}: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> =>{
+}: UsePortalOptions = {}): FunctionComponent<{ children: ReactNode }> => {
   const portalElementRef = useRef<HTMLElement | null>(null);
   const portalCreatedByHook = useRef<boolean>(false);
 
@@ -64,7 +64,6 @@ export const usePortal = ({
     const { element, created } = getOrCreatePortalRoot(id, attributes);
     portalElementRef.current = element;
     portalCreatedByHook.current = created;
-    
 
     // Cleanup function
     return () => {
@@ -75,11 +74,10 @@ export const usePortal = ({
       // Reset refs/state on unmount
       portalElementRef.current = null;
       portalCreatedByHook.current = false;
-     
     };
   }, [id, attributes]); // Re-run if id or attributes change
   const [isMounted, setIsMounted] = useState(!!portalElementRef.current);
-  setIsMounted(!!portalElementRef.current)
+  setIsMounted(!!portalElementRef.current);
   // The Portal component definition using useCallback for stability
   const Portal = useCallback(
     ({ children }: { children: ReactNode }): React.ReactPortal | null => {
@@ -94,4 +92,4 @@ export const usePortal = ({
   );
 
   return Portal;
-}
+};

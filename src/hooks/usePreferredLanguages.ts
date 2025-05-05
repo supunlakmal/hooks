@@ -12,7 +12,10 @@ export function usePreferredLanguages(): ReadonlyArray<string> {
     if (typeof navigator !== 'undefined' && navigator.languages) {
       // navigator.languages returns languages in preference order
       return navigator.languages;
-    } else if (typeof navigator !== 'undefined' && (navigator as any).language) {
+    } else if (
+      typeof navigator !== 'undefined' &&
+      (navigator as any).language
+    ) {
       // Fallback for older browsers
       return [(navigator as any).language];
     }

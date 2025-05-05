@@ -50,17 +50,17 @@ export default ModalComponent;
 
 ## Parameters
 
--   **`ref`**: `RefObject<T extends HTMLElement>` (Required)
-    -   A React ref object attached to the DOM element you want to monitor for clicks outside of.
--   **`callback`**: `() => void` (Required)
-    -   The function that will be executed when a click occurs outside the referenced element OR when the 'Escape' key is pressed.
+- **`ref`**: `RefObject<T extends HTMLElement>` (Required)
+  - A React ref object attached to the DOM element you want to monitor for clicks outside of.
+- **`callback`**: `() => void` (Required)
+  - The function that will be executed when a click occurs outside the referenced element OR when the 'Escape' key is pressed.
 
 ## Return Value
 
--   **`void`**
-    -   This hook does not return any value. Its purpose is to trigger the provided callback based on user interactions.
+- **`void`**
+  - This hook does not return any value. Its purpose is to trigger the provided callback based on user interactions.
 
 ## Notes
 
--   Internally, this hook utilizes `useClickOutside` to detect clicks outside the element and `useKeyPress` to detect 'Escape' key presses.
--   Ensure the `ref` is correctly attached to the container element whose outside clicks should trigger the callback.
+- Internally, this hook utilizes `useClickOutside` to detect clicks outside the element and `useKeyPress` to detect 'Escape' key presses.
+- Ensure the `ref` is correctly attached to the container element whose outside clicks should trigger the callback.

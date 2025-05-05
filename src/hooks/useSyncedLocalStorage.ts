@@ -29,9 +29,9 @@ export function useSyncedLocalStorage<T>(
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
   // Resolve the initial value once
   const resolvedInitialValue = useRef(
-      typeof initialValue === 'function'
-          ? (initialValue as () => T)()
-          : initialValue
+    typeof initialValue === 'function'
+      ? (initialValue as () => T)()
+      : initialValue
   ).current;
 
   // Get initial value from localStorage if available, otherwise use the resolved initial value
@@ -77,7 +77,11 @@ export function useSyncedLocalStorage<T>(
     if (!isBrowser) return;
 
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === key && event.newValue !== null && event.storageArea === window.localStorage) {
+      if (
+        event.key === key &&
+        event.newValue !== null &&
+        event.storageArea === window.localStorage
+      ) {
         try {
           const newValue = safeJsonParse<T>(event.newValue);
           if (newValue !== null) {
@@ -86,11 +90,14 @@ export function useSyncedLocalStorage<T>(
             // Note: This deep comparison might be expensive for large objects.
             // Consider a shallow comparison or requiring serializable values if performance is critical.
             if (JSON.stringify(newValue) !== JSON.stringify(storedValue)) {
-                 setStateRef.current(newValue);
+              setStateRef.current(newValue);
             }
           }
         } catch (error) {
-          console.error(`Error processing storage event for key “${key}”:`, error);
+          console.error(
+            `Error processing storage event for key “${key}”:`,
+            error
+          );
         }
       }
     };
@@ -101,8 +108,8 @@ export function useSyncedLocalStorage<T>(
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  // Ensure storedValue is a dependency here to re-evaluate the comparison inside the handler
-  // when the local state changes. key is also needed.
+    // Ensure storedValue is a dependency here to re-evaluate the comparison inside the handler
+    // when the local state changes. key is also needed.
   }, [key, storedValue]);
 
   // Return the state and the setter function

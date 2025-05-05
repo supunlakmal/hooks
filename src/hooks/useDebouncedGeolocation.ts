@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
-import { useGeolocation, GeolocationState, UseGeolocationOptions } from './useGeolocation'; 
-import { useDebouncedState } from './useDebouncedState'; 
+import {
+  useGeolocation,
+  GeolocationState,
+  UseGeolocationOptions,
+} from './useGeolocation';
+import { useDebouncedState } from './useDebouncedState';
 
 /**
  * A hook that provides debounced geolocation data.
@@ -12,18 +16,16 @@ import { useDebouncedState } from './useDebouncedState';
  * @returns The debounced GeolocationState object.
  */
 export function useDebouncedGeolocation(
-  options?: UseGeolocationOptions, 
-  delay: number = 500 
+  options?: UseGeolocationOptions,
+  delay: number = 500
 ): GeolocationState {
   // Get the live geolocation state
   const liveGeolocationState = useGeolocation(options);
 
   // Create debounced state, initialized with the current live state
   // We need a stable initial state reference for useDebouncedState
-  const [debouncedState, setDebouncedState] = useDebouncedState<GeolocationState>(
-    liveGeolocationState,
-    delay
-  );
+  const [debouncedState, setDebouncedState] =
+    useDebouncedState<GeolocationState>(liveGeolocationState, delay);
 
   // Effect to update the debounced state when the live state changes
   useEffect(() => {

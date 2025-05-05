@@ -35,7 +35,9 @@ const mediaDevices = isBrowser ? navigator.mediaDevices : undefined;
  * @param options Configuration options including media constraints.
  * @returns State and controls for the media stream.
  */
-export function useMediaStream(options: UseMediaStreamOptions): UseMediaStreamReturn {
+export function useMediaStream(
+  options: UseMediaStreamOptions
+): UseMediaStreamReturn {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -46,7 +48,7 @@ export function useMediaStream(options: UseMediaStreamOptions): UseMediaStreamRe
 
   // Update optionsRef if options object changes identity
   useEffect(() => {
-      optionsRef.current = options;
+    optionsRef.current = options;
   }, [options]);
 
   const stopStreamTracks = useCallback((currentStream: MediaStream | null) => {
@@ -76,13 +78,18 @@ export function useMediaStream(options: UseMediaStreamOptions): UseMediaStreamRe
     setIsActive(true);
 
     try {
-      const streamInstance = await mediaDevices.getUserMedia(optionsRef.current.constraints);
+      const streamInstance = await mediaDevices.getUserMedia(
+        optionsRef.current.constraints
+      );
       setStream(streamInstance);
       streamRef.current = streamInstance;
       optionsRef.current.onStream?.(streamInstance);
     } catch (err) {
       console.error('Error accessing media devices:', err);
-      const currentError = err instanceof Error ? err : new Error('Failed to access media devices');
+      const currentError =
+        err instanceof Error
+          ? err
+          : new Error('Failed to access media devices');
       setError(currentError);
       optionsRef.current.onError?.(currentError);
       setStream(null); // Ensure stream is null on error
@@ -95,7 +102,7 @@ export function useMediaStream(options: UseMediaStreamOptions): UseMediaStreamRe
   useEffect(() => {
     return () => {
       if (optionsRef.current.autoStop) {
-          stopStream();
+        stopStream();
       }
     };
   }, [stopStream]); // Use stopStream which includes the autoStop check logic via optionsRef

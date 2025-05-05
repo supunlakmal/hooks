@@ -11,7 +11,7 @@ interface EyeDropper {
 
 declare global {
   interface Window {
-    EyeDropper?: { new(): EyeDropper };
+    EyeDropper?: { new (): EyeDropper };
   }
 }
 
@@ -37,7 +37,9 @@ const isBrowser = typeof window !== 'undefined';
  * @param {UseEyeDropperOptions} [options] Configuration options.
  * @returns {UseEyeDropperReturn} Object with EyeDropper state and controls.
  */
-export function useEyeDropper(options?: UseEyeDropperOptions): UseEyeDropperReturn {
+export function useEyeDropper(
+  options?: UseEyeDropperOptions
+): UseEyeDropperReturn {
   const [isSupported] = useState<boolean>(() => {
     return isBrowser && typeof window.EyeDropper === 'function';
   });
@@ -46,7 +48,9 @@ export function useEyeDropper(options?: UseEyeDropperOptions): UseEyeDropperRetu
 
   const open = useCallback(async () => {
     if (!isSupported) {
-      const notSupportedError = new Error('EyeDropper API is not supported in this browser.');
+      const notSupportedError = new Error(
+        'EyeDropper API is not supported in this browser.'
+      );
       setError(notSupportedError);
       options?.onError?.(notSupportedError);
       console.error(notSupportedError.message);
@@ -65,23 +69,28 @@ export function useEyeDropper(options?: UseEyeDropperOptions): UseEyeDropperRetu
       const result: EyeDropperResult = await eyeDropper.open(/* { signal } */);
       setSRGBHex(result.sRGBHex);
     } catch (err) {
-        // Handle errors, including user cancellation (which typically throws DOMException: The user aborted a request.)
-        const currentError =
-            err instanceof Error
-            ? err
-            : new Error('Failed to open EyeDropper or operation was cancelled.');
+      // Handle errors, including user cancellation (which typically throws DOMException: The user aborted a request.)
+      const currentError =
+        err instanceof Error
+          ? err
+          : new Error('Failed to open EyeDropper or operation was cancelled.');
 
-        // Don't treat user cancellation as a hook error state unless specifically desired
-        if (currentError.name !== 'AbortError' && !(currentError instanceof DOMException && currentError.message.includes('aborted')) ) {
-             setError(currentError);
-             options?.onError?.(currentError);
-             console.error('EyeDropper error:', currentError);
-        } else {
-            // User cancelled, reset color potentially
-             setSRGBHex(null);
-             console.log('EyeDropper operation cancelled by user.');
-        }
-
+      // Don't treat user cancellation as a hook error state unless specifically desired
+      if (
+        currentError.name !== 'AbortError' &&
+        !(
+          currentError instanceof DOMException &&
+          currentError.message.includes('aborted')
+        )
+      ) {
+        setError(currentError);
+        options?.onError?.(currentError);
+        console.error('EyeDropper error:', currentError);
+      } else {
+        // User cancelled, reset color potentially
+        setSRGBHex(null);
+        console.log('EyeDropper operation cancelled by user.');
+      }
     }
   }, [isSupported, options]);
 

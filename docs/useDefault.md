@@ -8,8 +8,14 @@ A simple React hook that returns a default value if the provided value is `null`
 import { useState } from 'react';
 import { useDefault } from './hooks/useDefault'; // Adjust import path
 
-function DefaultValueComponent({ initialUsername }: { initialUsername?: string | null }) {
-  const [username, setUsername] = useState<string | null | undefined>(initialUsername);
+function DefaultValueComponent({
+  initialUsername,
+}: {
+  initialUsername?: string | null;
+}) {
+  const [username, setUsername] = useState<string | null | undefined>(
+    initialUsername
+  );
 
   // If username is null or undefined, userOrDefault will be 'Guest'
   const userOrDefault = useDefault(username, 'Guest');
@@ -31,14 +37,14 @@ function DefaultValueComponent({ initialUsername }: { initialUsername?: string |
 
 ### Parameters
 
--   `value`: The value to check. Can be of any type `T`, `null`, or `undefined`.
--   `defaultValue`: The value of type `T` to return if `value` is `null` or `undefined`.
+- `value`: The value to check. Can be of any type `T`, `null`, or `undefined`.
+- `defaultValue`: The value of type `T` to return if `value` is `null` or `undefined`.
 
 ### Return Value
 
--   Returns `value` if it is not `null` and not `undefined`.
--   Returns `defaultValue` otherwise.
+- Returns `value` if it is not `null` and not `undefined`.
+- Returns `defaultValue` otherwise.
 
 ### Dependencies
 
--   The hook uses `useMemo` and will re-evaluate only if `value` or `defaultValue` changes reference.
+- The hook uses `useMemo` and will re-evaluate only if `value` or `defaultValue` changes reference.

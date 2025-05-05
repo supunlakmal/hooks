@@ -65,13 +65,13 @@ export function useImageOnLoad(src?: string): Readonly<ImageOnLoadResult> {
 
     // Optional: Check if image is already cached by the browser
     if (img.complete && img.naturalWidth) {
-        // Needs a slight delay for cached images in some browsers (like Firefox)
-        // to correctly report dimensions and trigger load event if needed.
-        setTimeout(() => {
-             if(isMounted && img.complete && img.naturalWidth) {
-                handleLoad();
-             }
-        }, 0);
+      // Needs a slight delay for cached images in some browsers (like Firefox)
+      // to correctly report dimensions and trigger load event if needed.
+      setTimeout(() => {
+        if (isMounted && img.complete && img.naturalWidth) {
+          handleLoad();
+        }
+      }, 0);
     }
 
     return () => {

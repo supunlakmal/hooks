@@ -11,10 +11,8 @@ import React from 'react';
 import { useQueue } from '@supunlakmal/hooks'; // Adjust import path
 
 function TaskQueueComponent() {
-  const { add, remove, peek, size, first, last, queue, clear } = useQueue<string>([
-    'Initial Task 1',
-    'Initial Task 2',
-  ]);
+  const { add, remove, peek, size, first, last, queue, clear } =
+    useQueue < string > ['Initial Task 1', 'Initial Task 2'];
 
   const handleAddTask = () => {
     const newTask = `Task ${size + 1}`;
@@ -51,7 +49,6 @@ function TaskQueueComponent() {
 }
 
 export default TaskQueueComponent;
-
 ```
 
 ## API
@@ -60,22 +57,22 @@ export default TaskQueueComponent;
 
 ### Type Parameters
 
--   **`T`**: The type of items the queue will hold.
+- **`T`**: The type of items the queue will hold.
 
 ### Parameters
 
--   **`initialQueue`**: `T[]` (optional)
-    -   An array of items to initialize the queue with. Defaults to an empty array `[]`.
+- **`initialQueue`**: `T[]` (optional)
+  - An array of items to initialize the queue with. Defaults to an empty array `[]`.
 
 ### Returns
 
--   **`queueMethods`**: `object`
-    An object containing the queue state and methods:
-    -   `add(item: T): void` - Adds an item to the end of the queue.
-    -   `remove(): void` - Removes the item from the front of the queue. Does nothing if the queue is empty.
-    -   `peek(): T | undefined` - Returns the item at the front of the queue without removing it. Returns `undefined` if the queue is empty.
-    -   `size`: `number` - The current number of items in the queue.
-    -   `first`: `T | undefined` - The first item in the queue (same as `peek()`), or `undefined` if empty.
-    -   `last`: `T | undefined` - The last item added to the queue, or `undefined` if empty.
-    -   `queue`: `readonly T[]` - A read-only array representing the current items in the queue.
-    -   `clear(): void` - Removes all items from the queue.
+- **`queueMethods`**: `object`
+  An object containing the queue state and methods:
+  - `add(item: T): void` - Adds an item to the end of the queue.
+  - `remove(): void` - Removes the item from the front of the queue. Does nothing if the queue is empty.
+  - `peek(): T | undefined` - Returns the item at the front of the queue without removing it. Returns `undefined` if the queue is empty.
+  - `size`: `number` - The current number of items in the queue.
+  - `first`: `T | undefined` - The first item in the queue (same as `peek()`), or `undefined` if empty.
+  - `last`: `T | undefined` - The last item added to the queue, or `undefined` if empty.
+  - `queue`: `readonly T[]` - A read-only array representing the current items in the queue.
+  - `clear(): void` - Removes all items from the queue.

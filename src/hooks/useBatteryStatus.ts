@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 // Define the shape of the battery status object
 export interface BatteryState {
   isSupported: boolean; // Whether the Battery API is supported
-  loading: boolean;     // True while initially fetching battery status
+  loading: boolean; // True while initially fetching battery status
   charging: boolean | null;
-  level: number | null;       // Battery level (0.0 to 1.0)
+  level: number | null; // Battery level (0.0 to 1.0)
   chargingTime: number | null; // Time until fully charged (seconds), null if N/A or Infinity
   dischargingTime: number | null; // Time until empty (seconds), null if N/A or Infinity
   error: Error | null;
@@ -52,12 +52,12 @@ export function useBatteryStatus(): BatteryState {
 
   useEffect(() => {
     if (!nav?.getBattery) {
-       setState(s => ({
-         ...s,
-         loading: false,
-         isSupported: false,
-         error: new Error('Battery Status API not supported by this browser.')
-       }));
+      setState((s) => ({
+        ...s,
+        loading: false,
+        isSupported: false,
+        error: new Error('Battery Status API not supported by this browser.'),
+      }));
       return;
     }
 
@@ -70,40 +70,53 @@ export function useBatteryStatus(): BatteryState {
           loading: false,
           charging: batteryManager.charging,
           level: batteryManager.level,
-          chargingTime: batteryManager.chargingTime === Infinity ? null : batteryManager.chargingTime,
-          dischargingTime: batteryManager.dischargingTime === Infinity ? null : batteryManager.dischargingTime,
+          chargingTime:
+            batteryManager.chargingTime === Infinity
+              ? null
+              : batteryManager.chargingTime,
+          dischargingTime:
+            batteryManager.dischargingTime === Infinity
+              ? null
+              : batteryManager.dischargingTime,
           error: null,
         });
       }
     };
 
     const setupListeners = (manager: BatteryManager) => {
-        manager.addEventListener('chargingchange', updateBatteryState);
-        manager.addEventListener('levelchange', updateBatteryState);
-        manager.addEventListener('chargingtimechange', updateBatteryState);
-        manager.addEventListener('dischargingtimechange', updateBatteryState);
+      manager.addEventListener('chargingchange', updateBatteryState);
+      manager.addEventListener('levelchange', updateBatteryState);
+      manager.addEventListener('chargingtimechange', updateBatteryState);
+      manager.addEventListener('dischargingtimechange', updateBatteryState);
     };
 
     const removeListeners = (manager: BatteryManager | null) => {
-        if (manager) {
-            manager.removeEventListener('chargingchange', updateBatteryState);
-            manager.removeEventListener('levelchange', updateBatteryState);
-            manager.removeEventListener('chargingtimechange', updateBatteryState);
-            manager.removeEventListener('dischargingtimechange', updateBatteryState);
-        }
+      if (manager) {
+        manager.removeEventListener('chargingchange', updateBatteryState);
+        manager.removeEventListener('levelchange', updateBatteryState);
+        manager.removeEventListener('chargingtimechange', updateBatteryState);
+        manager.removeEventListener(
+          'dischargingtimechange',
+          updateBatteryState
+        );
+      }
     };
 
-    nav.getBattery()
+    nav
+      .getBattery()
       .then((manager) => {
         batteryManager = manager;
         updateBatteryState();
         setupListeners(manager);
       })
       .catch((err) => {
-        setState(s => ({
+        setState((s) => ({
           ...s,
           loading: false,
-          error: err instanceof Error ? err : new Error('Failed to get battery status'),
+          error:
+            err instanceof Error
+              ? err
+              : new Error('Failed to get battery status'),
         }));
       });
 

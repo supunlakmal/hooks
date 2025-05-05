@@ -18,17 +18,18 @@ type Initializer<T> = () => T;
  * @returns {T} The constant value.
  */
 export function useConst<T>(initializer: Initializer<T> | T): T {
-    const ref = useRef<{ value: T } | null>(null);
+  const ref = useRef<{ value: T } | null>(null);
 
-    if (ref.current === null) {
-        // Initialize the ref's value
-        ref.current = {
-            value: typeof initializer === 'function'
-                ? (initializer as Initializer<T>)() // Call the function if it's an initializer
-                : initializer // Otherwise, use the value directly
-        };
-    }
+  if (ref.current === null) {
+    // Initialize the ref's value
+    ref.current = {
+      value:
+        typeof initializer === 'function'
+          ? (initializer as Initializer<T>)() // Call the function if it's an initializer
+          : initializer, // Otherwise, use the value directly
+    };
+  }
 
-    // Return the stored value
-    return ref.current.value;
+  // Return the stored value
+  return ref.current.value;
 }

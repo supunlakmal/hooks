@@ -10,10 +10,7 @@ import { useEffect } from 'react';
  * @param delay The debounce delay in milliseconds.
  * @returns A boolean indicating whether the media query matches (debounced).
  */
-export function useDebouncedMediaQuery(
-  query: string,
-  delay: number
-): boolean {
+export function useDebouncedMediaQuery(query: string, delay: number): boolean {
   // Get the live match state from useMediaQuery
   const matches = useMediaQuery(query);
 

@@ -43,20 +43,20 @@ export default App;
 
 ## Parameters
 
--   **`elementRef`**: `RefObject<Element>` (Required)
-    -   A React ref object attached to the DOM element you want to track for visibility.
--   **`observerOptions`**: `IntersectionObserverInit` (Optional)
-    -   Standard options object for the underlying `IntersectionObserver` (e.g., `root`, `rootMargin`, `threshold`). Defaults will be used if omitted.
+- **`elementRef`**: `RefObject<Element>` (Required)
+  - A React ref object attached to the DOM element you want to track for visibility.
+- **`observerOptions`**: `IntersectionObserverInit` (Optional)
+  - Standard options object for the underlying `IntersectionObserver` (e.g., `root`, `rootMargin`, `threshold`). Defaults will be used if omitted.
 
 ## Return Value
 
--   **`boolean`**
-    -   Returns `true` if the element referenced by `elementRef` has entered the viewport at least once according to the `observerOptions`.
-    -   Returns `false` initially and until the element becomes visible for the first time.
-    -   **Important:** Once it returns `true`, it will continue to return `true` for the lifetime of the component instance, even if the element scrolls out of view.
+- **`boolean`**
+  - Returns `true` if the element referenced by `elementRef` has entered the viewport at least once according to the `observerOptions`.
+  - Returns `false` initially and until the element becomes visible for the first time.
+  - **Important:** Once it returns `true`, it will continue to return `true` for the lifetime of the component instance, even if the element scrolls out of view.
 
 ## Notes
 
--   Relies on the `IntersectionObserver` API, which is widely supported in modern browsers.
--   Internally uses `useIntersectionObserver` to monitor the element's intersection state.
--   The state update logic ensures that the `hasBeenVisible` flag is set to `true` only once.
+- Relies on the `IntersectionObserver` API, which is widely supported in modern browsers.
+- Internally uses `useIntersectionObserver` to monitor the element's intersection state.
+- The state update logic ensures that the `hasBeenVisible` flag is set to `true` only once.

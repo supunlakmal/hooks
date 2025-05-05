@@ -19,7 +19,9 @@ interface UseNotificationReturn {
   /** Function to request notification permission from the user. */
   requestPermission: () => Promise<NotificationPermission>;
   /** Function to display the notification with the configured options. */
-  showNotification: (overrideOptions?: Partial<UseNotificationOptions>) => Notification | null;
+  showNotification: (
+    overrideOptions?: Partial<UseNotificationOptions>
+  ) => Notification | null;
   /** Error object if permission request or notification fails, null otherwise. */
   error: Error | null;
   /** Indicates if the Notification API is supported by the browser. */
@@ -35,7 +37,9 @@ const notificationApi = isBrowser ? window.Notification : undefined;
  * @param defaultOptions Default options for the notification (title is required).
  * @returns State and functions to request permission and show notifications.
  */
-export function useNotification(defaultOptions: UseNotificationOptions): UseNotificationReturn {
+export function useNotification(
+  defaultOptions: UseNotificationOptions
+): UseNotificationReturn {
   const isSupported = !!notificationApi;
   const [permission, setPermission] = useState<NotificationPermission>(
     isSupported ? notificationApi.permission : 'default'
@@ -45,30 +49,37 @@ export function useNotification(defaultOptions: UseNotificationOptions): UseNoti
 
   // Keep optionsRef updated
   useEffect(() => {
-      optionsRef.current = defaultOptions;
+    optionsRef.current = defaultOptions;
   }, [defaultOptions]);
 
-  const requestPermission = useCallback(async (): Promise<NotificationPermission> => {
-    if (!isSupported) {
-      setError(new Error('Notifications not supported by this browser.'));
-      return 'denied';
-    }
+  const requestPermission =
+    useCallback(async (): Promise<NotificationPermission> => {
+      if (!isSupported) {
+        setError(new Error('Notifications not supported by this browser.'));
+        return 'denied';
+      }
 
-    try {
-      const status = await notificationApi.requestPermission();
-      setPermission(status);
-      setError(null);
-      return status;
-    } catch (err) {
-      console.error('Error requesting notification permission:', err);
-      const currentError = err instanceof Error ? err : new Error('Failed to request permission');
-      setError(currentError);
-      setPermission('denied'); // Assume denied on error
-      return 'denied';
-    }
-  }, [isSupported]);
+      try {
+        const status = await notificationApi.requestPermission();
+        setPermission(status);
+        setError(null);
+        return status;
+      } catch (err) {
+        console.error('Error requesting notification permission:', err);
+        const currentError =
+          err instanceof Error
+            ? err
+            : new Error('Failed to request permission');
+        setError(currentError);
+        setPermission('denied'); // Assume denied on error
+        return 'denied';
+      }
+    }, [isSupported]);
 
-  const showNotification = useCallback((overrideOptions?: Partial<UseNotificationOptions>): Notification | null => {
+  const showNotification = useCallback(
+    (
+      overrideOptions?: Partial<UseNotificationOptions>
+    ): Notification | null => {
       if (!isSupported) {
         console.warn('Notifications not supported.');
         setError(new Error('Notifications not supported by this browser.'));
@@ -83,12 +94,19 @@ export function useNotification(defaultOptions: UseNotificationOptions): UseNoti
       }
 
       const finalOptions = { ...optionsRef.current, ...overrideOptions };
-      const { title, onClick, onClose, onError: optionsOnError, onShow, ...restOptions } = finalOptions;
+      const {
+        title,
+        onClick,
+        onClose,
+        onError: optionsOnError,
+        onShow,
+        ...restOptions
+      } = finalOptions;
 
       if (!title) {
-          console.error('Notification title is required.');
-          setError(new Error('Notification title is required.'));
-          return null;
+        console.error('Notification title is required.');
+        setError(new Error('Notification title is required.'));
+        return null;
       }
 
       try {
@@ -103,7 +121,8 @@ export function useNotification(defaultOptions: UseNotificationOptions): UseNoti
         return notification;
       } catch (err) {
         console.error('Error creating notification:', err);
-        const currentError = err instanceof Error ? err : new Error('Failed to show notification');
+        const currentError =
+          err instanceof Error ? err : new Error('Failed to show notification');
         setError(currentError);
         return null;
       }
@@ -121,5 +140,11 @@ export function useNotification(defaultOptions: UseNotificationOptions): UseNoti
   //   // return () => { /* remove listener */ };
   // }, [isSupported]);
 
-  return { permission, requestPermission, showNotification, error, isSupported };
+  return {
+    permission,
+    requestPermission,
+    showNotification,
+    error,
+    isSupported,
+  };
 }

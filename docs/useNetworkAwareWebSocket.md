@@ -102,32 +102,32 @@ export default ChatComponent;
 
 ## Parameters
 
--   **`url`**: `string | null | undefined` (Required)
-    -   The URL of the WebSocket server to connect to.
-    -   If `null` or `undefined` is passed, the hook will attempt to close any existing connection and prevent new ones from opening.
--   **`options`**: `UseNetworkAwareWebSocketOptions` (Optional)
-    -   An object containing configuration callbacks and settings:
-        -   `onOpen`: `(event: Event) => void` - Callback fired when the connection is successfully opened.
-        -   `onClose`: `(event: CloseEvent) => void` - Callback fired when the connection closes.
-        -   `onError`: `(event: Event) => void` - Callback fired when a WebSocket error occurs.
-        -   `onMessage`: `(event: MessageEvent) => void` - Callback fired when a message is received from the server.
-        -   `retryOnError`: `boolean` (Default: `false`) - If `true`, the hook will automatically attempt to reconnect after the specified `retryDelay` if an error occurs or the connection closes uncleanly, but only if the browser is online.
-        -   `retryDelay`: `number` (Default: `2000`) - The delay in milliseconds before attempting a reconnect if `retryOnError` is `true`.
+- **`url`**: `string | null | undefined` (Required)
+  - The URL of the WebSocket server to connect to.
+  - If `null` or `undefined` is passed, the hook will attempt to close any existing connection and prevent new ones from opening.
+- **`options`**: `UseNetworkAwareWebSocketOptions` (Optional)
+  - An object containing configuration callbacks and settings:
+    - `onOpen`: `(event: Event) => void` - Callback fired when the connection is successfully opened.
+    - `onClose`: `(event: CloseEvent) => void` - Callback fired when the connection closes.
+    - `onError`: `(event: Event) => void` - Callback fired when a WebSocket error occurs.
+    - `onMessage`: `(event: MessageEvent) => void` - Callback fired when a message is received from the server.
+    - `retryOnError`: `boolean` (Default: `false`) - If `true`, the hook will automatically attempt to reconnect after the specified `retryDelay` if an error occurs or the connection closes uncleanly, but only if the browser is online.
+    - `retryDelay`: `number` (Default: `2000`) - The delay in milliseconds before attempting a reconnect if `retryOnError` is `true`.
 
 ## Return Value
 
--   **`UseNetworkAwareWebSocketReturn<T>`**: An object containing the state and controls for the WebSocket connection:
-    -   `lastMessage`: `MessageEvent<T> | null` - The most recent message event received from the server. `T` is the expected type of `message.data`.
-    -   `isConnected`: `boolean` - `true` if the WebSocket is currently connected (readyState is OPEN), `false` otherwise.
-    -   `error`: `Event | null` - The last error event encountered, or `null` if no error has occurred since the last successful connection or attempt.
-    -   `sendMessage`: `(data: string | ArrayBufferLike | Blob | ArrayBufferView) => void` - A memoized function to send data over the WebSocket connection. It checks if the connection is open before sending.
-    -   `websocket`: `WebSocket | null` - A direct reference to the underlying `WebSocket` instance, or `null` if not connected. Useful for accessing properties or methods not exposed directly by the hook.
+- **`UseNetworkAwareWebSocketReturn<T>`**: An object containing the state and controls for the WebSocket connection:
+  - `lastMessage`: `MessageEvent<T> | null` - The most recent message event received from the server. `T` is the expected type of `message.data`.
+  - `isConnected`: `boolean` - `true` if the WebSocket is currently connected (readyState is OPEN), `false` otherwise.
+  - `error`: `Event | null` - The last error event encountered, or `null` if no error has occurred since the last successful connection or attempt.
+  - `sendMessage`: `(data: string | ArrayBufferLike | Blob | ArrayBufferView) => void` - A memoized function to send data over the WebSocket connection. It checks if the connection is open before sending.
+  - `websocket`: `WebSocket | null` - A direct reference to the underlying `WebSocket` instance, or `null` if not connected. Useful for accessing properties or methods not exposed directly by the hook.
 
 ## Notes
 
--   The connection is only established or maintained when `navigator.onLine` is `true` AND a valid `url` is provided.
--   If the network status changes to offline, or the `url` becomes `null`/`undefined`, the hook automatically initiates a clean disconnection.
--   If the network status changes back to online and a valid `url` is present, the hook automatically attempts to reconnect.
--   The `retryOnError` option provides basic resilience against temporary network issues or server-side restarts causing unclean closures.
--   Event handlers (`onOpen`, `onClose`, etc.) are passed via the `options` object.
--   The hook handles cleanup (closing the connection, clearing timeouts) automatically on component unmount or when dependencies change.
+- The connection is only established or maintained when `navigator.onLine` is `true` AND a valid `url` is provided.
+- If the network status changes to offline, or the `url` becomes `null`/`undefined`, the hook automatically initiates a clean disconnection.
+- If the network status changes back to online and a valid `url` is present, the hook automatically attempts to reconnect.
+- The `retryOnError` option provides basic resilience against temporary network issues or server-side restarts causing unclean closures.
+- Event handlers (`onOpen`, `onClose`, etc.) are passed via the `options` object.
+- The hook handles cleanup (closing the connection, clearing timeouts) automatically on component unmount or when dependencies change.

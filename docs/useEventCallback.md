@@ -1,6 +1,6 @@
 # useEventCallback
 
-The `useEventCallback` hook creates a stable function reference (memoized callback) that always delegates to the *latest* version of the provided callback function. This is particularly useful for optimizing child components that depend on stable callback props (e.g., when using `React.memo` or including callbacks in dependency arrays of other hooks like `useEffect`) without causing unnecessary re-renders when the parent's callback definition changes.
+The `useEventCallback` hook creates a stable function reference (memoized callback) that always delegates to the _latest_ version of the provided callback function. This is particularly useful for optimizing child components that depend on stable callback props (e.g., when using `React.memo` or including callbacks in dependency arrays of other hooks like `useEffect`) without causing unnecessary re-renders when the parent's callback definition changes.
 
 ## Usage
 
@@ -42,13 +42,16 @@ function ParentComponent() {
     <div>
       <h2>useEventCallback Example</h2>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(c => c + 1)}>Increment Count</button>
+      <button onClick={() => setCount((c) => c + 1)}>Increment Count</button>
       <hr />
       {/* This child will re-render every time count changes because regularHandleClick changes */}
       <MemoizedChild onClick={regularHandleClick} label="Regular Callback" />
       <br />
       {/* This child will NOT re-render when count changes because stableHandleClick's reference is stable */}
-      <MemoizedChild onClick={stableHandleClick} label="Stable Callback (useEventCallback)" />
+      <MemoizedChild
+        onClick={stableHandleClick}
+        label="Stable Callback (useEventCallback)"
+      />
     </div>
   );
 }
@@ -60,18 +63,18 @@ export default ParentComponent;
 
 ### Parameters
 
--   `callback`: `T extends (...args: any[]) => any`
-    -   **Required**. The callback function you want to stabilize. The hook ensures that the returned function always calls the most recent version of this `callback`.
+- `callback`: `T extends (...args: any[]) => any`
+  - **Required**. The callback function you want to stabilize. The hook ensures that the returned function always calls the most recent version of this `callback`.
 
 ### Return Value
 
--   `(memoizedCallback: T)`: `T`
-    -   Returns a memoized function with a stable reference. This function, when called, will execute the latest `callback` passed to the hook.
+- `(memoizedCallback: T)`: `T`
+  - Returns a memoized function with a stable reference. This function, when called, will execute the latest `callback` passed to the hook.
 
 ## Behavior
 
--   Internally uses `useRef` to store the latest version of the `callback`.
--   Uses `useEffect` to update the ref whenever the `callback` prop changes.
--   Returns a `useCallback` function with an empty dependency array (`[]`), ensuring its reference remains stable across renders.
--   The stable function reads the latest callback from the ref and executes it when called.
--   Throws an error if the callback is somehow invoked before the internal ref has been initialized (though this is unlikely in standard usage).
+- Internally uses `useRef` to store the latest version of the `callback`.
+- Uses `useEffect` to update the ref whenever the `callback` prop changes.
+- Returns a `useCallback` function with an empty dependency array (`[]`), ensuring its reference remains stable across renders.
+- The stable function reads the latest callback from the ref and executes it when called.
+- Throws an error if the callback is somehow invoked before the internal ref has been initialized (though this is unlikely in standard usage).

@@ -12,7 +12,9 @@ type Dispatch<A> = (value: A) => void;
  * @param initialState The initial state value or a function to compute it.
  * @returns A tuple containing the current state and a dispatch function to update it.
  */
-export function useRafState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>] {
+export function useRafState<S>(
+  initialState: S | (() => S)
+): [S, Dispatch<SetStateAction<S>>] {
   const [state, setState] = useState<S>(initialState);
   const rafRef = useRef<number>(0);
 

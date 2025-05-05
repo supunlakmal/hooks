@@ -28,10 +28,7 @@ export function useHoverDelay<T extends HTMLElement = HTMLElement>(
   };
 
   // Use useTimeout. Pass the delay if hovering, or null to clear/prevent if not.
-  useTimeout(
-    timeoutCallback,
-    isHovering ? delay : null
-  );
+  useTimeout(timeoutCallback, isHovering ? delay : null);
 
   // Effect to handle the immediate reset when hover stops.
   // This is necessary because useTimeout only triggers the callback *after* the delay.

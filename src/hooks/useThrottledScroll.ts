@@ -42,9 +42,9 @@ export function useThrottledScroll(
 
   // Throttle the scroll handler with correct arguments
   const throttledHandleScroll = useThrottledCallback(
-    handleScroll,               // The callback
-    [],                         // Deps for the callback (empty as handleScroll is stable)
-    delay,                      // wait (throttle delay)
+    handleScroll, // The callback
+    [], // Deps for the callback (empty as handleScroll is stable)
+    delay, // wait (throttle delay)
     throttleOptions?.noTrailing // noTrailing option
   );
 

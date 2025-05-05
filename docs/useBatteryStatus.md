@@ -62,21 +62,21 @@ export default BatteryInfoDisplay;
 
 ## Parameters
 
--   This hook does not accept any parameters.
+- This hook does not accept any parameters.
 
 ## Return Value
 
--   **`BatteryState`**: An object containing the following properties:
-    -   `isSupported`: `boolean` - Indicates whether the Battery Status API (`navigator.getBattery`) is supported by the user's browser.
-    -   `loading`: `boolean` - `true` while the hook is initially attempting to fetch the battery status, `false` afterwards.
-    -   `charging`: `boolean | null` - `true` if the device is currently charging, `false` if discharging, `null` if the status is unknown or not yet determined.
-    -   `level`: `number | null` - The current battery charge level as a value between `0.0` (empty) and `1.0` (full), or `null` if unknown.
-    -   `chargingTime`: `number | null` - An estimate in seconds of the time remaining until the battery is fully charged. Returns `null` if the device is not charging, the time is unknown, or the value is `Infinity`.
-    -   `dischargingTime`: `number | null` - An estimate in seconds of the time remaining until the battery is empty. Returns `null` if the device is charging, the time is unknown, or the value is `Infinity`.
-    -   `error`: `Error | null` - An `Error` object if there was a problem accessing the Battery Status API, `null` otherwise.
+- **`BatteryState`**: An object containing the following properties:
+  - `isSupported`: `boolean` - Indicates whether the Battery Status API (`navigator.getBattery`) is supported by the user's browser.
+  - `loading`: `boolean` - `true` while the hook is initially attempting to fetch the battery status, `false` afterwards.
+  - `charging`: `boolean | null` - `true` if the device is currently charging, `false` if discharging, `null` if the status is unknown or not yet determined.
+  - `level`: `number | null` - The current battery charge level as a value between `0.0` (empty) and `1.0` (full), or `null` if unknown.
+  - `chargingTime`: `number | null` - An estimate in seconds of the time remaining until the battery is fully charged. Returns `null` if the device is not charging, the time is unknown, or the value is `Infinity`.
+  - `dischargingTime`: `number | null` - An estimate in seconds of the time remaining until the battery is empty. Returns `null` if the device is charging, the time is unknown, or the value is `Infinity`.
+  - `error`: `Error | null` - An `Error` object if there was a problem accessing the Battery Status API, `null` otherwise.
 
 ## Notes
 
--   The availability and accuracy of the Battery Status API can vary significantly between browsers and operating systems. Some browsers may not support it (`isSupported` will be `false`), or may return estimated values (especially for `chargingTime` and `dischargingTime`).
--   The hook automatically adds and removes event listeners to the `BatteryManager` object to update the state when changes occur (e.g., plugging/unplugging the charger, battery level changes).
--   `chargingTime` and `dischargingTime` might be `Infinity`, which the hook converts to `null` for easier handling.
+- The availability and accuracy of the Battery Status API can vary significantly between browsers and operating systems. Some browsers may not support it (`isSupported` will be `false`), or may return estimated values (especially for `chargingTime` and `dischargingTime`).
+- The hook automatically adds and removes event listeners to the `BatteryManager` object to update the state when changes occur (e.g., plugging/unplugging the charger, battery level changes).
+- `chargingTime` and `dischargingTime` might be `Infinity`, which the hook converts to `null` for easier handling.

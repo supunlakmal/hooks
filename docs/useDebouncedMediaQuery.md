@@ -38,22 +38,21 @@ function ResponsiveComponent() {
 }
 
 export default ResponsiveComponent;
-
 ```
 
 ## Parameters
 
--   **`query`**: `string` (Required)
-    -   The CSS media query string to evaluate (e.g., `'(max-width: 600px)'`, `'(prefers-color-scheme: dark)'`).
--   **`delay`**: `number` (Required)
-    -   The debounce delay in milliseconds. The hook's return value will only update `delay` milliseconds after the *last* change in the media query's actual match status.
+- **`query`**: `string` (Required)
+  - The CSS media query string to evaluate (e.g., `'(max-width: 600px)'`, `'(prefers-color-scheme: dark)'`).
+- **`delay`**: `number` (Required)
+  - The debounce delay in milliseconds. The hook's return value will only update `delay` milliseconds after the _last_ change in the media query's actual match status.
 
 ## Return Value
 
--   **`boolean`**
-    -   A boolean value indicating whether the media query currently matches, updated after the specified debounce `delay`.
+- **`boolean`**
+  - A boolean value indicating whether the media query currently matches, updated after the specified debounce `delay`.
 
 ## Notes
 
--   This hook internally uses `useMediaQuery` to get the live match status and `useDebouncedState` to manage the debounced value.
--   The initial returned value will reflect the media query's status at the time of the component's first render, and subsequent updates will be debounced.
+- This hook internally uses `useMediaQuery` to get the live match status and `useDebouncedState` to manage the debounced value.
+- The initial returned value will reflect the media query's status at the time of the component's first render, and subsequent updates will be debounced.

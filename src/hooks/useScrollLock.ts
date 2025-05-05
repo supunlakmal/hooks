@@ -32,7 +32,7 @@ export function useScrollLock(): UseScrollLockReturn {
 
     // Calculate scrollbar width only once if needed
     if (scrollbarWidth === 0) {
-        scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     }
 
     // Prevent scrolling
@@ -40,7 +40,7 @@ export function useScrollLock(): UseScrollLockReturn {
 
     // Add padding to compensate for scrollbar removal if necessary
     if (scrollbarWidth > 0) {
-        body.style.paddingRight = `${scrollbarWidth}px`;
+      body.style.paddingRight = `${scrollbarWidth}px`;
     }
 
     setIsLocked(true);
@@ -64,9 +64,9 @@ export function useScrollLock(): UseScrollLockReturn {
         // Ensure unlock is called if component unmounts while locked
         // Need to call the actual logic, not just setIsLocked
         if (isBrowser) {
-             const body = document.body;
-             body.style.overflow = originalOverflow;
-             body.style.paddingRight = originalPaddingRight;
+          const body = document.body;
+          body.style.overflow = originalOverflow;
+          body.style.paddingRight = originalPaddingRight;
         }
       }
     };

@@ -6,10 +6,16 @@ export type HookableRefHandler<T> = (v: T) => T;
 // --- Overload Signatures ---
 
 // Overload 1: No initial state provided (defaults to null | undefined)
-export function useHookableRef<T = undefined>(): MutableRefObject<T | null | undefined>;
+export function useHookableRef<T = undefined>(): MutableRefObject<
+  T | null | undefined
+>;
 
 // Overload 2: Initial state, onSet, onGet are provided
-export function useHookableRef<T>(initialValue: T, onSet: HookableRefHandler<T>, onGet: HookableRefHandler<T>): MutableRefObject<T>;
+export function useHookableRef<T>(
+  initialValue: T,
+  onSet: HookableRefHandler<T>,
+  onGet: HookableRefHandler<T>
+): MutableRefObject<T>;
 
 // Implementation
 export function useHookableRef<T>(
@@ -17,7 +23,9 @@ export function useHookableRef<T>(
   onSet?: HookableRefHandler<T>,
   onGet?: HookableRefHandler<T>
 ): MutableRefObject<T | null | undefined> | MutableRefObject<T> {
-  return useHookableRefFn<T>(initialValue, onSet, onGet) as MutableRefObject<T | null | undefined> | MutableRefObject<T>;
+  return useHookableRefFn<T>(initialValue, onSet, onGet) as
+    | MutableRefObject<T | null | undefined>
+    | MutableRefObject<T>;
 }
 
 /**
@@ -31,22 +39,23 @@ export function useHookableRef<T>(
  */
 const useHookableRefFn = <T>(
   initialValue?: T,
-  onSet?: HookableRefHandler<T>, 
+  onSet?: HookableRefHandler<T>,
   onGet?: HookableRefHandler<T>
 ): MutableRefObject<T | null | undefined> => {
-    const onSetRef = useSyncedRef(onSet);
+  const onSetRef = useSyncedRef(onSet);
   const onGetRef = useSyncedRef(onGet);
 
   return useMemo(() => {
     let v = initialValue;
 
     return {
-      get current() { 
+      get current() {
         return onGetRef.current === undefined ? v : onGetRef.current(v as T);
       },
 
       set current(value) {
-        v = onSetRef.current === undefined ? value : onSetRef.current(value as T);
+        v =
+          onSetRef.current === undefined ? value : onSetRef.current(value as T);
       },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

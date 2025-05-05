@@ -31,15 +31,15 @@ yarn add @supunlakmal/hooks
 ## Quick Start Example
 
 ```jsx
-import React, { useState } from "react";
-import { useToggle, useDebounce, useWindowSize } from "@supunlakmal/hooks";
+import React, { useState } from 'react';
+import { useToggle, useDebounce, useWindowSize } from '@supunlakmal/hooks';
 
 function ExampleComponent() {
   // Effortlessly manage boolean state
   const [isOpen, toggle] = useToggle(false);
 
   // Debounce rapid input changes
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const debouncedSearchTerm = useDebounce(inputValue, 500);
 
   // Get window dimensions easily
@@ -56,7 +56,7 @@ function ExampleComponent() {
   return (
     <div>
       {/* useToggle Example */}
-      <button onClick={toggle}>{isOpen ? "Close" : "Open"}</button>
+      <button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</button>
       {isOpen && <p>Content is visible!</p>}
 
       <hr />
@@ -81,7 +81,6 @@ function ExampleComponent() {
   );
 }
 ```
-
 
 ## Available Hooks
 
@@ -907,8 +906,8 @@ Runs a function in a Web Worker thread to offload heavy computations from the ma
 
 Offloads expensive computations or functions to a separate Web Worker thread (alternative to useWebWorker).
 
---- 
+---
 
 ## Live Demo
 
-A live demo environment showcasing all hooks will be available [**`here`**](https://hooks-showcase-chi.vercel.app/) 
+A live demo environment showcasing all hooks will be available [**`here`**](https://hooks-showcase-chi.vercel.app/)

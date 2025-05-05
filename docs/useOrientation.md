@@ -39,8 +39,8 @@ This hook takes no parameters.
 
 ### Returns
 
--   **`orientationState`**: `object`
-    An object containing the current orientation state:
-    -   `angle`: `number` - The current orientation angle of the screen (typically 0, 90, 180, or 270).
-    -   `type`: `OrientationType` - A string indicating the orientation type (e.g., `'portrait-primary'`, `'portrait-secondary'`, `'landscape-primary'`, `'landscape-secondary'`).
-    -   `isSupported`: `boolean` - Indicates whether the Screen Orientation API is available in the current browser environment.
+- **`orientationState`**: `object`
+  An object containing the current orientation state:
+  - `angle`: `number` - The current orientation angle of the screen (typically 0, 90, 180, or 270).
+  - `type`: `OrientationType` - A string indicating the orientation type (e.g., `'portrait-primary'`, `'portrait-secondary'`, `'landscape-primary'`, `'landscape-secondary'`).
+  - `isSupported`: `boolean` - Indicates whether the Screen Orientation API is available in the current browser environment.
