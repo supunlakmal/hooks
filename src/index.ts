@@ -151,5 +151,10 @@ export { useFavicon } from './hooks/useFavicon';
 export { useWorker } from './hooks/useWorker';
 export { useWebWorker } from './hooks/useWebWorker';
 export { useWakeLock } from './hooks/useWakeLock';
+export { useBoolean } from './hooks/useBoolean';
+export { useSetState } from './hooks/useSetState';
+export { useCycle } from './hooks/useCycle';
+export { useResetState } from './hooks/useResetState'; // Added export
+
 // Example of exporting types alongside hooks if needed:
 // export { useMyHook, type UseMyHookOptions } from './hooks/useMyHook';
