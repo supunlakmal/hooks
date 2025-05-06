@@ -154,7 +154,9 @@ export { useWakeLock } from './hooks/useWakeLock';
 export { useBoolean } from './hooks/useBoolean';
 export { useSetState } from './hooks/useSetState';
 export { useCycle } from './hooks/useCycle';
-export { useResetState } from './hooks/useResetState'; // Added export
+export { useResetState } from './hooks/useResetState';
+export { useEnum } from './hooks/useEnum';
+export { useForceUpdate } from './hooks/useForceUpdate'; // Added export
 
 // Example of exporting types alongside hooks if needed:
 // export { useMyHook, type UseMyHookOptions } from './hooks/useMyHook';
