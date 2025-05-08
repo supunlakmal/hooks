@@ -22,10 +22,13 @@ export { useCustomCompareEffect } from './hooks/useCustomCompareEffect';
 export { useCustomCompareMemo } from './hooks/useCustomCompareMemo';
 export { useDarkMode } from './hooks/useDarkMode';
 export { useDebounce } from './hooks/useDebounce';
+export { useHistoryState } from "./hooks/useHistoryState";
 export { useDebouncedCallback } from './hooks/useDebouncedCallback';
 export { useDebouncedEffect } from './hooks/useDebouncedEffect';
 export { useDebouncedState } from './hooks/useDebouncedState';
 export { useDebouncedFetch } from './hooks/useDebouncedFetch';
+export { useListState } from "./hooks/useListState";
+export { useMapState } from "./hooks/useMapState";
 export { useDebouncedGeolocation } from './hooks/useDebouncedGeolocation';
 export { useDebouncedMediaQuery } from './hooks/useDebouncedMediaQuery';
 export { useDebouncedWindowSize } from './hooks/useDebouncedWindowSize';
@@ -151,5 +154,12 @@ export { useFavicon } from './hooks/useFavicon';
 export { useWorker } from './hooks/useWorker';
 export { useWebWorker } from './hooks/useWebWorker';
 export { useWakeLock } from './hooks/useWakeLock';
+export { useBoolean } from './hooks/useBoolean';
+export { useSetState } from './hooks/useSetState';
+export { useCycle } from './hooks/useCycle';
+export { useResetState } from './hooks/useResetState';
+export { useEnum } from './hooks/useEnum';
+export { useForceUpdate } from './hooks/useForceUpdate'; // Added export
+
 // Example of exporting types alongside hooks if needed:
 // export { useMyHook, type UseMyHookOptions } from './hooks/useMyHook';

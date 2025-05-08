@@ -84,35 +84,21 @@ function ExampleComponent() {
 
 ## Available Hooks
 
-Explore the documentation for each hook to see detailed API information and usage examples:
+### [**`useAnimationFrame`**](https://github.com/supunlakmal/hooks/blob/main/docs/useAnimationFrame.md)
 
-### [**`useAnimation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useAnimation.md)
-
-Manages a simple time-based animation loop using `requestAnimationFrame`.
+Executes a callback function on each frame of the `requestAnimationFrame` loop.
 
 ---
 
-### [**`useAsync`**](https://github.com/supunlakmal/hooks/blob/main/docs/useAsync.md)
+### [**`useBatteryStatus`**](https://github.com/supunlakmal/hooks/blob/main/docs/useBatteryStatus.md)
 
-Simplifies handling asynchronous operations (like API calls), managing loading, error, and success states.
-
----
-
-### [**`useAsyncAbortable`**](https://github.com/supunlakmal/hooks/blob/main/docs/useAsyncAbortable.md)
-
-Simplifies handling asynchronous operations that can be aborted.
+Provides real-time information about the device's battery status.
 
 ---
 
-### [**`useBreakpoint`**](https://github.com/supunlakmal/hooks/blob/main/docs/useBreakpoint.md)
+### [**`useBoolean`**](https://github.com/supunlakmal/hooks/blob/main/docs/useBoolean.md)
 
-Determines the currently active responsive breakpoint based on window width.
-
----
-
-### [**`useBroadcastChannel`**](https://github.com/supunlakmal/hooks/blob/main/docs/useBroadcastChannel.md)
-
-Enables cross-tab/window communication using the Broadcast Channel API.
+Manages a boolean state with convenient toggle, setTrue, and setFalse functions.
 
 ---
 
@@ -122,33 +108,27 @@ A `useFetch` variant with simple in-memory caching and TTL.
 
 ---
 
-### [**`useClickOutside`**](https://github.com/supunlakmal/hooks/blob/main/docs/useClickOutside.md)
+### [**`useClickOutsideWithEscape`**](https://github.com/supunlakmal/hooks/blob/main/docs/useClickOutsideWithEscape.md)
 
-Executes a callback when a click/touch event occurs outside of a specified DOM element.
-
----
-
-### [**`useClipboard`**](https://github.com/supunlakmal/hooks/blob/main/docs/useClipboard.md)
-
-Provides functionality to interact with the system clipboard (copy/paste).
+Triggers a callback when clicking outside an element or pressing the Escape key.
 
 ---
 
-### [**`useContextMenu`**](https://github.com/supunlakmal/hooks/blob/main/docs/useContextMenu.md)
+### [**`useClipboardWithFeedback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useClipboardWithFeedback.md)
 
-Provides state and logic for implementing a custom context menu (right-click menu).
-
----
-
-### [**`useCopyToClipboard`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCopyToClipboard.md)
-
-Provides a function to copy text to the clipboard and tracks status (uses fallback).
+Copies text to the clipboard and shows timed feedback on success.
 
 ---
 
-### [**`useControlledRerenderState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useControlledRerenderState.md)
+### [**`useConst`**](https://github.com/supunlakmal/hooks/blob/main/docs/useConst.md)
 
-A hook to force a component to re-render.
+Initializes and returns a value that remains constant throughout the component's lifecycle.
+
+---
+
+### [**`useCookie`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCookie.md)
+
+Provides an interface for reading, writing, and deleting cookies.
 
 ---
 
@@ -160,13 +140,37 @@ Manages a countdown timer with start, pause, and reset controls.
 
 ### [**`useCounter`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCounter.md)
 
-A basic counter hook.
+A basic counter hook with increment, decrement, and reset functions.
 
 ---
 
 ### [**`useConditionalEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useConditionalEffect.md)
 
-A `useEffect` variant that allows you to conditionally run the effect.
+A `useEffect` variant that allows you to conditionally run the effect based on a boolean flag.
+
+---
+
+### [**`useContextMenu`**](https://github.com/supunlakmal/hooks/blob/main/docs/useContextMenu.md)
+
+Provides state and logic for implementing a custom context menu (right-click menu).
+
+---
+
+### [**`useCopyToClipboard`**](https://github.bal/hooks/blob/main/docs/useCopyToClipboard.md)
+
+Provides a function to copy text to the clipboard and tracks status (uses fallback).
+
+---
+
+### [**`useControlledRerenderState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useControlledRerenderState.md)
+
+A hook to force a component to re-render.
+
+---
+
+### [**`useCycle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCycle.md)
+
+Cycles through a list of values with next/previous controls.
 
 ---
 
@@ -176,9 +180,15 @@ Manages application theme preference (dark/light mode) with OS detection and loc
 
 ---
 
-### [**`useDebouncedState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedState.md)
+### [**`useDebouncedCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedCallback.md)
 
-Debounces a state, delaying updates until a certain time has passed without changes.
+Debounces a callback function, delaying its execution until a certain time has passed without changes.
+
+---
+
+### [**`useDebouncedEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedEffect.md)
+
+A `useEffect` variant that debounces the effect callback.
 
 ---
 
@@ -196,31 +206,19 @@ Tracks the user's geographic location using the Geolocation API, with debouncing
 
 ### [**`useDebouncedMediaQuery`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedMediaQuery.md)
 
-Debounces a state, delaying updates until a certain time has passed without changes.
+Debounces the result of a CSS media query.
 
 ---
 
-### [**`useDebounce`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebounce.md)
+### [**`useDebouncedWindowSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedWindowSize.md)
 
-Debounces a value, delaying updates until a certain time has passed without changes.
-
----
-
-### [**`useDeepCompareEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDeepCompareEffect.md)
-
-A `useEffect` variant that performs a deep comparison of dependencies.
+Provides window dimensions debounced by a specified delay.
 
 ---
 
-### [**`useDebouncedCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedCallback.md)
+### [**`useDefault`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDefault.md)
 
-Debounces a callback function, delaying its execution until a certain time has passed without changes.
-
----
-
-### [**`useDebouncedEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDebouncedEffect.md)
-
-A `useEffect` variant that debounces the effect callback.
+Provides a default value if the input value is `null` or `undefined`.
 
 ---
 
@@ -230,27 +228,9 @@ Computes derived state based on other values, recomputing only when dependencies
 
 ---
 
-### [**`useDefault`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDefault.md)
-
-Provides a state hook with a default value that is used when the state is `undefined` or `null`.
-
----
-
-### [**`useDocumentTitle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDocumentTitle.md)
-
-Sets and manages the document title.
-
----
-
 ### [**`useDeviceMotion`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDeviceMotion.md)
 
 Tracks device motion information (acceleration, rotation rate) via the `devicemotion` event.
-
----
-
-### [**`useLocationBasedFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocationBasedFetch.md)
-
-A fetch variant that uses the user's location for the API endpoint.
 
 ---
 
@@ -260,9 +240,57 @@ Tracks the physical orientation of the device via the `deviceorientation` event.
 
 ---
 
+### [**`useDocumentTitle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDocumentTitle.md)
+
+Sets and manages the document title.
+
+---
+
+### [**`useDraggable`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDraggable.md)
+
+Adds direct element draggability (positioning via transform) using pointer events, with bounds support.
+
+---
+
 ### [**`useDrag`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDrag.md)
 
 Provides basic HTML Drag and Drop API event handling (`dragstart`, `drag`, `dragend`) for an element.
+
+---
+
+### [**`useElementSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useElementSize.md)
+
+Efficiently tracks the dimensions (width/height) of a DOM element using `ResizeObserver`.
+
+---
+
+### [**`useEnum`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEnum.md)
+
+A hook to manage a state that cycles through values of an enum. (Description inferred - doc file was blank).
+
+---
+
+### [**`useErrorBoundary`**](https://github.com/supunlakmal/hooks/blob/main/docs/useErrorBoundary.md)
+
+A hook to add error boundary to a component.
+
+---
+
+### [**`useEventCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEventCallback.md)
+
+Creates a stable function reference that always calls the latest version of a callback.
+
+---
+
+### [**`useEventListener`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEventListener.md)
+
+Robustly attaches event listeners to `window`, `document`, or elements, handling cleanup.
+
+---
+
+### [**`useEventSource`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEventSource.md)
+
+Manages a connection to a Server-Sent Events (SSE) endpoint.
 
 ---
 
@@ -274,55 +302,7 @@ Utilizes the EyeDropper API to select colors from the screen.
 
 ### [**`useFavicon`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFavicon.md)
 
-Provides basic HTML Drag and Drop API event handling (`dragstart`, `drag`, `dragend`) for an element.
-
----
-
-### [**`useGeolocationContinuous`**](https://github.com/supunlakmal/hooks/blob/main/docs/useGeolocationContinuous.md)
-
-Tracks the user's geographic location continuously using the Geolocation API.
-
----
-
-### [**`useErrorBoundary`**](https://github.com/supunlakmal/hooks/blob/main/docs/useErrorBoundary.md)
-
-A hook to add error boundary to a component.
-
----
-
-### [**`useMobile`**](https://github.com/supunlakmal/hooks/blob/main/docs/use-mobile.md)
-
-Detects if the current viewport is mobile-sized based on a configurable breakpoint.
-
----
-
-### [**`useNewFullscreen`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNewFullscreen.md)
-
-Enters and exits fullscreen mode for an element, tracking the current state.
-
----
-
-### [**`useDraggable`**](https://github.com/supunlakmal/hooks/blob/main/docs/useDraggable.md)
-
-Adds direct element draggability (positioning via transform) using pointer events, with bounds support.
-
----
-
-### [**`useElementSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useElementSize.md)
-
-Efficiently tracks the dimensions (width/height) of a DOM element using `ResizeObserver`.
-
----
-
-### [**`useFirstMountState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFirstMountState.md)
-
-Returns `true` if the component is rendering for the first time, `false` otherwise.
-
----
-
-### [**`useEventListener`**](https://github.com/supunlakmal/hooks/blob/main/docs/useEventListener.md)
-
-Robustly attaches event listeners to `window`, `document`, or elements, handling cleanup.
+Dynamically sets the website's favicon.
 
 ---
 
@@ -338,9 +318,21 @@ Manages complex component state using an explicit state machine definition.
 
 ---
 
+### [**`useFirstMountState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFirstMountState.md)
+
+Returns `true` if the component is rendering for the first time, `false` otherwise.
+
+---
+
 ### [**`useFocusTrap`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFocusTrap.md)
 
 Traps keyboard focus within a specified container element when active (for modals, dialogs).
+
+---
+
+### [**`useFocusWithinState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFocusWithinState.md)
+
+Determines if a specified element or any of its descendants currently have focus.
 
 ---
 
@@ -356,9 +348,21 @@ A comprehensive hook for form state, validation (change/blur/submit), and submis
 
 ---
 
+### [**`useForceUpdate`**](https://github.com/supunlakmal/hooks/blob/main/docs/useForceUpdate.md)
+
+A hook to force a component to re-render.
+
+---
+
 ### [**`useFullscreen`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFullscreen.md)
 
 Enters and exits fullscreen mode for an element, tracking the current state.
+
+---
+
+### [**`useFunctionalState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFunctionalState.md)
+
+Functional state updates for React components. (Description inferred - doc file was blank).
 
 ---
 
@@ -368,99 +372,69 @@ Tracks the user's geographic location using the Geolocation API.
 
 ---
 
+### [**`useGeolocationContinuous`**](https://github.com/supunlakmal/hooks/blob/main/docs/useGeolocationContinuous.md)
+
+Tracks the user's geographic location continuously using the Geolocation API.
+
+---
+
+### [**`useHasBeenVisible`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHasBeenVisible.md)
+
+Determines if an element has ever been visible within the viewport.
+
+---
+
+### [**`useHistoryState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHistoryState.md)
+
+Manages state with undo/redo history tracking.
+
+---
+
+### [**`useHookableRef`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHookableRef.md)
+
+Create a ref that can be used in a hook. (Description inferred - doc file was blank).
+
+---
+
 ### [**`useHover`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHover.md)
 
 Tracks whether the mouse pointer is currently hovering over a specific DOM element.
 
 ---
 
-### [**`useFunctionalState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useFunctionalState.md)
+### [**`useHoverDelay`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHoverDelay.md)
 
-Functional state updates for React components.
-
----
-
-### [**`useHookableRef`**](https://github.com/supunlakmal/hooks/blob/main/docs/useHookableRef.md)
-
-Create a ref that can be used in a hook.
+Tracks hover state with a minimum duration delay.
 
 ---
 
-### [**`useIsMounted`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsMounted.md)
+### [**`useIdleCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleCallback.md)
 
-A hook that returns true if the component is mounted.
-
----
-
-### [**`useIsomorphicLayoutEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsomorphicLayoutEffect.md)
-
-A `useLayoutEffect` variant that works on the server and the client.
+Schedules a function to be called during browser idle periods using `requestIdleCallback`.
 
 ---
 
-### [**`useLifecycleLogger`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLifecycleLogger.md)
+### [**`useIdleDetection`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleDetection.md)
 
-A hook that logs the component's lifecycle events.
-
----
-
-### [**`useList`**](https://github.com/supunlakmal/hooks/blob/main/docs/useList.md)
-
-A hook that provides functions to manipulate a list.
+Monitors user idle state and screen lock status using the experimental Idle Detection API.
 
 ---
 
-### [**`useLocalStorageValue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorageValue.md)
+### [**`useIdleFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleFetch.md)
 
-Get the value from local storage.
-
----
-
-### [**`useLocalStorageQueue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorageQueue.md)
-
-Manages a queue of items persisted in local storage.
+Initiates a data fetch after the user becomes active following a period of inactivity.
 
 ---
 
-### [**`useMediaStream`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediaStream.md)
+### [**`useIdleTimer`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleTimer.md)
 
-Get the value from local storage.
-
----
-
-### [**`useMeasure`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMeasure.md)
-
-Get the size of an element.
+Monitors user activity and triggers callbacks based on idle/active status.
 
 ---
 
-### [**`useMediatedState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediatedState.md)
+### [**`useImageOnLoad`**](https://github.com/supunlakmal/hooks/blob/main/docs/useImageOnLoad.md)
 
-Manages a mediated state value.
-
----
-
-### [**`useCustomCompareEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCustomCompareEffect.md)
-
-A `useEffect` variant that allow to provide custom compore logic.
-
----
-
-### [**`useCustomCompareMemo`**](https://github.com/supunlakmal/hooks/blob/main/docs/useCustomCompareMemo.md)
-
-A `useMemo` variant that allow to provide custom compore logic.
-
----
-
-### [**`usePreviousDifferent`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePreviousDifferent.md)
-
-Tracks the previous different value of a state or prop from the last render.
-
----
-
-### [**`usePersistentToggle`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePersistentToggle.md)
-
-Manages boolean state that persists in local storage.
+Tracks the loading status and dimensions of an image element.
 
 ---
 
@@ -482,9 +456,39 @@ A declarative hook for setting intervals (`setInterval`) with automatic cleanup.
 
 ---
 
+### [**`useIntervalWhen`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIntervalWhen.md)
+
+Sets up an interval that only runs when a specific condition is met.
+
+---
+
 ### [**`useIsFirstRender`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsFirstRender.md)
 
 Returns `true` if the component is rendering for the first time, `false` otherwise.
+
+---
+
+### [**`useIsMobile`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsMobile.md)
+
+Detects if the current viewport is mobile-sized based on a configurable breakpoint.
+
+---
+
+### [**`useIsMounted`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsMounted.md)
+
+A hook that returns true if the component is mounted.
+
+---
+
+### [**`useIsomorphicId`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsomorphicId.md)
+
+Generates unique IDs that are stable across server and client rendering environments.
+
+---
+
+### [**`useIsomorphicLayoutEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsomorphicLayoutEffect.md)
+
+A `useLayoutEffect` variant that works on the server and the client.
 
 ---
 
@@ -500,9 +504,39 @@ Detects whether a specific key is currently being pressed down.
 
 ---
 
+### [**`useLifecycleLogger`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLifecycleLogger.md)
+
+A hook that logs the component's lifecycle events.
+
+---
+
+### [**`useList`**](https://github.com/supunlakmal/hooks/blob/main/docs/useList.md)
+
+A hook that provides functions to manipulate a list.
+
+---
+
+### [**`useListState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useListState.md)
+
+Manages an array state with helper functions for common array operations.
+
+---
+
 ### [**`useLocalStorage`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorage.md)
 
 Manages state persisted in `localStorage`, synchronizing across tabs.
+
+---
+
+### [**`useLocalStorageQueue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorageQueue.md)
+
+Manages a queue of items persisted in local storage.
+
+---
+
+### [**`useLocalStorageValue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocalStorageValue.md)
+
+Get the value from local storage.
 
 ---
 
@@ -518,21 +552,45 @@ Detects long press gestures (mouse or touch) on a target element.
 
 ---
 
+### [**`useLocationBasedFetch`**](https://github.com/supunlakmal/hooks/blob/main/docs/useLocationBasedFetch.md)
+
+A fetch variant that uses the user's location for the API endpoint.
+
+---
+
 ### [**`useMap`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMap.md)
 
 Manages state in the form of a JavaScript `Map`, providing immutable update actions.
 
 ---
 
-### [**`useMediaQuery`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediaQuery.md)
+### [**`useMapState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMapState.md)
 
-Tracks the state of a CSS media query (e.g., viewport size, orientation, color scheme).
+Manages an object or a Map-like state with helper functions to set, remove, and reset key-value pairs.
 
 ---
 
-### [**`useNetworkState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkState.md)
+### [**`useMeasure`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMeasure.md)
 
-Tracks the network state.
+Get the size of an element. (Description inferred - doc file was blank).
+
+---
+
+### [**`useMediaStream`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediaStream.md)
+
+Simplifies requesting and managing access to the user's camera and/or microphone.
+
+---
+
+### [**`useMediatedState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediatedState.md)
+
+Manages a mediated state value.
+
+---
+
+### [**`useMediaQuery`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMediaQuery.md)
+
+Tracks the state of a CSS media query.
 
 ---
 
@@ -548,21 +606,15 @@ Executes a callback function exactly once when the component mounts.
 
 ---
 
+### [**`useMousePosition`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMousePosition.md)
+
+Tracks the current position of the mouse pointer globally.
+
+---
+
 ### [**`useMutation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMutation.md)
 
 Simplifies handling asynchronous data modification operations (POST, PUT, DELETE), managing status.
-
----
-
-### [**`useNetworkSpeed`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkSpeed.md)
-
-Provides information about the user's network connection (speed, type) using the Network Information API.
-
----
-
-### [**`usePromise`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePromise.md)
-
-Simplifies handling promises, managing loading, error, and success states.
 
 ---
 
@@ -578,6 +630,24 @@ A `useWebSocket` variant that automatically reconnects when the network status c
 
 ---
 
+### [**`useNetworkSpeed`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkSpeed.md)
+
+Provides information about the user's network connection (speed, type) using the Network Information API.
+
+---
+
+### [**`useNetworkState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNetworkState.md)
+
+Tracks the network state.
+
+---
+
+### [**`useNewFullscreen`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNewFullscreen.md)
+
+Enters and exits fullscreen mode for an element, tracking the current state. (Description inferred - doc was same as useFullscreen)
+
+---
+
 ### [**`useNotification`**](https://github.com/supunlakmal/hooks/blob/main/docs/useNotification.md)
 
 Utilizes the Notification API to display desktop notifications.
@@ -590,21 +660,21 @@ Tracks the browser's online/offline connection status.
 
 ---
 
-### [**`usePageVisibility`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePageVisibility.md)
-
-Tracks the visibility state of the current browser tab/page using the Page Visibility API.
-
----
-
 ### [**`useOrientation`**](https://github.com/supunlakmal/hooks/blob/main/docs/useOrientation.md)
 
 Tracks the screen orientation (landscape or portrait).
 
 ---
 
-### [**`useOldUpdateEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useOldUpdateEffect.md)
+### [**`usePageLeave`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePageLeave.md)
 
-A `useEffect` variant that skips the effect execution after the initial render (mount).
+Triggers a callback function when the user's mouse cursor leaves the main browser window or document area.
+
+---
+
+### [**`usePageVisibility`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePageVisibility.md)
+
+Tracks the visibility state of the current browser tab/page using the Page Visibility API.
 
 ---
 
@@ -614,15 +684,27 @@ Manages pagination logic for client-side data sets.
 
 ---
 
+### [**`usePermission`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePermission.md)
+
+Queries the status of browser permissions (geolocation, notifications, etc.) using the Permissions API.
+
+---
+
 ### [**`usePersistentCounter`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePersistentCounter.md)
 
 Manages a counter state that persists in local storage.
 
 ---
 
-### [**`usePermission`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePermission.md)
+### [**`usePersistentToggle`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePersistentToggle.md)
 
-Queries the status of browser permissions (geolocation, notifications, etc.) using the Permissions API.
+Manages boolean state that persists in local storage.
+
+---
+
+### [**`usePinchZoom`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePinchZoom.md)
+
+Detects and reacts to pinch-to-zoom gestures on a specified element.
 
 ---
 
@@ -638,15 +720,45 @@ Tracks the user's preference for reduced motion using the `prefers-reduced-motio
 
 ---
 
+### [**`usePreferredLanguages`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePreferredLanguages.md)
+
+Returns an array of the user's preferred languages, as configured in their browser.
+
+---
+
 ### [**`usePrevious`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePrevious.md)
 
 Tracks the previous value of a state or prop from the last render.
 
 ---
 
-### [**`useQueryParam`**](https://github.com/supunlakmal/hooks/blob/main/docs/useQueryParam.md)
+### [**`usePreviousDifferent`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePreviousDifferent.md)
 
-Synchronizes a React state variable with a URL query parameter.
+Tracks the previous different value of a state or prop from the last render.
+
+---
+
+### [**`usePromise`**](https://github.com/supunlakmal/hooks/blob/main/docs/usePromise.md)
+
+Simplifies handling promises, managing loading, error, and success states.
+
+---
+
+### [**`useQueue`**](https://github.com/supunlakmal/hooks/blob/main/docs/useQueue.md)
+
+Manages a stateful queue (First-In, First-Out).
+
+---
+
+### [**`useRafCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRafCallback.md)
+
+Creates a callback based on requestAnimationFrame.
+
+---
+
+### [**`useRafState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRafState.md)
+
+Manages state updates deferred to the next browser animation frame.
 
 ---
 
@@ -662,15 +774,15 @@ Tracks the number of times a component has rendered.
 
 ---
 
-### [**`useRafCallback`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRafCallback.md)
+### [**`useRerender`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRerender.md)
 
-Creates a callback based on requestAnimationFrame.
+Force to re-render the component.
 
 ---
 
-### [**`useRafState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRafState.md)
+### [**`useResetState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useResetState.md)
 
-Creates a callback based on requestAnimationFrame.
+Provides a state variable and a function to reset it to its initial value.
 
 ---
 
@@ -698,6 +810,18 @@ Tracks the screen orientation (angle, type) using the Screen Orientation API.
 
 ---
 
+### [**`useScript`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScript.md)
+
+Dynamically loads an external JavaScript script and tracks its loading status.
+
+---
+
+### [**`useScrollLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollLock.md)
+
+Prevents scrolling on the `body` element.
+
+---
+
 ### [**`useScrollPosition`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollPosition.md)
 
 Tracks the current X and Y scroll position of the window or a specified element.
@@ -707,12 +831,6 @@ Tracks the current X and Y scroll position of the window or a specified element.
 ### [**`useScrollSpy`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollSpy.md)
 
 Monitors scroll position to determine which section element is currently active in the viewport.
-
----
-
-### [**`useScrollLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useScrollLock.md)
-
-Prevents scrolling on the `body` element.
 
 ---
 
@@ -734,33 +852,9 @@ Manages state in the form of a JavaScript `Set`, providing immutable update acti
 
 ---
 
-### [**`useStateWithHistory`**](https://github.com/supunlakmal/hooks/blob/main/docs/useStateWithHistory.md)
+### [**`useSetState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSetState.md)
 
-Manages state with undo/redo history tracking.
-
----
-
-### [**`useSyncedLocalStorage`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSyncedLocalStorage.md)
-
-Manages state with undo/redo history tracking.
-
----
-
-### [**`useRerender`**](https://github.com/supunlakmal/hooks/blob/main/docs/useRerender.md)
-
-Force to re-render the component.
-
----
-
-### [**`useSwipe`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSwipe.md)
-
-Detects swipe gestures (left, right, up, down) on touch-enabled devices for a specified element.
-
----
-
-### [**`useThrottle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottle.md)
-
-Throttles a value, ensuring updates do not occur more frequently than a specified limit.
+Manages object state allowing partial updates, similar to class component `setState`.
 
 ---
 
@@ -776,15 +870,33 @@ A hook to get the value from local or session storage.
 
 ---
 
-### [**`useTextSelection`**](https://github.com/supunlakmal/hooks/blob/main/docs/useTextSelection.md)
+### [**`useSwipe`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSwipe.md)
 
-A hook to get the value from local or session storage.
+Detects swipe gestures (left, right, up, down) on touch-enabled devices for a specified element.
 
 ---
 
-### [**`useThrottledState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledState.md)
+### [**`useSyncedLocalStorage`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSyncedLocalStorage.md)
 
-Throttles a state, ensuring updates do not occur more frequently than a specified limit.
+Manages state persisted in `localStorage` and synchronizes across tabs.
+
+---
+
+### [**`useSyncedRef`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSyncedRef.md)
+
+Create a ref that syncs with another value.
+
+---
+
+### [**`useTextSelection`**](https://github.com/supunlakmal/hooks/blob/main/docs/useTextSelection.md)
+
+Tracks the text currently selected by the user within the document.
+
+---
+
+### [**`useThrottle`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottle.md)
+
+Throttles a value, delaying updates until a certain time has passed without changes.
 
 ---
 
@@ -797,6 +909,18 @@ Throttles a callback, ensuring updates do not occur more frequently than a speci
 ### [**`useThrottledEventListener`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledEventListener.md)
 
 Attaches an event listener and throttles the callback execution.
+
+---
+
+### [**`useThrottledScroll`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledScroll.md)
+
+Tracks the window's scroll position with throttled updates.
+
+---
+
+### [**`useThrottledState`**](https://github.com/supunlakmal/hooks/blob/main/docs/useThrottledState.md)
+
+Throttles a state, ensuring updates do not occur more frequently than a specified limit.
 
 ---
 
@@ -824,15 +948,15 @@ Executes a cleanup function exactly once when the component unmounts.
 
 ---
 
-### [**`useUpdateEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useUpdateEffect.md)
+### [**`useUnmountEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useUnmountEffect.md)
 
-A `useEffect` variant that skips the effect execution after the initial render (mount).
+Executes a cleanup function when the component unmounts.
 
 ---
 
-### [**`useVirtualList`**](https://github.com/supunlakmal/hooks/blob/main/docs/useVirtualList.md)
+### [**`useUpdateEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useUpdateEffect.md)
 
-Performance optimization for rendering long lists by rendering only visible items (fixed height).
+A `useEffect` variant that skips the effect execution after the initial render (mount).
 
 ---
 
@@ -842,21 +966,9 @@ Utilizes the Vibration API to trigger device vibrations.
 
 ---
 
-### [**`useWakeLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWakeLock.md)
+### [**`useVirtualList`**](https://github.com/supunlakmal/hooks/blob/main/docs/useVirtualList.md)
 
 Performance optimization for rendering long lists by rendering only visible items (fixed height).
-
----
-
-### [**`useSyncedRef`**](https://github.com/supunlakmal/hooks/blob/main/docs/useSyncedRef.md)
-
-Create a ref that syncs with another value.
-
----
-
-### [**`useUnmountEffect`**](https://github.com/supunlakmal/hooks/blob/main/docs/useUnmountEffect.md)
-
-Executes a cleanup function when the component unmounts.
 
 ---
 
@@ -866,33 +978,15 @@ Tracks whether a target element is currently visible within the viewport or an a
 
 ---
 
-### [**`useWebSocket`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWebSocket.md)
-
-Manages WebSocket connections, state, messaging, and automatic reconnection.
-
----
-
-### [**`useWindowSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWindowSize.md)
-
-Returns the current dimensions (width and height) of the browser window.
-
----
-
-### [**`useWhyDidYouUpdate`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWhyDidYouUpdate.md)
-
-Development utility to debug component re-renders by logging changed props.
-
----
-
-### [**`useIdleTimer`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIdleTimer.md)
-
-Monitors user activity and triggers callbacks based on idle/active status.
-
----
-
 ### [**`useWakeLock`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWakeLock.md)
 
 Manages the Screen Wake Lock API to prevent the screen from sleeping.
+
+---
+
+### [**`useWebSocket`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWebSocket.md)
+
+Manages WebSocket connections, state, messaging, and automatic reconnection.
 
 ---
 
@@ -902,11 +996,21 @@ Runs a function in a Web Worker thread to offload heavy computations from the ma
 
 ---
 
+### [**`useWhyDidYouUpdate`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWhyDidYouUpdate.md)
+
+Development utility to debug component re-renders by logging changed props.
+
+---
+
+### [**`useWindowSize`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWindowSize.md)
+
+Returns the current dimensions (width and height) of the browser window.
+
+---
+
 ### [**`useWorker`**](https://github.com/supunlakmal/hooks/blob/main/docs/useWorker.md)
 
 Offloads expensive computations or functions to a separate Web Worker thread (alternative to useWebWorker).
-
----
 
 ## Live Demo
 
