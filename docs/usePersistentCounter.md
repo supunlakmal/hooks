@@ -6,6 +6,7 @@ A custom React hook that provides a counter state which automatically persists i
 
 ```jsx
 import { usePersistentCounter } from '@supunlakmal/hooks'; // Adjust the import path as needed
+import React from 'react';
 
 function PersistentCounterComponent() {
   const { count, increment, decrement, reset, set } = usePersistentCounter(
@@ -17,15 +18,16 @@ function PersistentCounterComponent() {
   return (
     <div>
       <h1>Persistent Counter</h1>
-      <p>Current Count: {count}</p>
-      <button onClick={increment}>Increment (+2)</button>
-      <button onClick={decrement}>Decrement (-2)</button>
+      <p>Current Count: <strong>{count}</strong></p>
+      <button onClick={increment}>Increment (+{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})</button>
+      <button onClick={decrement}>Decrement (-{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})</button>
       <button onClick={() => set(5)}>Set to 5</button>
       <button onClick={reset}>Reset to Initial (0)</button>
       <p>
         (Counter value will be saved in local storage under the key
         'myAppCounter')
       </p>
+      <p>Min: 0, Max: 10, Step: 2</p>
     </div>
   );
 }
@@ -40,7 +42,7 @@ The hook accepts the following parameters:
 - **`key`**: `string` (Required)
   - The unique key used to store and retrieve the counter's value in `localStorage`.
 - **`initialValue`**: `number` (Optional, defaults to `0`)
-  - The initial value of the counter if no value is found for the given `key` in `localStorage`.
+  - The initial value of the counter if no value is found for the given `key` in `localStorage`. This value is also used when `reset` is called.
 - **`options`**: `object` (Optional)
   - An optional object to configure the counter's behavior:
     - `min`: `number` (Optional) - The minimum allowed value for the counter. `decrement` will not go below this value, and `set` will clamp to this minimum.
@@ -52,17 +54,18 @@ The hook accepts the following parameters:
 The hook returns an object with the following properties:
 
 - **`count`**: `number`
-  - The current value of the persistent counter.
+  - The current value of the persistent counter, read from local storage on mount and updated on change.
 - **`increment`**: `() => void`
-  - A function to increase the counter by the defined `step`, respecting the `max` limit.
+  - A function to increase the counter by the defined `step`, respecting the `max` limit. Updates the value in state and local storage.
 - **`decrement`**: `() => void`
-  - A function to decrease the counter by the defined `step`, respecting the `min` limit.
+  - A function to decrease the counter by the defined `step`, respecting the `min` limit. Updates the value in state and local storage.
 - **`set`**: `(newCount: number) => void`
-  - A function to set the counter to a specific `newCount`, clamped between `min` and `max` if they are defined.
+  - A function to set the counter to a specific `newCount`, clamped between `min` and `max` if they are defined. Updates the value in state and local storage.
 - **`reset`**: `() => void`
-  - A function to reset the counter back to the `initialValue` provided when the hook was initialized.
+  - A function to reset the counter back to the `initialValue`. Updates the value in state and local storage.
+  - **`step`**: `number`
+  - The current step value used for incrementing/decrementing.
 
-## Notes
+## How it Works
 
-- This hook relies internally on `useLocalStorage` to handle the persistence.
-- The counter state will be preserved even if the user closes the browser tab/window and reopens it, as long as the `localStorage` data isn't cleared.
+`usePersistentCounter` internally uses the `useLocalStorage` hook to manage the storage and retrieval of the counter value. It reads the initial value from local storage (falling back to `initialValue` if the key is not found), and updates the local storage value whenever the counter state changes via the provided `increment`, `decrement`, `set`, or `reset` functions. It implements the optional `min`, `max`, and `step` logic around the state updates before saving to storage.

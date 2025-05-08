@@ -8,31 +8,45 @@ The `useControlledRerenderState` hook provides a mechanism to manually trigger r
 
 Here's how to use the `useControlledRerenderState` hook in a React component:
 
-```
-typescript
-import { useControlledRerenderState } from 'your-library'; // Replace 'your-library' with the actual library name
+```typescript
+import React, { useState } from 'react';
+import { useControlledRerenderState } from '@supunlakmal/hooks'; // Adjust the import path
 
-function MyComponent({ condition }: { condition: boolean }) {
-  const [shouldRerender, triggerRerender] = useControlledRerenderState(condition);
+let externalCondition = false; // Simulate an external condition
 
-  //...your logic here...
+function ControlledRerenderComponent() {
+  const [componentKey, triggerRerender] = useControlledRerenderState(externalCondition);
+
+  console.log(`Component rendering. Key: ${componentKey}, External Condition: ${externalCondition}`);
+
+  // Simulate some complex logic or display that depends on the 'externalCondition'
+  const content = externalCondition ? 'Content shown when condition is TRUE' : 'Content shown when condition is FALSE';
 
   return (
-    <div>
-        {/* the component render if the condition change */}
-        {shouldRerender && <div>Render when condition changes</div>}
-        <button onClick={() => triggerRerender(!condition)}>Force Re-render</button>
+    <div key={componentKey}> {/* Using the key to force a full component remount if needed, though triggerRerender primarily works via state update */}
+      <h1>useControlledRerenderState Example</h1>
+      <p>Check the console logs to see when the component re-renders.</p>
+      <p>{content}</p>
+      <button
+        onClick={() => {
+          externalCondition = !externalCondition; // Toggle the external condition
+          triggerRerender(externalCondition); // Inform the hook about the change
+        }}
+      >
+        Toggle External Condition and Trigger Rerender
+      </button>
     </div>
   );
 }
+
+export default ControlledRerenderComponent;
 ```
 
 ## API
 
 ### Types
 
-```
-typescript
+```typescript
 type TriggerRerender = (condition: boolean) => void;
 ```
 
@@ -54,4 +68,4 @@ type TriggerRerender = (condition: boolean) => void;
 
 ## How it Works
 
-The `useControlledRerenderState` hook uses the `useState` hook internally to manage a state variable (`shouldRerender`). This state variable is toggled each time the hook is invoked. The component re-renders when the `shouldRerender` changes its value, which only occurs when the `condition` changes.
+The `useControlledRerenderState` hook uses the `useState` hook internally to manage a state variable (`shouldRerender` or equivalent internal state). This internal state variable is updated whenever the `condition` parameter passed to the hook changes. By updating an internal state, the hook forces the component using it to re-render when the `condition` changes. The `triggerRerender` function returned by the hook also allows for manually triggering this state update (and thus a re-render) independent of the `condition` parameter.

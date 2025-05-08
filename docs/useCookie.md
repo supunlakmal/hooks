@@ -23,3 +23,54 @@ The `useCookie` hook returns an array with three elements:
 3. `deleteCookie` (function): A function to delete the cookie.
 
 ## Example
+
+```typescript
+import React, { useState } from 'react';
+import { useCookie } from '@supunlakmal/hooks'; // Adjust the import path
+
+function CookieComponent() {
+  const cookieName = 'myAppCookie';
+  const [cookieValue, setCookie, deleteCookie] = useCookie(cookieName);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSetCookie = () => {
+    // Set cookie to expire in 7 days
+    const sevenDaysLater = new Date();
+    sevenDaysLater.setDate(sevenDaysLater.getDate() + 7);
+    setCookie(inputValue, { expires: sevenDaysLater, path: '/' });
+    setInputValue(''); // Clear input
+  };
+
+  return (
+    <div>
+      <h1>useCookie Example</h1>
+      <p>Cookie Name: <strong>{cookieName}</strong></p>
+      <p>
+        Current Cookie Value:{' '}
+        <strong>{cookieValue === undefined ? 'Not Set' : cookieValue}</strong>
+      </p>
+
+      <div>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter value to set cookie"
+        />
+        <button onClick={handleSetCookie} disabled={!inputValue}>
+          Set Cookie
+        </button>
+        <button onClick={deleteCookie} disabled={cookieValue === undefined}>
+          Delete Cookie
+        </button>
+      </div>
+
+      <p style={{ marginTop: '20px', fontSize: '0.9em', color: 'gray' }}>
+        Note: Cookie interactions depend on browser settings and origin.
+      </p>
+    </div>
+  );
+}
+
+export default CookieComponent;
+```
