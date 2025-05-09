@@ -1,4 +1,4 @@
-import React, { createContext, useContext, FC, PropsWithChildren, Context, ReactElement } from "react";
+import React, { createContext, useContext, FC, PropsWithChildren, Context, ReactElement, ReactNode } from "react"; // Import ReactNode
 
 // constate(useCounter, value => value.count)
 //                      ^^^^^^^^^^^^^^^^^^^^\
@@ -73,15 +73,20 @@ function constate<Props, Value, Selectors extends Selector<Value>[]>(
     ...props
   }) => {
     const value = useValue(props as Props);
-    let element: ReactElement | string | number | React.Fragment = children as any;
+    // Fix: Use ReactNode which correctly types children (elements, strings, numbers, fragments, arrays etc.)
+    // React.Fragment refers to the *value* you use in JSX, not the type describing a fragment node.
+    let element: ReactNode = children;
 
     for (let i = 0; i < contexts.length; i += 1) {
       const context = contexts[i];
+      // If no selectors are provided, the 'selectors' array will be empty.
+      // In this case, we need to provide a default identity selector.
       const selector = selectors[i] || ((v: Value) => v);
       element = (
         <context.Provider value={selector(value)}>{element}</context.Provider>
       );
     }
+    // After wrapping, the top-level 'element' is always a ReactElement (<context.Provider>)
     return element as ReactElement;
   };
 

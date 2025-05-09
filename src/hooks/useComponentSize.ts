@@ -46,7 +46,7 @@ function useComponentSize(ref: RefObject<HTMLElement>): Size {
         resizeObserver.observe(ref.current);
 
         return () => {
-          resizeObserver.disconnect(ref.current as Element);
+          resizeObserver.disconnect();
           // resizeObserver = null; // This line is not necessary in modern JS/TS
         };
       } else {
