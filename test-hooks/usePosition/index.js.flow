@@ -1,6 +1,0 @@
-interface ElementPosition {
-  top: number,
-  left: number,
-}
-
-declare export default function usePosition(): ElementPosition;
