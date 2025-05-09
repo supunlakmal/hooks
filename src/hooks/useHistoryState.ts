@@ -5,14 +5,9 @@ type HistoryState<T> = {
   pointer: number;
 };
 
-export function useHistoryState<T>(initialState: T): [
-  T,
-  (newState: T) => void,
-  () => void,
-  () => void,
-  boolean,
-  boolean
-] {
+export function useHistoryState<T>(
+  initialState: T
+): [T, (newState: T) => void, () => void, () => void, boolean, boolean] {
   const [state, setState] = useState<HistoryState<T>>({
     history: [initialState],
     pointer: 0,
@@ -47,5 +42,5 @@ export function useHistoryState<T>(initialState: T): [
   const canGoBack = state.pointer > 0;
   const canGoForward = state.pointer < state.history.length - 1;
 
- return [present, setPresentState, goBack, goForward, canGoBack, canGoForward];
+  return [present, setPresentState, goBack, goForward, canGoBack, canGoForward];
 }

@@ -6,12 +6,7 @@ type MapState<K extends string | number | symbol, V> = {
 
 export function useMapState<K extends string | number | symbol, V>(
   initialState: MapState<K, V> = {} as MapState<K, V>
-): [
-  MapState<K, V>,
-  (key: K, value: V) => void,
-  (key: K) => void,
-  () => void
-] {
+): [MapState<K, V>, (key: K, value: V) => void, (key: K) => void, () => void] {
   const [state, setState] = useState<MapState<K, V>>(initialState);
 
   const set = useCallback((key: K, value: V) => {

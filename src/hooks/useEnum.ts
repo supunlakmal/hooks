@@ -64,7 +64,8 @@ export const useEnum = <T extends Record<string | number, string | number>>(
   }, [currentIndex, enumValues]);
 
   const prev = useCallback(() => {
-    const prevIndex = (currentIndex - 1 + enumValues.length) % enumValues.length;
+    const prevIndex =
+      (currentIndex - 1 + enumValues.length) % enumValues.length;
     setCurrentValue(enumValues[prevIndex]);
   }, [currentIndex, enumValues]);
 

@@ -183,7 +183,7 @@ export function useIdleDetection(
       // Check initial permission state without prompting
       (navigator.permissions as any)
         ?.query({ name: 'idle-detection' })
-        .then((status:any) => {
+        .then((status: any) => {
           setPermissionState(status.state as IdlePermissionState);
           if (status.state === 'granted') {
             startDetector();
@@ -198,7 +198,7 @@ export function useIdleDetection(
             }
           };
         })
-        .catch((err:any) => {
+        .catch((err: any) => {
           console.warn('Could not query idle-detection permission state:', err);
           // Fallback to trying to start, which will request permission if needed
           startDetector();

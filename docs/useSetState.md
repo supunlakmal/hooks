@@ -7,6 +7,7 @@ The `useSetState` hook provides a way to manage state in a component using an ob
 ## Usage
 
 A clear code example demonstrating how to use the hook.
+
 ```
 typescript
 import { useSetState } from '@supunlakmal/hooks';
@@ -37,9 +38,11 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
 
 Define the TypeScript types and interfaces used by the hook.
+
 ```
 typescript
 type SetState<T> = Partial<T> | ((prevState: T) => Partial<T>);
@@ -48,32 +51,33 @@ function useSetState<T extends object>(
   initialState: T | (() => T)
 ): [T, (newState: SetState<T>) => void];
 ```
+
 ## Parameters
 
--   **`initialState`**
-    -   Type: `T | (() => T)`
-    -   Detailed description: The initial state object or a function that returns the initial state.
-    - Mark optional parameters: No
+- **`initialState`**
+  - Type: `T | (() => T)`
+  - Detailed description: The initial state object or a function that returns the initial state.
+  - Mark optional parameters: No
 
 ## Returns
 
--   **`state`**
-    -   Type: `T`
-    -   Details: The current state object.
--   **`setState`**
-    -   Type: `(newState: SetState<T>) => void`
-    -   Details: A function to update the state. It accepts either a partial state object (to update only specific properties) or a function that receives the previous state and returns a partial state object.
+- **`state`**
+  - Type: `T`
+  - Details: The current state object.
+- **`setState`**
+  - Type: `(newState: SetState<T>) => void`
+  - Details: A function to update the state. It accepts either a partial state object (to update only specific properties) or a function that receives the previous state and returns a partial state object.
 
 ## How it Works
 
 The `useSetState` hook uses the `useState` hook internally to manage the state object. It provides a custom `setState` function that merges the partial state updates with the previous state object using the spread syntax (`...prev`).
 
--   **React hooks used**:
-    -   `useState`
--   **Logic and calculations**:
-    -   When `setState` is called, it merges the provided partial state with the current state using `Object.assign({}, prev, typeof newState === 'function' ? newState(prev) : newState)`.
--   **Cleanup procedures**:
-    -   No special cleanup procedures are needed.
--   **Reasoning behind implementation choices**:
-    -   The design choice of merging partial state updates is similar to `setState` in class components, allowing for efficient updates of complex objects.
-    - By making it possible to send a callback, it is possible to manage async data.
+- **React hooks used**:
+  - `useState`
+- **Logic and calculations**:
+  - When `setState` is called, it merges the provided partial state with the current state using `Object.assign({}, prev, typeof newState === 'function' ? newState(prev) : newState)`.
+- **Cleanup procedures**:
+  - No special cleanup procedures are needed.
+- **Reasoning behind implementation choices**:
+  - The design choice of merging partial state updates is similar to `setState` in class components, allowing for efficient updates of complex objects.
+  - By making it possible to send a callback, it is possible to manage async data.

@@ -39,9 +39,12 @@ export const useThrottledEffect = (
       handler();
     } else {
       clearTimeout(timeoutRef.current as NodeJS.Timeout);
-      timeoutRef.current = setTimeout(() => {
-        handler();
-      }, delay - (Date.now() - lastRan.current));
+      timeoutRef.current = setTimeout(
+        () => {
+          handler();
+        },
+        delay - (Date.now() - lastRan.current)
+      );
     }
 
     // Cleanup function

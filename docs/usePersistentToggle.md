@@ -71,9 +71,9 @@ The hook returns a tuple containing:
     - The current boolean value of the persistent toggle.
 2.  **`actions`**: `UsePersistentToggleActions`
     - An object containing helper functions:
-        - `toggle`: `() => void` - A function to switch the boolean state to the opposite value (true to false, false to true).
-        - `setTrue`: `() => void` - A function to set the boolean state explicitly to `true`.
-        - `setFalse`: `() => void` - A function to set the boolean state explicitly to `false`.
+      - `toggle`: `() => void` - A function to switch the boolean state to the opposite value (true to false, false to true).
+      - `setTrue`: `() => void` - A function to set the boolean state explicitly to `true`.
+      - `setFalse`: `() => void` - A function to set the boolean state explicitly to `false`.
 
 ## How it Works
 
