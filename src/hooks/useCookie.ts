@@ -19,7 +19,13 @@ const getCookie = (name: string): string | null => {
 const setCookie = (
   name: string,
   value: string,
-  options?: { expires?: Date | number; path?: string; domain?: string; secure?: boolean; sameSite?: 'Strict' | 'Lax' | 'None' }
+  options?: {
+    expires?: Date | number;
+    path?: string;
+    domain?: string;
+    secure?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+  }
 ): void => {
   if (typeof document === 'undefined') return; // Handle SSR
 
@@ -43,8 +49,11 @@ const setCookie = (
 };
 
 // Helper function to delete a cookie
-const deleteCookie = (name: string, options?: { path?: string; domain?: string }): void => {
- setCookie(name, '', { ...options, expires: new Date(0) });
+const deleteCookie = (
+  name: string,
+  options?: { path?: string; domain?: string }
+): void => {
+  setCookie(name, '', { ...options, expires: new Date(0) });
 };
 
 /**
@@ -78,8 +87,8 @@ export const useCookie = (
   ) => void,
   (options?: { path?: string; domain?: string }) => void,
 ] => {
-  const [cookieValue, setInternalCookieValue] = useState<string | null>(() =>
-    getCookie(cookieName) ?? initialValue ?? null
+  const [cookieValue, setInternalCookieValue] = useState<string | null>(
+    () => getCookie(cookieName) ?? initialValue ?? null
   );
 
   const updateCookie = useCallback(
@@ -91,9 +100,9 @@ export const useCookie = (
   );
 
   const removeCookie = useCallback(
- (options?: { path?: string; domain?: string }) => {
-        deleteCookie(cookieName, options);
-        setInternalCookieValue(null);
+    (options?: { path?: string; domain?: string }) => {
+      deleteCookie(cookieName, options);
+      setInternalCookieValue(null);
     },
     [cookieName]
   );

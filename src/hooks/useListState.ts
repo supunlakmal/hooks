@@ -1,13 +1,15 @@
 import { useState, useCallback } from 'react';
 
-export function useListState<T>(initialState: T[] = []): [
+export function useListState<T>(
+  initialState: T[] = []
+): [
   T[],
   (item: T) => void,
   (callback: (item: T) => boolean) => void,
   (index: number, newItem: T) => void,
   (index: number) => void,
   (newList: T[]) => void,
-  () => void
+  () => void,
 ] {
   const [list, setList] = useState<T[]>(initialState);
 

@@ -12,7 +12,7 @@ import { useState, useCallback } from 'react';
  * // Later, when you need to force a re-render:
  * forceUpdate();
  */
-export const useForceUpdate = (): () => void => {
+export const useForceUpdate = (): (() => void) => {
   const [, updateState] = useState({});
 
   const forceUpdate = useCallback(() => {

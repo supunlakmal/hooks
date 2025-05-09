@@ -1,6 +1,6 @@
 {
   "name": "@supunlakmal/hooks",
-  "version": "0.12.0",
+  "version": "1.0.0",
   "description": "A collection of reusable React hooks",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -8,6 +8,10 @@
     "build": "tsc",
     "format": "prettier --write .",
     "p": "npm publish --access public"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/supunlakmal"
   },
   "homepage": "https://github.com/supunlakmal/hooks",
   "repository": {

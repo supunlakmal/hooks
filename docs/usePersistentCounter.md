@@ -18,9 +18,15 @@ function PersistentCounterComponent() {
   return (
     <div>
       <h1>Persistent Counter</h1>
-      <p>Current Count: <strong>{count}</strong></p>
-      <button onClick={increment}>Increment (+{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})</button>
-      <button onClick={decrement}>Decrement (-{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})</button>
+      <p>
+        Current Count: <strong>{count}</strong>
+      </p>
+      <button onClick={increment}>
+        Increment (+{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})
+      </button>
+      <button onClick={decrement}>
+        Decrement (-{usePersistentCounter('myAppCounter', 0, { step: 2 }).step})
+      </button>
       <button onClick={() => set(5)}>Set to 5</button>
       <button onClick={reset}>Reset to Initial (0)</button>
       <p>

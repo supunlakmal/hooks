@@ -44,9 +44,9 @@ function useCycle<T>(values: T[]): [T, () => void, () => void];
 ### Returns
 
 - A tuple containing:
-    - The current value from the `values` array.
-    - A function to move to the next value in the cycle.
-    - A function to move to the previous value in the cycle.
+  - The current value from the `values` array.
+  - A function to move to the next value in the cycle.
+  - A function to move to the previous value in the cycle.
 
 ## How it Works
 

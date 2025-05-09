@@ -7,6 +7,7 @@ The `useDeviceMotion` hook provides access to the device's motion sensor data, a
 ## Usage
 
 A clear code example demonstrating how to use the hook.
+
 ```
 typescript
 import { useDeviceMotion } from './path/to/useDeviceMotion'; // Replace with the actual path
@@ -29,9 +30,11 @@ function MyComponent() {
   );
 }
 ```
+
 ## API
 
 Define the TypeScript types and interfaces used by the hook.
+
 ```
 typescript
 interface DeviceMotionData {
@@ -41,50 +44,51 @@ interface DeviceMotionData {
   interval: number | null;
 }
 ```
+
 ## Parameters
 
 A bulleted list describing each parameter:
 
--   **options**:
-    -   Type: `DeviceMotionEventInit` (optional)
-    -   Description: An optional object that allow us to set the interval of the updates.  It's passed directly to the `DeviceMotionEvent` event listener.
-    -   Mark optional parameters.: optional
+- **options**:
+  - Type: `DeviceMotionEventInit` (optional)
+  - Description: An optional object that allow us to set the interval of the updates. It's passed directly to the `DeviceMotionEvent` event listener.
+  - Mark optional parameters.: optional
 
 ## Returns
 
 Describe what the hook returns:
 
--   **DeviceMotionData**:
-    -   Type: `{ acceleration: { x: number | null; y: number | null; z: number | null } | null, accelerationIncludingGravity: { x: number | null; y: number | null; z: number | null } | null, rotationRate: { alpha: number | null; beta: number | null; gamma: number | null } | null; interval: number | null; } | null;`
-    -   Details: An object containing the following properties:
-        -   `acceleration`: Acceleration of the device on each axis, `null` if not supported.
-            -   `x`: Acceleration on the x-axis.
-            -   `y`: Acceleration on the y-axis.
-            -   `z`: Acceleration on the z-axis.
-        -   `accelerationIncludingGravity`: Acceleration with the effect of gravity, `null` if not supported.
-            -   `x`: Acceleration on the x-axis including gravity.
-            -   `y`: Acceleration on the y-axis including gravity.
-            -   `z`: Acceleration on the z-axis including gravity.
-        -   `rotationRate`: Rate of rotation around each axis, `null` if not supported.
-            -   `alpha`: Rotation around the z-axis.
-            -   `beta`: Rotation around the x-axis.
-            -   `gamma`: Rotation around the y-axis.
-        -   `interval`: interval of the update.
-    -   Behavior explanation: This object will update with the latest `DeviceMotionEvent` data whenever the device motion sensor detects a change.
-    - if `DeviceMotionEvent` is not available, then it will return null.
+- **DeviceMotionData**:
+  - Type: `{ acceleration: { x: number | null; y: number | null; z: number | null } | null, accelerationIncludingGravity: { x: number | null; y: number | null; z: number | null } | null, rotationRate: { alpha: number | null; beta: number | null; gamma: number | null } | null; interval: number | null; } | null;`
+  - Details: An object containing the following properties:
+    - `acceleration`: Acceleration of the device on each axis, `null` if not supported.
+      - `x`: Acceleration on the x-axis.
+      - `y`: Acceleration on the y-axis.
+      - `z`: Acceleration on the z-axis.
+    - `accelerationIncludingGravity`: Acceleration with the effect of gravity, `null` if not supported.
+      - `x`: Acceleration on the x-axis including gravity.
+      - `y`: Acceleration on the y-axis including gravity.
+      - `z`: Acceleration on the z-axis including gravity.
+    - `rotationRate`: Rate of rotation around each axis, `null` if not supported.
+      - `alpha`: Rotation around the z-axis.
+      - `beta`: Rotation around the x-axis.
+      - `gamma`: Rotation around the y-axis.
+    - `interval`: interval of the update.
+  - Behavior explanation: This object will update with the latest `DeviceMotionEvent` data whenever the device motion sensor detects a change.
+  - if `DeviceMotionEvent` is not available, then it will return null.
 
 ## How it Works
 
 Explain the inner workings, including:
 
--   React hooks used (e.g., `useState`, `useRef`).
-    -   `useState`: To hold the current `DeviceMotionData`.
-    -   `useEffect`: To subscribe and unsubscribe to the `devicemotion` event.
--   Logic and calculations.
-    -   The hook listens to the `devicemotion` event and updates the `DeviceMotionData` state when the event fires.
--   Cleanup procedures.
-    -   The `useEffect` hook returns a cleanup function that removes the event listener when the component unmounts.
--   Reasoning behind implementation choices.
-    -   Using `useState` allows the component to re-render whenever the sensor data changes.
-    -   `useEffect` ensures that the event listener is set up and removed correctly during the component's lifecycle.
-    - If the `DeviceMotionEvent` event not availabel, we will not add the event listener.
+- React hooks used (e.g., `useState`, `useRef`).
+  - `useState`: To hold the current `DeviceMotionData`.
+  - `useEffect`: To subscribe and unsubscribe to the `devicemotion` event.
+- Logic and calculations.
+  - The hook listens to the `devicemotion` event and updates the `DeviceMotionData` state when the event fires.
+- Cleanup procedures.
+  - The `useEffect` hook returns a cleanup function that removes the event listener when the component unmounts.
+- Reasoning behind implementation choices.
+  - Using `useState` allows the component to re-render whenever the sensor data changes.
+  - `useEffect` ensures that the event listener is set up and removed correctly during the component's lifecycle.
+  - If the `DeviceMotionEvent` event not availabel, we will not add the event listener.

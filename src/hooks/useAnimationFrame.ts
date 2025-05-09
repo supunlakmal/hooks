@@ -26,7 +26,6 @@ export const useAnimationFrame = (callback: () => void): void => {
     animationFrameId.current = requestAnimationFrame(loop);
   }, []); // Dependencies intentionally empty because loop uses callbackRef.current
 
-
   useEffect(() => {
     // Start the animation loop
     animationFrameId.current = requestAnimationFrame(loop);

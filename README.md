@@ -3,12 +3,21 @@
 [![NPM Version](https://img.shields.io/npm/v/@supunlakmal/hooks.svg)](https://www.npmjs.com/package/@supunlakmal/hooks)
 [![License: ISC](https://img.shields.io/npm/l/@supunlakmal/hooks.svg)](https://opensource.org/licenses/ISC)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+![npm](https://img.shields.io/npm/dt/@supunlakmal/hooks?label=Total%20Downloads&color=brightgreen)
+[![GitHub last commit](https://img.shields.io/github/last-commit/supunlakmal/hooks)](https://github.com/supunlakmal/hooks/commits/main)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@supunlakmal/hooks)](https://bundlephobia.com/package/@supunlakmal/hooks)
+[![Install Size](https://packagephobia.com/badge?p=@supunlakmal/hooks)](https://packagephobia.com/result?p=@supunlakmal/hooks)
+
+
+
+
+
 
 <!-- Add other badges as applicable: Downloads, Build Status, Coverage -->
 
 **A comprehensive collection of production-ready, reusable React hooks written in TypeScript to simplify common UI patterns and browser API interactions.**
 
-Stop reinventing the wheel! `@supunlakmal/hooks` provides a wide array of well-tested, easy-to-use hooks covering everything from state management enhancements and side effects to browser APIs and performance optimizations.
+Stop reinventing the wheel! `@supunlakmal/hooks` provides a wide arrays, easy-to-use hooks covering everything from state management enhancements and side effects to browser APIs and performance optimizations.
 
 **Why choose `@supunlakmal/hooks`?**
 

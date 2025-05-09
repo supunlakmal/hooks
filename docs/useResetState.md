@@ -74,7 +74,9 @@ export default MyForm;
 ```typescript
 import { Dispatch, SetStateAction } from 'react';
 
-function useResetState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>, () => void];
+function useResetState<S>(
+  initialState: S | (() => S)
+): [S, Dispatch<SetStateAction<S>>, () => void];
 ```
 
 ## Parameters

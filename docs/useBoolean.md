@@ -10,7 +10,7 @@ This hook is useful for managing simple on/off or true/false states within your 
 
 This hook takes one optional parameter:
 
-* `initialValue`: The initial boolean value for the state (default is `false`).
+- `initialValue`: The initial boolean value for the state (default is `false`).
 
 ## Return Value
 
@@ -18,9 +18,9 @@ The hook returns a tuple containing:
 
 1.  The current boolean state (`value`).
 2.  An object containing helper functions:
-    *   `toggle`: A function to switch the boolean state to the opposite value.
-    *   `setTrue`: A function to set the boolean state to `true`.
-    *   `setFalse`: A function to set the boolean state to `false`.
+    - `toggle`: A function to switch the boolean state to the opposite value.
+    - `setTrue`: A function to set the boolean state to `true`.
+    - `setFalse`: A function to set the boolean state to `false`.
 
 ## Example
 

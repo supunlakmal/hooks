@@ -23,7 +23,8 @@ export const useSetState = <T extends object>(
   const mergeState = useCallback(
     (patch: Partial<T> | ((prevState: T) => Partial<T>)) => {
       setState((prevState) => {
-        const newStatePatch = typeof patch === 'function' ? patch(prevState) : patch;
+        const newStatePatch =
+          typeof patch === 'function' ? patch(prevState) : patch;
         // Ensure we don't mutate the previous state, especially if initialState was a function
         // that might return the same object reference on multiple calls.
         return { ...prevState, ...newStatePatch };
