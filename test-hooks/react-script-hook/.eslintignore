@@ -1,8 +1,0 @@
-/.git
-/coverage
-/lib
-
-node_modules
-.eslintrc.js
-jest.config.js
-.prettierrc.js

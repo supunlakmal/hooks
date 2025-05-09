@@ -1,8 +1,0 @@
-.circleci
-.github
-playground
-tools
-index.html
-jest.config.js
-tslint.json
-__test__
