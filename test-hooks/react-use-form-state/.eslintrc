@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "@wsmd/eslint-config/typescript",
+    "@wsmd/eslint-config/react",
+    "@wsmd/eslint-config/prettier",
+    "@wsmd/eslint-config/jest"
+  ],
+  "globals": {
+    "__DEV__": false
+  },
+  "rules": {
+    "getter-return": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-underscore-dangle": ["error", { "allow": ["__DEV__"] }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "parser": "babel-eslint"
+    },
+    {
+      "files": ["test/**/*.js"],
+      "rules": {
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-filename-extension": "off",
+        "jsx-a11y/control-has-associated-label": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["test/types.tsx", "rollup.config.js"]
+}

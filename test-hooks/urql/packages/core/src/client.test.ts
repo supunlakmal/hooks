@@ -1,0 +1,1339 @@
+import { print } from '@0no-co/graphql.web';
+import { vi, expect, it, beforeEach, describe, afterEach } from 'vitest';
+
+/** NOTE: Testing in this file is designed to test both the client and its interaction with default Exchanges */
+
+import {
+  Source,
+  delay,
+  map,
+  never,
+  pipe,
+  merge,
+  subscribe,
+  publish,
+  filter,
+  share,
+  toArray,
+  toPromise,
+  onPush,
+  tap,
+  take,
+  fromPromise,
+  fromValue,
+  mergeMap,
+} from 'wonka';
+
+import { gql } from './gql';
+import { Exchange, Operation, OperationResult } from './types';
+import { makeOperation } from './utils';
+import { Client, createClient } from './client';
+import {
+  mutationOperation,
+  queryOperation,
+  subscriptionOperation,
+} from './test-utils';
+
+const url = 'https://hostname.com';
+
+describe('createClient / Client', () => {
+  it('creates an instance of Client', () => {
+    expect(createClient({ url, exchanges: [] }) instanceof Client).toBeTruthy();
+    expect(new Client({ url, exchanges: [] }) instanceof Client).toBeTruthy();
+  });
+
+  it('passes snapshot', () => {
+    const client = createClient({ url, exchanges: [] });
+    expect(client).toMatchSnapshot();
+  });
+});
+
+const query = {
+  key: 1,
+  query: gql`
+    {
+      todos {
+        id
+      }
+    }
+  `,
+  variables: { example: 1234 },
+};
+
+const mutation = {
+  key: 1,
+  query: gql`
+    mutation {
+      todos {
+        id
+      }
+    }
+  `,
+  variables: { example: 1234 },
+};
+
+const subscription = {
+  key: 1,
+  query: gql`
+    subscription {
+      todos {
+        id
+      }
+    }
+  `,
+  variables: { example: 1234 },
+};
+
+let receivedOps: Operation[] = [];
+let client = createClient({
+  url: '1234',
+  exchanges: [],
+});
+const receiveMock = vi.fn((s: Source<Operation>) =>
+  pipe(
+    s,
+    tap(op => (receivedOps = [...receivedOps, op])),
+    map(op => ({ operation: op }))
+  )
+);
+const exchangeMock = vi.fn(() => receiveMock);
+
+beforeEach(() => {
+  receivedOps = [];
+  exchangeMock.mockClear();
+  receiveMock.mockClear();
+  client = createClient({
+    url,
+    exchanges: [exchangeMock] as any[],
+    requestPolicy: 'cache-and-network',
+  });
+});
+
+describe('exchange args', () => {
+  it('receives forward function', () => {
+    // @ts-ignore
+    expect(typeof exchangeMock.mock.calls[0][0].forward).toBe('function');
+  });
+
+  it('receives client', () => {
+    // @ts-ignore
+    expect(exchangeMock.mock.calls[0][0]).toHaveProperty('client', client);
+  });
+});
+
+describe('promisified methods', () => {
+  it('query', () => {
+    const queryResult = client
+      .query(
+        gql`
+          {
+            todos {
+              id
+            }
+          }
+        `,
+        { example: 1234 },
+        { requestPolicy: 'cache-only' }
+      )
+      .toPromise();
+
+    const received = receivedOps[0];
+    expect(print(received.query)).toEqual(print(query.query));
+    expect(received.key).toBeDefined();
+    expect(received.variables).toEqual({ example: 1234 });
+    expect(received.kind).toEqual('query');
+    expect(received.context).toEqual({
+      url: 'https://hostname.com',
+      requestPolicy: 'cache-only',
+      fetchOptions: undefined,
+      fetch: undefined,
+      suspense: false,
+      preferGetMethod: undefined,
+    });
+    expect(queryResult).toHaveProperty('then');
+  });
+
+  it('mutation', () => {
+    const mut = gql`
+      mutation {
+        todos {
+          id
+        }
+      }
+    `;
+    const mutationResult = client.mutation(mut, { example: 1234 }).toPromise();
+
+    const received = receivedOps[0];
+    expect(print(received.query)).toEqual(print(mut));
+    expect(received.key).toBeDefined();
+    expect(received.variables).toEqual({ example: 1234 });
+    expect(received.kind).toEqual('mutation');
+    expect(received.context).toMatchObject({
+      url: 'https://hostname.com',
+      requestPolicy: 'cache-and-network',
+      fetchOptions: undefined,
+      fetch: undefined,
+      suspense: false,
+      preferGetMethod: undefined,
+    });
+    expect(mutationResult).toHaveProperty('then');
+  });
+});
+
+describe('synchronous methods', () => {
+  it('readQuery', () => {
+    const result = client.readQuery(
+      gql`
+        {
+          todos {
+            id
+          }
+        }
+      `,
+      { example: 1234 }
+    );
+
+    expect(receivedOps.length).toBe(2);
+    expect(receivedOps[0].kind).toBe('query');
+    expect(receivedOps[1].kind).toBe('teardown');
+    expect(result).toEqual({
+      operation: {
+        ...query,
+        context: expect.anything(),
+        key: expect.any(Number),
+        kind: 'query',
+      },
+    });
+  });
+});
+
+describe('executeQuery', () => {
+  it('passes query string exchange', () => {
+    pipe(
+      client.executeQuery(query),
+      subscribe(x => x)
+    );
+
+    const receivedQuery = receivedOps[0].query;
+    expect(print(receivedQuery)).toBe(print(query.query));
+  });
+
+  it('should throw when passing in a mutation', () => {
+    try {
+      client.executeQuery(mutation);
+      expect(true).toBeFalsy();
+    } catch (e: any) {
+      expect(e.message).toMatchInlineSnapshot(
+        `"Expected operation of type "query" but found "mutation""`
+      );
+    }
+  });
+
+  it('passes variables type to exchange', () => {
+    pipe(
+      client.executeQuery(query),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('variables', query.variables);
+  });
+
+  it('passes requestPolicy to exchange', () => {
+    pipe(
+      client.executeQuery(query),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0].context).toHaveProperty(
+      'requestPolicy',
+      'cache-and-network'
+    );
+  });
+
+  it('allows overriding the requestPolicy', () => {
+    pipe(
+      client.executeQuery(query, { requestPolicy: 'cache-first' }),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0].context).toHaveProperty(
+      'requestPolicy',
+      'cache-first'
+    );
+  });
+
+  it('passes kind type to exchange', () => {
+    pipe(
+      client.executeQuery(query),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('kind', 'query');
+  });
+
+  it('passes url (from context) to exchange', () => {
+    pipe(
+      client.executeQuery(query),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('context.url', url);
+  });
+});
+
+describe('executeMutation', () => {
+  it('passes query string exchange', async () => {
+    pipe(
+      client.executeMutation(mutation),
+      subscribe(x => x)
+    );
+
+    const receivedQuery = receivedOps[0].query;
+    expect(print(receivedQuery)).toBe(print(mutation.query));
+  });
+
+  it('passes variables type to exchange', () => {
+    pipe(
+      client.executeMutation(mutation),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('variables', query.variables);
+  });
+
+  it('passes kind type to exchange', () => {
+    pipe(
+      client.executeMutation(mutation),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('kind', 'mutation');
+  });
+
+  it('passes url (from context) to exchange', () => {
+    pipe(
+      client.executeMutation(mutation),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('context.url', url);
+  });
+});
+
+describe('executeSubscription', () => {
+  it('passes query string exchange', async () => {
+    pipe(
+      client.executeSubscription(subscription),
+      subscribe(x => x)
+    );
+
+    const receivedQuery = receivedOps[0].query;
+    expect(print(receivedQuery)).toBe(print(subscription.query));
+  });
+
+  it('passes variables type to exchange', () => {
+    pipe(
+      client.executeSubscription(subscription),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('variables', subscription.variables);
+  });
+
+  it('passes kind type to exchange', () => {
+    pipe(
+      client.executeSubscription(subscription),
+      subscribe(x => x)
+    );
+
+    expect(receivedOps[0]).toHaveProperty('kind', 'subscription');
+  });
+});
+
+describe('queuing behavior', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('queues reexecuteOperation, which dispatchOperation consumes', () => {
+    const output: Array<Operation | OperationResult> = [];
+
+    const exchange: Exchange =
+      ({ client }) =>
+      ops$ => {
+        return pipe(
+          ops$,
+          filter(op => op.kind !== 'teardown'),
+          tap(op => {
+            output.push(op);
+            if (
+              op.key === queryOperation.key &&
+              op.context.requestPolicy !== 'network-only'
+            ) {
+              client.reexecuteOperation({
+                ...op,
+                context: {
+                  ...op.context,
+                  requestPolicy: 'network-only',
+                },
+              });
+            }
+          }),
+          map(op => ({
+            stale: false,
+            hasNext: false,
+            data: op.key,
+            operation: op,
+          }))
+        );
+      };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const shared = pipe(
+      client.executeRequestOperation(queryOperation),
+      onPush(result => output.push(result)),
+      share
+    );
+
+    const results = pipe(shared, toArray);
+    pipe(shared, publish);
+
+    expect(output.length).toBe(8);
+    expect(results.length).toBe(2);
+
+    expect(output[0]).toHaveProperty('key', queryOperation.key);
+    expect(output[0]).toHaveProperty('context.requestPolicy', 'cache-first');
+
+    expect(output[1]).toHaveProperty('operation.key', queryOperation.key);
+    expect(output[1]).toHaveProperty(
+      'operation.context.requestPolicy',
+      'cache-first'
+    );
+
+    expect(output[2]).toHaveProperty('key', queryOperation.key);
+    expect(output[2]).toHaveProperty('context.requestPolicy', 'network-only');
+
+    expect(output[3]).toHaveProperty('operation.key', queryOperation.key);
+    expect(output[3]).toHaveProperty(
+      'operation.context.requestPolicy',
+      'network-only'
+    );
+
+    expect(output[1]).toBe(results[0]);
+    expect(output[3]).toBe(results[1]);
+  });
+
+  it('reemits previous results as stale if the operation is reexecuted as network-only', async () => {
+    const output: OperationResult[] = [];
+
+    const exchange: Exchange = () => {
+      let countRes = 0;
+      return ops$ => {
+        return pipe(
+          ops$,
+          filter(op => op.kind !== 'teardown'),
+          map(op => ({
+            hasNext: false,
+            stale: false,
+            data: ++countRes,
+            operation: op,
+          })),
+          delay(1)
+        );
+      };
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const { unsubscribe } = pipe(
+      client.executeRequestOperation(queryOperation),
+      subscribe(result => {
+        output.push(result);
+      })
+    );
+
+    vi.advanceTimersByTime(1);
+
+    expect(output.length).toBe(1);
+    expect(output[0]).toHaveProperty('data', 1);
+    expect(output[0]).toHaveProperty('operation.key', queryOperation.key);
+    expect(output[0]).toHaveProperty(
+      'operation.context.requestPolicy',
+      'cache-first'
+    );
+
+    client.reexecuteOperation(
+      makeOperation(queryOperation.kind, queryOperation, {
+        ...queryOperation.context,
+        requestPolicy: 'network-only',
+      })
+    );
+
+    await Promise.resolve();
+
+    expect(output.length).toBe(2);
+    expect(output[1]).toHaveProperty('data', 1);
+    expect(output[1]).toHaveProperty('stale', true);
+    expect(output[1]).toHaveProperty('operation.key', queryOperation.key);
+    expect(output[1]).toHaveProperty(
+      'operation.context.requestPolicy',
+      'cache-first'
+    );
+
+    vi.advanceTimersByTime(1);
+
+    expect(output.length).toBe(3);
+    expect(output[2]).toHaveProperty('data', 2);
+    expect(output[2]).toHaveProperty('stale', false);
+    expect(output[2]).toHaveProperty('operation.key', queryOperation.key);
+    expect(output[2]).toHaveProperty(
+      'operation.context.requestPolicy',
+      'network-only'
+    );
+
+    unsubscribe();
+  });
+});
+
+describe('deduplication behavior', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('deduplicates operations when no result has been sent yet', () => {
+    const onOperation = vi.fn();
+
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: ++i,
+          operation: op,
+        })),
+        delay(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+    const operationOne = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+    const operationTwo = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    pipe(client.executeRequestOperation(operationOne), subscribe(resultOne));
+    pipe(client.executeRequestOperation(operationTwo), subscribe(resultTwo));
+    expect(resultOne).toHaveBeenCalledTimes(0);
+    expect(resultTwo).toHaveBeenCalledTimes(0);
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultTwo).toHaveBeenCalledTimes(1);
+    expect(onOperation).toHaveBeenCalledTimes(1);
+  });
+
+  it('deduplicates operations when hasNext: true is set', () => {
+    const onOperation = vi.fn();
+
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: true,
+          stale: false,
+          data: ++i,
+          operation: op,
+        }))
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+    const operationOne = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+    const operationTwo = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    pipe(client.executeRequestOperation(operationOne), subscribe(resultOne));
+    pipe(client.executeRequestOperation(operationTwo), subscribe(resultTwo));
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultTwo).toHaveBeenCalledTimes(1);
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultTwo).toHaveBeenCalledTimes(1);
+    expect(onOperation).toHaveBeenCalledTimes(1);
+  });
+
+  it('deduplicates otherwise if operation has already been sent', () => {
+    const onOperation = vi.fn();
+    const onResult = vi.fn();
+
+    let hasSent = false;
+    const exchange: Exchange = () => ops$ =>
+      pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: 'test',
+          operation: op,
+        })),
+        filter(() => {
+          return hasSent ? false : (hasSent = true);
+        }),
+        delay(1)
+      );
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operationOne = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+
+    const operationTwo = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    const operationThree = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    pipe(client.executeRequestOperation(operationOne), subscribe(onResult));
+    pipe(client.executeRequestOperation(operationTwo), subscribe(onResult));
+    pipe(client.executeRequestOperation(operationThree), subscribe(onResult));
+    vi.advanceTimersByTime(1);
+
+    expect(onOperation).toHaveBeenCalledTimes(1);
+    expect(onResult).toHaveBeenCalledTimes(3);
+  });
+
+  it('does not deduplicate cache-and-network’s follow-up operations', () => {
+    const onOperation = vi.fn();
+    const onResult = vi.fn();
+
+    const operationOne = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-and-network',
+    });
+
+    const operationTwo = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    let shouldSend = true;
+    const exchange: Exchange = () => ops$ =>
+      pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: false,
+          stale: true,
+          data: 'test',
+          operation: op,
+        })),
+        filter(() => {
+          if (shouldSend) {
+            shouldSend = false;
+            client.reexecuteOperation(operationTwo);
+            return true;
+          } else {
+            return false;
+          }
+        })
+      );
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operationThree = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    pipe(client.executeRequestOperation(operationOne), subscribe(onResult));
+    pipe(client.executeRequestOperation(operationThree), subscribe(onResult));
+
+    expect(onOperation).toHaveBeenCalledTimes(2);
+  });
+
+  it('unblocks mutation operations on call to reexecuteOperation', async () => {
+    const onOperation = vi.fn();
+    const onResult = vi.fn();
+
+    let hasSent = false;
+    const exchange: Exchange = () => ops$ =>
+      pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: 'test',
+          operation: op,
+        })),
+        filter(() => hasSent || !(hasSent = true))
+      );
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('mutation', mutationOperation, {
+      ...mutationOperation.context,
+      requestPolicy: 'cache-first',
+    });
+
+    pipe(client.executeRequestOperation(operation), subscribe(onResult));
+
+    expect(onOperation).toHaveBeenCalledTimes(1);
+    expect(onResult).toHaveBeenCalledTimes(0);
+
+    client.reexecuteOperation(operation);
+    await Promise.resolve();
+
+    expect(onOperation).toHaveBeenCalledTimes(2);
+    expect(onResult).toHaveBeenCalledTimes(1);
+  });
+
+  // See https://github.com/urql-graphql/urql/issues/3254
+  it('unblocks stale operations', async () => {
+    const onOperation = vi.fn();
+    const onResult = vi.fn();
+
+    let sends = 0;
+    const exchange: Exchange = () => ops$ =>
+      pipe(
+        ops$,
+        onPush(onOperation),
+        map(op => ({
+          hasNext: false,
+          stale: sends++ ? false : true,
+          data: 'test',
+          operation: op,
+        }))
+      );
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+
+    pipe(client.executeRequestOperation(operation), subscribe(onResult));
+
+    expect(onOperation).toHaveBeenCalledTimes(1);
+    expect(onResult).toHaveBeenCalledTimes(1);
+
+    client.reexecuteOperation(operation);
+    await Promise.resolve();
+
+    expect(onOperation).toHaveBeenCalledTimes(2);
+    expect(onResult).toHaveBeenCalledTimes(2);
+  });
+
+  // See https://github.com/urql-graphql/urql/issues/3565
+  it('blocks reexecuting operations that are in-flight', async () => {
+    const onOperation = vi.fn();
+    const onResult = vi.fn();
+
+    let resolve;
+    const exchange: Exchange =
+      ({ client }) =>
+      ops$ =>
+        pipe(
+          ops$,
+          onPush(onOperation),
+          mergeMap(op => {
+            if (op.key === queryOperation.key) {
+              const promise = new Promise<OperationResult>(res => {
+                resolve = res;
+              });
+              return fromPromise(
+                promise.then(() => {
+                  return {
+                    hasNext: false,
+                    stale: false,
+                    data: 'test',
+                    operation: op,
+                  };
+                })
+              );
+            } else {
+              client.reexecuteOperation(queryOperation);
+              return fromValue({
+                hasNext: false,
+                stale: false,
+                data: 'test',
+                operation: op,
+              });
+            }
+          })
+        );
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+
+    const mutation = makeOperation('mutation', mutationOperation, {
+      ...mutationOperation.context,
+      requestPolicy: 'cache-first',
+    });
+
+    pipe(client.executeRequestOperation(operation), subscribe(onResult));
+
+    expect(onOperation).toHaveBeenCalledTimes(1);
+    expect(onResult).toHaveBeenCalledTimes(0);
+
+    pipe(client.executeRequestOperation(mutation), subscribe(onResult));
+    await Promise.resolve();
+
+    expect(onOperation).toHaveBeenCalledTimes(2);
+    expect(onResult).toHaveBeenCalledTimes(1);
+
+    resolve();
+    await Promise.resolve();
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(onOperation).toHaveBeenCalledTimes(2);
+    expect(onResult).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('shared sources behavior', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('replays results from prior operation result as needed (cache-first)', async () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: ++i,
+          operation: op,
+        })),
+        delay(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledTimes(0);
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation: queryOperation,
+      stale: false,
+      hasNext: false,
+    });
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 1,
+      operation: queryOperation,
+      stale: true,
+      hasNext: false,
+    });
+
+    vi.advanceTimersByTime(1);
+
+    // With cache-first we don't expect a new operation to be issued
+    expect(resultTwo).toHaveBeenCalledTimes(2);
+  });
+
+  it('dispatches the correct request policy on subsequent sources', async () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: ++i,
+          operation: op,
+        })),
+        delay(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+    const operationOne = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'cache-first',
+    });
+    const operationTwo = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    pipe(client.executeRequestOperation(operationOne), subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledTimes(0);
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation: operationOne,
+      hasNext: false,
+      stale: false,
+    });
+
+    pipe(client.executeRequestOperation(operationTwo), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 1,
+      operation: operationOne,
+      stale: true,
+      hasNext: false,
+    });
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 2,
+      operation: operationTwo,
+      stale: false,
+      hasNext: false,
+    });
+  });
+
+  it('replays results from prior operation result as needed (network-only)', async () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: ++i,
+          operation: op,
+        })),
+        delay(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(operation), subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledTimes(0);
+
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledTimes(1);
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation,
+      stale: false,
+      hasNext: false,
+    });
+
+    pipe(client.executeRequestOperation(operation), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 1,
+      operation,
+      stale: true,
+      hasNext: false,
+    });
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation,
+      stale: true,
+      hasNext: false,
+    });
+
+    expect(resultTwo).toHaveBeenCalledTimes(1);
+    expect(resultOne).toHaveBeenCalledTimes(2);
+
+    vi.advanceTimersByTime(1);
+
+    // With network-only we expect a new operation to be issued, hence a new result
+    expect(resultTwo).toHaveBeenCalledTimes(2);
+    expect(resultOne).toHaveBeenCalledTimes(3);
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 2,
+      operation,
+      stale: false,
+      hasNext: false,
+    });
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 2,
+      operation,
+      stale: false,
+      hasNext: false,
+    });
+  });
+
+  it('does not replay values from a past subscription', async () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        filter(op => op.kind !== 'teardown'),
+        map(op => ({
+          hasNext: false,
+          stale: false,
+          data: ++i,
+          operation: op,
+        })),
+        delay(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    // We keep the source in-memory
+    const source = client.executeRequestOperation(queryOperation);
+    const resultOne = vi.fn();
+    let subscription;
+
+    subscription = pipe(source, subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledTimes(0);
+    vi.advanceTimersByTime(1);
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation: queryOperation,
+      hasNext: false,
+      stale: false,
+    });
+
+    subscription.unsubscribe();
+    const resultTwo = vi.fn();
+    subscription = pipe(source, subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledTimes(0);
+    vi.advanceTimersByTime(1);
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 2,
+      operation: queryOperation,
+      stale: false,
+      hasNext: false,
+    });
+  });
+
+  it('replayed results are not emitted on the shared source', () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        map(op => ({
+          data: ++i,
+          operation: op,
+          hasNext: false,
+          stale: false,
+        })),
+        take(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(operation), subscribe(resultOne));
+    pipe(client.executeRequestOperation(operation), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledTimes(1);
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 1,
+      operation,
+      stale: true,
+      hasNext: false,
+    });
+  });
+
+  it('does nothing when no operation result has been emitted yet', () => {
+    const dispatched = vi.fn();
+
+    const exchange: Exchange = () => ops$ => {
+      return pipe(
+        ops$,
+        map(op => {
+          dispatched(op);
+          return { hasNext: false, stale: false, data: 1, operation: op };
+        }),
+        filter(() => false)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultOne));
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultTwo));
+
+    expect(resultOne).toHaveBeenCalledTimes(0);
+    expect(resultTwo).toHaveBeenCalledTimes(0);
+    expect(dispatched).toHaveBeenCalledTimes(1);
+  });
+
+  it('skips replaying results when a result is emitted immediately (network-only)', () => {
+    const exchange: Exchange = () => ops$ => {
+      let i = 0;
+      return pipe(
+        ops$,
+        map(op => ({ hasNext: false, stale: false, data: ++i, operation: op }))
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const operation = makeOperation('query', queryOperation, {
+      ...queryOperation.context,
+      requestPolicy: 'network-only',
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(operation), subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation,
+      hasNext: false,
+      stale: false,
+    });
+
+    pipe(client.executeRequestOperation(operation), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 2,
+      operation,
+      hasNext: false,
+      stale: false,
+    });
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 2,
+      operation,
+      hasNext: false,
+      stale: false,
+    });
+  });
+
+  it('replays stale results as needed', () => {
+    const exchange: Exchange = () => ops$ => {
+      return pipe(
+        ops$,
+        map(op => ({ hasNext: false, stale: true, data: 1, operation: op })),
+        take(1)
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultOne));
+
+    expect(resultOne).toHaveBeenCalledWith({
+      data: 1,
+      operation: queryOperation,
+      stale: true,
+      hasNext: false,
+    });
+
+    pipe(client.executeRequestOperation(queryOperation), subscribe(resultTwo));
+
+    expect(resultTwo).toHaveBeenCalledWith({
+      data: 1,
+      operation: queryOperation,
+      stale: true,
+      hasNext: false,
+    });
+  });
+
+  it('does nothing when operation is a subscription has been emitted yet', () => {
+    const exchange: Exchange = () => ops$ => {
+      return merge([
+        pipe(
+          ops$,
+          map(op => ({ hasNext: true, data: 1, operation: op })),
+          take(1)
+        ),
+        never,
+      ]);
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = vi.fn();
+    const resultTwo = vi.fn();
+
+    pipe(
+      client.executeRequestOperation(subscriptionOperation),
+      subscribe(resultOne)
+    );
+    expect(resultOne).toHaveBeenCalledTimes(1);
+
+    pipe(
+      client.executeRequestOperation(subscriptionOperation),
+      subscribe(resultTwo)
+    );
+    expect(resultTwo).toHaveBeenCalledTimes(0);
+  });
+
+  it('supports promisified sources', async () => {
+    const exchange: Exchange = () => ops$ => {
+      return pipe(
+        ops$,
+        map(op => ({ hasNext: false, stale: true, data: 1, operation: op }))
+      );
+    };
+
+    const client = createClient({
+      url: 'test',
+      exchanges: [exchange],
+    });
+
+    const resultOne = await pipe(
+      client.executeRequestOperation(queryOperation),
+      take(1),
+      toPromise
+    );
+
+    expect(resultOne).toEqual({
+      data: 1,
+      operation: queryOperation,
+      stale: true,
+      hasNext: false,
+    });
+  });
+});

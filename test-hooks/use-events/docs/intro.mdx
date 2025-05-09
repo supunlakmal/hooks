@@ -1,0 +1,63 @@
+---
+name: Introduction
+route: /
+order: 1
+---
+
+# Introduction
+
+**Use Events** - Events turned into React Hooks.
+Read about [Hooks](https://reactjs.org/docs/hooks-intro.html) feature.
+
+## Install
+
+> Note: React 16.8+ is required for Hooks.
+
+### With npm
+
+```sh
+npm i use-events
+```
+
+### Or with yarn
+
+```sh
+yarn add use-events
+```
+
+exposed as `UseEvents`
+
+## Quick Examples
+
+```jsx
+import { useActive, useHover, useMousePosition } from 'use-events';
+```
+
+```jsx
+const App = () => {
+  const [isActive, bind] = useActive();
+
+  return (
+    <button style={{ color: isActive ? 'white' : 'black' }} {...bind}>
+      Click me
+    </button>
+  );
+};
+```
+
+```jsx
+const App = () => {
+  const [isHovered, hoverBind] = useHover();
+  const [x, y, mousePositionBind] = useMousePosition();
+
+  return (
+    <div {...hoverBind} {...mousePositionBind}>
+      {isHovered && (
+        <span>
+          {x} - {y}
+        </span>
+      )}
+    </div>
+  );
+};
+```

@@ -1,0 +1,26 @@
+---
+name: useWindowSize
+menu: Hooks
+---
+
+import { Playground } from 'docz';
+import { useWindowSize } from '@withvoid/melting-pot';
+import Size from './Size';
+
+# useWindowSize
+
+```
+const {width, height} = useWindowSize();
+```
+
+- First argument returns a number, width of the client screen.
+- Second argument returns a number, height of the client screen.
+
+## Examples
+
+<Playground>
+  {() => {
+    const { width, height } = useWindowSize();
+    return <Size width={width} height={height} />;
+  }}
+</Playground>

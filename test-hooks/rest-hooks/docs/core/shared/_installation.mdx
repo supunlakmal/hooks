@@ -1,0 +1,111 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import PkgTabs from '@site/src/components/PkgTabs';
+import PkgInstall from '@site/src/components/PkgInstall';
+import Link from '@docusaurus/Link';
+
+<Tabs
+defaultValue="web"
+groupId="platform"
+values={[
+{ label: 'Web', value: 'web' },
+{ label: 'React Native', value: 'native' },
+{ label: 'NextJS', value: 'nextjs' },
+{ label: 'Expo', value: 'expo' },
+{ label: 'Anansi', value: 'anansi' },
+]}>
+
+<TabItem value="web">
+
+```tsx title="index.tsx"
+import { DataProvider } from '@data-client/react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.createRoot(document.body).render(
+  <DataProvider>
+    <App />
+  </DataProvider>,
+);
+```
+
+Alternatively [integrate state with redux](../guides/redux.md)
+
+</TabItem>
+
+<TabItem value="native">
+
+```tsx title="index.tsx"
+import { DataProvider } from '@data-client/react';
+import { AppRegistry } from 'react-native';
+
+const Root = () => (
+  <DataProvider>
+    <App />
+  </DataProvider>
+);
+AppRegistry.registerComponent('MyApp', () => Root);
+```
+
+Alternatively [integrate state with redux](../guides/redux.md)
+
+</TabItem>
+
+<TabItem value="nextjs">
+
+<p style={{ textAlign: 'center' }}>
+  <Link className="button button--primary" to="../guides/ssr#nextjs">Full NextJS Guide</Link>
+</p>
+
+```tsx title="app/layout.tsx"
+// highlight-next-line
+import { DataProvider } from '@data-client/react/nextjs';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        // highlight-next-line
+        <DataProvider>{children}</DataProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+</TabItem>
+<TabItem value="expo">
+
+```tsx title="app/_layout.tsx"
+import { Stack } from 'expo-router';
+import { DataProvider } from '@data-client/react';
+
+export default function RootLayout() {
+  return (
+    // highlight-start
+    <DataProvider>
+      // highlight-end
+      <Stack>
+        <Stack.Screen name="index" />
+      </Stack>
+      // highlight-start
+    </DataProvider>
+    // highlight-end
+  );
+}
+```
+
+</TabItem>
+
+<TabItem value="anansi">
+
+[Anansi](https://github.com/ntucker/anansi) (beta) is a fully composable framework for React development with optional
+Server Side Rendering.
+
+```bash title="bash"
+npx @anansi/cli hatch my-project
+```
+
+Anansi includes Reactive Data Client automatically.
+
+</TabItem>
+</Tabs>

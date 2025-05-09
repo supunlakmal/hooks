@@ -1,0 +1,10 @@
+.DS_STORE
+coverage
+node_modules
+*.log
+.idea
+.vscode
+config
+tsconfig.json
+.prettierrc
+.rpt2_cache

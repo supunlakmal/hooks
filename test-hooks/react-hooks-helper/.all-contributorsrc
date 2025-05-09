@@ -1,0 +1,68 @@
+{
+  "projectName": "react-hooks-helper",
+  "projectOwner": "revelcw",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "revelcw",
+      "name": "Revel Carlberg West",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/29359616?v=4",
+      "profile": "https://github.com/revelcw",
+      "contributions": [
+        "infra",
+        "test",
+        "example",
+        "ideas",
+        "maintenance",
+        "review",
+        "tool",
+        "code"
+      ]
+    },
+    {
+      "login": "donavon",
+      "name": "Donavon West",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/887639?v=4",
+      "profile": "http://donavon.com",
+      "contributions": [
+        "code",
+        "ideas",
+        "test"
+      ]
+    },
+    {
+      "login": "threepointone",
+      "name": "Sunil Pai",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/18808?v=4",
+      "profile": "https://github.com/threepointone",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "permadiwibisono",
+      "name": "Permadi Wibisono",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/14840070?v=4",
+      "profile": "https://bradastore.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "weakish",
+      "name": "Jang Rush",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/114114?v=4",
+      "profile": "https://mmap.page",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

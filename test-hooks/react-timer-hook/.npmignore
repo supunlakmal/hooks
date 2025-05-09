@@ -1,0 +1,12 @@
+node_modules
+src
+.DS_Store
+build
+!.eslintrc
+yarn-error.log
+dev-dist
+docs
+demo
+*.js
+!dist/**/*
+*.html

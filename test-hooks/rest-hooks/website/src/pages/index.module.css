@@ -1,0 +1,106 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 2.5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /*margin-bottom: 10px;*/
+
+  /* background: linear-gradient(
+      transparent 212px,
+      var(--ifm-hero-fade-to-background-color) 100%
+    ),
+    url('../../static/img/rest_hooks_logo_grayscale.svg')
+      var(--ifm-hero-background-color) no-repeat; */
+  background-position: 0, 100% calc(20% - 3rem);
+
+  /* overlap */
+  padding-bottom: 14.5rem;
+  margin-bottom: -12rem;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+/* our svg uses 'currentcolor' so we can adjust its light color here */
+html[data-theme='light'] .logoWrapper {
+  color: #0d0e0f;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+    padding-bottom: 14rem;
+    margin-bottom: -13rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttons :global(.button.button--primary) {
+  font-weight: bold;
+}
+.buttons :global(.button) {
+  font-size: 18px;
+  border-radius: 10px;
+  letter-spacing: 0;
+
+  padding: calc( var(--ifm-button-padding-vertical) * var(--ifm-button-size-multiplier) * 0.9 )
+          calc( var(--ifm-button-padding-horizontal) * var(--ifm-button-size-multiplier) * 0.9 );
+
+  --shadow: 0 10px 25px -5px var(--shadow-color),0 8px 10px -6px var(--shadow-color);
+  --ring-shadow: 0 0 #000;
+  --ring-offset-shadow: 0 0 #000;
+  box-shadow: var(--ring-offset-shadow,0 0 #0000),var(--ring-shadow,0 0 #0000),var(--shadow);
+}
+.buttons :global(.button.button--primary) {
+  --shadow-color: rgba(14,165,233,.2);
+}
+html[data-theme='dark'] .buttons :global(.button.button--secondary) {
+  --shadow-color: rgba(203, 208, 216,.2);
+}
+html[data-theme='light'] .buttons :global(.button.button--secondary) {
+  --shadow-color: rgba(167, 176, 189,.2);
+}
+
+.buttons :global(.button) svg {
+  margin-bottom: -3px;
+  display: inline-block;
+}
+.buttons :global(.button:last-of-type) {
+  margin: 0 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .logoWrapper {
+    margin-bottom: 20px;
+  }
+  .heroBanner {
+    padding: 1rem 0;
+    padding-bottom: 14rem;
+
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .buttons :global(.button.button--primary),.buttons :global(.button.button--secondary) {
+    font-size: 15px;
+    padding: 0.3em 1.1em;
+  }
+}
+
+
+:global(.main-wrapper) > main {
+  z-index: 1;
+  position: relative;
+}

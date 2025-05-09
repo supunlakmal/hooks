@@ -1,0 +1,8 @@
+CHANGELOG.md
+yarn.lock
+pnpm-lock.yaml
+dist
+.git
+.cache
+coverage
+example/.next

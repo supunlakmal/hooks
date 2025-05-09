@@ -1,0 +1,95 @@
+{
+  "projectName": "use-dark-mode",
+  "projectOwner": "donavon",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "donavon",
+      "name": "Donavon West",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/887639?v=4",
+      "profile": "http://donavon.com",
+      "contributions": [
+        "infra",
+        "test",
+        "example",
+        "ideas",
+        "maintenance",
+        "review",
+        "tool",
+        "code"
+      ]
+    },
+    {
+      "login": "revelcw",
+      "name": "Revel Carlberg West",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/29359616?v=4",
+      "profile": "https://github.com/revelcw",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Andarist",
+      "name": "Mateusz Burzyński",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/9800850?v=4",
+      "profile": "https://github.com/Andarist",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "wKovacs64",
+      "name": "Justin Hall",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1288694?v=4",
+      "profile": "https://github.com/wKovacs64",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fxbabys",
+      "name": "Jeremy",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/24556921?v=4",
+      "profile": "https://github.com/fxbabys",
+      "contributions": [
+        "userTesting",
+        "bug"
+      ]
+    },
+    {
+      "login": "janosh",
+      "name": "Janosh Riebesell",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/30958850?v=4",
+      "profile": "http://janosh.io",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "hipstersmoothie",
+      "name": "Andrew Lisowski",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1192452?v=4",
+      "profile": "http://hipstersmoothie.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "jorgegonzalez",
+      "name": "Jorge Gonzalez",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12901172?v=4",
+      "profile": "https://jorgegonzalez.io",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true
+}

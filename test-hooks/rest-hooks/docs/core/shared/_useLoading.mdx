@@ -1,0 +1,126 @@
+import HooksPlayground from '@site/src/components/HooksPlayground';
+import {
+  postFixtures,
+  getInitialInterceptorData,
+} from '@site/src/fixtures/posts';
+
+<HooksPlayground fixtures={postFixtures} getInitialInterceptorData={getInitialInterceptorData} row>
+
+```ts title="PostResource" collapsed
+import { Entity, resource } from '@data-client/rest';
+
+export class Post extends Entity {
+  id = 0;
+  author = 0;
+  title = '';
+  body = '';
+  votes = 0;
+
+  static key = 'Post';
+
+  get img() {
+    return `//loremflickr.com/96/72/kitten,cat?lock=${this.id % 16}`;
+  }
+}
+export const PostResource = resource({
+  path: '/posts/:id',
+  schema: Post,
+});
+```
+
+```tsx title="PostDetail" collapsed
+import { useSuspense } from '@data-client/react';
+import { PostResource } from './PostResource';
+
+export default function PostDetail({ id }) {
+  const post = useSuspense(PostResource.get, { id });
+  return (
+    <div>
+      <div className="voteBlock">
+        <img src={post.img} width="70" height="52" />
+      </div>
+      <div>
+        <h4>{post.title}</h4>
+        <p>{post.body}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+```tsx title="PostForm" collapsed
+export default function PostForm({ onSubmit, loading, error }) {
+  const handleSubmit = e => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    onSubmit(data);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextInput
+        label="Title"
+        name="title"
+        defaultValue="My New Post"
+        required
+      />
+      <TextArea name="body" rows={12} label="Body" required>
+        After clicking 'save', the button will be disabled until the POST
+        is completed. Upon completion the newly created post is displayed
+        immediately as Reactive Data Client is able to use the fetch
+        response to populate the store.
+      </TextArea>
+      {error ? (
+        <div className="alert alert--danger">{error.message}</div>
+      ) : null}
+      <div>
+        <button type="submit" disabled={loading}>
+          {loading ? 'saving...' : 'Save'}
+        </button>
+      </div>
+    </form>
+  );
+}
+```
+
+```tsx title="PostCreate" {7}
+import { useLoading, useController } from '@data-client/react';
+import { PostResource } from './PostResource';
+import PostForm from './PostForm';
+
+export default function PostCreate({ navigateToPost }) {
+  const ctrl = useController();
+  const [handleSubmit, loading, error] = useLoading(
+    async data => {
+      const post = await ctrl.fetch(PostResource.getList.push, data);
+      navigateToPost(post.id);
+    },
+    [ctrl],
+  );
+  return (
+    <PostForm onSubmit={handleSubmit} loading={loading} error={error} />
+  );
+}
+```
+
+```tsx title="Navigation" collapsed
+import PostCreate from './PostCreate';
+import PostDetail from './PostDetail';
+
+function Navigation() {
+  const [id, setId] = React.useState<undefined | number>(undefined);
+  if (id) {
+    return (
+      <div>
+        <PostDetail id={id} />
+        <center>
+          <button onClick={() => setId(undefined)}>New Post</button>
+        </center>
+      </div>
+    );
+  }
+  return <PostCreate navigateToPost={setId} />;
+}
+render(<Navigation />);
+```
+
+</HooksPlayground>

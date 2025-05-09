@@ -1,0 +1,10 @@
+__tests__
+node_modules
+example
+jest.config.js
+.travis.yml
+tsconfig.json
+tslint.json
+coverage
+.rts2*
+dist

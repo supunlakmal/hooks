@@ -1,0 +1,4 @@
+
+type VisibilityState = "hidden" | "visible" | "prerender";
+
+declare export default function useDocumentVisibility(): VisibilityState;

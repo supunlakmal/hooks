@@ -1,0 +1,170 @@
+html[data-theme='light'] .playground-preview {
+  --ifm-color-formfield-active: var(--ifm-link-color);
+}
+html[data-theme='dark'] .playground-preview {
+  --ifm-color-formfield-active: var(--ifm-link-color);
+}
+
+/* Root container for the text field */
+.rt-TextFieldRoot {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em;
+  background-color: var(--ifm-color-emphasis-0);
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+  position: relative;
+  margin-bottom:1ex;
+}
+html[data-theme='dark'] .rt-TextFieldRoot,
+html[data-theme='dark'] .rt-TextAreaRoot,
+html[data-theme='dark'] .small.rt-TextFieldRoot:hover,
+html[data-theme='dark'] .small.rt-TextFieldRoot:focus-within {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* The slot element (left side) */
+.rt-SearchIcon {
+  display: flex;
+  align-items: center;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* The input element inside the text field */
+.rt-TextFieldInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  color: var(--ifm-color-content);
+  background: transparent;
+}
+
+/* Spinner container (right side) */
+.rt-TextFieldSpinner {
+  display: flex;
+  align-items: center;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Spinner styles */
+.rt-Spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-top-color: var(--ifm-color-formfield-active);
+  border-radius: 50%;
+  animation: rt-spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes rt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Placeholder or label styling */
+.rt-TextFieldLabel {
+  position: absolute;
+  top: -0.75em;
+  left: 0.75em;
+  background-color: var(--ifm-color-emphasis-0);
+  padding: 0 0.25em;
+  font-size: 0.70rem;
+  color: var(--ifm-color-emphasis-700);
+  pointer-events: none;
+}
+
+/* Focus state for the text field */
+.rt-TextFieldInput:focus + .rt-TextFieldLabel {
+  color: var(--ifm-color-formfield-active);
+}
+
+.rt-TextFieldRoot:focus-within {
+  border-color: var(--ifm-color-formfield-active);
+}
+
+
+.large.rt-TextFieldRoot {
+  font-size: 16px;
+}
+.large .rt-TextFieldInput {
+  font-size: 16px;
+}
+.medium.rt-TextFieldRoot {
+  font-size: 14px;
+}
+.medium .rt-TextFieldInput {
+  font-size: 14px;
+}
+.small.rt-TextFieldRoot {
+  display: inline-flex;
+  border: 1px solid transparent;       /* Transparent borders on all sides */
+  border-bottom-color: var(--ifm-color-emphasis-500);           /* Visible bottom border */
+  background: none;
+  outline: none;
+  padding: 5px;                        /* Consistent padding */
+  height: 30px;                        /* Fixed height to prevent shifting */
+  box-sizing: border-box;              /* Include padding and border in element's size */
+  transition: all 0.2s ease-in-out;    /* Quick animation for transitions */
+  border-radius: 0;
+  margin-bottom:0;
+  margin-top:-4px;
+}
+html[data-theme='dark'] .small.rt-TextFieldRoot {
+  background: none;
+}
+.small.rt-TextFieldRoot:hover,
+.small.rt-TextFieldRoot:focus-within {
+  background-color: var(--ifm-color-emphasis-0);
+  border-color: var(--ifm-color-emphasis-400);                  /* Make all borders visible */
+  border-radius: 4px;
+}
+.small.rt-TextFieldRoot:focus-within {
+  border-color: var(--ifm-color-formfield-active);                  /* Make all borders visible */
+}
+
+.listItem .rt-TextFieldRoot {
+  width: calc(100% - 21px);
+}
+
+
+
+
+/* Root container for the textarea */
+.rt-TextAreaRoot {
+  position: relative;
+  width: 100%;
+  background-color: var(--ifm-color-emphasis-0);
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+  padding-bottom:-5px;
+  /* overflow: hidden; */
+  margin: 1.5ex 0 .5ex;
+}
+
+/* The textarea element inside the component */
+.rt-TextAreaInput {
+  padding: 0.5em;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--ifm-color-content);
+  background: transparent;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 4em; /* Set a minimum height */
+  box-sizing: border-box;
+  margin-bottom: -4px;
+}
+
+
+/* Focus state for the textarea */
+.rt-TextAreaInput:focus + .rt-TextFieldLabel {
+  color: var(--ifm-color-formfield-active);
+}
+
+.rt-TextAreaRoot:focus-within {
+  border-color: var(--ifm-color-formfield-active);
+}

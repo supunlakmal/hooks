@@ -1,0 +1,34 @@
+import createProvider from '../../src/create-provider';
+import ReactNProvider from '../../types/provider';
+import { G, INITIAL_REDUCERS, INITIAL_STATE, R } from '../utils/initial';
+import { hasContext } from '../utils/react-version';
+import itShouldRequireContext from './utils/it-should-require-context';
+
+
+
+describe('Provider.getDispatch', (): void => {
+
+  // If Context is not supported,
+  if (!hasContext) {
+    itShouldRequireContext();
+    return;
+  }
+
+
+
+  let Provider: ReactNProvider<G, R>;
+  beforeEach((): void => {
+    Provider = createProvider(INITIAL_STATE, INITIAL_REDUCERS);
+  });
+
+
+
+  it('should be a function with no arguments', (): void => {
+    expect(Provider.getDispatch).toBeInstanceOf(Function);
+    expect(Provider.getDispatch).toHaveLength(0);
+  });
+
+  it('should return dispatch', (): void => {
+    expect(Provider.getDispatch()).toStrictEqual(Provider.dispatch);
+  });
+});

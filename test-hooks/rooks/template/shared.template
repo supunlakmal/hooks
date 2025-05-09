@@ -1,0 +1,10 @@
+/**
+ * %name%
+ * @description %description%
+ * @see {@link https://rooks.vercel.app/docs/%name%}
+*/
+function %name%() {
+  return null;
+}
+
+export {%name%};

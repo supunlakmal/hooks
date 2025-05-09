@@ -1,0 +1,9 @@
+/node_modules
+/src
+/tests
+/.gitignore
+/.mocharc.js
+/.npmignore
+/.travis.yml
+/tsconfig.json
+/yarn.lock
