@@ -8,11 +8,6 @@
 [![bundle size](https://img.shields.io/bundlephobia/minzip/@supunlakmal/hooks)](https://bundlephobia.com/package/@supunlakmal/hooks)
 [![Install Size](https://packagephobia.com/badge?p=@supunlakmal/hooks)](https://packagephobia.com/result?p=@supunlakmal/hooks)
 
-
-
-
-
-
 <!-- Add other badges as applicable: Downloads, Build Status, Coverage -->
 
 **A comprehensive collection of production-ready, reusable React hooks written in TypeScript to simplify common UI patterns and browser API interactions.**
