@@ -1,0 +1,43 @@
+name: Create Tag on Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history to ensure tag exists locally
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create and push tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v$VERSION"
+          echo "Checking if tag $TAG already exists..."
+          # Check if the tag already exists to avoid errors on re-runs
+          if git rev-parse $TAG >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping tag creation."
+          else
+            echo "Creating tag: $TAG"
+            git tag $TAG
+            echo "Pushing tag: $TAG"
+            git push origin $TAG
+          fi
+        env:
+          # Use the default GITHUB_TOKEN with permissions to push tags
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
