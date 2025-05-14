@@ -1,4 +1,6 @@
 name: Tag new npm package releases
+permissions:
+  contents: write
 on:
   push:
     branches:
