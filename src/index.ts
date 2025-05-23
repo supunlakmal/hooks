@@ -163,7 +163,7 @@ export { useForceUpdate } from './hooks/useForceUpdate'; // Added export
 
 // Example of exporting types alongside hooks if needed:
 // export { useMyHook, type UseMyHookOptions } from './hooks/useMyHook';
-export { useNewHook1 } from './hooks/useNewHook1';
+export { useDocumentEventListener } from './hooks/useDocumentEventListener';
 export { useNewHook2 } from './hooks/useNewHook2';
 export { useNewHook3 } from './hooks/useNewHook3';
 export { useNewHook4 } from './hooks/useNewHook4';
