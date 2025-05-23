@@ -1,99 +1,116 @@
-import { useCallback, useState, type Dispatch } from 'react';
-import { useSyncedRef } from './useSyncedRef'; // Assuming this exists and works
-import { type NextState, resolveHookState } from '../util/resolve-hook-state'; // Assuming this exists and works
+import { useCallback, useState, useMemo, useRef, type Dispatch } from 'react';
 
-type MediatedStateResult<State> = [State, Dispatch<NextState<State>>];
-type MediatedStateResultWithUndefined<State = undefined> = [
-  State | undefined,
-  Dispatch<NextState<State | undefined>>,
-];
-type MediatedStateResultWithMediator<State, RawState> = [
-  State,
-  Dispatch<NextState<RawState, State>>,
-];
+// --- useSyncedRef ---
+/**
+ * Like `useRef`, but it returns immutable ref that contains actual value.
+ * Ensures the .current getter always provides the latest value passed to the hook.
+ * @param value The value to track.
+ */
+const useSyncedRef = <T>(value: T): { readonly current: T } => {
+  const ref = useRef(value);
 
-export type InitialState<State> = State | (() => State);
+  // Update the ref's current value on every render
+  ref.current = value;
 
-export function useMediatedState<
-  State = undefined,
->(): MediatedStateResultWithUndefined<State>;
-export function useMediatedState<State>(
+  // Return a memoized, frozen object with a getter
+  // The object identity is stable, but the getter always reads the latest ref.current
+  return useMemo(
+    () =>
+      Object.freeze({
+        get current() {
+          return ref.current;
+        },
+      }),
+    [] // Empty dependency array is correct here
+  );
+};
+
+// --- State Helpers ---
+type StateInitializerFN<State> = () => State;
+type StateUpdaterFN<State, PreviousState = State> = (
+  previousState: PreviousState
+) => State;
+
+export type InitialState<State> = State | StateInitializerFN<State>;
+export type NextState<State, PreviousState = State> =
+  | State
+  | StateUpdaterFN<State, PreviousState>;
+
+/** Internal helper to resolve initial state */
+export const resolveInitialState = <State>(
   initialState: InitialState<State>
-): MediatedStateResult<State>;
-export function useMediatedState<State, RawState = State>(
-  initialState: InitialState<State>,
-  mediator: (rawNextState: RawState) => State
-): MediatedStateResultWithMediator<State, RawState>;
-export function useMediatedState<State, RawState>(
-  initialState?: InitialState<State>,
-  mediator?: (rawNextState: RawState) => State
-):
-  | MediatedStateResultWithUndefined<State>
-  | MediatedStateResult<State>
-  | MediatedStateResultWithMediator<State, RawState> {
-  return useMediatedStateFn<State, RawState>(initialState, mediator);
-}
+): State => {
+  // Check if initialState is a function (initializer) and call it
+  if (typeof initialState === 'function') {
+    // We cast here because TS struggles with the typeof check narrowing perfectly in this context
+    return (initialState as StateInitializerFN<State>)();
+  }
+  return initialState;
+};
 
-// --- Implementation ---
+/** Internal helper to resolve next state based on previous state */
+export const resolveNextState = <State, PreviousState = State>(
+  nextState: NextState<State, PreviousState>,
+  previousState: PreviousState
+): State => {
+  // Check if nextState is a function (updater) and call it with previousState
+  if (typeof nextState === 'function') {
+    // We cast here for the same reason as above
+    return (nextState as StateUpdaterFN<State, PreviousState>)(previousState);
+  }
+  return nextState;
+};
 
+// --- useMediatedState ---
 /**
  * Like `useState`, but every value set is passed through a mediator function
- * before the state is updated.
- *
- * @param initialState The initial state value, or a function to compute it.
- * @param mediator An optional function that takes the raw value passed to the setter
- *                 and returns the final state value to be stored.
+ * before the state is updated. The initial state is NOT mediated by default.
+ * @template State The type of the state managed by the hook (after mediation).
+ * @template RawState The type of the value passed to the setter (before mediation). Defaults to State.
+ * @param initialState Initial state value or initializer function. Resolved value is used directly.
+ * @param mediator Optional function that takes the resolved raw value and returns the final state value. Applied only on updates.
  */
-
-type SetMediatedState<State, RawState> = Dispatch<NextState<RawState, State>>;
-
-const useMediatedStateFn = <State, RawState>(
-  initialState?: InitialState<State>,
-  mediator?: (value: RawState) => State
-):
-  | [State | undefined, Dispatch<NextState<State | undefined>>]
-  | [State, Dispatch<NextState<State>>]
-  | [State, Dispatch<NextState<RawState, State>>] => {
-  // Use useState directly with the initialState. useState handles functional initializers.
-  const [state, setState] = useState<State | undefined>(initialState);
-
-  if (!mediator) {
-    const setRawState = setState as Dispatch<
-      NextState<State | undefined, State | undefined>
-    >;
-    return [state, setRawState];
-  }
+export const useMediatedState = <State, RawState = State>(
+  initialState: InitialState<State>,
+  mediator?: (resolvedRawValue: RawState) => State
+): [State, Dispatch<NextState<RawState, State>>] => {
+  // Use useSyncedRef to track the latest mediator function without causing setter recreation
   const mediatorRef = useSyncedRef(mediator);
 
-  const setMediatedState = useCallback<SetMediatedState<State, RawState>>(
-    (value) => {
-      const currentMediator = mediatorRef.current;
-
-      if (currentMediator) {
-        // If a mediator exists, then the type of State is never `undefined`.
-        // Previous state is always `State` and never `undefined`.
-        setState((previousState: State | undefined) => {
-          // Previous state can never be undefined if there is a mediator,
-          // because that means that the initial state must have been provided.
-          const nextRawValue = resolveHookState<RawState, State>(
-            value,
-            previousState as State
-          );
-
-          // Pass the raw value through the mediator to get the final state.
-          return currentMediator(nextRawValue);
-        });
-      } else {
-        // No mediator exists, in this case RawState is State
-        setState(value as any);
-      }
-    },
-    [mediatorRef]
+  // Initialize state using the provided initialState helper
+  // The initial state itself is NOT mediated here. Mediation happens on updates.
+  const [state, setState] = useState<State>(() =>
+    resolveInitialState(initialState)
   );
 
-  // Return the current state and the mediated setter function.
-  return [
-    state as State, // If no mediator, this will have type State | undefined, if there is mediator it is State
-    setMediatedState as Dispatch<NextState<RawState, State>>, // if no mediator, it will be Dispatch<NextState<State>>
-  ];
+  // Memoize the setter function
+  const setMediatedState = useCallback<Dispatch<NextState<RawState, State>>>(
+    (valueOrFn) => {
+      // Use the functional update form of setState to ensure we have the latest previous state
+      setState((prevState) => {
+        // 1. Resolve the raw value (handles both direct value and updater function)
+        const resolvedRawValue = resolveNextState<RawState, State>(
+          valueOrFn,
+          prevState
+        );
+
+        // 2. Get the current mediator function from the ref
+        const currentMediator = mediatorRef.current;
+
+        // 3. Apply mediator if it exists, otherwise return the resolved raw value
+        if (currentMediator) {
+          return currentMediator(resolvedRawValue);
+        } else {
+          // If no mediator, assume RawState is assignable to State
+          // Add type assertion for safety, though ideally State == RawState here
+          // Or the user should ensure compatibility or provide an identity mediator.
+          return resolvedRawValue as unknown as State;
+        }
+      });
+    },
+    [] // setState is stable, mediatorRef handles mediator changes. No deps needed.
+  );
+
+  // Return the current state and the memoized setter
+  return [state, setMediatedState];
 };

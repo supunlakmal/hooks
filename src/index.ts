@@ -2,6 +2,7 @@
 
 export { useMobile } from './hooks/useMobile';
 export { useAnimation } from './hooks/useAnimation';
+export { useArray } from './hooks/useArray';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncAbortable } from './hooks/useAsyncAbortable';
 export { useBreakpoint } from './hooks/useBreakpoint';
@@ -26,6 +27,7 @@ export { useHistoryState } from './hooks/useHistoryState';
 export { useDebouncedCallback } from './hooks/useDebouncedCallback';
 export { useDebouncedEffect } from './hooks/useDebouncedEffect';
 export { useDebouncedState } from './hooks/useDebouncedState';
+export { useDebouncedValue } from './hooks/useDebouncedValue';
 export { useDebouncedFetch } from './hooks/useDebouncedFetch';
 export { useListState } from './hooks/useListState';
 export { useMapState } from './hooks/useMapState';
