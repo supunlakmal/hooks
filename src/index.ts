@@ -1,6 +1,6 @@
 // index.ts (Refactored for Named Exports)
 
-export { useMobile } from './hooks/use-mobile';
+export { useMobile } from './hooks/useMobile';
 export { useAnimation } from './hooks/useAnimation';
 export { useAsync } from './hooks/useAsync';
 export { useAsyncAbortable } from './hooks/useAsyncAbortable';
