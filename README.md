@@ -1102,9 +1102,15 @@ Allows you to cycle through a list of values.
 
 ---
 
-### [**`use-mobile`**](https://github.com/supunlakmal/hooks/blob/main/docs/use-mobile.md)
+### [**`useMobile`**](https://github.com/supunlakmal/hooks/blob/main/docs/useMobile.md)
 
 Determines whether the current device is a mobile device based on screen width.
+
+---
+
+### [**`useIsMobile`**](https://github.com/supunlakmal/hooks/blob/main/docs/useIsMobile.md)
+
+A React hook that detects whether the current viewport is mobile-sized based on a configurable breakpoint.
 
 ---
 

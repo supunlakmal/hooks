@@ -48,7 +48,7 @@ export const useThrottledCallback = <Fn extends (...args: any[]) => any>(
   });
 
   return useMemo((): ((...args: Parameters<Fn>) => void) => {
-    let delay = wait;
+    const delay = wait;
 
     const execute = (context: ThisParameterType<Fn>, args: Parameters<Fn>) => {
       lastCall.current = undefined;
